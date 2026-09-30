@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#07110d">
     <meta name="color-scheme" content="dark light">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://fysoul22.github.io/writeups.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CTF Write-ups | Ft7y.Sec">
+    <meta property="og:description" content="أرشيف تقارير CTF واختبار الاختراق من بيئات تدريبية مصرح بها.">
+    <meta property="og:url" content="https://fysoul22.github.io/writeups.html">
     <meta name="description" content="أرشيف شامل وموثق لتقارير تحديات CTF واختبار الاختراق من Hack The Box و TryHackMe و HackerDNA مقسمة حسب المنصة.">
     <title>أرشيف تقارير CTF Write-ups | Ft7y.Sec</title>
 
@@ -76,7 +82,8 @@
             <!-- شريط البحث السريع المباشر -->
             <div class="writeups-search-bar">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="writeupFilterInput" class="writeups-search-input" placeholder="ابحث عن آلة، ثغرة، نظام، أو أداة (مثال: Linux, SMB, RCE, Docker, SQLi)..." aria-label="بحث في التقارير">
+                <label class="sr-only" for="writeupFilterInput">ابحث في تقارير CTF</label>
+                <input type="search" id="writeupFilterInput" class="writeups-search-input" placeholder="ابحث عن آلة، ثغرة، نظام، أو أداة (مثال: Linux, SMB, RCE, Docker, SQLi)..." aria-label="بحث في التقارير">
             </div>
         </section>
 
@@ -109,7 +116,7 @@
         <!-- ==========================================
              1. قسم منصة HACK THE BOX
              ========================================== -->
-        <section class="platform-section-block" id="section-htb" data-platform-section="htb" data-aos="fade-up">
+        <section class="platform-section-block" id="section-htb" data-platform-section="htb" aria-label="تقارير Hack The Box" data-aos="fade-up">
             <div class="platform-section-header">
                 <h2 class="platform-section-title htb">
                     <i class="fa-solid fa-cube"></i>
@@ -439,7 +446,7 @@
         <!-- ==========================================
              2. قسم منصة TRYHACKME
              ========================================== -->
-        <section class="platform-section-block" id="section-thm" data-platform-section="thm" data-aos="fade-up">
+        <section class="platform-section-block" id="section-thm" data-platform-section="thm" aria-label="تقارير TryHackMe" data-aos="fade-up">
             <div class="platform-section-header">
                 <h2 class="platform-section-title thm">
                     <i class="fa-solid fa-fire"></i>
@@ -559,7 +566,7 @@
         <!-- ==========================================
              3. قسم منصة HACKERDNA والتحقيق الجنائي الرقمي
              ========================================== -->
-        <section class="platform-section-block" id="section-hackerdna" data-platform-section="hackerdna" data-aos="fade-up">
+        <section class="platform-section-block" id="section-hackerdna" data-platform-section="hackerdna" aria-label="تقارير HackerDNA" data-aos="fade-up">
             <div class="platform-section-header">
                 <h2 class="platform-section-title dna">
                     <i class="fa-solid fa-dna"></i>
@@ -595,7 +602,7 @@
         <!-- ==========================================
              4. قسم أمن تطبيقات الويب (WEB SECURITY)
              ========================================== -->
-        <section class="platform-section-block" id="section-web" data-platform-section="web" data-aos="fade-up">
+        <section class="platform-section-block" id="section-web" data-platform-section="web" aria-label="تقارير Web Security" data-aos="fade-up">
             <div class="platform-section-header">
                 <h2 class="platform-section-title web">
                     <i class="fa-solid fa-globe"></i>
