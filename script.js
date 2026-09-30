@@ -17,6 +17,12 @@
    ================================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Respect reduced-motion preference before starting decorative effects.
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+        document.documentElement.classList.add('reduced-motion');
+    }
+
 
     // ----------------------------------------------------
     // 1. تهيئة مكتبة AOS للحركات
