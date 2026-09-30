@@ -1,0 +1,7 @@
+max_retries = 2
+timeout = 20
+exclude = [
+  "^https://localhost",
+  "^https://127\\.0\\.0\\.1",
+  "^https://t\\.me/your-username$"
+]
