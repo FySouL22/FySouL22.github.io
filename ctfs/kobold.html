@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#07110d">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="تقرير CTF تقني لتحدي kobold HTB machine Write-up على منصة Hack The Box.">
+  <title>kobold HTB machine Write-up | Ft7y.Sec</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="../avatar.png" type="image/png">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">تخطي إلى المحتوى</a>
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <div class="page-noise" aria-hidden="true"></div>
+  <canvas id="particles-canvas"></canvas>
+  <header class="navbar" id="navbar">
+    <div class="logo"><a href="../index.html#home">Ft7y<span>.Sec</span></a></div>
+    <nav class="nav-links" id="nav-menu" aria-label="التنقل الرئيسي"><ul>
+      <li><a href="../index.html#home">الرئيسية</a></li>
+      <li><a href="../pentest.html">اختبار الاختراق</a></li>
+      <li><a href="../appsec.html">أمن التطبيقات</a></li>
+      <li><a href="../automation.html">البرمجة والأتمتة</a></li>
+      <li><a href="../systems-labs.html">الأنظمة والمعامل</a></li>
+      <li><a href="../writeups.html">CTF Write-ups</a></li>
+      <li><a href="../index.html#contact">تواصل معي</a></li>
+    </ul></nav>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="btn-secondary" type="button" title="تبديل الوضع" aria-label="تبديل الوضع"><i class="fa-solid fa-moon"></i></button>
+      <button class="mobile-toggle" id="mobile-toggle" type="button" aria-label="القائمة"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+  <main id="main-content" class="subpage-container ctf-report-page">
+    <article class="ctf-report-article">
+      <header class="subpage-hero ctf-report-hero" data-aos="fade-up">
+        <nav class="breadcrumb-nav" aria-label="مسار التنقل"><a href="../index.html"><i class="fa-solid fa-house"></i> الرئيسية</a><span class="sep">/</span><a href="index.html">تقارير CTF</a><span class="sep">/</span><span class="current">kobold HTB machine Write-up</span></nav>
+        <div class="writeup-header"><span class="platform-tag htb"><i class="fa-solid fa-cube"></i> Hack The Box</span><span class="ctf-directory-label"><i class="fa-solid fa-shield-halved"></i> بيئة تدريبية مصرح بها</span></div>
+        <h1 class="subpage-hero-title">kobold HTB machine Write-up</h1>
+        <p class="subpage-hero-desc">توثيق تقني محفوظ من المصدر الأصلي في Notion، يشمل الخطوات والأوامر والنتائج ولقطات الشاشة المتاحة.</p>
+        <a href="index.html" class="btn-outline ctf-back-link"><i class="fa-solid fa-arrow-right"></i> العودة إلى تقارير CTF</a>
+      </header>
+      <div class="ctf-report-content" data-aos="fade-up"><p>تعتبر ماشين <strong>Kobold</strong> من الأجهزة السهلة (Easy) بنظام Linux ضمن الموسم العاشر لمنصة Hack The Box، وهي تركز بشكل أساسي على استغلال الثغرات في أدوات الذكاء الاصطناعي (AI Tools) وإساءة استخدام الصلاحيات في الحاويات (Docker) \[499، 548\].</p><p>إليك تقرير شامل ومفصل لخطوات اختراق الماشين بناءً على المصادر المتاحة:</p><h4>1. مرحلة الاستطلاع وجمع المعلومات (Reconnaissance)</h4><p>تبدأ العملية بفحص المنافذ والخدمات باستخدام أداة <code dir="ltr">Nmap</code>:</p><ul class="ctf-report-list"><li><strong>المنافذ المفتوحة:</strong></li><li><strong>22 (SSH):</strong> إصدار OpenSSH 9.6p1 \[500، 579\].</li><li><strong>80 (HTTP):</strong> يقوم بالتحويل تلقائياً إلى الرابط <code dir="ltr">https://kobold.htb</code> \[500، 579\].</li><li><strong>443 (HTTPS):</strong> يستضيف واجهة &quot;Kobold Operations Suite&quot; \[500، 579\].</li><li><strong>3552 (HTTP):</strong> تشغيل لوحة تحكم <strong>Arcane v1.13.0</strong> لإدارة Docker \[502، 503\].</li><li><strong>اكتشاف النطاقات الفرعية (Subdomains):</strong>&lt;br&gt;أظهر فحص شهادة SSL وجود نطاق عريض (<code dir="ltr">.kobold.htb</code>) \[501، 579\]. باستخدام أدوات مثل <code dir="ltr">ffuf</code> أو <code dir="ltr">gobuster</code> تم اكتشاف النطاقات التالية:</li></ul><ol class="ctf-report-list"><li><code dir="ltr">mcp.kobold.htb</code>: يستضيف <strong>MCPJam Inspector v1.4.2</strong> \[504، 582\].</li><li><code dir="ltr">bin.kobold.htb</code>: يستضيف خدمة <strong>PrivateBin 2.0.2</strong> \[508، 583\].</li></ol><h4>2. الوصول الأولي (Initial Access)</h4><p>نقطة الضعف الرئيسية موجودة في نطاق <code dir="ltr">mcp.kobold.htb</code> الذي يشغل أداة <strong>MCPJam Inspector</strong>:</p><ul class="ctf-report-list"><li><strong>الثغرة المكتشفة:</strong> ثغرة تنفيذ أوامر عن بُعد (RCE) غير موثقة (Unauthenticated) في النهاية الطرفية <code dir="ltr">/api/mcp/connect</code> (المعروفة بـ <strong>CVE-2026-23744</strong> أو <strong>CVE-2026-23520</strong>) \[505، 549، 584\].</li><li><strong>الاستغلال:</strong> تسمح هذه الثغرة بإرسال كائن JSON يحتوي على بارامتر <code dir="ltr">serverConfig.command</code> لتنفيذ أوامر نظام التشغيل مباشرة دون أي تصفية للمدخلات \[505، 584\].</li><li><strong>التنفيذ:</strong> تم إرسال طلب <code dir="ltr">curl</code> يحتوي على &quot;Reverse Shell&quot; (مثل <code dir="ltr">bash -i</code>) للحصول على اتصال عكسي.</li><li><strong>النتيجة:</strong> الحصول على صلاحيات المستخدم <strong>ben</strong> \[506، 558\].</li></ul><h4>3. التحرك الجانبي وتسريب البيانات (Pivot &amp; Enumeration)</h4><p>بعد الدخول كـ <code dir="ltr">ben</code> تبين أنه ينتمي لمجموعة <code dir="ltr">operator</code> \[506، 560\]:</p><ul class="ctf-report-list"><li><strong>استغلال مجموعة Operator:</strong> تمتلك هذه المجموعة صلاحيات القراءة والكتابة في المجلد <code dir="ltr">/privatebin-data/</code> وهو مجلد مشترك (Docker Volume) مع حاوية PrivateBin.</li><li><strong>ثغرة LFI في PrivateBin:</strong> تم تحديد إصدار PrivateBin v2.0.2 كنسخة مصابة بثغرة تضمين ملفات محلية (LFI) عبر ملفات الكوكيز الخاصة بالقوالب (Template Cookie) (CVE-2025-64714) \[508، 509\].</li><li><strong>سلسلة الاستغلال (Chaining):</strong></li></ul><ol class="ctf-report-list"><li>قام المهاجم بكتابة ملف &quot;Webshell&quot; داخل المجلد المشترك <code dir="ltr">/privatebin-data/data/pwn.php</code> من خلال مستخدم <code dir="ltr">ben</code>.</li><li>تم استدعاء هذا الملف عبر ثغرة LFI في <code dir="ltr">bin.kobold.htb</code> للحصول على RCE داخل الحاوية.</li><li>من داخل الحاوية تم قراءة ملف الإعدادات <code dir="ltr">/srv/cfg/conf.php</code> الذي كشف عن بيانات اعتماد قاعدة بيانات MySQL لم يتم تغييرها \[510، 511\].</li></ol><h4>4. تصعيد الصلاحيات (Privilege Escalation)</h4><p>هناك مساران للوصول إلى صلاحيات الجذر (Root):</p><h4>المسار الأول: لوحة تحكم Arcane (المسار المقصود)</h4><ul class="ctf-report-list"><li><strong>إعادة استخدام البيانات:</strong> تم استخدام كلمة المرور المسربة من ملف إعدادات PrivateBin لتسجيل الدخول إلى لوحة <strong>Arcane</strong> على المنفذ 3552 \[511، 512\].</li><li><strong>الهروب من الحاوية (Docker Escape):</strong></li></ul><ol class="ctf-report-list"><li>إنشاء حاوية جديدة مع تفعيل &quot;الموضع المميز&quot; (Privileged mode).</li><li>ربط (Mounting) نظام ملفات الجهاز المضيف (<code dir="ltr">/</code>) بمجلد داخل الحاوية مثل <code dir="ltr">/hostfs</code> \[513، 563\].</li><li>الدخول إلى &quot;Shell&quot; الحاوية وقراءة ملف العلم الموجود في المضيف الأصلي عبر المسار <code dir="ltr">/hostfs/root/root.txt</code> \[513، 563\].</li></ol><h4>المسار الثاني: استخدام مجموعة Docker (المسار البديل)</h4><ul class="ctf-report-list"><li>كشف فحص ملف <code dir="ltr">/etc/gshadow</code> أن المستخدم <code dir="ltr">ben</code> هو عضو بالفعل في مجموعة <code dir="ltr">docker</code>.</li><li>باستخدام أمر <code dir="ltr">newgrp docker</code> أو <code dir="ltr">sg docker</code> تمكن المستخدم من تفعيل صلاحيات المجموعة مباشرة \[514، 550\].</li><li>تم تشغيل حاوية بصلاحيات كاملة للوصول إلى ملفات الجذر بنفس تقنية المسار الأول \[550، 563\].</li></ul><p><strong>الخلاصة:</strong> تظهر ماشين Kobold مخاطر ترك واجهات تطوير الأدوات (مثل MCPJam) مفتوحة دون مصادقة، ومخاطر إساءة تكوين أحجام Docker المشتركة التي قد تؤدي إلى تسريب بيانات حساسة وتصعيد كامل للصلاحيات.</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/kobold-1.png" alt="لقطة شاشة من تقرير kobold HTB machine Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير kobold HTB machine Write-up</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/kobold-2.png" alt="لقطة شاشة من تقرير kobold HTB machine Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير kobold HTB machine Write-up</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/kobold-3.png" alt="لقطة شاشة من تقرير kobold HTB machine Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير kobold HTB machine Write-up</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/kobold-4.png" alt="لقطة شاشة من تقرير kobold HTB machine Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير kobold HTB machine Write-up</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/kobold-5.png" alt="لقطة شاشة من تقرير kobold HTB machine Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير kobold HTB machine Write-up</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/kobold-6.png" alt="لقطة شاشة من تقرير kobold HTB machine Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير kobold HTB machine Write-up</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/kobold-7.png" alt="لقطة شاشة من تقرير kobold HTB machine Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير kobold HTB machine Write-up</figcaption></figure></div>
+      <footer class="ctf-report-end"><a href="index.html" class="btn-primary"><i class="fa-solid fa-arrow-right"></i> كل تقارير CTF</a></footer>
+    </article>
+  </main>
+  <footer class="footer"><div class="footer-content">
+    <div class="footer-logo">Ft7y<span>.Sec</span></div>
+    <div class="footer-links">
+      <a href="../index.html#home">الرئيسية</a><a href="../pentest.html">اختبار الاختراق</a><a href="../appsec.html">أمن التطبيقات</a><a href="../automation.html">البرمجة والأتمتة</a><a href="../systems-labs.html">الأنظمة والمعامل</a><a href="../writeups.html">CTF Write-ups</a>
+    </div>
+    <p>© 2026 Ft7y.Sec. جميع الحقوق محفوظة.</p>
+  </div></footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="../script.js"></script>
+</body>
+</html>

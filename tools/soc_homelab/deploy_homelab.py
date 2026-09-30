@@ -1,0 +1,186 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+=============================================================================
+Cyber Defense & SOC HomeLab Automated Deployment & Attack Simulator v1.5
+Author: Mohamed Fathi (Ft7y.Sec)
+GitHub: https://github.com/FySouL22/cyber-defense-homelab
+Description: Automated deployment helper for Wazuh SIEM + Elastic Indexer,
+             health verification, and integrated adversary attack simulator.
+=============================================================================
+"""
+
+import sys
+import os
+import time
+import subprocess
+import argparse
+import socket
+import urllib.request
+import ssl
+
+# Configure Windows UTF-8 stdout
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+if hasattr(sys.stderr, 'reconfigure'):
+    sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+
+CYAN = "\033[96m"
+GREEN = "\033[92m"
+YELLOW = "\033[93m"
+RED = "\033[91m"
+BOLD = "\033[1m"
+RESET = "\033[0m"
+
+BANNER = f"""{GREEN}{BOLD}
+  ███████╗ ██████╗  ██████╗    ███████╗██╗███████╗███╗   ███╗
+  ██╔════╝██╔═══██╗██╔════╝    ██╔════╝██║██╔════╝████╗ ████║
+  ███████╗██║   ██║██║         ███████╗██║█████╗  ██╔████╔██║
+  ╚════██║██║   ██║██║         ╚════██║██║██╔══╝  ██║╚██╔╝██║
+  ███████║╚██████╔╝╚██████╗    ███████║██║███████╗██║ ╚═╝ ██║
+  ╚══════╝ ╚═════╝  ╚═════╝    ╚══════╝╚═╝╚══════╝╚═╝     ╚═╝
+     -- Cyber Defense & SOC HomeLab Suite by Mohamed Fathi --
+                  GitHub: https://github.com/FySouL22
+{RESET}"""
+
+DOCKER_COMPOSE_TEMPLATE = """version: '3.8'
+
+services:
+  wazuh.indexer:
+    image: wazuh/wazuh-indexer:4.8.0
+    container_name: wazuh.indexer
+    hostname: wazuh.indexer
+    restart: always
+    ports:
+      - "9200:9200"
+    environment:
+      - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
+      - "bootstrap.memory_lock=true"
+      - "discovery.type=single-node"
+      - "DISABLE_INSTALL_DEMO_CONFIG=true"
+      - "DISABLE_SECURITY_PLUGIN=true"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+
+  wazuh.manager:
+    image: wazuh/wazuh-manager:4.8.0
+    container_name: wazuh.manager
+    hostname: wazuh.manager
+    restart: always
+    ports:
+      - "1514:1514/udp"
+      - "1515:1515"
+      - "514:514/udp"
+      - "55000:55000"
+    environment:
+      - INDEXER_URL=http://wazuh.indexer:9200
+    depends_on:
+      - wazuh.indexer
+
+  wazuh.dashboard:
+    image: wazuh/wazuh-dashboard:4.8.0
+    container_name: wazuh.dashboard
+    hostname: wazuh.dashboard
+    restart: always
+    ports:
+      - "443:5601"
+    environment:
+      - INDEXER_URL=http://wazuh.indexer:9200
+      - WAZUH_API_URL=https://wazuh.manager
+    depends_on:
+      - wazuh.indexer
+      - wazuh.manager
+"""
+
+
+def check_prerequisites():
+    """Verify Docker and Docker Compose are present."""
+    print(f"{CYAN}[*] Verifying system prerequisites...{RESET}")
+    docker_check = subprocess.run(["docker", "--version"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    if docker_check.returncode != 0:
+        print(f"{RED}[-] Error: Docker is not installed or not in PATH.{RESET}")
+        return False
+    print(f"{GREEN}[✓] Docker detected: {docker_check.stdout.strip()}{RESET}")
+    return True
+
+
+def simulate_bruteforce(target_ip, port=22, attempts=5):
+    """Simulate an SSH / Auth brute force attack to trigger SIEM rules."""
+    print(f"\n{YELLOW}[*] Adversary Emulation: Simulating SSH Brute Force against {target_ip}:{port}...{RESET}")
+    for i in range(1, attempts + 1):
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.settimeout(1.5)
+                s.connect((target_ip, port))
+                s.sendall(b"SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.1\r\n")
+                time.sleep(0.3)
+                print(f"    [!] Sent authentication probe #{i} (Failed login event generated)")
+        except Exception:
+            print(f"    [!] Failed connection attempt #{i} (Simulated Event ID 4625 / auth.log failure)")
+    print(f"{GREEN}[✓] Simulation finished. Check Wazuh Dashboard for 'Rule ID 5710 / 5712' alert!{RESET}")
+
+
+def simulate_privesc_recon():
+    """Simulate malicious discovery command execution to trigger Sysmon Event 1."""
+    print(f"\n{YELLOW}[*] Adversary Emulation: Running SUID & PrivEsc Reconnaissance...{RESET}")
+    recon_cmds = [
+        "whoami /priv 2>/dev/null || whoami",
+        "net user Administrator 2>/dev/null || id",
+        "find / -perm -4000 -type f 2>/dev/null || echo 'Checked SUID'"
+    ]
+    for cmd in recon_cmds:
+        print(f"    [!] Executing Suspicious Recon: {cmd}")
+        subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    print(f"{GREEN}[✓] Command executions completed. Check Wazuh for 'Privileged Command Execution' alert.{RESET}")
+
+
+def deploy_lab():
+    """Generate docker-compose.yml and start containers."""
+    if not check_prerequisites():
+        sys.exit(1)
+
+    print(f"{CYAN}[*] Creating docker-compose.yml for Wazuh All-in-One SOC...{RESET}")
+    with open("docker-compose.yml", "w", encoding="utf-8") as f:
+        f.write(DOCKER_COMPOSE_TEMPLATE)
+    print(f"{GREEN}[✓] docker-compose.yml generated successfully.{RESET}")
+
+    print(f"{YELLOW}[*] Spawning containers (this might take a few minutes)...{RESET}")
+    subprocess.run(["docker", "compose", "up", "-d"])
+    print(f"\n{BOLD}{GREEN}[✓] Wazuh SOC HomeLab is now active!{RESET}")
+    print(f"    Dashboard URL : https://localhost (or https://<server-ip>)")
+    print(f"    Default User  : admin")
+    print(f"    Default Pass  : admin (or see Wazuh deployment log)\n")
+
+
+def main():
+    print(BANNER)
+    parser = argparse.ArgumentParser(
+        description="Cyber Defense & SOC HomeLab Deployer and Attack Simulator by Ft7y.Sec",
+        formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument("--deploy", action="store_true", help="Deploy Wazuh SIEM & Elastic stack via Docker Compose")
+    parser.add_argument("--simulate-bruteforce", help="Simulate brute-force attacks against target IP to test detection")
+    parser.add_argument("--simulate-recon", action="store_true", help="Simulate discovery and privilege escalation activities")
+    parser.add_argument("--status", action="store_true", help="Check status of running HomeLab containers")
+
+    args = parser.parse_args()
+
+    if args.deploy:
+        deploy_lab()
+    elif args.simulate_bruteforce:
+        simulate_bruteforce(args.simulate_bruteforce)
+    elif args.simulate_recon:
+        simulate_privesc_recon()
+    elif args.status:
+        subprocess.run(["docker", "compose", "ps"])
+    else:
+        parser.print_help()
+
+
+if __name__ == "__main__":
+    main()

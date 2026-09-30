@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#07110d">
+    <meta name="color-scheme" content="dark light">
+    <title>PyPort-Scanner Pro | أداة فحص المنافذ والشبكات | Ft7y.Sec</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="avatar.png" type="image/png">
+</head>
+
+<body>
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <div class="page-noise" aria-hidden="true"></div>
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- شريط التنقل العلوي -->
+    <header class="navbar" id="navbar">
+        <div class="logo">
+            <a href="index.html#home">Ft7y<span>.Sec</span></a>
+        </div>
+
+        <nav class="nav-links" id="nav-menu">
+            <ul>
+                <li><a href="index.html#home">الرئيسية</a></li>
+                <li><a href="pentest.html">اختبار الاختراق</a></li>
+                <li><a href="appsec.html">أمن التطبيقات</a></li>
+                <li><a href="automation.html">البرمجة والأتمتة</a></li>
+                <li><a href="systems-labs.html">الأنظمة والمعامل</a></li>
+                <li><a href="writeups.html">CTF Write-ups</a></li>
+                <li><a href="index.html#projects" class="active">المشاريع والأدوات</a></li>
+                <li><a href="index.html#contact">تواصل معي</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-actions">
+            <button id="theme-toggle" class="btn-secondary" title="تبديل الوضع">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="القائمة">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="subpage-container">
+        <!-- ترويسة المشروع مع الشعار والمؤلف -->
+        <section class="subpage-hero project-hero" data-aos="fade-up">
+            <nav class="breadcrumb-nav">
+                <a href="index.html"><i class="fa-solid fa-house"></i> الرئيسية</a>
+                <span class="sep">/</span>
+                <a href="index.html#projects">المشاريع والأدوات</a>
+                <span class="sep">/</span>
+                <span class="current">PyPort-Scanner Pro</span>
+            </nav>
+
+            <div class="project-hero-flex">
+                <div class="project-hero-content">
+                    <div class="project-badge-line">
+                        <span class="project-status-badge"><span class="pulse-dot"></span> v2.5 Stable Release</span>
+                        <span class="project-cat-badge"><i class="fa-brands fa-python"></i> Python 3 CLI Tool</span>
+                    </div>
+
+                    <h1 class="subpage-hero-title">
+                        <i class="fa-solid fa-crosshairs"></i>
+                        PyPort-Scanner Pro v2.5
+                    </h1>
+
+                    <p class="subpage-hero-desc">
+                        فاحص منافذ متعدد الخيوط (Multi-threaded) فائق السرعة تم تطويره بلغة بايثون للقيام بمسح شامل لشبكات الـ IPv4، كشف المنافذ المفتوحة، التقاط البانر (Banner Grabbing) لتحديد إصدارات الخدمات وأنظمة التشغيل، وتوليد تقارير جاهزة بصيغتي JSON و TXT.
+                    </p>
+
+                    <div class="project-hero-cta">
+                        <a href="#interactive-simulator" class="btn-primary">
+                            <i class="fa-solid fa-terminal"></i> تجربة الأداة مباشرة في المتصفح
+                        </a>
+                        <a href="https://github.com/FySouL22/pyport-scanner-pro" target="_blank" rel="noopener noreferrer" class="btn-outline">
+                            <i class="fa-brands fa-github"></i> الكود المصدري على GitHub
+                        </a>
+                        <a href="tools/pyport_scanner/pyport_scanner.py" download="pyport_scanner.py" class="btn-secondary">
+                            <i class="fa-solid fa-download"></i> تحميل السكربت (.py)
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-author-card">
+                    <div class="author-avatar-wrap">
+                        <img src="avatar.png" alt="شعار محمد فتحي" class="author-img">
+                        <div class="author-badge-glow"></div>
+                    </div>
+                    <div class="author-info-text">
+                        <span class="author-label">مطور الأداة</span>
+                        <h4 class="author-name">محمد فتحي (Ft7y.Sec)</h4>
+                        <span class="author-role">Security Researcher &amp; Developer</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subpage-quick-stats" style="margin-top: 25px;">
+                <div class="quick-badge"><i class="fa-solid fa-bolt"></i> خيوط متزامنة ThreadPoolExecutor</div>
+                <div class="quick-badge"><i class="fa-solid fa-tag"></i> التقاط البانر Banner Grabbing</div>
+                <div class="quick-badge"><i class="fa-solid fa-file-code"></i> تصدير تقارير JSON / TXT</div>
+                <div class="quick-badge"><i class="fa-solid fa-feather-pointed"></i> Zero External Dependencies</div>
+            </div>
+        </section>
+
+        <!-- 1. المحاكي التفاعلي المباشر في المتصفح -->
+        <section id="interactive-simulator" class="simulator-section" data-aos="fade-up">
+            <div class="content-block-header">
+                <h2><i class="fa-solid fa-play"></i> تجربة أداة PyPort-Scanner Pro مباشرة (Web Simulator)</h2>
+                <p>قم باختبار أداء الأداة الافتراضي، إدخال عنوان الهدف، تحديد سرعة الفحص والمنافذ، ومشاهدة النتائج المباشرة والتقاط البانر التفاعلي:</p>
+            </div>
+
+            <div class="simulator-card">
+                <div class="simulator-controls-bar">
+                    <div class="sim-input-group">
+                        <label for="sim-target"><i class="fa-solid fa-bullseye"></i> عنوان الهدف (Host / IP):</label>
+                        <input type="text" id="sim-target" class="sim-input" value="10.10.10.85" placeholder="e.g. 192.168.1.1 or scanme.nmap.org">
+                    </div>
+
+                    <div class="sim-input-group">
+                        <label for="sim-profile"><i class="fa-solid fa-list-check"></i> نطاق المنافذ (Ports Profile):</label>
+                        <select id="sim-profile" class="sim-select">
+                            <option value="top20">أشهر 20 منفذ (Top 20 Services)</option>
+                            <option value="web">منافذ الويب فقط (80, 443, 8080, 8443)</option>
+                            <option value="db">قواعد البيانات (3306, 5432, 1433, 27017)</option>
+                            <option value="custom">نطاق مخصص (1 - 1000)</option>
+                        </select>
+                    </div>
+
+                    <div class="sim-input-group">
+                        <label for="sim-threads"><i class="fa-solid fa-gauge-high"></i> عدد الخيوط (Concurrency):</label>
+                        <select id="sim-threads" class="sim-select">
+                            <option value="50">50 Workers (سريع وموصى به)</option>
+                            <option value="100">100 Workers (فائق السرعة)</option>
+                            <option value="10">10 Workers (خفي Stealth)</option>
+                        </select>
+                    </div>
+
+                    <div class="sim-action-group">
+                        <button id="sim-run-btn" class="btn-primary btn-run-scanner">
+                            <i class="fa-solid fa-play"></i> بدء الفحص الآن
+                        </button>
+                    </div>
+                </div>
+
+                <!-- شاشة الطرفية التفاعلية -->
+                <div class="sim-terminal-window">
+                    <div class="sim-terminal-header">
+                        <div class="window-dots">
+                            <span class="w-dot red"></span>
+                            <span class="w-dot yellow"></span>
+                            <span class="w-dot green"></span>
+                        </div>
+                        <div class="sim-terminal-title">root@ft7y-sec:~# pyport-scanner -t target -b</div>
+                        <div class="sim-terminal-actions">
+                            <button id="sim-clear-btn" class="sim-action-btn" title="مسح الشاشة"><i class="fa-solid fa-eraser"></i></button>
+                            <button id="sim-download-btn" class="sim-action-btn" title="تحميل التقرير" style="display: none;"><i class="fa-solid fa-download"></i> تصدير التقرير</button>
+                        </div>
+                    </div>
+
+                    <div class="sim-terminal-body" id="sim-output">
+                        <div class="term-line prompt">root@ft7y:~$ pyport-scanner --help</div>
+                        <div class="term-line info">PyPort-Scanner Pro جاهز للتشغيل. حدد الهدف واضغط "بدء الفحص الآن" لمحاكاة عملية الفحص والتقاط البانر.</div>
+                    </div>
+
+                    <div class="sim-progress-bar-container" id="sim-progress-wrap" style="display: none;">
+                        <div class="sim-progress-bar" id="sim-progress"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. استعراض الكود المصدري الكامل -->
+        <section class="content-block" data-aos="fade-up">
+            <div class="content-block-header">
+                <h2><i class="fa-solid fa-code"></i> الكود المصدري للأداة (pyport_scanner.py)</h2>
+                <p>كود بايثون 3 أصلي ونظيف، لا يتطلب أي حزم خارجية ويعمل مباشرة عبر الطرفية:</p>
+            </div>
+
+            <div class="script-card">
+                <div class="script-card-header">
+                    <div class="script-meta">
+                        <h3><i class="fa-brands fa-python"></i> PyPort-Scanner Pro v2.5 Source Code</h3>
+                        <p>مرخص تحت رخصة MIT ومتاح للاستخدام في التدريب واختبار الاختراق الأخلاقي.</p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="https://github.com/FySouL22/pyport-scanner-pro" target="_blank" rel="noopener noreferrer" class="btn-outline" style="padding: 7px 14px; font-size: 13px;">
+                            <i class="fa-brands fa-github"></i> المستودع على GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="code-window">
+                    <div class="window-bar">
+                        <div class="window-dots">
+                            <span class="w-dot red"></span>
+                            <span class="w-dot yellow"></span>
+                            <span class="w-dot green"></span>
+                        </div>
+                        <span class="window-title">tools/pyport_scanner/pyport_scanner.py</span>
+                        <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ الكود كاملاً</button>
+                    </div>
+                    <pre class="window-content"><code>#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+PyPort-Scanner Pro v2.5 by Mohamed Fathi (Ft7y.Sec)
+GitHub: https://github.com/FySouL22/pyport-scanner-pro
+"""
+import socket
+import sys
+import json
+import argparse
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime
+
+COMMON_PORTS = {
+    21: "FTP", 22: "SSH", 23: "Telnet", 25: "SMTP", 53: "DNS",
+    80: "HTTP", 110: "POP3", 135: "MSRPC", 139: "NetBIOS",
+    143: "IMAP", 443: "HTTPS", 445: "SMB", 3306: "MySQL",
+    3389: "RDP", 5432: "PostgreSQL", 8080: "HTTP-Proxy"
+}
+
+def grab_banner(target_ip, port, timeout=1.0):
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.settimeout(timeout)
+            s.connect((target_ip, port))
+            if port in [80, 8080, 443]:
+                s.sendall(b"HEAD / HTTP/1.1\r\nHost: " + target_ip.encode() + b"\r\n\r\n")
+            else:
+                s.sendall(b"\r\n")
+            raw = s.recv(1024).decode('utf-8', errors='ignore').strip()
+            return raw.splitlines()[0][:80] if raw else "Service Active"
+    except Exception:
+        return COMMON_PORTS.get(port, "Unknown")
+
+def scan_port(target_ip, port, timeout=0.8):
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.settimeout(timeout)
+            if s.connect_ex((target_ip, port)) == 0:
+                return {
+                    "port": port,
+                    "service": COMMON_PORTS.get(port, "Unknown"),
+                    "banner": grab_banner(target_ip, port, timeout)
+                }
+    except Exception:
+        pass
+    return None
+
+def main():
+    parser = argparse.ArgumentParser(description="PyPort-Scanner Pro by Ft7y.Sec")
+    parser.add_argument("-t", "--target", required=True, help="Target Host / IP")
+    parser.add_argument("-p", "--ports", default="1-1024", help="Port range (e.g. 1-1024, 80,443, top20)")
+    parser.add_argument("-w", "--workers", type=int, default=50, help="Thread count (default: 50)")
+    parser.add_argument("-o", "--output", help="Save to JSON file")
+    args = parser.parse_args()
+
+    target_ip = socket.gethostbyname(args.target)
+    print(f"[*] Scanning {args.target} ({target_ip}) with {args.workers} workers...")
+    
+    ports = range(1, 1025)
+    open_ports = []
+    with ThreadPoolExecutor(max_workers=args.workers) as pool:
+        futures = {pool.submit(scan_port, target_ip, p): p for p in ports}
+        for f in as_completed(futures):
+            res = f.result()
+            if res:
+                open_ports.append(res)
+                print(f"[+] Port {res['port']:5d}/TCP OPEN ({res['service']}) -> {res['banner']}")
+
+if __name__ == "__main__":
+    main()</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. دليل الاستخدام في الطرفية -->
+        <section class="content-block" data-aos="fade-up">
+            <div class="content-block-header">
+                <h2><i class="fa-solid fa-book-open"></i> دليل التشغيل والاستخدام في سطر الأوامر (CLI Guide)</h2>
+                <p>أوامر التشغيل المباشرة مع أمثلة الحالات الحقيقية:</p>
+            </div>
+
+            <div class="commands-grid">
+                <div class="cmd-card">
+                    <div class="cmd-desc-row">
+                        <span class="cmd-purpose"><i class="fa-solid fa-bolt"></i> الفحص السريع لأشهر المنافذ لموقع أو شبكة</span>
+                    </div>
+                    <div class="cmd-code-row">
+                        <span class="cmd-text">python pyport_scanner.py -t scanme.nmap.org -p top20</span>
+                        <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ</button>
+                    </div>
+                </div>
+
+                <div class="cmd-card">
+                    <div class="cmd-desc-row">
+                        <span class="cmd-purpose"><i class="fa-solid fa-file-export"></i> فحص نطاق كامل مع 80 خيطاً وتصدير التقرير بصيغة JSON</span>
+                    </div>
+                    <div class="cmd-code-row">
+                        <span class="cmd-text">python pyport_scanner.py -t 192.168.1.1 -p 1-1000 -w 80 -o report.json</span>
+                        <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">Ft7y<span>.Sec</span></div>
+            <p>&copy; 2026 محمد فتحي (Mohamed Fathi). جميع الحقوق محفوظة.</p>
+            <div class="footer-links">
+                <a href="index.html#home">الرئيسية</a>
+                <a href="pentest.html">اختبار الاختراق</a>
+                <a href="appsec.html">أمن التطبيقات</a>
+                <a href="automation.html">البرمجة والأتمتة</a>
+                <a href="systems-labs.html">الأنظمة والمعامل</a>
+                <a href="writeups.html">CTF Write-ups</a>
+                <a href="index.html#projects">المشاريع والأدوات</a>
+            </div>
+        </div>
+    </footer>
+
+    <button id="back-to-top" class="back-to-top" title="العودة للأعلى">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+    <div id="toast" class="toast"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

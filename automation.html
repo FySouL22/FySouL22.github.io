@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#07110d">
+    <meta name="color-scheme" content="dark light">
+    <title>البرمجة والأتمتة في الأمن السيبراني | Ft7y.Sec</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="avatar.png" type="image/png">
+</head>
+
+<body>
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <div class="page-noise" aria-hidden="true"></div>
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- شريط التنقل العلوي -->
+    <header class="navbar" id="navbar">
+        <div class="logo">
+            <a href="index.html#home">Ft7y<span>.Sec</span></a>
+        </div>
+
+        <nav class="nav-links" id="nav-menu">
+            <ul>
+                <li><a href="index.html#home">الرئيسية</a></li>
+                <li><a href="pentest.html">اختبار الاختراق</a></li>
+                <li><a href="appsec.html">أمن التطبيقات</a></li>
+                <li><a href="automation.html" class="active">البرمجة والأتمتة</a></li>
+                <li><a href="systems-labs.html">الأنظمة والمعامل</a></li>
+                <li><a href="writeups.html">CTF Write-ups</a></li>
+                <li><a href="index.html#contact">تواصل معي</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-actions">
+            <button id="theme-toggle" class="btn-secondary" title="تبديل الوضع">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="القائمة">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="subpage-container">
+        <!-- الترويسة -->
+        <section class="subpage-hero" data-aos="fade-up">
+            <nav class="breadcrumb-nav">
+                <a href="index.html"><i class="fa-solid fa-house"></i> الرئيسية</a>
+                <span class="sep">/</span>
+                <a href="index.html#skills">المهارات التقنية</a>
+                <span class="sep">/</span>
+                <span class="current">البرمجة والأتمتة (Automation)</span>
+            </nav>
+
+            <h1 class="subpage-hero-title">
+                <i class="fa-brands fa-python"></i>
+                البرمجة والأتمتة في الأمن السيبراني (Cybersecurity Scripting)
+            </h1>
+            <p class="subpage-hero-desc">
+                بناء وتطوير الأدوات والسكربتات المخصصة بلغات <strong>Python</strong>, <strong>Bash</strong>, <strong>PowerShell</strong>, و <strong>Go</strong> لتسريع عمليات الاستطلاع، أتمتة جمع المعلومات، تحليل الحزم والملفات، وبناء خطوط الفحص الأمني المستمر في بيئات <strong>DevSecOps &amp; CI/CD</strong>.
+            </p>
+
+            <div class="subpage-quick-stats">
+                <div class="quick-badge"><i class="fa-brands fa-python"></i> أدوات بايثون أمنية جاهزة</div>
+                <div class="quick-badge"><i class="fa-solid fa-terminal"></i> ون-لاينرز وسكربتات Bash</div>
+                <div class="quick-badge"><i class="fa-brands fa-windows"></i> سكريبتات PowerShell للاستجابة</div>
+                <div class="quick-badge"><i class="fa-solid fa-gears"></i> أتمتة خطوط DevSecOps</div>
+            </div>
+        </section>
+
+        <!-- صندوق الفلترة والبحث -->
+        <section class="subpage-controls" data-aos="fade-up" data-aos-delay="100">
+            <div class="search-box-wrapper">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" class="search-input" placeholder="ابحث في السكربتات والأكواد (مثال: port scanner, socket, bash, recon, powershell, github actions)..." aria-label="بحث في السكربتات">
+                <button class="search-clear-btn" title="مسح البحث"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="filter-chips">
+                <button class="chip-btn active" data-category="all"><i class="fa-solid fa-grip"></i> الكل</button>
+                <button class="chip-btn" data-category="python"><i class="fa-brands fa-python"></i> سكربتات Python</button>
+                <button class="chip-btn" data-category="bash"><i class="fa-solid fa-terminal"></i> أتمتة Bash</button>
+                <button class="chip-btn" data-category="powershell"><i class="fa-brands fa-windows"></i> سكربتات PowerShell</button>
+                <button class="chip-btn" data-category="golang"><i class="fa-solid fa-code"></i> أدوات Go الحديثة</button>
+                <button class="chip-btn" data-category="cicd"><i class="fa-solid fa-gears"></i> خطوط DevSecOps</button>
+            </div>
+        </section>
+
+        <div class="scripts-showcase">
+
+            <!-- 1. Python Multi-threaded Port Scanner -->
+            <div class="script-card" data-category="python" data-aos="fade-up">
+                <div class="script-card-header">
+                    <div class="script-meta">
+                        <h3><i class="fa-brands fa-python"></i> فاحص منافذ متعدد الخيوط فائق السرعة (Fast Port Scanner)</h3>
+                        <p>سكربت بايثون 3 يعتمد على مقابس الشبكة <code>socket</code> ووحدة <code>concurrent.futures</code> لفحص مئات المنافذ في ثوان معدودة والتقاط عنوان الخدمة (Banner Grabbing).</p>
+                    </div>
+                </div>
+
+                <div class="code-window">
+                    <div class="window-bar">
+                        <div class="window-dots">
+                            <span class="w-dot red"></span>
+                            <span class="w-dot yellow"></span>
+                            <span class="w-dot green"></span>
+                        </div>
+                        <span class="window-title">port_scanner.py</span>
+                        <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ الكود</button>
+                    </div>
+                    <pre class="window-content"><code>import socket
+import sys
+from concurrent.futures import ThreadPoolExecutor
+
+TARGET_HOST = sys.argv[1] if len(sys.argv) > 1 else "127.0.0.1"
+PORTS_TO_SCAN = range(1, 1025)  # Well-known ports
+TIMEOUT = 0.8
+
+def scan_port(port):
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.settimeout(TIMEOUT)
+            result = s.connect_ex((TARGET_HOST, port))
+            if result == 0:
+                # Banner Grabbing attempt
+                try:
+                    s.sendall(b"HEAD / HTTP/1.0\r\n\r\n")
+                    banner = s.recv(1024).decode('utf-8', errors='ignore').split('\r\n')[0]
+                except Exception:
+                    banner = "Service Active"
+                print(f"[+] Port {port:5d}/TCP is OPEN --> {banner}")
+    except socket.error:
+        pass
+
+print(f"[*] Starting Multi-threaded Scan on: {TARGET_HOST}")
+with ThreadPoolExecutor(max_workers=100) as executor:
+    executor.map(scan_port, PORTS_TO_SCAN)
+print("[*] Scan completed successfully.")</code></pre>
+                </div>
+            </div>
+
+            <!-- 2. Python Web Directory Brute-Forcer -->
+            <div class="script-card" data-category="python" data-aos="fade-up">
+                <div class="script-card-header">
+                    <div class="script-meta">
+                        <h3><i class="fa-brands fa-python"></i> فاحص دلائل الويب التلقائي (Web Directory Brute-Forcer)</h3>
+                        <p>أداة بايثون ترسل طلبات HTTP متوازية لاكتشاف الملفات الحساسة ولوحات التحكم المخفية مع فلترة رموز الاستجابة (200, 301, 403).</p>
+                    </div>
+                </div>
+
+                <div class="code-window">
+                    <div class="window-bar">
+                        <div class="window-dots">
+                            <span class="w-dot red"></span>
+                            <span class="w-dot yellow"></span>
+                            <span class="w-dot green"></span>
+                        </div>
+                        <span class="window-title">web_fuzzer.py</span>
+                        <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ الكود</button>
+                    </div>
+                    <pre class="window-content"><code>import requests
+from concurrent.futures import ThreadPoolExecutor
+
+BASE_URL = "https://example.com"
+WORDLIST_PATH = "common_dirs.txt"
+HEADERS = {"User-Agent": "Ft7y-Sec-Custom-Fuzzer/1.0"}
+
+def check_endpoint(word):
+    word = word.strip()
+    if not word or word.startswith("#"):
+        return
+    url = f"{BASE_URL}/{word}"
+    try:
+        res = requests.get(url, headers=HEADERS, timeout=3, allow_redirects=False)
+        if res.status_code in [200, 204, 301, 302, 307, 401, 403]:
+            color = "\033[92m" if res.status_code == 200 else "\033[93m"
+            print(f"{color}[{res.status_code}] --> {url} (Length: {len(res.content)})\033[0m")
+    except requests.RequestException:
+        pass
+
+with open(WORDLIST_PATH, "r", encoding="utf-8", errors="ignore") as f:
+    words = f.readlines()
+
+print(f"[*] Launching directory discovery on {BASE_URL} ({len(words)} words)...")
+with ThreadPoolExecutor(max_workers=40) as pool:
+    pool.map(check_endpoint, words)</code></pre>
+                </div>
+            </div>
+
+            <!-- 3. Python Scapy ARP Spoofing Detector -->
+            <div class="script-card" data-category="python" data-aos="fade-up">
+                <div class="script-card-header">
+                    <div class="script-meta">
+                        <h3><i class="fa-brands fa-python"></i> كاشف هجمات التسمم وتحويل المسار (ARP Spoof Detector with Scapy)</h3>
+                        <p>مراقبة حزم الـ ARP في الشبكة المحلية بالزمن الحقيقي وتنبيه المستخدم في حال وجود هجوم Man-in-the-Middle يحاول انتحال عنوان الراوتر.</p>
+                    </div>
+                </div>
+
+                <div class="code-window">
+                    <div class="window-bar">
+                        <div class="window-dots">
+                            <span class="w-dot red"></span>
+                            <span class="w-dot yellow"></span>
+                            <span class="w-dot green"></span>
+                        </div>
+                        <span class="window-title">arp_detector.py</span>
+                        <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ الكود</button>
+                    </div>
+                    <pre class="window-content"><code>from scapy.all import sniff, ARP
+
+ip_mac_table = {}
+
+def process_arp_packet(packet):
+    if packet.haslayer(ARP) and packet[ARP].op == 2:  # ARP Response/Is-at
+        sender_ip = packet[ARP].psrc
+        sender_mac = packet[ARP].hwsrc.lower()
+
+        if sender_ip in ip_mac_table:
+            known_mac = ip_mac_table[sender_ip]
+            if known_mac != sender_mac:
+                print(f"\033[91m[!] CRITICAL ALERT: Possible ARP Spoofing Detected!\033[0m")
+                print(f"    IP: {sender_ip} has CHANGED from [{known_mac}] to [{sender_mac}]")
+        else:
+            ip_mac_table[sender_ip] = sender_mac
+            print(f"[*] New Host Logged: {sender_ip:15s} -> {sender_mac}")
+
+print("[*] Sniffing for ARP anomaly on local network interface...")
+sniff(filter="arp", store=0, prn=process_arp_packet)</code></pre>
+                </div>
+            </div>
+
+            <!-- 4. Bash Recon Pipeline -->
+            <div class="script-card" data-category="bash" data-aos="fade-up">
+                <div class="script-card-header">
+                    <div class="script-meta">
+                        <h3><i class="fa-solid fa-terminal"></i> ون-لاينر الاستطلاع التلقائي المتكامل (Recon Automation Pipeline)</h3>
+                        <p>سلسلة أوامر متصلة لجمع النطاقات الفرعية، التحقق من المواقع النشطة، وفحص الثغرات الحرجة آلياً عبر دمج الأدوات الرائدة.</p>
+                    </div>
+                </div>
+
+                <div class="code-window">
+                    <div class="window-bar">
+                        <div class="window-dots">
+                            <span class="w-dot red"></span>
+                            <span class="w-dot yellow"></span>
+                            <span class="w-dot green"></span>
+                        </div>
+                        <span class="window-title">recon_pipeline.sh</span>
+                        <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ الكود</button>
+                    </div>
+                    <pre class="window-content"><code>#!/bin/bash
+TARGET=$1
+if [ -z "$TARGET" ]; then
+    echo "Usage: ./recon_pipeline.sh domain.com"
+    exit 1
+fi
+
+mkdir -p "recon_${TARGET}"
+echo "[*] Step 1: Enumerating subdomains..."
+subfinder -d "$TARGET" -silent | sort -u > "recon_${TARGET}/subs.txt"
+
+echo "[*] Step 2: Probing live web endpoints..."
+httpx -l "recon_${TARGET}/subs.txt" -silent -status-code -title -tech-detect -o "recon_${TARGET}/live_hosts.txt"
+
+echo "[*] Step 3: Scanning for critical vulnerabilities with Nuclei..."
+cat "recon_${TARGET}/live_hosts.txt" | awk '{print $1}' | nuclei -t cves/,vulnerabilities/ -severity critical,high -o "recon_${TARGET}/nuclei_alerts.txt"
+
+echo "[+] Recon completed! Results stored in recon_${TARGET}/"</code></pre>
+                </div>
+            </div>
+
+            <!-- 5. Bash Nmap Port Parser -->
+            <div class="script-card" data-category="bash" data-aos="fade-up">
+                <div class="script-card-header">
+                    <div class="script-meta">
+                        <h3><i class="fa-solid fa-terminal"></i> استخراج المنافذ المفتوحة من مخرجات Nmap بنقرة واحدة</h3>
+                        <p>دالة Bash سريعة تحول مخرجات Nmap (ملف .gnmap) إلى قائمة منافذ مفصولة بفواصل لنسخها وتمريرها في أدوات الفحص التفصيلي.</p>
+                    </div>
+                </div>
+
+                <div class="code-window">
+                    <div class="window-bar">
+                        <div class="window-dots">
+                            <span class="w-dot red"></span>
+                            <span class="w-dot yellow"></span>
+                            <span class="w-dot green"></span>
+                        </div>
+                        <span class="window-title">parse_ports.sh</span>
+                        <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ الكود</button>
+                    </div>
+                    <pre class="window-content"><code># Add this function to your ~/.bashrc or execute directly:
+extract_ports() {
+    FILE=$1
+    if [ ! -f "$FILE" ]; then
+        echo "Usage: extract_ports target.gnmap"
+        return
+    fi
+    PORTS=$(grep -oP '\d+/open' "$FILE" | cut -d '/' -f 1 | paste -sd ',' -)
+    IP=$(grep -oP 'Host: \K[0-9.]+' "$FILE" | head -n 1)
+    echo "[+] Target IP: $IP"
+    echo "[+] Open Ports: $PORTS"
+    echo "$PORTS" | xclip -selection clipboard 2>/dev/null || true
+    echo "[*] Command ready: nmap -p$PORTS -sV -sC $IP"
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- 6. PowerShell Active Directory Enumeration -->
+            <div class="script-card" data-category="powershell" data-aos="fade-up">
+                <div class="script-card-header">
+                    <div class="script-meta">
+                        <h3><i class="fa-brands fa-windows"></i> استكشاف دومين Active Directory بدون أدوات خارجية (Native AD Enum)</h3>
+                        <p>استخدام كائنات <code>DirectorySearcher</code> المدمجة في Windows لاستخراج مدراء النطاق وأجهزة السيرفرات دون إطلاق إنذارات برامج مكافحة الفيروسات (AV/EDR Evasion).</p>
+                    </div>
+                </div>
+
+                <div class="code-window">
+                    <div class="window-bar">
+                        <div class="window-dots">
+                            <span class="w-dot red"></span>
+                            <span class="w-dot yellow"></span>
+                            <span class="w-dot green"></span>
+                        </div>
+                        <span class="window-title">ad_enum.ps1</span>
+                        <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ الكود</button>
+                    </div>
+                    <pre class="window-content"><code>Write-Host "[*] Querying Domain Controllers..." -ForegroundColor Cyan
+[System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain().DomainControllers | 
+    Select-Object Name, IPAddress, OSVersion
+
+Write-Host "`n[*] Extracting Members of 'Domain Admins'..." -ForegroundColor Yellow
+$Searcher = [ADSISearcher]'(samAccountType=805306368)'
+$Searcher.Filter = "(&(objectClass=user)(memberOf=*Domain Admins*))"
+$Searcher.FindAll() | ForEach-Object {
+    [PSCustomObject]@{
+        Username     = $_.Properties.samaccountname[0]
+        Email        = $_.Properties.mail[0]
+        LastLogon    = [DateTime]::FromFileTime($_.Properties.lastlogontimestamp[0])
+    }
+} | Format-Table -AutoSize</code></pre>
+                </div>
+            </div>
+
+            <!-- 7. Go Tools Pipeline -->
+            <div class="script-card" data-category="golang" data-aos="fade-up">
+                <div class="script-card-header">
+                    <div class="script-meta">
+                        <h3><i class="fa-solid fa-code"></i> لماذا لغة Go؟ وكيفية تثبيت وإدارة ترسانة الأدوات الأمنية الحديثة</h3>
+                        <p>تعتبر Go اللغة المعيارية لأدوات الـ Recon في العصر الحديث بفضل السرعة العالية، انعدام الاعتماديات (Single Static Binary)، ودعم الخيوط المتزامنة الفائق عبر Goroutines.</p>
+                    </div>
+                </div>
+
+                <div class="code-window">
+                    <div class="window-bar">
+                        <div class="window-dots">
+                            <span class="w-dot red"></span>
+                            <span class="w-dot yellow"></span>
+                            <span class="w-dot green"></span>
+                        </div>
+                        <span class="window-title">install_go_arsenal.sh</span>
+                        <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ الكود</button>
+                    </div>
+                    <pre class="window-content"><code>#!/bin/bash
+# Fast install of the modern Go security arsenal
+echo "[*] Installing ProjectDiscovery Tools..."
+go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
+go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest
+go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
+go install -v github.com/projectdiscovery/katana/cmd/katana@latest
+go install -v github.com/ffuf/ffuf/v2@latest
+
+echo "[+] All binaries installed in ~/go/bin. Add to your PATH:"
+echo 'export PATH=$PATH:$HOME/go/bin' >> ~/.bashrc
+source ~/.bashrc
+echo "[+] Verification:"
+nuclei -version</code></pre>
+                </div>
+            </div>
+
+            <!-- 8. CI/CD DevSecOps Pipeline -->
+            <div class="script-card" data-category="cicd" data-aos="fade-up">
+                <div class="script-card-header">
+                    <div class="script-meta">
+                        <h3><i class="fa-solid fa-gears"></i> خط فحص أمني مؤتمت مع كل Commit (GitHub Actions Security Pipeline)</h3>
+                        <p>ملف سير عمل (Workflow) يقوم بفحص الكود عبر <strong>Semgrep</strong> وفحص حزم الاعتماديات عبر <strong>Trivy</strong> تلقائياً وإيقاف الـ Merge إذا وجدت ثغرة أمنية عالية الخطورة.</p>
+                    </div>
+                </div>
+
+                <div class="code-window">
+                    <div class="window-bar">
+                        <div class="window-dots">
+                            <span class="w-dot red"></span>
+                            <span class="w-dot yellow"></span>
+                            <span class="w-dot green"></span>
+                        </div>
+                        <span class="window-title">.github/workflows/security-scan.yml</span>
+                        <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ الكود</button>
+                    </div>
+                    <pre class="window-content"><code>name: DevSecOps Automated Security Scan
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  sast_scan:
+    name: SAST Code Analysis (Semgrep)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Semgrep SAST
+        run: |
+          docker run --rm -v "${{ github.workspace }}:/src" returntocorp/semgrep \
+            semgrep scan --config=auto --error
+
+  dependency_scan:
+    name: SCA Vulnerability Scan (Trivy)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Scan Dependencies with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH'
+          exit-code: '1' # Break the build if critical flaws exist</code></pre>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">Ft7y<span>.Sec</span></div>
+            <p>&copy; 2026 محمد فتحي (Mohamed Fathi). جميع الحقوق محفوظة.</p>
+            <div class="footer-links">
+                <a href="index.html#home">الرئيسية</a>
+                <a href="pentest.html">اختبار الاختراق</a>
+                <a href="appsec.html">أمن التطبيقات</a>
+                <a href="automation.html">البرمجة والأتمتة</a>
+                <a href="systems-labs.html">الأنظمة والمعامل</a>
+                <a href="writeups.html">CTF Write-ups</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- زر العودة للأعلى -->
+    <button id="back-to-top" class="back-to-top" title="العودة للأعلى">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <!-- إشعار النسخ -->
+    <div id="toast" class="toast"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

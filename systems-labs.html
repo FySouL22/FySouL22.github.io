@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#07110d">
+    <meta name="color-scheme" content="dark light">
+    <title>الأنظمة والمعامل الأمنية ومختبرات الـ CTF | Ft7y.Sec</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="avatar.png" type="image/png">
+</head>
+
+<body>
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <div class="page-noise" aria-hidden="true"></div>
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- شريط التنقل العلوي -->
+    <header class="navbar" id="navbar">
+        <div class="logo">
+            <a href="index.html#home">Ft7y<span>.Sec</span></a>
+        </div>
+
+        <nav class="nav-links" id="nav-menu">
+            <ul>
+                <li><a href="index.html#home">الرئيسية</a></li>
+                <li><a href="pentest.html">اختبار الاختراق</a></li>
+                <li><a href="appsec.html">أمن التطبيقات</a></li>
+                <li><a href="automation.html">البرمجة والأتمتة</a></li>
+                <li><a href="systems-labs.html" class="active">الأنظمة والمعامل</a></li>
+                <li><a href="writeups.html">CTF Write-ups</a></li>
+                <li><a href="index.html#contact">تواصل معي</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-actions">
+            <button id="theme-toggle" class="btn-secondary" title="تبديل الوضع">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="القائمة">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="subpage-container">
+        <!-- الترويسة -->
+        <section class="subpage-hero" data-aos="fade-up">
+            <nav class="breadcrumb-nav">
+                <a href="index.html"><i class="fa-solid fa-house"></i> الرئيسية</a>
+                <span class="sep">/</span>
+                <a href="index.html#skills">المهارات التقنية</a>
+                <span class="sep">/</span>
+                <span class="current">الأنظمة والمعامل ومختبرات الـ CTF</span>
+            </nav>
+
+            <h1 class="subpage-hero-title">
+                <i class="fa-brands fa-linux"></i>
+                الأنظمة والمعامل الأمنية (Systems, Hardening &amp; HomeLabs)
+            </h1>
+            <p class="subpage-hero-desc">
+                دليل معماري وعملي متكامل لتأسيس بيئات ومعامل الاختراق المنزلية (HomeLabs)، تأمين أنظمة <strong>Linux</strong> ومسارات تصعيد الصلاحيات، بناء شبكات <strong>Active Directory</strong> لمحاكاة هجمات المؤسسات، تأمين حاويات <strong>Docker</strong>، وتنصيب معمل مراقبة أمنية <strong>SOC / SIEM</strong> عبر Wazuh، مع خارطة طريق تدريبية لاحتراف منصات <strong>TryHackMe</strong> و <strong>HackTheBox</strong>.
+            </p>
+
+            <div class="subpage-quick-stats">
+                <div class="quick-badge"><i class="fa-brands fa-windows"></i> معمل Active Directory مؤسسي</div>
+                <div class="quick-badge"><i class="fa-brands fa-linux"></i> تأمين Linux وتصعيد الصلاحيات</div>
+                <div class="quick-badge"><i class="fa-brands fa-docker"></i> أمن الحاويات والـ Docker</div>
+                <div class="quick-badge"><i class="fa-solid fa-shield-halved"></i> معمل Wazuh SIEM &amp; SOC</div>
+            </div>
+        </section>
+
+        <!-- صندوق الفلترة والبحث -->
+        <section class="subpage-controls" data-aos="fade-up" data-aos-delay="100">
+            <div class="search-box-wrapper">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" class="search-input" placeholder="ابحث في الأنظمة، المعامل، السيناريوهات (مثل: Active Directory, SUID, Docker, Wazuh, Proxmox)..." aria-label="بحث في المعامل">
+                <button class="search-clear-btn" title="مسح البحث"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="filter-chips">
+                <button class="chip-btn active" data-category="all"><i class="fa-solid fa-grip"></i> الكل</button>
+                <button class="chip-btn" data-category="ad"><i class="fa-brands fa-windows"></i> معمل Active Directory</button>
+                <button class="chip-btn" data-category="linux"><i class="fa-brands fa-linux"></i> تأمين Linux وتصعيد الصلاحيات</button>
+                <button class="chip-btn" data-category="docker"><i class="fa-brands fa-docker"></i> أمن الحاويات Docker</button>
+                <button class="chip-btn" data-category="virtualization"><i class="fa-solid fa-server"></i> بيئات المحاكاة والشبكات</button>
+                <button class="chip-btn" data-category="soc"><i class="fa-solid fa-chart-line"></i> معمل SOC &amp; Wazuh</button>
+                <button class="chip-btn" data-category="roadmap"><i class="fa-solid fa-map-location-dot"></i> خارطة تدريب CTF</button>
+            </div>
+        </section>
+
+        <div class="scripts-showcase">
+
+            <!-- 1. Active Directory Lab -->
+            <div class="script-card" data-category="ad" data-aos="fade-up">
+                <div class="script-card-header">
+                    <div class="script-meta">
+                        <h3><i class="fa-brands fa-windows"></i> 1. معمل Active Directory المؤسسي المنزلي (Home AD Lab)</h3>
+                        <p>بناء بيئة تحاكي شبكات الشركات لاختبار هجمات Kerberos واكتشاف مسارات السيطرة على الدومين (Domain Compromise) وطرق التقسية والدفاع.</p>
+                    </div>
+                </div>
+
+                <div class="architecture-box">
+                    <h4 style="color: var(--accent-color);"><i class="fa-solid fa-network-wired"></i> المخطط المعماري للأجهزة في المعمل المعزول (Subnet: 192.168.10.0/24):</h4>
+                    <div class="arch-node-list">
+                        <div class="arch-node">
+                            <h4><i class="fa-solid fa-server"></i> Domain Controller (DC01)</h4>
+                            <p><strong>OS:</strong> Windows Server 2022<br><strong>IP:</strong> 192.168.10.10<br><strong>Role:</strong> Active Directory, DNS, Kerberos KDC, Certificate Authority</p>
+                        </div>
+                        <div class="arch-node">
+                            <h4><i class="fa-solid fa-desktop"></i> Workstation 01 (WS01)</h4>
+                            <p><strong>OS:</strong> Windows 10/11 Enterprise<br><strong>IP:</strong> 192.168.10.20<br><strong>Role:</strong> Domain-joined Client, Simulated User Activity, SQL Server</p>
+                        </div>
+                        <div class="arch-node">
+                            <h4><i class="fa-solid fa-laptop-code"></i> Attacker Machine</h4>
+                            <p><strong>OS:</strong> Kali Linux<br><strong>IP:</strong> 192.168.10.50<br><strong>Tools:</strong> Impacket, BloodHound, NetExec, Responder, Mimikatz</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commands-grid">
+                    <div class="cmd-card">
+                        <div class="cmd-desc-row">
+                            <span class="cmd-purpose"><i class="fa-solid fa-fire"></i> أشهر هجمات الـ Active Directory المحاكاة في المعمل</span>
+                        </div>
+                        <div class="cmd-flags" style="margin-top: 8px;">
+                            <span class="flag-pill"><strong>Kerberoasting:</strong> طلب تذاكر TGS لحسابات الـ SPNs المشفرة بكلمات مرور وكسرها بدون اتصال.</span>
+                            <span class="flag-pill"><strong>AS-REP Roasting:</strong> استهداف الحسابات التي لا تتطلب مصادقة Kerberos المسبقة واستخراج تجزئتها فوراً.</span>
+                            <span class="flag-pill"><strong>BloodHound Analysis:</strong> تشغيل SharpHound لرسم العلاقات واكتشاف مسار تصعيد الصلاحيات إلى Domain Admin.</span>
+                            <span class="flag-pill"><strong>Pass-the-Hash (PtH):</strong> استخدام تجزئة NTLM المسحوبة من الذاكرة لتنفيذ أوامر عن بعد عبر SMB/WMI دون معرفة كلمة السر.</span>
+                            <span class="flag-pill"><strong>DCSync:</strong> انتحال صفة Domain Controller ثانٍ وسحب كافة تجزئات النطاق (بما فيها حساب krbtgt).</span>
+                        </div>
+                    </div>
+
+                    <div class="cmd-card">
+                        <div class="cmd-desc-row">
+                            <span class="cmd-purpose"><i class="fa-solid fa-shield-halved"></i> أمر Impacket العملي لهجوم Kerberoasting داخل المعمل</span>
+                        </div>
+                        <div class="cmd-code-row">
+                            <span class="cmd-text">impacket-GetUserSPNs lab.local/user:Password123 -dc-ip 192.168.10.10 -request -outputfile hashes.kerberoast</span>
+                            <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ</button>
+                        </div>
+                        <div class="cmd-flags">
+                            <span class="flag-pill">كسر التجزئات الناتجة عبر Hashcat: <code>hashcat -m 13100 -a 0 hashes.kerberoast rockyou.txt</code></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Linux Hardening & PrivEsc -->
+            <div class="script-card" data-category="linux" data-aos="fade-up">
+                <div class="script-card-header">
+                    <div class="script-meta">
+                        <h3><i class="fa-brands fa-linux"></i> 2. تأمين أنظمة Linux وتصعيد الصلاحيات (Linux Hardening &amp; PrivEsc)</h3>
+                        <p>استكشاف أشهر نقاط الضعف التي تتيح للمخترق القفز من مستخدم عادي إلى صلاحيات Root، مع قائمة التحقق العملية لحماية وتأمين الخوادم.</p>
+                    </div>
+                </div>
+
+                <div class="commands-grid">
+                    <div class="cmd-card">
+                        <div class="cmd-desc-row">
+                            <span class="cmd-purpose"><i class="fa-solid fa-magnifying-glass"></i> فحص واستخراج ملفات الـ SUID الخطيرة القابلة للاستغلال عبر GTFOBins</span>
+                        </div>
+                        <div class="cmd-code-row">
+                            <span class="cmd-text">find / -perm -u=s -type f 2>/dev/null</span>
+                            <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ</button>
+                        </div>
+                        <div class="cmd-flags">
+                            <span class="flag-pill">ملفات مشبوهة إذا وُجدت بـ SUID: <code>/usr/bin/find</code>, <code>/usr/bin/vim</code>, <code>/usr/bin/python3</code>, <code>/usr/bin/bash</code></span>
+                        </div>
+                    </div>
+
+                    <div class="cmd-card">
+                        <div class="cmd-desc-row">
+                            <span class="cmd-purpose"><i class="fa-solid fa-user-lock"></i> تشغيل سكربت التدقيق التلقائي LinPEAS مباشرة في الذاكرة دون ترك أثر</span>
+                        </div>
+                        <div class="cmd-code-row">
+                            <span class="cmd-text">curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh</span>
+                            <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ</button>
+                        </div>
+                        <div class="cmd-flags">
+                            <span class="flag-pill">يقوم بفحص إصدار الكيرنل، ملفات Cron، كلمات المرور المخزنة، وصلاحيات Sudo</span>
+                        </div>
+                    </div>
+
+                    <div class="cmd-card">
+                        <div class="cmd-desc-row">
+                            <span class="cmd-purpose"><i class="fa-solid fa-lock"></i> إجراءات التقسية الأساسية لخوادم الإنتاج (Hardening Checklist)</span>
+                        </div>
+                        <ul class="steps-list">
+                            <li><strong>تأمين خدمة SSH:</strong> تعديل <code>/etc/ssh/sshd_config</code> لمنع تسجيل الدخول كـ Root (<code>PermitRootLogin no</code>)، وتعطيل كلمات المرور والاعتماد على مفاتيح SSH فقط (<code>PasswordAuthentication no</code>).</li>
+                            <li><strong>جدار الحماية UFW:</strong> إغلاق كافة المنافذ افتراضياً وفتح المنافذ الضرورية فقط (<code>ufw default deny incoming; ufw allow 22/tcp; ufw enable</code>).</li>
+                            <li><strong>الحماية من التخمين:</strong> تنصيب أداة <code>fail2ban</code> لحظر أي عنوان IP يتكرر فشله في تسجيل الدخول تلقائياً.</li>
+                            <li><strong>التدقيق الأمني الدوري:</strong> تشغيل فاحص الأنظمة الشهير Lynis عبر الأمر <code>sudo lynis audit system</code> لتوليد تقرير التقسية.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Docker & Container Security -->
+            <div class="script-card" data-category="docker" data-aos="fade-up">
+                <div class="script-card-header">
+                    <div class="script-meta">
+                        <h3><i class="fa-brands fa-docker"></i> 3. أمن الحاويات والـ Docker (Container Security &amp; Escapes)</h3>
+                        <p>تأمين صور الحاويات، تفادي سيناريوهات الهروب للنظام المضيف (Container Escapes)، وفحص الثغرات في طبقات Dockerfile.</p>
+                    </div>
+                </div>
+
+                <div class="commands-grid">
+                    <div class="cmd-card">
+                        <div class="cmd-desc-row">
+                            <span class="cmd-purpose"><i class="fa-solid fa-triangle-exclamation"></i> خطر تمرير Docker Socket وكيف يؤدي إلى السيطرة الكاملة على السيرفر المضيف</span>
+                        </div>
+                        <div class="cmd-code-row">
+                            <span class="cmd-text">docker run -it -v /var/run/docker.sock:/var/run/docker.sock alpine sh</span>
+                            <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ</button>
+                        </div>
+                        <div class="cmd-flags">
+                            <span class="flag-pill">تحذير أمني: يتيح لمن بداخل الحاوية إنشاء حاوية جديدة بـ <code>--privileged</code> وقراءة قرص الخادم المضيف بالكامل.</span>
+                        </div>
+                    </div>
+
+                    <div class="cmd-card">
+                        <div class="cmd-desc-row">
+                            <span class="cmd-purpose"><i class="fa-solid fa-shield-virus"></i> فحص صورة Docker واكتشاف الثغرات في الحزم والمكتبات عبر Trivy</span>
+                        </div>
+                        <div class="cmd-code-row">
+                            <span class="cmd-text">trivy image --severity HIGH,CRITICAL python:3.11-alpine</span>
+                            <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ</button>
+                        </div>
+                        <div class="cmd-flags">
+                            <span class="flag-pill">استخراج تقرير بجميع CVEs ومستوى خطورتها ورقم الإصدار الذي تم فيه ترقيع الثغرة.</span>
+                        </div>
+                    </div>
+
+                    <div class="cmd-card">
+                        <div class="cmd-desc-row">
+                            <span class="cmd-purpose"><i class="fa-solid fa-code"></i> أفضل الممارسات لكتابة Dockerfile آمن ومنيع (Best Practices)</span>
+                        </div>
+                        <div class="code-window" style="margin-top: 8px;">
+                            <div class="window-bar">
+                                <span class="window-title">Dockerfile (Hardened)</span>
+                                <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ</button>
+                            </div>
+                            <pre class="window-content"><code>FROM python:3.11-slim
+# 1. Don't run as root! Create a non-privileged system user
+RUN groupadd -r appuser && useradd -r -g appuser -d /app appuser
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+# 2. Change ownership to the non-root user
+USER appuser
+# 3. Read-only root filesystem when executed
+EXPOSE 8000
+CMD ["python", "app.py"]</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Virtualization & Lab Setup -->
+            <div class="script-card" data-category="virtualization" data-aos="fade-up">
+                <div class="script-card-header">
+                    <div class="script-meta">
+                        <h3><i class="fa-solid fa-server"></i> 4. بيئات المحاكاة الافتراضية وعزل شبكات المعمل (Virtualization)</h3>
+                        <p>مقارنة بين منصات VirtualBox, VMware, Proxmox VE وكيفية إعداد جدار حماية وهمي مثل pfSense كبوابة آمنة للمختبر.</p>
+                    </div>
+                </div>
+
+                <div class="vuln-cards-grid">
+                    <div class="vuln-card" data-category="virtualization">
+                        <h3 class="vuln-title"><i class="fa-solid fa-laptop"></i> Type-2: VMware / VirtualBox</h3>
+                        <p class="vuln-desc">
+                            يعمل فوق نظام التشغيل المكتبي (Windows أو Linux). مثالي للبداية والتدريب الفردي.
+                        </p>
+                        <div class="fix-box">
+                            <strong>إعداد الشبكة:</strong> استخدم وضع <code>Host-Only</code> أو <code>Internal Network</code> لعزل أجهزة الضحايا عن شبكة منزلك تماماً.
+                        </div>
+                    </div>
+
+                    <div class="vuln-card" data-category="virtualization">
+                        <h3 class="vuln-title"><i class="fa-solid fa-server"></i> Type-1: Proxmox VE Hypervisor</h3>
+                        <p class="vuln-desc">
+                            نظام تشغيل مخصص للسيرفرات (Bare-metal) يدعم KVM و LXC Containers وواجهة ويب ممتازة.
+                        </p>
+                        <div class="fix-box">
+                            <strong>الميزة:</strong> يعمل على مدار الساعة لاستهلاك طاقة منخفض، ويوفر أخذ لقطات فورية (Snapshots) عند كسر الأجهزة.
+                        </div>
+                    </div>
+
+                    <div class="vuln-card" data-category="virtualization">
+                        <h3 class="vuln-title"><i class="fa-solid fa-shield-halved"></i> pfSense / OPNsense Router</h3>
+                        <p class="vuln-desc">
+                            جدار حماية وراوتر وهمي مفتوح المصدر يُنصب داخل المعمل للفصل بين شبكة المهاجم وشبكة الضحايا.
+                        </p>
+                        <div class="fix-box">
+                            <strong>التحكم:</strong> مراقبة حزم البيانات، منع وصول الأجهزة المصابة للإنترنت الخارجي، وتخصيص VLANs منفصلة.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Wazuh SIEM & SOC Lab -->
+            <div class="script-card" data-category="soc" data-aos="fade-up">
+                <div class="script-card-header">
+                    <div class="script-meta">
+                        <h3><i class="fa-solid fa-chart-line"></i> 5. معمل المراقبة وتحليل التهديدات (SOC &amp; Wazuh SIEM Lab)</h3>
+                        <p>بناء معمل Blue Team مفتوح المصدر لتجميع سجلات الأحداث من أجهزة الويندوز واللينكس واكتشاف الهجمات فورياً عبر محرك القواعد و Sysmon.</p>
+                    </div>
+                </div>
+
+                <div class="commands-grid">
+                    <div class="cmd-card">
+                        <div class="cmd-desc-row">
+                            <span class="cmd-purpose"><i class="fa-brands fa-docker"></i> تشغيل سيرفر Wazuh SIEM المتكامل بكامل خدماته في دقائق عبر Docker Compose</span>
+                        </div>
+                        <div class="cmd-code-row">
+                            <span class="cmd-text">git clone https://github.com/wazuh/wazuh-docker.git -b v4.8.0 && cd wazuh-docker/single-node && docker compose up -d</span>
+                            <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ</button>
+                        </div>
+                        <div class="cmd-flags">
+                            <span class="flag-pill">لوحة التحكم متاحة عبر: <code>https://&lt;wazuh-ip&gt;</code> بالحساب الافتراضي: <code>admin / admin</code></span>
+                        </div>
+                    </div>
+
+                    <div class="cmd-card">
+                        <div class="cmd-desc-row">
+                            <span class="cmd-purpose"><i class="fa-brands fa-windows"></i> تنصيب Microsoft Sysmon على أجهزة Windows لمراقبة إنشاء العمليات وحقن الذاكرة</span>
+                        </div>
+                        <div class="cmd-code-row">
+                            <span class="cmd-text">sysmon.exe -accepteula -i sysmonconfig.xml</span>
+                            <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ</button>
+                        </div>
+                        <div class="cmd-flags">
+                            <span class="flag-pill">تطبيق إعدادات <strong>SwiftOnSecurity</strong> الشهيرة لتسجيل عمليات حقن الذاكرة ومحاولات استخراج كلمات المرور.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. CTF Platforms Roadmap -->
+            <div class="script-card" data-category="roadmap" data-aos="fade-up">
+                <div class="script-card-header">
+                    <div class="script-meta">
+                        <h3><i class="fa-solid fa-map-location-dot"></i> 6. خارطة طريق منصات التدريب العالمية (CTF Platforms Roadmap)</h3>
+                        <p>مسارات وتوجيهات عملية للانتقال من مرحلة الأساسيات حتى الوصول لمستوى الاحتراف في منصات TryHackMe و HackTheBox و PortSwigger.</p>
+                    </div>
+                </div>
+
+                <div class="vuln-cards-grid">
+                    <div class="vuln-card" data-category="roadmap">
+                        <div class="vuln-card-header">
+                            <span class="vuln-id">TryHackMe</span>
+                            <span class="severity-badge" style="background: rgba(223,31,38,0.15); color: #f87171;">المرتبة الأولى للمبتدئين</span>
+                        </div>
+                        <h3 class="vuln-title">المسارات التعليمية الموصى بها</h3>
+                        <ul class="steps-list" style="margin: 10px 0;">
+                            <li><strong>Pre-Security:</strong> استيعاب مبادئ الشبكات، بروتوكولات الويب، وأساسيات Linux.</li>
+                            <li><strong>Jr Penetration Tester:</strong> تعلم المنهجية الرسمية لاختبار الاختراق، ثغرات OWASP، وفحص Nmap و Burp.</li>
+                            <li><strong>الغرف التكتيكية المفضلة:</strong> Mr Robot, Blue, Kenobi, Steel Mountain, Buffer Overflow Prep.</li>
+                        </ul>
+                    </div>
+
+                    <div class="vuln-card" data-category="roadmap">
+                        <div class="vuln-card-header">
+                            <span class="vuln-id">HackTheBox</span>
+                            <span class="severity-badge" style="background: rgba(159,239,0,0.15); color: #a3e635;">بيئة واقعية ومتقدمة</span>
+                        </div>
+                        <h3 class="vuln-title">خطة التقدم على HTB</h3>
+                        <ul class="steps-list" style="margin: 10px 0;">
+                            <li><strong>Starting Point:</strong> اجتياز Tiers (0, 1, 2) لفهم التعامل مع المنافذ والـ Shells.</li>
+                            <li><strong>Easy Linux Machines:</strong> حل آلات كلاسيكية مثل Lame, Bashed, Shocker, Beep.</li>
+                            <li><strong>Easy Windows Machines:</strong> البدء بـ Blue, Devel, Jerry, ثم آلات الـ Active Directory مثل Forest و Active.</li>
+                        </ul>
+                    </div>
+
+                    <div class="vuln-card" data-category="roadmap">
+                        <div class="vuln-card-header">
+                            <span class="vuln-id">PortSwigger Academy</span>
+                            <span class="severity-badge" style="background: rgba(59,130,246,0.15); color: #60a5fa;">أمن تطبيقات الويب</span>
+                        </div>
+                        <h3 class="vuln-title">معامل مجانية لاختبار ثغرات الويب</h3>
+                        <ul class="steps-list" style="margin: 10px 0;">
+                            <li>أفضل منصة في العالم للتدريب على ثغرات الويب بدون أي اشتراك.</li>
+                            <li>حل المعامل بالتدرج: مستوى <strong>Apprentice</strong> ثم <strong>Practitioner</strong>.</li>
+                            <li>المواضيع الأساسية: SQL Injection, XSS, CSRF, Clickjacking, SSRF, Access Control.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">Ft7y<span>.Sec</span></div>
+            <p>&copy; 2026 محمد فتحي (Mohamed Fathi). جميع الحقوق محفوظة.</p>
+            <div class="footer-links">
+                <a href="index.html#home">الرئيسية</a>
+                <a href="pentest.html">اختبار الاختراق</a>
+                <a href="appsec.html">أمن التطبيقات</a>
+                <a href="automation.html">البرمجة والأتمتة</a>
+                <a href="systems-labs.html">الأنظمة والمعامل</a>
+                <a href="writeups.html">CTF Write-ups</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- زر العودة للأعلى -->
+    <button id="back-to-top" class="back-to-top" title="العودة للأعلى">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <!-- إشعار النسخ -->
+    <div id="toast" class="toast"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

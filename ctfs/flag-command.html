@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#07110d">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="تقرير CTF تقني لتحدي Flag Command على منصة Hack The Box.">
+  <title>Flag Command | Ft7y.Sec</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="../avatar.png" type="image/png">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">تخطي إلى المحتوى</a>
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <div class="page-noise" aria-hidden="true"></div>
+  <canvas id="particles-canvas"></canvas>
+  <header class="navbar" id="navbar">
+    <div class="logo"><a href="../index.html#home">Ft7y<span>.Sec</span></a></div>
+    <nav class="nav-links" id="nav-menu" aria-label="التنقل الرئيسي"><ul>
+      <li><a href="../index.html#home">الرئيسية</a></li>
+      <li><a href="../pentest.html">اختبار الاختراق</a></li>
+      <li><a href="../appsec.html">أمن التطبيقات</a></li>
+      <li><a href="../automation.html">البرمجة والأتمتة</a></li>
+      <li><a href="../systems-labs.html">الأنظمة والمعامل</a></li>
+      <li><a href="../writeups.html">CTF Write-ups</a></li>
+      <li><a href="../index.html#contact">تواصل معي</a></li>
+    </ul></nav>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="btn-secondary" type="button" title="تبديل الوضع" aria-label="تبديل الوضع"><i class="fa-solid fa-moon"></i></button>
+      <button class="mobile-toggle" id="mobile-toggle" type="button" aria-label="القائمة"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+  <main id="main-content" class="subpage-container ctf-report-page">
+    <article class="ctf-report-article">
+      <header class="subpage-hero ctf-report-hero" data-aos="fade-up">
+        <nav class="breadcrumb-nav" aria-label="مسار التنقل"><a href="../index.html"><i class="fa-solid fa-house"></i> الرئيسية</a><span class="sep">/</span><a href="index.html">تقارير CTF</a><span class="sep">/</span><span class="current">Flag Command</span></nav>
+        <div class="writeup-header"><span class="platform-tag htb"><i class="fa-solid fa-cube"></i> Hack The Box</span><span class="ctf-directory-label"><i class="fa-solid fa-shield-halved"></i> بيئة تدريبية مصرح بها</span></div>
+        <h1 class="subpage-hero-title">Flag Command</h1>
+        <p class="subpage-hero-desc">توثيق تقني محفوظ من المصدر الأصلي في Notion، يشمل الخطوات والأوامر والنتائج ولقطات الشاشة المتاحة.</p>
+        <a href="index.html" class="btn-outline ctf-back-link"><i class="fa-solid fa-arrow-right"></i> العودة إلى تقارير CTF</a>
+      </header>
+      <div class="ctf-report-content" data-aos="fade-up"><h2><strong><em>Flag Command \\1</em></strong></h2><p>Challenge Scenario</p><p>Embark on the &quot;Dimensional Escape Quest&quot; where you wake up in a mysterious forest maze that&#39;s not quite of this world. Navigate singing squirrels, mischievous nymphs, and grumpy wizards in a whimsical labyrinth that may lead to otherworldly surprises. Will you conquer the enchanted maze or find yourself lost in a different dimension of magical challenges? The journey unfolds in this mystical escape!</p><p>&gt; سيناريو التحدي&lt;br&gt;&lt;br&gt;انطلق في مغامرة&quot;الهروب البُعدي&quot; حيث تستيقظ في متاهة غابة غامضة لاتنتمي إلى عالمنا. تجوّل بين السناجب المُغنية،والحوريات المُشاغبة، والسحرة المُتذمرين في متاهةساحرة قد تُفضي إلى مفاجآت من عوالم أخرى.هل ستتغلب على المتاهة المسحورة أم ستجد نفسك تائهاً في بُعد آخر مليء بالتحديات السحرية؟ تتكشف الرحلة في هذا الهروب الغامض! {color=&quot;green&quot;}</p><p>Objective&lt;br&gt;Find a secret command in json response and use it to get the flag&lt;br&gt;Application Overview&lt;br&gt;Visiting the home page we are provided with the following page</p><p>&gt; موضوعي&lt;br&gt;ابحث عن أمر سري في استجابة JSON واستخدمه للحصول على العلم&lt;br&gt;نظرة عامة على التطبيق&lt;br&gt;عند زيارة الصفحة الرئيسية، يتم تزويدنا بالصفحة التالية {color=&quot;green&quot;}</p><p>&gt; Target Host                              154.57.164.64:31141</p><aside class="ctf-callout"><p>بداية الاختبار وعند زيارة هذا العنوان المستهدف نجد مايلي :</p><p><strong>نجد ان العنوان عبارة عن لعبة تخبرك التالي :</strong>&lt;br&gt;</p><p>تجد نفسك فجأة واضحًا في وسط غابة غريبة وغريبة.</p><p>كيف بحق الجحيم انتهى بك الأمر هنا؟</p><p>تموج الأصوات الغريبة التي لا يمكن تمييزها عبر الأشجار المعقودة، مما يجعل الشعر على رقبتك على الحافة.</p><p>بإلقاء نظرة خاطفة حولك، تكتشف شخصية مبتسمة طويلة كامنة في الظل، يتمتم &quot;Xclow3n&quot; مثل نوع من الشعارات المشوشة، ومن الواضح أنها تنتظر إغماءك أو شيء من هذا القبيل. زاحف كثيرا؟</p><p>انتباه! هذه الغابة ليست الفناء الخلفي لجدتك.</p><p>إنها مليئة بما يكفي من النزوات والخوف لجعل فيلم الرعب يحمر خجلاً. حان الوقت لتجد طريقك للخروج.</p><p>المخاطر؟ أوه، لا شيء كبير. فقط أصدقائك، سقطوا في هاوية الظلام واليأس.</p><p>لكمة في &quot;البدء&quot; لبدء الأمور في هذه المغامرة الملتوية!</p></aside><figure class="ctf-report-figure"><img src="../assets/images/ctfs/flag-command-1.png" alt="لقطة شاشة من تقرير Flag Command" loading="lazy"><figcaption>لقطة شاشة من تقرير Flag Command</figcaption></figure><aside class="ctf-callout"><p>سوف نبحث في الكود المصدري الخاص بالصفحة:</p></aside><figure class="ctf-report-figure"><img src="../assets/images/ctfs/flag-command-2.png" alt="سنصب تركيزنا على البحث في اسكريبتاات الجافا للبحث عن&lt;span color=&quot;red&quot;&gt;*** نقاط النهاية (end points)***&lt;/span&gt; التي يتحدث معها الخادم :" loading="lazy"><figcaption>سنصب تركيزنا على البحث في اسكريبتاات الجافا للبحث عن&lt;span color=&quot;red&quot;&gt;*** نقاط النهاية (end points)***&lt;/span&gt; التي يتحدث معها الخادم :</figcaption></figure><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">javascript</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>عند فحص ملف                                src=/static/terminal/js/main.js
+نجد هذا </code></pre></section><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">javascript</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>وبداخل ها الملف جدنا هذه الدالة المهمة   
+const fetchOptions = () =&gt; {
+    fetch(&#39;/api/options&#39;)
+        .then((data) =&gt; data.json())
+        .then((res) =&gt; {
+            availableOptions = res.allPossibleCommands;</code></pre></section><p>هذا السطر يخبرنا أن المتصفح يقوم بجلب كل الأوامر الممكنة (بما فيها السرية) من الرابط التالي:&lt;br&gt;</p><p><a href="http://154.57.164.64:31141/api/options" target="_blank" rel="noopener noreferrer"><strong><em><code dir="ltr">http://154.57.164.64:31141/api/options</code></em></strong></a><strong><em><code dir="ltr">   </code></em></strong>             <strong><em>نقوم بزيارته لاستخراج اوامر اللعبة السرية</em></strong></p><p>وجدنا قائمة بالاوامر في كل مرحلة من مراحل اللعبة الى جانب خانة لاامر سري عبارة عن جملة نصية</p><p>---</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/flag-command-3.png" alt="لقطة شاشة من تقرير Flag Command" loading="lazy"><figcaption>لقطة شاشة من تقرير Flag Command</figcaption></figure><aside class="ctf-callout"><p>بالفعل وجدنا قائمة الاوامر التي يقراها الخادم وعند كتابة الجملة الموجودة في خانة secret كما هي بالفواصل والعلامات الموجودة تحصل على العلم</p></aside><figure class="ctf-report-figure"><img src="../assets/images/ctfs/flag-command-4.png" alt="لقطة شاشة من تقرير Flag Command" loading="lazy"><figcaption>لقطة شاشة من تقرير Flag Command</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/flag-command-5.png" alt="لقطة شاشة من تقرير Flag Command" loading="lazy"><figcaption>لقطة شاشة من تقرير Flag Command</figcaption></figure></div>
+      <footer class="ctf-report-end"><a href="index.html" class="btn-primary"><i class="fa-solid fa-arrow-right"></i> كل تقارير CTF</a></footer>
+    </article>
+  </main>
+  <footer class="footer"><div class="footer-content">
+    <div class="footer-logo">Ft7y<span>.Sec</span></div>
+    <div class="footer-links">
+      <a href="../index.html#home">الرئيسية</a><a href="../pentest.html">اختبار الاختراق</a><a href="../appsec.html">أمن التطبيقات</a><a href="../automation.html">البرمجة والأتمتة</a><a href="../systems-labs.html">الأنظمة والمعامل</a><a href="../writeups.html">CTF Write-ups</a>
+    </div>
+    <p>© 2026 Ft7y.Sec. جميع الحقوق محفوظة.</p>
+  </div></footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#07110d">
+    <meta name="color-scheme" content="dark light">
+    <title>SubDomain Reckoner | أداة استطلاع النطاقات الفرعية | Ft7y.Sec</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="avatar.png" type="image/png">
+</head>
+
+<body>
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <div class="page-noise" aria-hidden="true"></div>
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- شريط التنقل العلوي -->
+    <header class="navbar" id="navbar">
+        <div class="logo">
+            <a href="index.html#home">Ft7y<span>.Sec</span></a>
+        </div>
+
+        <nav class="nav-links" id="nav-menu">
+            <ul>
+                <li><a href="index.html#home">الرئيسية</a></li>
+                <li><a href="pentest.html">اختبار الاختراق</a></li>
+                <li><a href="appsec.html">أمن التطبيقات</a></li>
+                <li><a href="automation.html">البرمجة والأتمتة</a></li>
+                <li><a href="systems-labs.html">الأنظمة والمعامل</a></li>
+                <li><a href="writeups.html">CTF Write-ups</a></li>
+                <li><a href="index.html#projects" class="active">المشاريع والأدوات</a></li>
+                <li><a href="index.html#contact">تواصل معي</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-actions">
+            <button id="theme-toggle" class="btn-secondary" title="تبديل الوضع">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="القائمة">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="subpage-container">
+        <!-- ترويسة المشروع -->
+        <section class="subpage-hero project-hero" data-aos="fade-up">
+            <nav class="breadcrumb-nav">
+                <a href="index.html"><i class="fa-solid fa-house"></i> الرئيسية</a>
+                <span class="sep">/</span>
+                <a href="index.html#projects">المشاريع والأدوات</a>
+                <span class="sep">/</span>
+                <span class="current">SubDomain Reckoner</span>
+            </nav>
+
+            <div class="project-hero-flex">
+                <div class="project-hero-content">
+                    <div class="project-badge-line">
+                        <span class="project-status-badge"><span class="pulse-dot"></span> v2.0 Release</span>
+                        <span class="project-cat-badge"><i class="fa-solid fa-magnifying-glass"></i> Passive OSINT Tool</span>
+                    </div>
+
+                    <h1 class="subpage-hero-title">
+                        <i class="fa-solid fa-sitemap"></i>
+                        SubDomain Reckoner v2.0
+                    </h1>
+
+                    <p class="subpage-hero-desc">
+                        أداة استطلاع وجمع النطاقات الفرعية السلبية (Passive Subdomain Enumerator) تعتمد على تحليل سجلات شهادات الأمان العامة (Certificate Transparency) ومصادر الـ OSINT المفتوحة لاستخراج مساحات الهجوم دون إرسال حزم مباشرة للمستهدف، مع إمكانية فحص استجابة الـ HTTP واستخراج عناوين الـ IP.
+                    </p>
+
+                    <div class="project-hero-cta">
+                        <a href="#interactive-simulator" class="btn-primary">
+                            <i class="fa-solid fa-satellite-dish"></i> تجربة الأداة في المتصفح
+                        </a>
+                        <a href="https://github.com/FySouL22/subdomain-reckoner" target="_blank" rel="noopener noreferrer" class="btn-outline">
+                            <i class="fa-brands fa-github"></i> الكود المصدري على GitHub
+                        </a>
+                        <a href="tools/subdomain_reckoner/subdomain_reckoner.py" download="subdomain_reckoner.py" class="btn-secondary">
+                            <i class="fa-solid fa-download"></i> تحميل السكربت (.py)
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-author-card">
+                    <div class="author-avatar-wrap">
+                        <img src="avatar.png" alt="شعار محمد فتحي" class="author-img">
+                        <div class="author-badge-glow"></div>
+                    </div>
+                    <div class="author-info-text">
+                        <span class="author-label">مطور الأداة</span>
+                        <h4 class="author-name">محمد فتحي (Ft7y.Sec)</h4>
+                        <span class="author-role">Security Researcher &amp; Developer</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subpage-quick-stats" style="margin-top: 25px;">
+                <div class="quick-badge"><i class="fa-solid fa-certificate"></i> شهادات crt.sh Transparency</div>
+                <div class="quick-badge"><i class="fa-solid fa-shield-cat"></i> استعلام HackerTarget API</div>
+                <div class="quick-badge"><i class="fa-solid fa-server"></i> حل عناوين DNS &amp; HTTP Status</div>
+                <div class="quick-badge"><i class="fa-solid fa-download"></i> تصدير Wordlist وقوائم JSON</div>
+            </div>
+        </section>
+
+        <!-- 1. المحاكي التفاعلي المباشر للاستطلاع -->
+        <section id="interactive-simulator" class="simulator-section" data-aos="fade-up">
+            <div class="content-block-header">
+                <h2><i class="fa-solid fa-satellite-dish"></i> محاكي استكشاف النطاقات الفرعية التفاعلي (Live OSINT Sandbox)</h2>
+                <p>أدخل النطاق المستهدف لبدء الاستعلام ومحاكاة عملية الاستطلاع وفحص الحالات النشطة مباشرة:</p>
+            </div>
+
+            <div class="simulator-card">
+                <div class="simulator-controls-bar">
+                    <div class="sim-input-group" style="flex: 2;">
+                        <label for="sub-target"><i class="fa-solid fa-globe"></i> النطاق المستهدف (Root Domain):</label>
+                        <input type="text" id="sub-target" class="sim-input" value="tesla.com" placeholder="e.g. example.com or target.org">
+                    </div>
+
+                    <div class="sim-input-group">
+                        <label for="sub-sources"><i class="fa-solid fa-database"></i> مصادر البيانات (OSINT Sources):</label>
+                        <select id="sub-sources" class="sim-select">
+                            <option value="all">كافة المصادر (crt.sh + HackerTarget + OTX)</option>
+                            <option value="crt">شهادات الأمان crt.sh فقط</option>
+                            <option value="dns">HackerTarget DNS Database</option>
+                        </select>
+                    </div>
+
+                    <div class="sim-action-group">
+                        <button id="sub-run-btn" class="btn-primary btn-run-scanner">
+                            <i class="fa-solid fa-magnifying-glass"></i> استكشاف النطاقات
+                        </button>
+                    </div>
+                </div>
+
+                <!-- شاشة المخرجات -->
+                <div class="sim-terminal-window">
+                    <div class="sim-terminal-header">
+                        <div class="window-dots">
+                            <span class="w-dot red"></span>
+                            <span class="w-dot yellow"></span>
+                            <span class="w-dot green"></span>
+                        </div>
+                        <div class="sim-terminal-title">root@ft7y-sec:~# subdomain-reckoner -d domain --probe</div>
+                        <div class="sim-terminal-actions">
+                            <button id="sub-clear-btn" class="sim-action-btn" title="مسح"><i class="fa-solid fa-eraser"></i></button>
+                            <button id="sub-export-btn" class="sim-action-btn" title="تصدير النتائج" style="display: none;"><i class="fa-solid fa-download"></i> تصدير (TXT / JSON)</button>
+                        </div>
+                    </div>
+
+                    <div class="sim-terminal-body" id="sub-output">
+                        <div class="term-line prompt">root@ft7y:~$ subdomain-reckoner --help</div>
+                        <div class="term-line info">أداة SubDomain Reckoner جاهزة للاستطلاع السلبي. أدخل اسم النطاق واضغط "استكشاف النطاقات" لبدء جمع البيانات.</div>
+                    </div>
+
+                    <div class="sim-progress-bar-container" id="sub-progress-wrap" style="display: none;">
+                        <div class="sim-progress-bar" id="sub-progress"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. الكود المصدري للأداة -->
+        <section class="content-block" data-aos="fade-up">
+            <div class="content-block-header">
+                <h2><i class="fa-solid fa-code"></i> الكود المصدري للأداة (subdomain_reckoner.py)</h2>
+                <p>مكتوبة ببايثون القياسية ومصممة للتكامل مع أدوات وبرامج اختبار الاختراق ومكافآت الثغرات Bug Bounty:</p>
+            </div>
+
+            <div class="script-card">
+                <div class="script-card-header">
+                    <div class="script-meta">
+                        <h3><i class="fa-brands fa-python"></i> SubDomain Reckoner v2.0 Source Code</h3>
+                        <p>كود كامل وجاهز للتشغيل مباشرة في بيئات Kali Linux أو Windows أو macOS.</p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="https://github.com/FySouL22/subdomain-reckoner" target="_blank" rel="noopener noreferrer" class="btn-outline" style="padding: 7px 14px; font-size: 13px;">
+                            <i class="fa-brands fa-github"></i> المستودع على GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="code-window">
+                    <div class="window-bar">
+                        <div class="window-dots">
+                            <span class="w-dot red"></span>
+                            <span class="w-dot yellow"></span>
+                            <span class="w-dot green"></span>
+                        </div>
+                        <span class="window-title">tools/subdomain_reckoner/subdomain_reckoner.py</span>
+                        <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ الكود كاملاً</button>
+                    </div>
+                    <pre class="window-content"><code>#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+SubDomain Reckoner v2.0 by Mohamed Fathi (Ft7y.Sec)
+GitHub: https://github.com/FySouL22/subdomain-reckoner
+"""
+import json
+import urllib.request
+import socket
+import argparse
+from concurrent.futures import ThreadPoolExecutor
+
+def query_crtsh(domain):
+    subdomains = set()
+    url = f"https://crt.sh/?q=%.{domain}&output=json"
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Ft7y-Recon/2.0"})
+        with urllib.request.urlopen(req, timeout=12) as response:
+            if response.status == 200:
+                data = json.loads(response.read().decode('utf-8', errors='ignore'))
+                for entry in data:
+                    for sub in entry.get("name_value", "").splitlines():
+                        sub = sub.strip().lower().replace("*.", "")
+                        if sub.endswith(domain) and sub != domain:
+                            subdomains.add(sub)
+    except Exception:
+        pass
+    return subdomains
+
+def probe_subdomain(sub):
+    try:
+        ip = socket.gethostbyname(sub)
+        return {"subdomain": sub, "ip": ip, "status": "resolved"}
+    except socket.gaierror:
+        return None
+
+def main():
+    parser = argparse.ArgumentParser(description="SubDomain Reckoner by Ft7y.Sec")
+    parser.add_argument("-d", "--domain", required=True, help="Target domain (e.g. target.com)")
+    parser.add_argument("-o", "--output", help="Save discovered subdomains to file")
+    args = parser.parse_args()
+
+    print(f"[*] Discovering subdomains for: {args.domain}")
+    subs = query_crtsh(args.domain)
+    print(f"[+] Found {len(subs)} subdomains via Certificate Transparency")
+    
+    with ThreadPoolExecutor(max_workers=30) as pool:
+        results = list(filter(None, pool.map(probe_subdomain, subs)))
+
+    for r in results:
+        print(f"[+] {r['subdomain']:35s} -> {r['ip']}")
+
+if __name__ == "__main__":
+    main()</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. أمثلة الاستخدام في سطر الأوامر -->
+        <section class="content-block" data-aos="fade-up">
+            <div class="content-block-header">
+                <h2><i class="fa-solid fa-terminal"></i> أمثلة التشغيل والأوامر (CLI Usage)</h2>
+                <p>تشغيل الأداة في الطرفية مع خيارات الفحص وحفظ التقارير:</p>
+            </div>
+
+            <div class="commands-grid">
+                <div class="cmd-card">
+                    <div class="cmd-desc-row">
+                        <span class="cmd-purpose"><i class="fa-solid fa-satellite-dish"></i> استخراج النطاقات وفحص حالتها المباشرة</span>
+                    </div>
+                    <div class="cmd-code-row">
+                        <span class="cmd-text">python subdomain_reckoner.py -d example.com --probe -t 30</span>
+                        <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ</button>
+                    </div>
+                </div>
+
+                <div class="cmd-card">
+                    <div class="cmd-desc-row">
+                        <span class="cmd-purpose"><i class="fa-solid fa-file-export"></i> تصدير قائمة النطاقات في ملف نصي جاهز لأدوات مثل Nmap و Nuclei</span>
+                    </div>
+                    <div class="cmd-code-row">
+                        <span class="cmd-text">python subdomain_reckoner.py -d target.com -o subdomains_list.txt</span>
+                        <button class="copy-cmd-btn"><i class="fa-regular fa-copy"></i> نسخ</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">Ft7y<span>.Sec</span></div>
+            <p>&copy; 2026 محمد فتحي (Mohamed Fathi). جميع الحقوق محفوظة.</p>
+            <div class="footer-links">
+                <a href="index.html#home">الرئيسية</a>
+                <a href="pentest.html">اختبار الاختراق</a>
+                <a href="appsec.html">أمن التطبيقات</a>
+                <a href="automation.html">البرمجة والأتمتة</a>
+                <a href="systems-labs.html">الأنظمة والمعامل</a>
+                <a href="writeups.html">CTF Write-ups</a>
+                <a href="index.html#projects">المشاريع والأدوات</a>
+            </div>
+        </div>
+    </footer>
+
+    <button id="back-to-top" class="back-to-top" title="العودة للأعلى">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+    <div id="toast" class="toast"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

