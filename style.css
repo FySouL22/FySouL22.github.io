@@ -4866,3 +4866,19 @@ body.light-mode .arch-node {
         display: none !important;
     }
 }
+
+
+/* Performance: avoid rendering decorative content before it enters the viewport. */
+.project-card,
+.writeup-card,
+.writeup-media-card {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 420px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #particles-canvas,
+    .page-noise {
+        display: none !important;
+    }
+}
