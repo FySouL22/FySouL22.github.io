@@ -191,53 +191,60 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     // 5. تصفية التقارير حسب المنصة (Platform Filtering)
     // ----------------------------------------------------
-    const platformTabs = document.querySelectorAll('.platform-tab[data-platform]');
-    const writeupCards = document.querySelectorAll('.writeup-card');
+    // Homepage write-up filtering (legacy + current card markup).
+    const platformTabs = document.querySelectorAll('.platform-tab[data-platform], .platform-tab[data-platform-filter]');
+    const writeupCards = document.querySelectorAll('.writeup-card, .writeup-media-card');
 
     platformTabs.forEach(tab => {
         tab.addEventListener('click', () => {
             platformTabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
-
-            const platform = tab.getAttribute('data-platform');
+            const platform = tab.getAttribute('data-platform') || tab.getAttribute('data-platform-filter');
 
             writeupCards.forEach(card => {
-                const category = card.getAttribute('data-category');
-                if (platform === 'all' || platform === category) {
-                    card.classList.remove('hidden');
-                    card.style.display = 'flex';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0) scale(1)';
-                    }, 20);
-                } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(15px) scale(0.95)';
-                    setTimeout(() => {
-                        card.classList.add('hidden');
-                        card.style.display = 'none';
-                    }, 300);
-                }
+                const category = card.getAttribute('data-category') || '';
+                const visible = platform === 'all' || category === platform;
+                card.hidden = !visible;
+                card.setAttribute('aria-hidden', String(!visible));
             });
         });
     });
 
-    // CTF archive filtering uses the same visual tabs without coupling to homepage writeups.
-    const ctfFilterButtons = document.querySelectorAll('[data-ctf-filter]');
-    const ctfDirectoryCards = document.querySelectorAll('.ctf-directory-card');
+    // CTF archive: platform filtering + full-text search.
+    const ctfFilterButtons = document.querySelectorAll('[data-platform-filter]');
+    const ctfCards = document.querySelectorAll('.writeup-media-card');
+    const ctfSections = document.querySelectorAll('[data-platform-section]');
+    const ctfSearch = document.getElementById('writeupFilterInput');
+
+    function applyCtfArchiveFilter() {
+        const activeButton = document.querySelector('[data-platform-filter].active');
+        const platform = activeButton?.getAttribute('data-platform-filter') || 'all';
+        const query = (ctfSearch?.value || '').toLowerCase().trim();
+
+        ctfCards.forEach(card => {
+            const category = card.getAttribute('data-category') || '';
+            const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+            const text = card.textContent.toLowerCase();
+            const visible = (platform === 'all' || category === platform) &&
+                (!query || keywords.includes(query) || text.includes(query));
+            card.hidden = !visible;
+        });
+
+        ctfSections.forEach(section => {
+            const visibleCards = [...section.querySelectorAll('.writeup-media-card')].some(card => !card.hidden);
+            section.hidden = !visibleCards;
+        });
+    }
 
     ctfFilterButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const filter = button.getAttribute('data-ctf-filter');
             ctfFilterButtons.forEach(item => item.classList.remove('active'));
             button.classList.add('active');
-
-            ctfDirectoryCards.forEach(card => {
-                const visible = filter === 'all' || card.getAttribute('data-platform') === filter;
-                card.hidden = !visible;
-            });
+            applyCtfArchiveFilter();
         });
     });
+
+    ctfSearch?.addEventListener('input', applyCtfArchiveFilter);
 
     // ----------------------------------------------------
     // 6. الربط التفاعلي لطلب التقارير بنموذج التواصل (Report Autofill)
@@ -399,8 +406,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollProgress = document.getElementById('scroll-progress');
 
     if (mobileToggle && navMenu) {
+        mobileToggle.setAttribute('aria-expanded', 'false');
         mobileToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
+            mobileToggle.setAttribute('aria-expanded', String(navMenu.classList.contains('active')));
             const icon = mobileToggle.querySelector('i');
             if (icon) {
                 icon.classList.toggle('fa-bars');
@@ -411,6 +420,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
+                mobileToggle.setAttribute('aria-expanded', 'false');
                 const icon = mobileToggle.querySelector('i');
                 if (icon) {
                     icon.classList.add('fa-bars');
@@ -557,14 +567,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     // 14. توهج الماوس السيبراني (Cyber Cursor Glow)
     // ----------------------------------------------------
+    // Skip the custom cursor effect on touch/coarse-pointer devices.
     const cursorGlow = document.createElement('div');
     cursorGlow.className = 'cursor-glow';
     document.body.appendChild(cursorGlow);
 
-    document.addEventListener('mousemove', (e) => {
-        cursorGlow.style.left = e.clientX + 'px';
-        cursorGlow.style.top = e.clientY + 'px';
-    });
+    if (window.matchMedia('(pointer: fine)').matches) {
+        document.addEventListener('mousemove', (e) => {
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+    } else {
+        cursorGlow.remove();
+    }
 
     // ----------------------------------------------------
     // 15. نسخ الأوامر البرمجية ونصوص الأكواد (Copy Commands & Code)
