@@ -1,0 +1,31 @@
+name: Performance Audit
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Start local server
+        run: |
+          python3 -m http.server 8000 >/tmp/site-server.log 2>&1 &
+          sleep 2
+
+      - name: Lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            http://localhost:8000/
+            http://localhost:8000/writeups.html
+            http://localhost:8000/projects.html
+          uploadArtifacts: true
+          temporaryPublicStorage: true
