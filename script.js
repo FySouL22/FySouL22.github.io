@@ -1067,3 +1067,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
+
+/* Security hardening: external links opened in a new tab must not retain
+   an opener reference, including links injected by future components. */
+document.querySelectorAll('a[target="_blank"]').forEach(link => {
+    link.setAttribute('rel', 'noopener noreferrer');
+});
