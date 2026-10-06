@@ -5,9 +5,7 @@
    - Matrix Digital Rain & Particle Canvas
    - Terminal Command Auto-Typing Simulation
    - Platform Tabs & Interactive Writeups Filtering
-   - Auto-fill Contact Form on Report Request
-   - Animated Stats Counters (IntersectionObserver)
-   - Animated Skill Progress Bars on Scroll
+   - Auto-fill Contact Form on Report Request- Animated Skill Progress Bars on Scroll
    - 3D Card Perspective Tilt Effect on Mousemove
    - Dark / Light Mode Switcher with LocalStorage
    - Smooth Scroll Spy & Sticky Navbar
@@ -322,7 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     // 9. تأثير الإمالة ثلاثية الأبعاد للبطاقات (3D Tilt Effect)
     // ----------------------------------------------------
-    const tiltCards = document.querySelectorAll('.project-card, .writeup-card, .skill-category-card, .stat-card');
+    const tiltCards = document.querySelectorAll('.project-card, .writeup-card, .skill-category-card, ');
     tiltCards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
