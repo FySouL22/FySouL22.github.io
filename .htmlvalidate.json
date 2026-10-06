@@ -3,6 +3,12 @@
   "rules": {
     "attribute-boolean-style": "off",
     "doctype-style": "off",
-    "no-trailing-whitespace": "warn"
+    "no-trailing-whitespace": "warn",
+    "unique-landmark": "warn",
+    "no-inline-style": "warn",
+    "no-implicit-button-type": "warn",
+    "text-content": "warn",
+    "no-raw-characters": "warn",
+    "wcag/h30": "warn"
   }
 }

@@ -1,0 +1,3 @@
+Contact: mailto:ft7y.sec@proton.me
+Preferred-Languages: ar, en
+Canonical: https://fysoul22.github.io/.well-known/security.txt
