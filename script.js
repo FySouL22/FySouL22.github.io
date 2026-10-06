@@ -725,7 +725,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         simRunBtn.addEventListener('click', () => {
-            const target = (simTargetInput ? simTargetInput.value.trim() : '') || '10.10.10.85';
+            const rawTarget = (simTargetInput ? simTargetInput.value.trim() : '') || '10.10.10.85';
+            const target = rawTarget.replace(/[&<>\"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[char]));
             const profile = simProfileSelect ? simProfileSelect.value : 'top20';
             const workers = simThreadsSelect ? simThreadsSelect.value : '50';
 
