@@ -5011,3 +5011,22 @@ img { max-width: 100%; }
 .code-block,
 pre,
 code { overflow-wrap: anywhere; }
+
+/* Accessible skip navigation */
+.skip-link {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 10000;
+    transform: translateY(-180%);
+    padding: 10px 14px;
+    border: 1px solid var(--ft-accent);
+    border-radius: 8px;
+    background: #07100b;
+    color: #effff4;
+    text-decoration: none;
+    font-weight: 700;
+}
+.skip-link:focus {
+    transform: translateY(0);
+}
