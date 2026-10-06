@@ -549,24 +549,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = 'جاري المعالجة والتشفير... <i class="fa-solid fa-spinner fa-spin"></i>';
-            formAlert.className = 'form-alert';
-            formAlert.style.color = 'var(--accent-color)';
-            formAlert.textContent = 'جاري إرسال الرسالة إلى الباحث...';
+            const body = [
+                'Name: ' + name,
+                'Reply email: ' + email,
+                '',
+                message
+            ].join('\\n');
 
-            setTimeout(() => {
-                formAlert.className = 'form-alert success';
-                formAlert.textContent = '✓ تم استلام رسالتك المشفرة بنجاح! سيتم الرد في أقرب وقت.';
-                contactForm.reset();
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = 'إرسال الرسالة <i class="fa-solid fa-paper-plane"></i>';
-                showToast('✓ تم إرسال رسالتك بنجاح!');
-                setTimeout(() => {
-                    formAlert.textContent = '';
-                    formAlert.className = 'form-alert';
-                }, 6000);
-            }, 1200);
+            const mailto = 'mailto:ft7y.sec@proton.me'
+                + '?subject=' + encodeURIComponent(subject)
+                + '&body=' + encodeURIComponent(body);
+
+            formAlert.className = 'form-alert success';
+            formAlert.textContent = 'سيتم فتح برنامج البريد لإرسال الرسالة. لم يتم الادعاء بإرسالها قبل تأكيدك.';
+            window.location.href = mailto;
         });
     }
 
