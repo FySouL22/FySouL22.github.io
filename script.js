@@ -286,46 +286,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ----------------------------------------------------
-    // 7. عداد الإحصائيات التلقائي عند التمرير (Animated Stats)
-    // ----------------------------------------------------
-    const statNumbers = document.querySelectorAll('.stat-number');
-    let statsCounted = false;
-
-    function countUpStats() {
-        statNumbers.forEach(stat => {
-            const target = +stat.getAttribute('data-target');
-            const duration = 2000;
-            const startTime = performance.now();
-
-            function updateCounter(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                // Ease-out curve
-                const currentCount = Math.floor((1 - Math.pow(1 - progress, 3)) * target);
-                stat.textContent = currentCount + '+';
-
-                if (progress < 1) {
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    stat.textContent = target + '+';
-                }
-            }
-            requestAnimationFrame(updateCounter);
-        });
-    }
-
-    const statsSection = document.getElementById('stats');
-    if (statsSection) {
-        const statsObserver = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting && !statsCounted) {
-                statsCounted = true;
-                countUpStats();
-            }
-        }, { threshold: 0.3 });
-        statsObserver.observe(statsSection);
-    }
-
-    // ----------------------------------------------------
     // 8. تحريك أشرطة المهارات والمنصات (Progress Bars)
     // ----------------------------------------------------
     const skillFills = document.querySelectorAll('.skill-fill');
