@@ -1,3 +1,3 @@
-Contact: mailto:ft7y.sec@proton.me
+Contact: mailto:ft7.support@gmail.com
 Preferred-Languages: ar, en
 Canonical: https://ft7.cv.github.io/.well-known/security.txt
