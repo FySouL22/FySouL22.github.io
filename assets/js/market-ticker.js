@@ -9,7 +9,7 @@
   const status = root.querySelector("[data-market-status]");
   let market = readCache();
   function readCache() {
-    try { const saved = JSON.parse(localStorage.getItem(CACHE_KEY) || "null"); return saved && typeof saved === "object" ? saved : { prices: {}, times: {} }; }
+    try { const saved = JSON.parse(localStorage.getItem(CACHE_KEY) || "null"); return saved && typeof saved === "object" ? { prices: saved.prices && typeof saved.prices === "object" ? saved.prices : {}, times: saved.times && typeof saved.times === "object" ? saved.times : {}, partialFailure: false, fetchFailed: false } : { prices: {}, times: {}, partialFailure: false, fetchFailed: false }; }
     catch { return { prices: {}, times: {} }; }
   }
   function persist() { try { localStorage.setItem(CACHE_KEY, JSON.stringify(market)); } catch { /* Storage is optional. */ } }
@@ -27,7 +27,8 @@
     const times = Object.values(market.times || {}).map(Number).filter(Number.isFinite);
     const latest = times.length ? Math.max(...times) : 0;
     if (!status) return;
-    if (!latest) status.textContent = "جارٍ جلب الأسعار الاسترشادية";
+    if (!latest) status.textContent = market.fetchFailed ? "تعذر جلب الأسعار حاليًا" : "جارٍ جلب الأسعار الاسترشادية";
+    else if (market.fetchFailed) status.textContent = "تعذر التحديث · آخر بيانات " + clock(latest);
     else if (market.partialFailure) status.textContent = "تعذر تحديث بعض الأسعار · آخر جلب " + clock(latest);
     else if (Date.now() - latest > HOUR) status.textContent = "بيانات محفوظة · آخر جلب " + clock(latest);
     else status.textContent = "تحديث ساعي · آخر جلب " + clock(latest);
@@ -66,6 +67,7 @@
     if (results[0].status === "fulfilled") { market.prices.USD_EGP = results[0].value; market.times.USD_EGP = checkedAt; successes++; }
     if (results[1].status === "fulfilled") { Object.assign(market.prices, results[1].value); Object.keys(results[1].value).forEach((asset) => { market.times[asset] = checkedAt; }); successes++; }
     market.partialFailure = successes > 0 && successes < 2;
+    market.fetchFailed = successes === 0;
     if (successes) { market.checkedAt = checkedAt; persist(); }
     render();
   }

@@ -37,7 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. محاكاة سطر الأوامر (Terminal Auto-Typing Effect)
     // ----------------------------------------------------
     const typedTextEl = document.getElementById('typed-text');
-    if (typedTextEl) {
+    if (typedTextEl && reduceMotion) typedTextEl.textContent = 'Security research • CTF • Python';
+    if (typedTextEl && !reduceMotion) {
         const commands = [
             'nmap -sV -sC -T4 10.10.10.x',
             'gobuster dir -u https://target -w /wordlists/raft.txt',

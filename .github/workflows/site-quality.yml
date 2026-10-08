@@ -20,7 +20,6 @@ jobs:
         run: |
           mapfile -d '' pages < <(find . -type f -name '*.html' -not -path './.git/*' -print0)
           npx --yes html-validate@10 "${pages[@]}"
-          echo "Legacy content pages are tracked separately until their accessibility debt is migrated."
 
       - name: Check internal/external links
         uses: lycheeverse/lychee-action@v2

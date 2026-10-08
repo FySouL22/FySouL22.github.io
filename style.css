@@ -4994,7 +4994,7 @@ body.light-mode .navbar{background:rgba(247,250,248,.94)}
 .coin-btc{background:#f4a340}.coin-eth{background:#9ba9ff}.coin-bnb{background:#f3c94d}.coin-sol{background:#a78bfa}
 .market-foot{display:flex;flex-direction:column;align-items:flex-end;gap:2px;white-space:nowrap;color:#82968a;font-size:9px;line-height:1.25}
 .market-sources a{color:#a9cbb8;text-decoration:underline;text-decoration-color:rgba(169,203,184,.35);text-underline-offset:2px}
-.market-sources a:hover{color:#70e6a6}
+.market-sources a:hover{color:#70e6a6}.market-sources::after{content:" · الكريبتو عبر USDT ≈ USD";color:#82968a}
 body.light-mode .market-strip{color:#183026;background:rgba(241,247,243,.96);border-bottom-color:rgba(22,136,91,.18)}
 body.light-mode .market-brand,body.light-mode .market-asset strong{color:#183026}
 body.light-mode .market-code,body.light-mode .market-foot{color:#587064}
