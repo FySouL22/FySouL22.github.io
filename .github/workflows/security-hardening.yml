@@ -12,7 +12,6 @@ permissions:
 jobs:
   python-security:
     runs-on: ubuntu-latest
-    if: ${{ hashFiles('tools/**/*.py') != '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
