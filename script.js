@@ -37,7 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. محاكاة سطر الأوامر (Terminal Auto-Typing Effect)
     // ----------------------------------------------------
     const typedTextEl = document.getElementById('typed-text');
-    if (typedTextEl) {
+    if (typedTextEl && reduceMotion) typedTextEl.textContent = 'Security research • CTF • Python';
+    if (typedTextEl && !reduceMotion) {
         const commands = [
             'nmap -sV -sC -T4 10.10.10.x',
             'gobuster dir -u https://target -w /wordlists/raft.txt',
@@ -82,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. خلفية الماتركس الخضراء (Matrix Digital Rain)
     // ----------------------------------------------------
     const matrixCanvas = document.getElementById('matrix-canvas');
-    if (matrixCanvas) {
+    if (matrixCanvas && !reduceMotion) {
         const ctx = matrixCanvas.getContext('2d');
         function resizeMatrix() {
             if (!matrixCanvas.parentElement) return;
@@ -126,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. شبكة الجزيئات السيبرانية التفاعلية (Particle Network)
     // ----------------------------------------------------
     const pCanvas = document.getElementById('particles-canvas');
-    if (pCanvas) {
+    if (pCanvas && !reduceMotion) {
         const pCtx = pCanvas.getContext('2d');
         let width = pCanvas.width = window.innerWidth;
         let height = pCanvas.height = window.innerHeight;
