@@ -52,12 +52,14 @@ services:
     hostname: wazuh.indexer
     restart: always
     ports:
-      - "9200:9200"
+      # Lab-only indexer API: never publish this port to the LAN.
+      - "127.0.0.1:9200:9200"
     environment:
       - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
       - "bootstrap.memory_lock=true"
       - "discovery.type=single-node"
       - "DISABLE_INSTALL_DEMO_CONFIG=true"
+      # This simplified demo disables indexer auth. Keep port 9200 loopback-only.
       - "DISABLE_SECURITY_PLUGIN=true"
     ulimits:
       memlock:
@@ -73,10 +75,12 @@ services:
     hostname: wazuh.manager
     restart: always
     ports:
-      - "1514:1514/udp"
-      - "1515:1515"
-      - "514:514/udp"
-      - "55000:55000"
+      # Defaults to loopback. Set LAB_BIND_IP to a dedicated, firewalled lab IP only if remote agents need access.
+      - "${LAB_BIND_IP:-127.0.0.1}:1514:1514/udp"
+      - "${LAB_BIND_IP:-127.0.0.1}:1515:1515"
+      - "${LAB_BIND_IP:-127.0.0.1}:514:514/udp"
+      # Wazuh API is administrative; keep it loopback-only.
+      - "127.0.0.1:55000:55000"
     environment:
       - INDEXER_URL=http://wazuh.indexer:9200
     depends_on:
@@ -88,7 +92,7 @@ services:
     hostname: wazuh.dashboard
     restart: always
     ports:
-      - "443:5601"
+      - "127.0.0.1:443:5601"
     environment:
       - INDEXER_URL=http://wazuh.indexer:9200
       - WAZUH_API_URL=https://wazuh.manager
@@ -106,12 +110,17 @@ def check_prerequisites():
         print(f"{RED}[-] Error: Docker is not installed or not in PATH.{RESET}")
         return False
     print(f"{GREEN}[✓] Docker detected: {docker_check.stdout.strip()}{RESET}")
+    compose_check = subprocess.run(["docker", "compose", "version"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    if compose_check.returncode != 0:
+        print(f"{RED}[-] Error: Docker Compose plugin is unavailable.{RESET}")
+        return False
+    print(f"{GREEN}[✓] Docker Compose detected: {compose_check.stdout.strip()}{RESET}")
     return True
 
 
 def simulate_bruteforce(target_ip, port=22, attempts=5):
-    """Simulate an SSH / Auth brute force attack to trigger SIEM rules."""
-    print(f"\n{YELLOW}[*] Adversary Emulation: Simulating SSH Brute Force against {target_ip}:{port}...{RESET}")
+    """Send harmless SSH TCP/banner probes; this does not attempt authentication."""
+    print(f"\n{YELLOW}[*] Sending SSH TCP/banner probes to {target_ip}:{port} (no login attempts)...{RESET}")
     for i in range(1, attempts + 1):
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -119,24 +128,41 @@ def simulate_bruteforce(target_ip, port=22, attempts=5):
                 s.connect((target_ip, port))
                 s.sendall(b"SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.1\r\n")
                 time.sleep(0.3)
-                print(f"    [!] Sent authentication probe #{i} (Failed login event generated)")
-        except Exception:
-            print(f"    [!] Failed connection attempt #{i} (Simulated Event ID 4625 / auth.log failure)")
-    print(f"{GREEN}[✓] Simulation finished. Check Wazuh Dashboard for 'Rule ID 5710 / 5712' alert!{RESET}")
+                print(f"    [!] SSH banner probe sent #{i}; no credentials were submitted.")
+        except (OSError, TimeoutError) as exc:
+            print(f"    [!] TCP probe #{i} did not connect: {exc.__class__.__name__}")
+    print(f"{YELLOW}[i] These probes do not generate failed-login events by themselves; alerting depends on the target and installed rules.{RESET}")
 
 
 def simulate_privesc_recon():
-    """Simulate malicious discovery command execution to trigger Sysmon Event 1."""
-    print(f"\n{YELLOW}[*] Adversary Emulation: Running SUID & PrivEsc Reconnaissance...{RESET}")
-    recon_cmds = [
-        "whoami /priv 2>/dev/null || whoami",
-        "net user Administrator 2>/dev/null || id",
-        "find / -perm -4000 -type f 2>/dev/null || echo 'Checked SUID'"
-    ]
-    for cmd in recon_cmds:
-        print(f"    [!] Executing Suspicious Recon: {cmd}")
-        subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    print(f"{GREEN}[✓] Command executions completed. Check Wazuh for 'Privileged Command Execution' alert.{RESET}")
+    """Run limited local discovery commands; this is not a guaranteed alert generator."""
+    print(f"\n{YELLOW}[*] Running local discovery commands (review before use)...{RESET}")
+    if os.name == "nt":
+        recon_cmds = [
+            ["whoami", "/priv"],
+            ["net", "user", "Administrator"],
+        ]
+    else:
+        recon_cmds = [
+            ["whoami"],
+            ["id"],
+            ["find", "/usr/bin", "/usr/local/bin", "-perm", "-4000", "-type", "f"],
+        ]
+
+    for command in recon_cmds:
+        print(f"    [!] Executing: {' '.join(command)}")
+        try:
+            result = subprocess.run(
+                command,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                timeout=10,
+                check=False,
+            )
+            print(f"        exit status: {result.returncode}")
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            print(f"        skipped/failed: {exc.__class__.__name__}")
+    print(f"{YELLOW}[i] Alert generation depends on endpoint telemetry, agent configuration, and SIEM rules.{RESET}")
 
 
 def deploy_lab():
@@ -150,11 +176,16 @@ def deploy_lab():
     print(f"{GREEN}[✓] docker-compose.yml generated successfully.{RESET}")
 
     print(f"{YELLOW}[*] Spawning containers (this might take a few minutes)...{RESET}")
-    subprocess.run(["docker", "compose", "up", "-d"])
-    print(f"\n{BOLD}{GREEN}[✓] Wazuh SOC HomeLab is now active!{RESET}")
-    print(f"    Dashboard URL : https://localhost (or https://<server-ip>)")
-    print(f"    Default User  : admin")
-    print(f"    Default Pass  : admin (or see Wazuh deployment log)\n")
+    result = subprocess.run(["docker", "compose", "up", "-d"], check=False)
+    if result.returncode != 0:
+        print(f"{RED}[-] Docker Compose failed (exit {result.returncode}). Review the output above; deployment is not confirmed.{RESET}")
+        return False
+    print(f"\n{BOLD}{GREEN}[✓] Docker Compose returned success. Verify container health before using the lab.{RESET}")
+    print(f"    Dashboard URL : https://localhost")
+    print(f"    Indexer API   : loopback-only at https://localhost:9200 (demo security plugin is disabled)")
+    print(f"    Credentials   : do not assume defaults; consult the matching Wazuh version documentation.\n")
+    print(f"{YELLOW}[!] LAB ONLY: do not expose the indexer or dashboard to an untrusted network.{RESET}")
+    return True
 
 
 def main():
@@ -164,8 +195,8 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument("--deploy", action="store_true", help="Deploy Wazuh SIEM & Elastic stack via Docker Compose")
-    parser.add_argument("--simulate-bruteforce", help="Simulate brute-force attacks against target IP to test detection")
-    parser.add_argument("--simulate-recon", action="store_true", help="Simulate discovery and privilege escalation activities")
+    parser.add_argument("--simulate-bruteforce", help="Send SSH TCP/banner probes only; does not attempt logins")
+    parser.add_argument("--simulate-recon", action="store_true", help="Run limited local discovery commands for telemetry testing")
     parser.add_argument("--status", action="store_true", help="Check status of running HomeLab containers")
 
     args = parser.parse_args()
