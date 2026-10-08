@@ -225,7 +225,10 @@ def main():
     elif args.simulate_recon:
         simulate_privesc_recon()
     elif args.status:
-        if os.path.isfile(os.path.join(SINGLE_NODE_DIRECTORY, "docker-compose.yml")):\n            subprocess.run(["docker", "compose", "ps"], cwd=SINGLE_NODE_DIRECTORY, check=False)\n        else:\n            print(f"{YELLOW}[i] Wazuh stack not found. Run with --deploy first.{RESET}")
+        if os.path.isfile(os.path.join(SINGLE_NODE_DIRECTORY, "docker-compose.yml")):
+            subprocess.run(["docker", "compose", "ps"], cwd=SINGLE_NODE_DIRECTORY, check=False)
+        else:
+            print(f"{YELLOW}[i] Wazuh stack not found. Run with --deploy first.{RESET}")
     else:
         parser.print_help()
 
