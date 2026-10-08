@@ -24,7 +24,7 @@ jobs:
       - name: Check internal/external links
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --verbose --no-progress --root-dir . --accept 200,202,204,206,301,302,307,308,429,999 './index.html' './404.html'
+          args: --offline --verbose --no-progress --root-dir . --accept 200,202,204,206,301,302,307,308,429,999 './**/*.html' './README.md' './tools/**/README.md'
           fail: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
