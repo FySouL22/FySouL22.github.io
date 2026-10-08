@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. خلفية الماتركس الخضراء (Matrix Digital Rain)
     // ----------------------------------------------------
     const matrixCanvas = document.getElementById('matrix-canvas');
-    if (matrixCanvas) {
+    if (matrixCanvas && !reduceMotion) {
         const ctx = matrixCanvas.getContext('2d');
         function resizeMatrix() {
             if (!matrixCanvas.parentElement) return;
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. شبكة الجزيئات السيبرانية التفاعلية (Particle Network)
     // ----------------------------------------------------
     const pCanvas = document.getElementById('particles-canvas');
-    if (pCanvas) {
+    if (pCanvas && !reduceMotion) {
         const pCtx = pCanvas.getContext('2d');
         let width = pCanvas.width = window.innerWidth;
         let height = pCanvas.height = window.innerHeight;
