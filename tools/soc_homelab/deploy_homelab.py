@@ -41,78 +41,67 @@ BANNER = f"""{GREEN}{BOLD}
                   GitHub: https://github.com/FySouL22
 {RESET}"""
 
-DOCKER_COMPOSE_TEMPLATE = """version: '3.8'
+WAZUH_VERSION = "v4.14.8"
+WAZUH_REPOSITORY = "https://github.com/wazuh/wazuh-docker.git"
+WAZUH_DIRECTORY = f"wazuh-docker-{WAZUH_VERSION}"
+SINGLE_NODE_DIRECTORY = os.path.join(WAZUH_DIRECTORY, "single-node")
 
-services:
-  wazuh.indexer:
-    image: wazuh/wazuh-indexer:4.8.0
-    container_name: wazuh.indexer
-    hostname: wazuh.indexer
-    restart: always
-    ports:
-      # Lab-only indexer API: never publish this port to the LAN.
-      - "127.0.0.1:9200:9200"
-    environment:
-      - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
-      - "bootstrap.memory_lock=true"
-      - "discovery.type=single-node"
-      - "DISABLE_INSTALL_DEMO_CONFIG=true"
-      # This simplified demo disables indexer auth. Keep port 9200 loopback-only.
-      - "DISABLE_SECURITY_PLUGIN=true"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-      nofile:
-        soft: 65536
-        hard: 65536
+# The official upstream Compose file publishes these ports on all interfaces.
+# This lab helper deliberately restricts every published port to loopback.
+LOOPBACK_PORT_BINDINGS = [
+    ('- "1514:1514"', '- "127.0.0.1:1514:1514"'),
+    ('- "1515:1515"', '- "127.0.0.1:1515:1515"'),
+    ('- "514:514/udp"', '- "127.0.0.1:514:514/udp"'),
+    ('- "55000:55000"', '- "127.0.0.1:55000:55000"'),
+    ('- "9200:9200"', '- "127.0.0.1:9200:9200"'),
+    ('- 443:5601', '- "127.0.0.1:443:5601"'),
+]
 
-  wazuh.manager:
-    image: wazuh/wazuh-manager:4.8.0
-    container_name: wazuh.manager
-    hostname: wazuh.manager
-    restart: always
-    ports:
-      # Defaults to loopback. Set LAB_BIND_IP to a dedicated, firewalled lab IP only if remote agents need access.
-      - "${LAB_BIND_IP:-127.0.0.1}:1514:1514/udp"
-      - "${LAB_BIND_IP:-127.0.0.1}:1515:1515"
-      - "${LAB_BIND_IP:-127.0.0.1}:514:514/udp"
-      # Wazuh API is administrative; keep it loopback-only.
-      - "127.0.0.1:55000:55000"
-    environment:
-      - INDEXER_URL=http://wazuh.indexer:9200
-    depends_on:
-      - wazuh.indexer
 
-  wazuh.dashboard:
-    image: wazuh/wazuh-dashboard:4.8.0
-    container_name: wazuh.dashboard
-    hostname: wazuh.dashboard
-    restart: always
-    ports:
-      - "127.0.0.1:443:5601"
-    environment:
-      - INDEXER_URL=http://wazuh.indexer:9200
-      - WAZUH_API_URL=https://wazuh.manager
-    depends_on:
-      - wazuh.indexer
-      - wazuh.manager
-"""
+def patch_compose_loopback(compose_path):
+    """Fail closed unless every expected upstream port mapping is safely bound."""
+    with open(compose_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    if "DISABLE_SECURITY_PLUGIN=true" in content:
+        print(f"{RED}[-] Refusing to run: the indexer security plugin is disabled.{RESET}")
+        return False
+
+    for original, hardened in LOOPBACK_PORT_BINDINGS:
+        if hardened in content:
+            continue
+        count = content.count(original)
+        if count != 1:
+            print(f"{RED}[-] Cannot safely patch expected port mapping {original!r} (matches: {count}).{RESET}")
+            print(f"{YELLOW}[i] Review the upstream Compose file for version {WAZUH_VERSION}; no deployment was started.{RESET}")
+            return False
+        content = content.replace(original, hardened, 1)
+
+    required = [hardened for _, hardened in LOOPBACK_PORT_BINDINGS]
+    if any(mapping not in content for mapping in required):
+        print(f"{RED}[-] Loopback binding validation failed; no deployment was started.{RESET}")
+        return False
+
+    with open(compose_path, "w", encoding="utf-8") as f:
+        f.write(content)
+    return True
+
 
 
 def check_prerequisites():
-    """Verify Docker and Docker Compose are present."""
+    """Verify Docker, Docker Compose, and Git are present."""
     print(f"{CYAN}[*] Verifying system prerequisites...{RESET}")
-    docker_check = subprocess.run(["docker", "--version"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    if docker_check.returncode != 0:
-        print(f"{RED}[-] Error: Docker is not installed or not in PATH.{RESET}")
-        return False
-    print(f"{GREEN}[✓] Docker detected: {docker_check.stdout.strip()}{RESET}")
-    compose_check = subprocess.run(["docker", "compose", "version"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    if compose_check.returncode != 0:
-        print(f"{RED}[-] Error: Docker Compose plugin is unavailable.{RESET}")
-        return False
-    print(f"{GREEN}[✓] Docker Compose detected: {compose_check.stdout.strip()}{RESET}")
+    checks = [
+        (["docker", "--version"], "Docker"),
+        (["docker", "compose", "version"], "Docker Compose"),
+        (["git", "--version"], "Git"),
+    ]
+    for command, label in checks:
+        result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=False)
+        if result.returncode != 0:
+            print(f"{RED}[-] Error: {label} is unavailable or not in PATH.{RESET}")
+            return False
+        print(f"{GREEN}[✓] {label} detected: {result.stdout.strip()}{RESET}")
     return True
 
 
@@ -164,25 +153,55 @@ def simulate_privesc_recon():
 
 
 def deploy_lab():
-    """Generate docker-compose.yml and start containers."""
+    """Deploy the official Wazuh single-node stack with TLS/auth and loopback-only ports."""
     if not check_prerequisites():
-        sys.exit(1)
-
-    print(f"{CYAN}[*] Creating docker-compose.yml for Wazuh All-in-One SOC...{RESET}")
-    with open("docker-compose.yml", "w", encoding="utf-8") as f:
-        f.write(DOCKER_COMPOSE_TEMPLATE)
-    print(f"{GREEN}[✓] docker-compose.yml generated successfully.{RESET}")
-
-    print(f"{YELLOW}[*] Spawning containers (this might take a few minutes)...{RESET}")
-    result = subprocess.run(["docker", "compose", "up", "-d"], check=False)
-    if result.returncode != 0:
-        print(f"{RED}[-] Docker Compose failed (exit {result.returncode}). Review the output above; deployment is not confirmed.{RESET}")
         return False
-    print(f"\n{BOLD}{GREEN}[✓] Docker Compose returned success. Verify container health before using the lab.{RESET}")
+
+    compose_path = os.path.join(SINGLE_NODE_DIRECTORY, "docker-compose.yml")
+    if not os.path.isdir(WAZUH_DIRECTORY):
+        print(f"{CYAN}[*] Cloning official Wazuh Docker stack ({WAZUH_VERSION})...{RESET}")
+        clone = subprocess.run(
+            ["git", "clone", "--depth", "1", "--branch", WAZUH_VERSION, WAZUH_REPOSITORY, WAZUH_DIRECTORY],
+            check=False,
+        )
+        if clone.returncode != 0:
+            print(f"{RED}[-] Could not clone the official Wazuh repository. No deployment was started.{RESET}")
+            return False
+    elif not os.path.isfile(compose_path):
+        print(f"{RED}[-] {WAZUH_DIRECTORY} exists but is incomplete. Move it aside and rerun; it was not overwritten.{RESET}")
+        return False
+
+    if not os.path.isfile(compose_path):
+        print(f"{RED}[-] Official Compose file not found: {compose_path}{RESET}")
+        return False
+
+    if not patch_compose_loopback(compose_path):
+        return False
+
+    print(f"{GREEN}[✓] Official Compose file validated: indexer security remains enabled and published ports bind to 127.0.0.1.{RESET}")
+    print(f"{YELLOW}[!] Self-signed TLS certificates and the upstream demo credentials are used by the official lab template. Change all default passwords before any non-local exposure.{RESET}")
+
+    print(f"{CYAN}[*] Generating the official Wazuh TLS certificates...{RESET}")
+    certs = subprocess.run(
+        ["docker", "compose", "-f", "generate-indexer-certs.yml", "run", "--rm", "generator"],
+        cwd=SINGLE_NODE_DIRECTORY,
+        check=False,
+    )
+    if certs.returncode != 0:
+        print(f"{RED}[-] Certificate generation failed (exit {certs.returncode}); stack startup was skipped.{RESET}")
+        return False
+
+    print(f"{CYAN}[*] Starting the official Wazuh stack...{RESET}")
+    result = subprocess.run(["docker", "compose", "up", "-d"], cwd=SINGLE_NODE_DIRECTORY, check=False)
+    if result.returncode != 0:
+        print(f"{RED}[-] Docker Compose failed (exit {result.returncode}). Review logs; deployment is not confirmed.{RESET}")
+        return False
+
+    print(f"\n{BOLD}{GREEN}[✓] Docker Compose returned success. Check container health before use.{RESET}")
     print("    Dashboard URL : https://localhost")
-    print("    Indexer API   : loopback-only at http://localhost:9200 (demo security plugin is disabled)")
-    print("    Credentials   : do not assume defaults; consult the matching Wazuh version documentation.\n")
-    print(f"{YELLOW}[!] LAB ONLY: do not expose the indexer or dashboard to an untrusted network.{RESET}")
+    print("    Indexer API   : https://localhost:9200 (loopback-only, TLS/auth enabled)")
+    print(f"    Compose path  : {SINGLE_NODE_DIRECTORY}")
+    print(f"{YELLOW}[!] LAB ONLY: default credentials must be changed and ports must remain firewalled.{RESET}")
     return True
 
 
@@ -192,7 +211,7 @@ def main():
         description="Cyber Defense & SOC HomeLab Deployer and Attack Simulator by Ft7y.Sec",
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
-    parser.add_argument("--deploy", action="store_true", help="Deploy Wazuh SIEM & Elastic stack via Docker Compose")
+    parser.add_argument("--deploy", action="store_true", help="Deploy official Wazuh Docker stack with TLS/auth and loopback-only ports")
     parser.add_argument("--simulate-bruteforce", help="Send SSH TCP/banner probes only; does not attempt logins")
     parser.add_argument("--simulate-recon", action="store_true", help="Run limited local discovery commands for telemetry testing")
     parser.add_argument("--status", action="store_true", help="Check status of running HomeLab containers")
@@ -206,7 +225,7 @@ def main():
     elif args.simulate_recon:
         simulate_privesc_recon()
     elif args.status:
-        subprocess.run(["docker", "compose", "ps"], check=False)
+        if os.path.isfile(os.path.join(SINGLE_NODE_DIRECTORY, "docker-compose.yml")):\n            subprocess.run(["docker", "compose", "ps"], cwd=SINGLE_NODE_DIRECTORY, check=False)\n        else:\n            print(f"{YELLOW}[i] Wazuh stack not found. Run with --deploy first.{RESET}")
     else:
         parser.print_help()
 
