@@ -12,7 +12,6 @@ Description: Fast, robust, multi-threaded TCP/UDP port scanner with banner
 
 import socket
 import sys
-import os
 import time
 import json
 import argparse
