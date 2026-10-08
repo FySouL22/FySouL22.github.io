@@ -12,7 +12,6 @@ Description: Fast, robust, multi-threaded TCP/UDP port scanner with banner
 
 import socket
 import sys
-import os
 import time
 import json
 import argparse
@@ -69,7 +68,7 @@ def grab_banner(target_ip, port, timeout=1.0):
             raw_banner = s.recv(1024)
             decoded = raw_banner.decode("utf-8", errors="ignore").strip()
             # Clean up banner to first meaningful line
-            lines = [l.strip() for l in decoded.splitlines() if l.strip()]
+            lines = [line.strip() for line in decoded.splitlines() if line.strip()]
             return lines[0][:80] if lines else "Service Active"
     except Exception:
         return COMMON_PORTS.get(port, "Unknown Service")

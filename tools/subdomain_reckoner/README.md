@@ -19,8 +19,8 @@
 
 ## 🛠️ Installation
 ```bash
-git clone https://github.com/FySouL22/subdomain-reckoner.git
-cd subdomain-reckoner
+git clone https://github.com/FySouL22/ft7.cv.github.io.git
+cd ft7.cv.github.io/tools/subdomain_reckoner
 python subdomain_reckoner.py -h
 ```
 

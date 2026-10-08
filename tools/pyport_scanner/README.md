@@ -20,8 +20,8 @@
 
 ## 🛠️ Installation
 ```bash
-git clone https://github.com/FySouL22/pyport-scanner-pro.git
-cd pyport-scanner-pro
+git clone https://github.com/FySouL22/ft7.cv.github.io.git
+cd ft7.cv.github.io/tools/pyport_scanner
 python pyport_scanner.py -h
 ```
 

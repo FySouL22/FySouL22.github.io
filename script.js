@@ -699,7 +699,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="term-line banner">  ██╔══╝     ██║      ██╔╝   ╚██╔╝      ╚════██║██╔══╝  ██║     </div>
                 <div class="term-line banner">  ██║        ██║      ███████╗██║       ███████║███████╗╚██████╗</div>
                 <div class="term-line banner">  -- PyPort-Scanner Pro v2.5 by Mohamed Fathi (Ft7y.Sec) --</div>
-                <div class="term-line info">[*] Target Host : ${target} (Resolved: 10.10.10.85)</div>
+                <div class="term-line info">[*] Demo Target : ${target} (display only; no DNS lookup)</div>
                 <div class="term-line info">[*] Concurrency : ${workers} Workers | Timeout: 0.8s</div>
                 <div class="term-line info">[*] Scan Started : ${new Date().toLocaleTimeString()}</div>
                 <div class="term-line info">-----------------------------------------------------------------</div>
@@ -738,7 +738,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     finishLine.className = 'term-line info';
                     finishLine.innerHTML = `
                         -----------------------------------------------------------------<br>
-                        <span style="color:#00ff66;font-weight:bold;">[✓] Scan Finished: ${totalSteps} open port(s) detected in 1.34s.</span>
+                        <span style="color:#00ff66;font-weight:bold;">[✓] Demo finished: ${totalSteps} sample ports displayed. No network scan was performed.</span>
                     `;
                     simOutput.appendChild(finishLine);
                     simOutput.scrollTop = simOutput.scrollHeight;
@@ -748,13 +748,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (simDownloadBtn) simDownloadBtn.style.display = 'inline-flex';
 
                     currentScanData = {
-                        scanner: "PyPort-Scanner Pro v2.5",
+                        scanner: "PyPort-Scanner Pro v2.5 (browser demo)",
+                        simulation: true,
+                        note: "Static demonstration data; no network scan was performed.",
                         author: "Mohamed Fathi (Ft7y.Sec)",
                         target: target,
                         timestamp: new Date().toISOString(),
                         open_ports: simulatedResults
                     };
-                    showToast('✓ اكتمل فحص المنافذ بنجاح!');
+                    showToast('✓ اكتملت المحاكاة؛ لم يتم فحص أي شبكة.');
                 }
             }, 220);
         });
