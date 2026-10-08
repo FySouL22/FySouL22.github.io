@@ -16,8 +16,6 @@ import time
 import subprocess
 import argparse
 import socket
-import urllib.request
-import ssl
 
 # Configure Windows UTF-8 stdout
 if hasattr(sys.stdout, 'reconfigure'):
@@ -182,7 +180,7 @@ def deploy_lab():
         return False
     print(f"\n{BOLD}{GREEN}[✓] Docker Compose returned success. Verify container health before using the lab.{RESET}")
     print(f"    Dashboard URL : https://localhost")
-    print(f"    Indexer API   : loopback-only at https://localhost:9200 (demo security plugin is disabled)")
+    print(f"    Indexer API   : loopback-only at http://localhost:9200 (demo security plugin is disabled)")
     print(f"    Credentials   : do not assume defaults; consult the matching Wazuh version documentation.\n")
     print(f"{YELLOW}[!] LAB ONLY: do not expose the indexer or dashboard to an untrusted network.{RESET}")
     return True
