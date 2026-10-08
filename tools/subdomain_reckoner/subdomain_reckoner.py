@@ -11,10 +11,8 @@ Description: Passive OSINT Subdomain Enumerator & Live HTTP Prober using
 """
 
 import sys
-import os
 import re
 import json
-import time
 import socket
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -69,7 +67,7 @@ def query_crtsh(domain):
                             sub = sub.replace("*.", "")
                         if sub.endswith(domain) and sub != domain:
                             subdomains.add(sub)
-    except Exception as e:
+    except Exception:
         pass
     return subdomains
 
