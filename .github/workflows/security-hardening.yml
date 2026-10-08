@@ -23,6 +23,8 @@ jobs:
         run: ruff check tools --select E4,E7,E9,F --output-format=github
       - name: Bandit
         run: bandit -r tools -lll
+      - name: Wazuh deployment safety tests
+        run: python -m unittest discover -s tools/soc_homelab -p "test_*.py"
 
   secret-scan:
     runs-on: ubuntu-latest
