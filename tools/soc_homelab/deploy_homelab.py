@@ -4,7 +4,7 @@
 =============================================================================
 Cyber Defense & SOC HomeLab Automated Deployment & Attack Simulator v1.5
 Author: Mohamed Fathi (Ft7y.Sec)
-GitHub: https://github.com/FySouL22/cyber-defense-homelab
+GitHub: https://github.com/FySouL22/ft7.cv.github.io/tree/main/tools/soc_homelab
 Description: Automated deployment helper for Wazuh SIEM + Elastic Indexer,
              health verification, and integrated adversary attack simulator.
 =============================================================================
