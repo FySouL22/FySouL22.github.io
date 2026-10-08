@@ -12,9 +12,9 @@
 ---
 
 ## ⚡ Features
-- 🐳 **1-Command Deployment**: Launches Wazuh Manager, Indexer, and Dashboard via Docker Compose in under 5 minutes.
+- 🐳 **Docker Compose helper**: Generates a sample Compose file and attempts to start the Wazuh Manager, Indexer, and Dashboard containers; container health must be checked separately.
 - 🎯 **Telemetry exercises**: Sends SSH TCP/banner probes (not login attempts) and runs limited local discovery commands. Whether alerts appear depends on endpoint telemetry, agents, and SIEM rules.
-- 🛡️ **Sysmon & Event Log Mapping**: Correlates Windows Event IDs (4625, 4624, 7045) and Linux `auth.log` in real time.
+- 🛡️ **Detection references**: Documents example Windows Event IDs (4625, 4624, 7045) and Linux `auth.log` sources; actual collection depends on endpoint agents and rule configuration.
 - 📊 **Unified Dashboard**: Web console for threat detection, regulatory compliance, and active response.
 
 ---
