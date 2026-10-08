@@ -44,12 +44,12 @@
     <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
     <div class="page-noise" aria-hidden="true"></div>
     <!-- Particle Canvas Background -->
-    <canvas id="particles-canvas"></canvas>
+    <!-- Decorative atmosphere is rendered with lightweight CSS gradients. -->
 
     <!-- شريط التنقل العلوي -->
     <aside class="market-strip" data-market-ticker aria-label="أسعار استرشادية للعملات">
   <div class="market-strip-inner">
-    <div class="market-brand"><span class="market-live-dot" aria-hidden="true"></span><span>مؤشرات السوق</span><small>تحديث كل ساعة</small></div>
+    <div class="market-brand"><span class="market-live-dot" aria-hidden="true"></span><span>السوق</span><small>تحديث كل ساعة</small></div>
     <ul class="market-assets">
       <li class="market-asset" data-market="USD_EGP"><span class="market-coin coin-usd" aria-hidden="true">$</span><span class="market-code">USD/EGP</span><strong data-price>—</strong></li>
       <li class="market-asset" data-market="BTC"><span class="market-coin coin-btc" aria-hidden="true">₿</span><span class="market-code">BTC</span><strong data-price>—</strong></li>
@@ -70,7 +70,8 @@
                 <li><a href="#home" class="active">الرئيسية</a></li>
                 
                 <li><a href="#skills">المهارات</a></li>
-                <li><a href="writeups.html">CTF Write-ups</a></li><li><a href="#projects">المشاريع</a></li>
+                <li><a href="#ctf-writeups">تقارير CTF</a></li>
+                <li><a href="#projects">المشاريع</a></li>
                 <li><a href="#contact">تواصل معي</a></li>
             </ul>
         </nav>
@@ -79,7 +80,7 @@
             <button id="theme-toggle" class="btn-secondary" type="button" title="تبديل الوضع" aria-label="تبديل الوضع">
                 <i class="fa-solid fa-moon"></i>
             </button>
-            <button class="mobile-toggle" id="mobile-toggle" aria-label="القائمة">
+            <button class="mobile-toggle" id="mobile-toggle" type="button" aria-label="القائمة" aria-expanded="false" aria-controls="nav-menu">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
@@ -89,17 +90,12 @@
         <!-- 1. قسم البداية (Hero Section) -->
         <section id="home" class="hero-section">
             
-            <div class="hero-content" data-aos="fade-right" data-aos-duration="1000">
-                <div class="terminal-badge">
-                    <span class="terminal-status" aria-hidden="true"></span><span class="term-prefix">root@ft7y:~$</span>
-                    <span class="typed-text" id="typed-text"></span>
-                    <span class="cursor-blink">|</span>
-                </div>
-                <h1 class="glitch-text" data-text="محمد فتحي">محمد فتحي</h1>
-                <span class="badge">Cybersecurity &amp; Web Developer</span>
-                
-                <h2 class="hero-title">Cybersecurity Researcher • Penetration Testing • Security Automation</h2>
-                <p class="hero-desc"><strong>باحث مستقل ومتعلم ذاتيًا في الأمن السيبراني، أركز على اختبار الاختراق وأمن تطبيقات الويب والأتمتة الأمنية. أتعلم بالتجربة داخل مختبري الشخصي، وأوثق عملي عبر تحديات CTF ومشاريع وأدوات Python.</strong></p>
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="650">
+                <p class="hero-eyebrow"><span class="hero-eyebrow-dot" aria-hidden="true"></span> ملف مهني · الأمن السيبراني وتطوير الويب</p>
+                <h1 class="hero-name">محمد فتحي</h1>
+                <span class="badge">Cybersecurity · Web Development</span>
+                <h2 class="hero-title">أمن سيبراني، اختبار اختراق، وأتمتة أمنية</h2>
+                <p class="hero-desc">باحث مستقل ومتعلم ذاتيًا في الأمن السيبراني. أركز على اختبار الاختراق وأمن تطبيقات الويب والأتمتة الأمنية، وأطوّر خبرتي بالتجربة داخل مختبري الشخصي وتوثيق العمل عبر تحديات CTF ومشاريع وأدوات Python.</p>
                 <div class="hero-actions">
                     <a href="#contact" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> تواصل معي</a>
                     <a href="#ctf-writeups" class="btn-outline"><i class="fa-solid fa-flag"></i> تصفح CTF Write-ups</a>
@@ -111,7 +107,7 @@
             </div>
 
             <!-- الصورة الشخصية -->
-            <div class="hero-image" data-aos="fade-left" data-aos-duration="1000">
+            <div class="hero-image" data-aos="fade-up" data-aos-duration="650" data-aos-delay="100">
                 <div class="avatar-ring">
                     <div class="ring ring-1"></div>
                     <div class="ring ring-2"></div>
@@ -121,9 +117,9 @@
                     </div>
                 </div>
                 <div class="floating-badges">
-                    <div class="float-badge" style="--delay:0s"><i class="fa-solid fa-shield-halved"></i> Pentester</div>
-                    <div class="float-badge" style="--delay:1s"><i class="fa-brands fa-python"></i> Web Developer</div>
-                    <div class="float-badge" style="--delay:2s"><i class="fa-solid fa-flag"></i> CTF Player</div>
+                    <div class="float-badge"><i class="fa-solid fa-shield-halved"></i> Pentester</div>
+                    <div class="float-badge"><i class="fa-brands fa-python"></i> Web Developer</div>
+                    <div class="float-badge"><i class="fa-solid fa-flag"></i> CTF Player</div>
 
                 </div>
                 <div class="social-icons">
