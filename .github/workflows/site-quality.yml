@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate maintained site pages
+      - name: Validate all site pages
         run: |
           mapfile -d '' pages < <(find . -type f -name '*.html' -not -path './.git/*' -print0)
           npx --yes html-validate@10 "${pages[@]}"

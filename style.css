@@ -4985,7 +4985,7 @@ body.light-mode .navbar{background:rgba(247,250,248,.94)}
 .market-brand{display:flex;align-items:center;gap:8px;white-space:nowrap;color:#cce7d7;font-size:12px;font-weight:700}
 .market-brand small{color:#82968a;font-size:10px;font-weight:500}
 .market-live-dot{width:7px;height:7px;border-radius:50%;background:#70e6a6;box-shadow:0 0 8px rgba(112,230,166,.4)}
-.market-assets{display:flex;align-items:center;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
+.market-assets{display:flex;align-items:center;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;list-style:none}
 .market-assets::-webkit-scrollbar{display:none}
 .market-asset{min-width:max-content;display:flex;align-items:center;gap:7px;padding:0 13px;border-left:1px solid rgba(255,255,255,.07);font-family:var(--font-code),monospace;font-size:11px;line-height:1}
 .market-code{color:#94a99d;font-size:10px}
