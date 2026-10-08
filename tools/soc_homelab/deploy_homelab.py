@@ -179,9 +179,9 @@ def deploy_lab():
         print(f"{RED}[-] Docker Compose failed (exit {result.returncode}). Review the output above; deployment is not confirmed.{RESET}")
         return False
     print(f"\n{BOLD}{GREEN}[✓] Docker Compose returned success. Verify container health before using the lab.{RESET}")
-    print(f"    Dashboard URL : https://localhost")
-    print(f"    Indexer API   : loopback-only at http://localhost:9200 (demo security plugin is disabled)")
-    print(f"    Credentials   : do not assume defaults; consult the matching Wazuh version documentation.\n")
+    print("    Dashboard URL : https://localhost")
+    print("    Indexer API   : loopback-only at http://localhost:9200 (demo security plugin is disabled)")
+    print("    Credentials   : do not assume defaults; consult the matching Wazuh version documentation.\n")
     print(f"{YELLOW}[!] LAB ONLY: do not expose the indexer or dashboard to an untrusted network.{RESET}")
     return True
 
@@ -206,7 +206,7 @@ def main():
     elif args.simulate_recon:
         simulate_privesc_recon()
     elif args.status:
-        subprocess.run(["docker", "compose", "ps"])
+        subprocess.run(["docker", "compose", "ps"], check=False)
     else:
         parser.print_help()
 
