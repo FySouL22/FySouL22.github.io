@@ -6,12 +6,10 @@
    - Terminal Command Auto-Typing Simulation
    - Platform Tabs & Interactive Writeups Filtering
    - Auto-fill Contact Form on Report Request- Animated Skill Progress Bars on Scroll
-   - 3D Card Perspective Tilt Effect on Mousemove
    - Dark / Light Mode Switcher with LocalStorage
    - Smooth Scroll Spy & Sticky Navbar
    - Email Clipboard Copy with Toast
    - Back to Top Button
-   - Cyber Cursor Glow
    ================================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -319,29 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ----------------------------------------------------
-    // 9. تأثير الإمالة ثلاثية الأبعاد للبطاقات (3D Tilt Effect)
-    // ----------------------------------------------------
-    const tiltCards = document.querySelectorAll('.project-card, .writeup-card, .skill-category-card, ');
-    tiltCards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -5;
-            const rotateY = ((x - centerX) / centerX) * 5;
-
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
-        });
-
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
-        });
-    });
-
-    // ----------------------------------------------------
-    // 10. الوضع الداكن / الفاتح (Theme Switcher)
+    // 9. الوضع الداكن / الفاتح (Theme Switcher)
     // ----------------------------------------------------
     const themeToggle = document.getElementById('theme-toggle');
     if (themeToggle) {
@@ -360,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ----------------------------------------------------
-    // 11. شريط التنقل المتجاوب، مؤشر التمرير، والروابط النشطة
+    // 10. شريط التنقل المتجاوب، مؤشر التمرير، والروابط النشطة
     // ----------------------------------------------------
     const navbar = document.getElementById('navbar');
     const mobileToggle = document.getElementById('mobile-toggle');
@@ -523,23 +499,6 @@ document.addEventListener('DOMContentLoaded', () => {
             formAlert.textContent = 'سيتم فتح برنامج البريد لإرسال الرسالة. لم يتم الادعاء بإرسالها قبل تأكيدك.';
             window.location.href = mailto;
         });
-    }
-
-    // ----------------------------------------------------
-    // 14. توهج الماوس السيبراني (Cyber Cursor Glow)
-    // ----------------------------------------------------
-    // Skip the custom cursor effect on touch/coarse-pointer devices.
-    const cursorGlow = document.createElement('div');
-    cursorGlow.className = 'cursor-glow';
-    document.body.appendChild(cursorGlow);
-
-    if (window.matchMedia('(pointer: fine)').matches) {
-        document.addEventListener('mousemove', (e) => {
-            cursorGlow.style.left = e.clientX + 'px';
-            cursorGlow.style.top = e.clientY + 'px';
-        });
-    } else {
-        cursorGlow.remove();
     }
 
     // ----------------------------------------------------
