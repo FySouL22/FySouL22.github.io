@@ -4866,7 +4866,7 @@ body.light-mode .navbar,body.light-mode .navbar.scrolled{background:rgba(247,250
  gap:clamp(36px,6vw,80px);position:relative;isolation:isolate;overflow:hidden;border-radius:0;
  background:linear-gradient(90deg,rgba(11,16,14,.24) 0%,rgba(11,16,14,.74) 46%,rgba(11,16,14,.94) 100%),url("assets/images/cyber-ambient.webp") left center/cover no-repeat;
 }
-.hero-section::before{content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;background:radial-gradient(ellipse at 12% 78%,rgba(100,190,125,.09),transparent 48%)}
+.hero-section::before{content:"";position:absolute;z-index:-1;inset:0;width:auto;height:auto;top:auto;right:auto;bottom:auto;left:auto;pointer-events:none;background:radial-gradient(ellipse at 12% 78%,rgba(100,190,125,.09),transparent 48%)}
 .hero-section::after{content:none!important;display:none!important}
 .hero-content{width:100%;max-width:690px;position:relative;z-index:2;text-align:start}
 .hero-eyebrow{color:var(--portfolio-muted)}
@@ -4914,7 +4914,10 @@ body.light-mode .navbar,body.light-mode .navbar.scrolled{background:rgba(247,250
 .status-kicker{color:var(--portfolio-accent)}
 .status-card strong{color:var(--portfolio-text)}
 .status-card>span:last-child{color:var(--portfolio-muted)}
-.content-section{padding:clamp(66px,8vw,104px) 0}
+.content-section{padding:clamp(66px,8vw,104px) 0;min-width:0}
+.contact-grid,.contact-info,.contact-form-container{min-width:0;max-width:100%}
+.ctf-screen-card{min-width:0;max-width:100%;overflow:hidden}
+[data-aos],[data-aos].aos-init,[data-aos].aos-animate{opacity:1!important;transform:none!important;transition:none!important;pointer-events:auto!important}
 .content-section::before,.content-section::after{content:none!important;display:none!important}
 .section-header{text-align:start;backdrop-filter:none}
 .section-tag{color:var(--portfolio-accent)}
@@ -4930,7 +4933,7 @@ body.light-mode .navbar,body.light-mode .navbar.scrolled{background:rgba(247,250
 .skill-category-card::before,.skill-category-card::after,.project-card::before,.project-card::after,
 .writeup-card::before,.writeup-card::after,.writeup-media-card::before,.writeup-media-card::after,
 .about-card::after,.highlight-box::after,.contact-info-container::after,.contact-form-container::after,
-.ctf-screen-card::before,.ctf-screen-card::after,.writeup-hover-glow{content:none!important;display:none!important;opacity:0!important}
+.ctf-screen-card::before,.ctf-screen-card::after,.ctf-screen-card-bg-glow,.writeup-hover-glow{content:none!important;display:none!important;opacity:0!important}
 .skill-category-card:hover,.project-card:hover,.writeup-card:hover,.writeup-media-card:hover,.ctf-screen-card:hover,
 .about-card:hover,.highlight-box:hover,.contact-info-container:hover,.contact-form-container:hover{
  transform:none!important;box-shadow:none!important;border-color:var(--portfolio-border-strong)!important;background-color:var(--portfolio-surface);
