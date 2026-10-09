@@ -4950,6 +4950,13 @@ body.light-mode .navbar,body.light-mode .navbar.scrolled{background:rgba(247,250
 .footer{background:#080d0b;border-top:1px solid var(--portfolio-border);box-shadow:none}
 .footer a:hover{color:var(--portfolio-accent)}
 body.light-mode{--portfolio-bg:#f5f8f5;--portfolio-surface:#fff;--portfolio-surface-raised:#f0f6f1;--portfolio-border:rgba(27,59,38,.13);--portfolio-border-strong:rgba(36,117,61,.28);--portfolio-text:#17231b;--portfolio-muted:#56675b;--portfolio-accent:#287744;--portfolio-accent-strong:#1e6638;background:var(--portfolio-bg);color:var(--portfolio-text)}
+#ctf-writeups,#projects{
+ background-image:linear-gradient(rgba(11,16,14,.93),rgba(11,16,14,.97)),url("assets/images/cyber-detail.webp");
+ background-size:cover;background-position:center;border-radius:18px;padding-inline:clamp(18px,3vw,36px);
+}
+body.light-mode #ctf-writeups,body.light-mode #projects{
+ background-image:linear-gradient(rgba(245,248,245,.93),rgba(245,248,245,.97)),url("assets/images/cyber-detail.webp");
+}
 body.light-mode .hero-section{background-image:linear-gradient(90deg,rgba(245,248,245,.42),rgba(245,248,245,.78) 45%,rgba(245,248,245,.95)),url("assets/images/cyber-ambient.webp")}
 body.light-mode .navbar,body.light-mode .navbar.scrolled{background:rgba(247,250,247,.96)}
 body.light-mode .hero-name,body.light-mode .hero-title,body.light-mode .section-title,body.light-mode .skill-category-card h3,body.light-mode .project-title{color:var(--portfolio-text)}
