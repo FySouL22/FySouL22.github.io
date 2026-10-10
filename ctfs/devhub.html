@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#07110d">
+  <meta name="theme-color" content="#07101f">
   <meta name="color-scheme" content="dark light">
   <meta name="description" content="تقرير CTF تقني لتحدي DevHUb HTB Write-up على منصة Hack The Box.">
   <title>DevHUb HTB Write-up | Ft7y.Sec</title>
@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-  <link rel="stylesheet" href="../style.css?v=20261009-visual-refresh-ccdd949">
+  <link rel="stylesheet" href="../style.css?v=20261010-market-glass">
   <link rel="icon" href="../avatar.png" type="image/png">
     <link rel="canonical" href="https://fysoul22.github.io/ft7.cv.github.io/ctfs/devhub.html">
     <meta property="og:type" content="website">
@@ -30,16 +30,18 @@
   <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
   <div class="page-noise" aria-hidden="true"></div>
   <canvas id="particles-canvas"></canvas>
-  <aside class="market-strip" data-market-ticker aria-label="أسعار استرشادية للعملات">
+  <aside class="market-strip" data-market-ticker aria-label="أسعار العملات التقديرية">
   <div class="market-strip-inner">
     <div class="market-brand"><span class="market-live-dot" aria-hidden="true"></span><span>مؤشرات السوق</span><small>تحديث كل ساعة</small></div>
     <ul class="market-assets">
-      <li class="market-asset" data-market="USD_EGP"><span class="market-coin coin-usd" aria-hidden="true">$</span><span class="market-code">USD/EGP</span><strong data-price>—</strong></li>
-      <li class="market-asset" data-market="BTC"><span class="market-coin coin-btc" aria-hidden="true">₿</span><span class="market-code">BTC</span><strong data-price>—</strong></li>
-      <li class="market-asset" data-market="ETH"><span class="market-coin coin-eth" aria-hidden="true">◇</span><span class="market-code">ETH</span><strong data-price>—</strong></li>
-      <li class="market-asset" data-market="BNB"><span class="market-coin coin-bnb" aria-hidden="true">B</span><span class="market-code">BNB</span><strong data-price>—</strong></li>
-      <li class="market-asset" data-market="SOL"><span class="market-coin coin-sol" aria-hidden="true">≋</span><span class="market-code">SOL</span><strong data-price>—</strong></li>
-    </ul><div class="market-foot"><span data-market-status role="status" aria-live="polite">جارٍ جلب الأسعار…</span><span class="market-sources">المصدر: <a href="https://www.binance.com/" target="_blank" rel="noopener noreferrer">Binance</a> · <a href="https://www.exchangerate.fun/docs/" target="_blank" rel="noopener noreferrer">ExchangeRate.fun</a></span></div>
+      <li class="market-asset" data-market="BTC"><button class="market-asset-button" type="button" aria-label="بيتكوين BTC" aria-expanded="false"><img class="market-coin" src="../assets/images/market/btc.svg" alt="" aria-hidden="true" width="18" height="18"><span class="market-label"><span class="market-code">BTC</span><span class="market-name">بيتكوين</span></span><strong data-price dir="ltr">—</strong></button></li>
+      <li class="market-asset" data-market="ETH"><button class="market-asset-button" type="button" aria-label="إيثيريوم ETH" aria-expanded="false"><img class="market-coin" src="../assets/images/market/eth.svg" alt="" aria-hidden="true" width="18" height="18"><span class="market-label"><span class="market-code">ETH</span><span class="market-name">إيثيريوم</span></span><strong data-price dir="ltr">—</strong></button></li>
+      <li class="market-asset" data-market="SOL"><button class="market-asset-button" type="button" aria-label="سولانا SOL" aria-expanded="false"><img class="market-coin" src="../assets/images/market/sol.svg" alt="" aria-hidden="true" width="18" height="18"><span class="market-label"><span class="market-code">SOL</span><span class="market-name">سولانا</span></span><strong data-price dir="ltr">—</strong></button></li>
+      <li class="market-asset" data-market="BNB"><button class="market-asset-button" type="button" aria-label="بي إن بي BNB" aria-expanded="false"><img class="market-coin" src="../assets/images/market/bnb.svg" alt="" aria-hidden="true" width="18" height="18"><span class="market-label"><span class="market-code">BNB</span><span class="market-name">بي إن بي</span></span><strong data-price dir="ltr">—</strong></button></li>
+      <li class="market-asset" data-market="XMR"><button class="market-asset-button" type="button" aria-label="مونيرو XMR" aria-expanded="false"><img class="market-coin" src="../assets/images/market/xmr.svg" alt="" aria-hidden="true" width="18" height="18"><span class="market-label"><span class="market-code">XMR</span><span class="market-name">مونيرو</span></span><strong data-price dir="ltr">—</strong></button></li>
+      <li class="market-asset" data-market="EGP"><button class="market-asset-button" type="button" aria-label="الجنيه المصري EGP، سعر الجنيه الواحد بالدولار" aria-expanded="false"><span class="market-coin coin-egp" aria-hidden="true">EGP<br>ج.م</span><span class="market-label"><span class="market-code">EGP</span><span class="market-name">الجنيه المصري</span></span><strong data-price dir="ltr">—</strong></button></li>
+    </ul>
+    <div class="market-foot"><span data-market-status role="status" aria-live="polite">جارٍ جلب الأسعار…</span><span class="market-sources">أسعار USDT تقريبية بالدولار · <a href="https://www.binance.com/" target="_blank" rel="noopener noreferrer">Binance</a> · <a href="https://www.exchangerate.fun/docs/" target="_blank" rel="noopener noreferrer">ExchangeRate.fun</a></span></div>
   </div>
 </aside>
 
@@ -103,9 +105,9 @@ analyst     1069  0.0  2.4 182536 96636 ?        Ss   May31   0:05
 /home/analyst/jupyter-env/bin/python3 /home/analyst/jupyter-env/bin/jupyter-lab
 --ip=127.0.0.1 --port=8888 
 --no-browser --notebook-dir=/home/analyst/notebooks 
---ServerApp.token=a7f3b2c9d8e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7 --ServerApp.password= --ServerApp.allow_origin= --ServerApp.disable_check_xsrf=False
+--ServerApp.token=[REDACTED_JUPYTER_TOKEN] --ServerApp.password= --ServerApp.allow_origin= --ServerApp.disable_check_xsrf=False
 root        1076  0.0  0.7  37376 28644 ?        Ss   May31   0:05 /home/analyst/jupyter-env/bin/python3 /opt/opsmcp/server.py
-mcp-dev 2031  0.0  0.0   6828  2104 pts/0    S+   00:36   0:00 grep --color=auto jupyter</code></pre></section><p>هناك مستخدم باسم  *<em>analyst   </em><strong><em>هو المسؤل عن تشغيل بيئة jupyter  داخل النظام وحصلنا ايضا على الرمز الخاص بهذه العملية     </em></strong><em>a7f3b2c9d8e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7  </em><strong><em>وكما اصبحنا نعلم الان  انه يعمل داخليا عبر</em></strong><em> 127.0.0.1:8888 </em>*</p><p>---</p><p>3-المعلومة الثالثة هي عن خادم Git داخلي للتحكم في الإصدارات والتعاون. توثيق المشروع ونصوص النشر</p><p>&lt;columns&gt;</p><p>&lt;column ratio=&quot;50&quot;&gt;</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devhub-10.png" alt="لقطة شاشة من تقرير DevHUb HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير DevHUb HTB Write-up</figcaption></figure><p>&lt;/column&gt;</p><p>&lt;column ratio=&quot;50&quot;&gt;</p><ul class="ctf-report-list"><li>سيرفر Git داخلي لتخزين الأكواد، ومكتوب إنه في حالة صيانة (<code dir="ltr">Maintenance Mode</code>).</li><li>أحياناً في وضع الصيانة بيكون فيه ملفات <code dir="ltr">.git</code> مكشوفة أو الـ repository نفسه ممكن نعمل له enumeration لو لقينا مسار السيرفر (زي لو كان شغال على Gitea أو GitLab أو مجرد مسار مخفي)</li></ul><p>&lt;/column&gt;</p><p>&lt;/columns&gt;</p><p>---</p></div>
+mcp-dev 2031  0.0  0.0   6828  2104 pts/0    S+   00:36   0:00 grep --color=auto jupyter</code></pre></section><p>هناك مستخدم باسم  *<em>analyst   </em><strong><em>هو المسؤل عن تشغيل بيئة jupyter  داخل النظام وحصلنا ايضا على الرمز الخاص بهذه العملية     </em></strong><em>[REDACTED_JUPYTER_TOKEN]  </em><strong><em>وكما اصبحنا نعلم الان  انه يعمل داخليا عبر</em></strong><em> 127.0.0.1:8888 </em>*</p><p>---</p><p>3-المعلومة الثالثة هي عن خادم Git داخلي للتحكم في الإصدارات والتعاون. توثيق المشروع ونصوص النشر</p><p>&lt;columns&gt;</p><p>&lt;column ratio=&quot;50&quot;&gt;</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devhub-10.png" alt="لقطة شاشة من تقرير DevHUb HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير DevHUb HTB Write-up</figcaption></figure><p>&lt;/column&gt;</p><p>&lt;column ratio=&quot;50&quot;&gt;</p><ul class="ctf-report-list"><li>سيرفر Git داخلي لتخزين الأكواد، ومكتوب إنه في حالة صيانة (<code dir="ltr">Maintenance Mode</code>).</li><li>أحياناً في وضع الصيانة بيكون فيه ملفات <code dir="ltr">.git</code> مكشوفة أو الـ repository نفسه ممكن نعمل له enumeration لو لقينا مسار السيرفر (زي لو كان شغال على Gitea أو GitLab أو مجرد مسار مخفي)</li></ul><p>&lt;/column&gt;</p><p>&lt;/columns&gt;</p><p>---</p></div>
       <footer class="ctf-report-end"><a href="index.html" class="btn-primary"><i class="fa-solid fa-arrow-right"></i> كل تقارير CTF</a></footer>
     </article>
   </main>
@@ -117,7 +119,7 @@ mcp-dev 2031  0.0  0.0   6828  2104 pts/0    S+   00:36   0:00 grep --color=auto
     <p>© 2026 Ft7y.Sec. جميع الحقوق محفوظة.</p>
   </div></footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <script src="../script.js"></script>
-    <script src="../assets/js/market-ticker.js" defer></script>
+  <script src="../script.js?v=20261010-night-sky"></script>
+    <script src="../assets/js/market-ticker.js?v=20261010-glass" defer></script>
 </body>
 </html>

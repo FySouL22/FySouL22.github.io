@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-labelledby="title">
+  <title id="title">Solana mark</title>
+  <defs><linearGradient id="solana" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9945ff"/><stop offset="1" stop-color="#14f195"/></linearGradient></defs>
+  <path fill="url(#solana)" d="M8 5.2h18.6l-4.5 4.5H3.5L8 5.2Zm0 8.5h20.5L24 18.2H3.5L8 13.7Zm0 8.6h20.5L24 26.8H3.5L8 22.3Z"/>
+</svg>

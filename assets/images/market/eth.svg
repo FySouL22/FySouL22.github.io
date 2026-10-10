@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-labelledby="title">
+  <title id="title">Ethereum diamond</title>
+  <path fill="#8a92b2" d="m16 1.8-9.2 14L16 20l9.2-4.2L16 1.8Z"/>
+  <path fill="#62688f" d="M16 1.8v18.3l9.2-4.2L16 1.8Z"/>
+  <path fill="#8a92b2" d="m6.8 17.6 9.2 12.6 9.2-12.6L16 21.8l-9.2-4.2Z"/>
+  <path fill="#62688f" d="m16 21.8v8.4l9.2-12.6-9.2 4.2Z"/>
+</svg>

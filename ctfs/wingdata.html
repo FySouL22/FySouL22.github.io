@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#07110d">
+  <meta name="theme-color" content="#07101f">
   <meta name="color-scheme" content="dark light">
   <meta name="description" content="تقرير CTF تقني لتحدي WingData على منصة Hack The Box.">
   <title>WingData | Ft7y.Sec</title>
@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-  <link rel="stylesheet" href="../style.css?v=20261009-visual-refresh-ccdd949">
+  <link rel="stylesheet" href="../style.css?v=20261010-market-glass">
   <link rel="icon" href="../avatar.png" type="image/png">
     <link rel="canonical" href="https://fysoul22.github.io/ft7.cv.github.io/ctfs/wingdata.html">
     <meta property="og:type" content="website">
@@ -30,16 +30,18 @@
   <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
   <div class="page-noise" aria-hidden="true"></div>
   <canvas id="particles-canvas"></canvas>
-  <aside class="market-strip" data-market-ticker aria-label="أسعار استرشادية للعملات">
+  <aside class="market-strip" data-market-ticker aria-label="أسعار العملات التقديرية">
   <div class="market-strip-inner">
     <div class="market-brand"><span class="market-live-dot" aria-hidden="true"></span><span>مؤشرات السوق</span><small>تحديث كل ساعة</small></div>
     <ul class="market-assets">
-      <li class="market-asset" data-market="USD_EGP"><span class="market-coin coin-usd" aria-hidden="true">$</span><span class="market-code">USD/EGP</span><strong data-price>—</strong></li>
-      <li class="market-asset" data-market="BTC"><span class="market-coin coin-btc" aria-hidden="true">₿</span><span class="market-code">BTC</span><strong data-price>—</strong></li>
-      <li class="market-asset" data-market="ETH"><span class="market-coin coin-eth" aria-hidden="true">◇</span><span class="market-code">ETH</span><strong data-price>—</strong></li>
-      <li class="market-asset" data-market="BNB"><span class="market-coin coin-bnb" aria-hidden="true">B</span><span class="market-code">BNB</span><strong data-price>—</strong></li>
-      <li class="market-asset" data-market="SOL"><span class="market-coin coin-sol" aria-hidden="true">≋</span><span class="market-code">SOL</span><strong data-price>—</strong></li>
-    </ul><div class="market-foot"><span data-market-status role="status" aria-live="polite">جارٍ جلب الأسعار…</span><span class="market-sources">المصدر: <a href="https://www.binance.com/" target="_blank" rel="noopener noreferrer">Binance</a> · <a href="https://www.exchangerate.fun/docs/" target="_blank" rel="noopener noreferrer">ExchangeRate.fun</a></span></div>
+      <li class="market-asset" data-market="BTC"><button class="market-asset-button" type="button" aria-label="بيتكوين BTC" aria-expanded="false"><img class="market-coin" src="../assets/images/market/btc.svg" alt="" aria-hidden="true" width="18" height="18"><span class="market-label"><span class="market-code">BTC</span><span class="market-name">بيتكوين</span></span><strong data-price dir="ltr">—</strong></button></li>
+      <li class="market-asset" data-market="ETH"><button class="market-asset-button" type="button" aria-label="إيثيريوم ETH" aria-expanded="false"><img class="market-coin" src="../assets/images/market/eth.svg" alt="" aria-hidden="true" width="18" height="18"><span class="market-label"><span class="market-code">ETH</span><span class="market-name">إيثيريوم</span></span><strong data-price dir="ltr">—</strong></button></li>
+      <li class="market-asset" data-market="SOL"><button class="market-asset-button" type="button" aria-label="سولانا SOL" aria-expanded="false"><img class="market-coin" src="../assets/images/market/sol.svg" alt="" aria-hidden="true" width="18" height="18"><span class="market-label"><span class="market-code">SOL</span><span class="market-name">سولانا</span></span><strong data-price dir="ltr">—</strong></button></li>
+      <li class="market-asset" data-market="BNB"><button class="market-asset-button" type="button" aria-label="بي إن بي BNB" aria-expanded="false"><img class="market-coin" src="../assets/images/market/bnb.svg" alt="" aria-hidden="true" width="18" height="18"><span class="market-label"><span class="market-code">BNB</span><span class="market-name">بي إن بي</span></span><strong data-price dir="ltr">—</strong></button></li>
+      <li class="market-asset" data-market="XMR"><button class="market-asset-button" type="button" aria-label="مونيرو XMR" aria-expanded="false"><img class="market-coin" src="../assets/images/market/xmr.svg" alt="" aria-hidden="true" width="18" height="18"><span class="market-label"><span class="market-code">XMR</span><span class="market-name">مونيرو</span></span><strong data-price dir="ltr">—</strong></button></li>
+      <li class="market-asset" data-market="EGP"><button class="market-asset-button" type="button" aria-label="الجنيه المصري EGP، سعر الجنيه الواحد بالدولار" aria-expanded="false"><span class="market-coin coin-egp" aria-hidden="true">EGP<br>ج.م</span><span class="market-label"><span class="market-code">EGP</span><span class="market-name">الجنيه المصري</span></span><strong data-price dir="ltr">—</strong></button></li>
+    </ul>
+    <div class="market-foot"><span data-market-status role="status" aria-live="polite">جارٍ جلب الأسعار…</span><span class="market-sources">أسعار USDT تقريبية بالدولار · <a href="https://www.binance.com/" target="_blank" rel="noopener noreferrer">Binance</a> · <a href="https://www.exchangerate.fun/docs/" target="_blank" rel="noopener noreferrer">ExchangeRate.fun</a></span></div>
   </div>
 </aside>
 
@@ -251,89 +253,7 @@ cat settings.xml
         &lt;Max_Upload_Size_Hourly&gt;0&lt;/Max_Upload_Size_Hourly&gt;
         &lt;Enable_Download_Limit_Hourly&gt;0&lt;/Enable_Download_Limit_Hourly&gt;
 &lt;/DOMAIN_OPTION&gt;
-wingftp@wingdata:/opt/wftpserver/Data/1$</code></pre></section><p>السطر الذي نريده هو  <strong>\&lt;SaltingString\&gt;WingFTP\&lt;/SaltingString\&gt;</strong></p><p>قم بوضع الهاش + salt  في ملف وسميه hash</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/wingdata-10.png" alt="لقطة شاشة من تقرير WingData" loading="lazy"><figcaption>لقطة شاشة من تقرير WingData</figcaption></figure><p><strong>نفذ الامر التالي : </strong></p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>┌──(kali㉿kali)-[~/Downloads]
-└─$ hashcat -m 1410 -a 0 hash /usr/share/wordlists/rockyou.txt
-hashcat (v6.2.6) starting
-
-OpenCL API (OpenCL 3.0 PoCL 6.0+debian  Linux, None+Asserts, RELOC, SPIR-V, LLVM 18.1.8, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
-====================================================================================================================================================
-* Device #1: cpu-sandybridge-Intel(R) Core(TM) i7-6700HQ CPU @ 2.60GHz, 4196/8456 MB (2048 MB allocatable), 8MCU
-
-Minimum password length supported by kernel: 0
-Maximum password length supported by kernel: 256
-Minimim salt length supported by kernel: 0
-Maximum salt length supported by kernel: 256
-
-Hashes: 1 digests; 1 unique digests, 1 unique salts
-Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
-Rules: 1
-
-Optimizers applied:
-* Zero-Byte
-* Early-Skip
-* Not-Iterated
-* Single-Hash
-* Single-Salt
-* Raw-Hash
-
-ATTENTION! Pure (unoptimized) backend kernels selected.
-Pure kernels can crack longer passwords, but drastically reduce performance.
-If you want to switch to optimized kernels, append -O to your commandline.
-See the above message to find out about the exact limits.
-
-Watchdog: Temperature abort trigger set to 90c
-
-Host memory required for this attack: 2 MB
-
-Dictionary cache hit:
-* Filename..: /usr/share/wordlists/rockyou.txt
-* Passwords.: 14344385
-* Bytes.....: 139921507
-* Keyspace..: 14344385
-
-Cracking performance lower than expected?                 
-
-* Append -O to the commandline.
-  This lowers the maximum supported password/salt length (usually down to 32).
-
-* Append -w 3 to the commandline.
-  This can cause your screen to lag.
-
-* Append -S to the commandline.
-  This has a drastic speed impact but can be better for specific attacks.
-  Typical scenarios are a small wordlist but a large ruleset.
-
-* Update your backend API runtime / driver the right way:
-  https://hashcat.net/faq/wrongdriver
-
-* Create more work items to make use of your parallelization power:
-  https://hashcat.net/faq/morework
-
-32940defd3c3ef70a2dd44a5301ff984c4742f0baae76ff5b8783994f8a503ca:WingFTP:!#7Blushing^*Bride5
-                                                          
-Session..........: hashcat
-Status...........: Cracked
-Hash.Mode........: 1410 (sha256($pass.$salt))
-Hash.Target......: 32940defd3c3ef70a2dd44a5301ff984c4742f0baae76ff5b87...ingFTP
-Time.Started.....: Thu May  7 23:29:44 2026 (5 secs)
-Time.Estimated...: Thu May  7 23:29:49 2026 (0 secs)
-Kernel.Feature...: Pure Kernel
-Guess.Base.......: File (/usr/share/wordlists/rockyou.txt)
-Guess.Queue......: 1/1 (100.00%)
-Speed.#1.........:  2631.4 kH/s (1.00ms) @ Accel:1024 Loops:1 Thr:1 Vec:8
-Recovered........: 1/1 (100.00%) Digests (total), 1/1 (100.00%) Digests (new)
-Progress.........: 14344192/14344385 (100.00%)
-Rejected.........: 0/14344192 (0.00%)
-Restore.Point....: 14336000/14344385 (99.94%)
-Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1
-Candidate.Engine.: Device Generator
-Candidates.#1....: #!hottie -&gt;  ladykitz
-Hardware.Mon.#1..: Util: 37%
-
-Started: Thu May  7 23:29:22 2026
-Stopped: Thu May  7 23:29:50 2026
-                                                                                             
-┌──(kali㉿kali)-[~/Downloads]</code></pre></section><p>وكدة تبق حصلت على كلمة مرور المستخدم wacky  دلوقتي هنسجل دخول باستخدام ال Username = <strong>wacky</strong> Password =  *<em>!#7Blushing\^\</em>Bride5  <em><strong><em>هنسجل بيهم</em></strong></em>    ssh**</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/wingdata-11.png" alt="لقطة شاشة من تقرير WingData" loading="lazy"><figcaption>لقطة شاشة من تقرير WingData</figcaption></figure><p>وكدة تكون حصلت على<strong> User Flag </strong></p><h3><strong> Next step :    Privilege escalation</strong></h3><p>&gt;  الامر <strong>sudo -L </strong> بين وجود اسكريبت شغال بصلاحية ال <strong>Root</strong>  بدون باسورد هنفتحه ونحاول نشوف   بيشتغل ازاي وهل نقدر نستغله</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>wacky@wingdata:~$ sudo -l
+wingftp@wingdata:/opt/wftpserver/Data/1$</code></pre></section><p>السطر الذي نريده هو  <strong>\&lt;SaltingString\&gt;WingFTP\&lt;/SaltingString\&gt;</strong></p><p>قم بوضع الهاش + salt  في ملف وسميه hash</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/wingdata-10.png" alt="لقطة شاشة من تقرير WingData" loading="lazy"><figcaption>لقطة شاشة من تقرير WingData</figcaption></figure><p><strong>نفذ الامر التالي : </strong></p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>[REDACTED CTF credential output]</code></pre></section><p>وكدة تبق حصلت على كلمة مرور المستخدم wacky  دلوقتي هنسجل دخول باستخدام ال Username = <strong>wacky</strong> Password =  [REDACTED_CTF_PASSWORD]  <em><strong><em>هنسجل بيهم</em></strong></em>    ssh**</p><figure class="ctf-report-figure"><img src="../assets/images/ctfs/wingdata-11.png" alt="لقطة شاشة من تقرير WingData" loading="lazy"><figcaption>لقطة شاشة من تقرير WingData</figcaption></figure><p>وكدة تكون حصلت على<strong> User Flag </strong></p><h3><strong> Next step :    Privilege escalation</strong></h3><p>&gt;  الامر <strong>sudo -L </strong> بين وجود اسكريبت شغال بصلاحية ال <strong>Root</strong>  بدون باسورد هنفتحه ونحاول نشوف   بيشتغل ازاي وهل نقدر نستغله</p><section class="ctf-code-block"><div class="ctf-code-toolbar"><span dir="ltr">bash</span><button type="button" class="ctf-copy-code" aria-label="نسخ الكود"><i class="fa-regular fa-copy" aria-hidden="true"></i></button></div><pre dir="ltr"><code>wacky@wingdata:~$ sudo -l
 Matching Defaults entries for wacky on wingdata:
     env_reset, mail_badpass,
     secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin, use_pty
@@ -436,7 +356,7 @@ sudo /usr/local/bin/python3 /opt/backup_clients/restore_backup_clients.p</code><
     <p>© 2026 Ft7y.Sec. جميع الحقوق محفوظة.</p>
   </div></footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <script src="../script.js"></script>
-    <script src="../assets/js/market-ticker.js" defer></script>
+  <script src="../script.js?v=20261010-night-sky"></script>
+    <script src="../assets/js/market-ticker.js?v=20261010-glass" defer></script>
 </body>
 </html>

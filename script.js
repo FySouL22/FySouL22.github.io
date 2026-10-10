@@ -2,7 +2,7 @@
    Ft7y.Sec - Advanced Cyber Interactive Script
    Features:
    - Scroll Progress Indicator Bar
-   - Matrix Digital Rain & Particle Canvas
+   - Subtle night-sky stars, a rare shooting star, and glass-card light tracking
    - Terminal Command Auto-Typing Simulation
    - Platform Tabs & Interactive Writeups Filtering
    - Auto-fill Contact Form on Report Request- Animated Skill Progress Bars on Scroll
@@ -13,6 +13,10 @@
    ================================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+    const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[char]));
+
     // Respect reduced-motion preference before starting decorative effects.
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion) {
@@ -122,73 +126,160 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ----------------------------------------------------
-    // 4. شبكة الجزيئات السيبرانية التفاعلية (Particle Network)
+    // 4. سماء ليلية تفاعلية: نجوم هادئة وشهاب متباعد
     // ----------------------------------------------------
-    const pCanvas = document.getElementById('particles-canvas');
-    if (pCanvas && !reduceMotion) {
-        const pCtx = pCanvas.getContext('2d');
-        let width = pCanvas.width = window.innerWidth;
-        let height = pCanvas.height = window.innerHeight;
+    const nightSky = document.createElement('canvas');
+    nightSky.className = 'night-sky-canvas';
+    nightSky.setAttribute('aria-hidden', 'true');
+    nightSky.setAttribute('role', 'presentation');
+    document.body.insertBefore(nightSky, document.body.firstChild);
 
-        window.addEventListener('resize', () => {
-            width = pCanvas.width = window.innerWidth;
-            height = pCanvas.height = window.innerHeight;
-        });
+    const skyContext = nightSky.getContext('2d', { alpha: true });
+    if (skyContext) {
+        let skyWidth = 0;
+        let skyHeight = 0;
+        let skyScale = 1;
+        let stars = [];
+        let meteor = null;
+        let nextMeteorAt = 0;
+        let animationFrame = 0;
+        let previousFrameAt = 0;
 
-        const particles = [];
-        const numParticles = Math.min(width > 768 ? 50 : 22, 55);
+        function resizeNightSky() {
+            skyWidth = window.innerWidth;
+            skyHeight = window.innerHeight;
+            skyScale = Math.min(window.devicePixelRatio || 1, 1.25);
+            nightSky.width = Math.round(skyWidth * skyScale);
+            nightSky.height = Math.round(skyHeight * skyScale);
+            skyContext.setTransform(skyScale, 0, 0, skyScale, 0, 0);
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.7;
-                this.vy = (Math.random() - 0.5) * 0.7;
-                this.radius = Math.random() * 2 + 1;
-            }
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
-            }
-            draw() {
-                pCtx.beginPath();
-                pCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                pCtx.fillStyle = 'rgba(0, 255, 102, 0.4)';
-                pCtx.fill();
-            }
+            const starCount = Math.min(150, Math.max(48, Math.round((skyWidth * skyHeight) / 10500)));
+            stars = Array.from({ length: starCount }, () => ({
+                x: Math.random() * skyWidth,
+                y: Math.random() * skyHeight,
+                radius: Math.random() * 1.05 + 0.25,
+                phase: Math.random() * Math.PI * 2,
+                pace: Math.random() * 0.00065 + 0.00018,
+                tint: Math.random() > 0.82 ? '190, 222, 255' : '231, 241, 255'
+            }));
+            meteor = null;
+            nextMeteorAt = performance.now() + 9000 + Math.random() * 9000;
+            drawNightSky(performance.now(), false);
         }
 
-        for (let i = 0; i < numParticles; i++) {
-            particles.push(new Particle());
-        }
+        function drawNightSky(now, animate) {
+            skyContext.clearRect(0, 0, skyWidth, skyHeight);
+            stars.forEach(star => {
+                const shimmer = animate ? 0.25 + (Math.sin(now * star.pace + star.phase) + 1) * 0.23 : 0.48;
+                skyContext.beginPath();
+                skyContext.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                skyContext.fillStyle = `rgba(${star.tint}, ${shimmer})`;
+                skyContext.fill();
+            });
 
-        function animateParticles() {
-            pCtx.clearRect(0, 0, width, height);
+            if (!animate) return;
+            if (!meteor && now >= nextMeteorAt) {
+                meteor = {
+                    x: skyWidth * (0.58 + Math.random() * 0.38),
+                    y: skyHeight * (Math.random() * 0.3),
+                    bornAt: now,
+                    duration: 1150
+                };
+                nextMeteorAt = now + 12000 + Math.random() * 15000;
+            }
 
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 120) {
-                        pCtx.beginPath();
-                        pCtx.strokeStyle = `rgba(0, 255, 102, ${0.15 * (1 - dist / 120)})`;
-                        pCtx.lineWidth = 0.7;
-                        pCtx.moveTo(particles[i].x, particles[i].y);
-                        pCtx.lineTo(particles[j].x, particles[j].y);
-                        pCtx.stroke();
-                    }
+            if (meteor) {
+                const age = now - meteor.bornAt;
+                const progress = age / meteor.duration;
+                if (progress >= 1) {
+                    meteor = null;
+                } else {
+                    const x = meteor.x - progress * skyWidth * 0.22;
+                    const y = meteor.y + progress * skyHeight * 0.2;
+                    const tail = skyContext.createLinearGradient(x, y, x + 76, y - 48);
+                    tail.addColorStop(0, 'rgba(196, 226, 255, 0.78)');
+                    tail.addColorStop(1, 'rgba(196, 226, 255, 0)');
+                    skyContext.beginPath();
+                    skyContext.moveTo(x, y);
+                    skyContext.lineTo(x + 76, y - 48);
+                    skyContext.strokeStyle = tail;
+                    skyContext.lineWidth = 1.4;
+                    skyContext.globalAlpha = Math.sin(progress * Math.PI);
+                    skyContext.stroke();
+                    skyContext.globalAlpha = 1;
                 }
             }
-            requestAnimationFrame(animateParticles);
         }
-        animateParticles();
+
+        function animateNightSky(now) {
+            if (document.visibilityState !== 'visible') {
+                animationFrame = 0;
+                return;
+            }
+            if (!previousFrameAt || now - previousFrameAt >= 32) {
+                drawNightSky(now, true);
+                previousFrameAt = now;
+            }
+            animationFrame = window.requestAnimationFrame(animateNightSky);
+        }
+
+        function syncNightSkyMotion() {
+            if (document.visibilityState === 'visible' && !reduceMotion && !animationFrame) {
+                animationFrame = window.requestAnimationFrame(animateNightSky);
+            } else if (document.visibilityState !== 'visible' && animationFrame) {
+                window.cancelAnimationFrame(animationFrame);
+                animationFrame = 0;
+            }
+        }
+
+        resizeNightSky();
+        if (!reduceMotion) syncNightSkyMotion();
+        window.addEventListener('resize', resizeNightSky, { passive: true });
+        document.addEventListener('visibilitychange', syncNightSkyMotion);
+    }
+
+    // Glass surfaces share a single pointer listener for a restrained light-follow effect.
+    const glassPanelSelector = [
+        '.status-card', '.skill-category-card', '.project-card', '.writeup-card',
+        '.writeup-media-card', '.ctf-screen-card', '.about-card', '.highlight-box',
+        '.contact-info-container', '.contact-form-container', '.tool-card', '.cmd-card',
+        '.vuln-card', '.script-card', '.ctf-directory-card', '.simulator-card',
+        '.soc-event-card', '.project-author-card', '.architecture-box', '.subpage-hero'
+    ].join(', ');
+    document.querySelectorAll(glassPanelSelector).forEach(panel => panel.classList.add('glass-surface'));
+
+    if (window.matchMedia('(pointer: fine)').matches && !reduceMotion) {
+        let pointerFrame = 0;
+        let latestPointerEvent = null;
+        let activeGlassPanel = null;
+
+        document.addEventListener('pointermove', event => {
+            latestPointerEvent = event;
+            if (pointerFrame) return;
+            pointerFrame = window.requestAnimationFrame(() => {
+                pointerFrame = 0;
+                const pointerEvent = latestPointerEvent;
+                if (!pointerEvent) return;
+
+                const shiftX = (pointerEvent.clientX / window.innerWidth - 0.5) * -12;
+                const shiftY = (pointerEvent.clientY / window.innerHeight - 0.5) * -8;
+                document.body.style.setProperty('--sky-shift-x', `${shiftX.toFixed(1)}px`);
+                document.body.style.setProperty('--sky-shift-y', `${shiftY.toFixed(1)}px`);
+
+                const target = pointerEvent.target instanceof Element ? pointerEvent.target : null;
+                const panel = target?.closest('.glass-surface') || null;
+                if (activeGlassPanel && activeGlassPanel !== panel) {
+                    activeGlassPanel.style.setProperty('--glass-x', '50%');
+                    activeGlassPanel.style.setProperty('--glass-y', '50%');
+                }
+                activeGlassPanel = panel;
+                if (panel) {
+                    const bounds = panel.getBoundingClientRect();
+                    panel.style.setProperty('--glass-x', `${(pointerEvent.clientX - bounds.left).toFixed(1)}px`);
+                    panel.style.setProperty('--glass-y', `${(pointerEvent.clientY - bounds.top).toFixed(1)}px`);
+                }
+            });
+        }, { passive: true });
     }
 
     // ----------------------------------------------------
@@ -643,6 +734,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const target = rawTarget.replace(/[&<>\"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[char]));
             const profile = simProfileSelect ? simProfileSelect.value : 'top20';
             const workers = simThreadsSelect ? simThreadsSelect.value : '50';
+            const safeProfile = escapeHtml(profile);
+            const safeWorkers = escapeHtml(workers);
 
             simRunBtn.disabled = true;
             simRunBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الفحص...';
@@ -651,7 +744,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (simDownloadBtn) simDownloadBtn.style.display = 'none';
 
             simOutput.innerHTML = `
-                <div class="term-line prompt">root@ft7y:~$ python pyport_scanner.py -t ${target} -p ${profile} -w ${workers} -b</div>
+                <div class="term-line prompt">root@ft7y:~$ python pyport_scanner.py -t ${target} -p ${safeProfile} -w ${safeWorkers} -b</div>
                 <div class="term-line banner">  ███████╗████████╗███████╗██╗   ██╗    ███████╗███████╗ ██████╗</div>
                 <div class="term-line banner">  ██╔════╝╚══██╔══╝╚════██║╚██╗ ██╔╝    ██╔════╝██╔════╝██╔════╝</div>
                 <div class="term-line banner">  █████╗     ██║       ██╔╝ ╚████╔╝     ███████╗█████╗  ██║     </div>
@@ -659,7 +752,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="term-line banner">  ██║        ██║      ███████╗██║       ███████║███████╗╚██████╗</div>
                 <div class="term-line banner">  -- PyPort-Scanner Pro v2.5 by Mohamed Fathi (Ft7y.Sec) --</div>
                 <div class="term-line info">[*] Demo Target : ${target} (display only; no DNS lookup)</div>
-                <div class="term-line info">[*] Concurrency : ${workers} Workers | Timeout: 0.8s</div>
+                <div class="term-line info">[*] Concurrency : ${safeWorkers} Workers | Timeout: 0.8s</div>
                 <div class="term-line info">[*] Scan Started : ${new Date().toLocaleTimeString()}</div>
                 <div class="term-line info">-----------------------------------------------------------------</div>
             `;
@@ -758,6 +851,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         subRunBtn.addEventListener('click', () => {
             const domain = (subTargetInput ? subTargetInput.value.trim() : '') || 'tesla.com';
+            const safeDomain = escapeHtml(domain);
 
             subRunBtn.disabled = true;
             subRunBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري الاستطلاع...';
@@ -766,10 +860,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (subExportBtn) subExportBtn.style.display = 'none';
 
             subOutput.innerHTML = `
-                <div class="term-line prompt">root@ft7y:~$ python subdomain_reckoner.py -d ${domain} --probe</div>
+                <div class="term-line prompt">root@ft7y:~$ python subdomain_reckoner.py -d ${safeDomain} --probe</div>
                 <div class="term-line banner">  ███████╗██╗   ██╗██████╗ ██████╗  ██████╗ ███╗   ███╗ █████╗</div>
                 <div class="term-line banner">  -- SubDomain Reckoner v2.0 by Mohamed Fathi (Ft7y.Sec) --</div>
-                <div class="term-line info">[*] Target Domain: ${domain}</div>
+                <div class="term-line info">[*] Target Domain: ${safeDomain}</div>
                 <div class="term-line info">[*] Mode         : Passive OSINT (crt.sh + HackerTarget API)</div>
                 <div class="term-line warn">[*] Querying Certificate Transparency Logs...</div>
             `;
@@ -793,7 +887,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const line = document.createElement('div');
                     line.className = 'term-line success';
                     const codeColor = item.code === 200 ? '#00ff66' : (item.code === 403 ? '#f87171' : '#facc15');
-                    line.innerHTML = `[+] <span style="color:#00ff66;font-weight:bold;">${item.sub}</span> | IP: ${item.ip} | <span style="color:${codeColor};font-weight:bold;">[${item.code}]</span> | ${item.title} <span style="color:#94a3b8;">(${item.server})</span>`;
+                    line.innerHTML = `[+] <span style="color:#00ff66;font-weight:bold;">${escapeHtml(item.sub)}</span> | IP: ${item.ip} | <span style="color:${codeColor};font-weight:bold;">[${item.code}]</span> | ${item.title} <span style="color:#94a3b8;">(${item.server})</span>`;
                     subOutput.appendChild(line);
                     subOutput.scrollTop = subOutput.scrollHeight;
 
@@ -806,7 +900,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     finishLine.className = 'term-line info';
                     finishLine.innerHTML = `
                         -----------------------------------------------------------------<br>
-                        <span style="color:#00ff66;font-weight:bold;">[✓] Finished: Discovered ${total} active subdomains for ${domain}.</span>
+                        <span style="color:#00ff66;font-weight:bold;">[✓] Finished: Discovered ${total} active subdomains for ${safeDomain}.</span>
                     `;
                     subOutput.appendChild(finishLine);
                     subOutput.scrollTop = subOutput.scrollHeight;
