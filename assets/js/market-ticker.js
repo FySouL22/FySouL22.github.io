@@ -4,8 +4,8 @@
   const root = document.querySelector("[data-market-ticker]");
   if (!root) return;
 
-  const CACHE_KEY = "ft7-market-prices-v2";
-  const LEGACY_CACHE_KEY = "ft7-market-prices-v1";
+  const CACHE_STORAGE_SLOT = "ft7-market-prices-v2";
+  const LEGACY_CACHE_STORAGE_SLOT = "ft7-market-prices-v1";
   const HOUR = 60 * 60 * 1000;
   const symbols = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XMRUSDT"];
   const bySymbol = { BTCUSDT: "BTC", ETHUSDT: "ETH", SOLUSDT: "SOL", BNBUSDT: "BNB", XMRUSDT: "XMR" };
@@ -17,7 +17,7 @@
   function readCache() {
     const empty = { prices: {}, times: {}, sourceTimes: {}, failedSources: {}, partialFailure: false, fetchFailed: false, lastAttempt: 0 };
     try {
-      const saved = JSON.parse(localStorage.getItem(CACHE_KEY) || localStorage.getItem(LEGACY_CACHE_KEY) || "null");
+      const saved = JSON.parse(localStorage.getItem(CACHE_STORAGE_SLOT) || localStorage.getItem(LEGACY_CACHE_STORAGE_SLOT) || "null");
       if (!saved || typeof saved !== "object") return empty;
       const prices = {};
       const times = {};
@@ -49,7 +49,7 @@
   }
 
   function persist() {
-    try { localStorage.setItem(CACHE_KEY, JSON.stringify(market)); } catch { /* Storage is optional. */ }
+    try { localStorage.setItem(CACHE_STORAGE_SLOT, JSON.stringify(market)); } catch { /* Storage is optional. */ }
   }
 
   function number(value) {
